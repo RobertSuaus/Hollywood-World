@@ -8,6 +8,6 @@
  *
  * @author Robert
  */
-public class newClass {
+public class Person {
     
 }
