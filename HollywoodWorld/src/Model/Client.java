@@ -11,25 +11,37 @@
 package Model;
 
 public class Client extends Person {
+    //Representa un cliente socio registrado en el sistema
     
     public Client(
         String name,
         String lastName,
         String telephone,
         String address,
-        String membershipID
+        String status,
+        int membershipId
     ){
         super(name, lastName, telephone, address);
-        this.membershipID = membershipID;
+        this.status = status;
+        this.membershipId = membershipId;
     }
     
-    public void setMembershipID(){
-        
+    public void setStatus(String status){
+        this.status = status;
     }
     
-    public String getMembershipID(){
-        return membershipID;
+    public void setMembershipId(int membershipId){
+        this.membershipId = membershipId;
     }
     
-    private String membershipID;
+    public String getStatus(){
+        return status;
+    }
+    
+    public int getMembershipId(){
+        return membershipId;
+    }
+    
+    private String status; //Alta, Baja,
+    private int membershipId; //Número de socio: 1 a 99999
 }

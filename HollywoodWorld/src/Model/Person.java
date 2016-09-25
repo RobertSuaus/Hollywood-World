@@ -11,7 +11,8 @@
 package Model;
 
 public class Person {
-    //Clase base de la que se derivan los clientes y empleados
+    /*Clase base de la que se derivan los clientes y empleados que interactuan
+    con el sistema*/
     
     public Person(
         String name,
@@ -49,7 +50,7 @@ public class Person {
         return lastName;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
