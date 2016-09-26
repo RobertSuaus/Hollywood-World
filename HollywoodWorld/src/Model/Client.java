@@ -11,25 +11,45 @@
 package Model;
 
 public class Client extends Person {
+    //Representa un cliente socio registrado en el sistema
     
     public Client(
         String name,
         String lastName,
         String telephone,
         String address,
-        String membershipID
+        boolean isActive,
+        int membershipId
     ){
         super(name, lastName, telephone, address);
-        this.membershipID = membershipID;
+        this.isActive = isActive;
+        this.membershipId = membershipId;
     }
     
-    public void setMembershipID(){
-        
+    //Dar de alta al cliente
+    public void setAsActive(){
+        this.isActive = true;
     }
     
-    public String getMembershipID(){
-        return membershipID;
+    //Dar de baja al cliente
+    public void setAsInactive(){
+        this.isActive = false;
     }
     
-    private String membershipID;
+    public void setMembershipId(int membershipId){
+        this.membershipId = membershipId;
+    }
+    
+    //Retorna el estado de alta
+    public boolean isActive(){
+        return isActive;
+    }
+    
+    public int getMembershipId(){
+        return membershipId;
+    }
+    
+    
+    private boolean isActive; //Estado de alta o baja
+    private int membershipId; //Número de socio: 1 a 99999
 }
