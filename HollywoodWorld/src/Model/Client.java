@@ -18,38 +18,19 @@ public class Client extends Person {
         String lastName,
         String telephone,
         String address,
-        boolean isActive,
-        int membershipId
+        Membership membership
     ){
         super(name, lastName, telephone, address);
-        this.isActive = isActive;
-        this.membershipId = membershipId;
+        this.membership = membership;
     }
     
-    //Dar de alta al cliente
-    public void setAsActive(){
-        this.isActive = true;
+    public void setMembership(Membership membership){
+        this.membership = membership;
     }
     
-    //Dar de baja al cliente
-    public void setAsInactive(){
-        this.isActive = false;
+    public Membership getMembership(){
+        return membership;
     }
     
-    public void setMembershipId(int membershipId){
-        this.membershipId = membershipId;
-    }
-    
-    //Retorna el estado de alta
-    public boolean isActive(){
-        return isActive;
-    }
-    
-    public int getMembershipId(){
-        return membershipId;
-    }
-    
-    
-    private boolean isActive; //Estado de alta o baja
-    private int membershipId; //Número de socio: 1 a 99999
+    private Membership membership;
 }
