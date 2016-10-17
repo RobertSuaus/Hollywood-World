@@ -10,7 +10,8 @@ package Model;
  * @author Robert
  */
 public class Membership {
-    //Representa la membresia de socio de un cliente
+    /*Representa la membresia de socio de un cliente. Todos los clientes
+    tienen una y solo una membresia.*/
     
     public Membership(
         int id,

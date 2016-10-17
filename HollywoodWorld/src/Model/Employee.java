@@ -21,14 +21,14 @@ public class Employee extends Person {
         String rfc,
         double basicSalary,
         Date admissionDate,
-        Roles role
+        EmployeePositions position
         ){
             super(name, lastName, telephone, address);
             this.id = id;
             this.rfc = rfc;
             this.basicSalary = basicSalary;
             this.admissionDate = admissionDate;
-            this.role = role;
+            this.position = position;
         }
     
     public void setId(int id){
@@ -47,8 +47,8 @@ public class Employee extends Person {
         this.admissionDate = admissionDate;
     }
     
-    public void setUserAccount(Roles role){
-        this.role = role;
+    public void setPosition(EmployeePositions position){
+        this.position = position;
     }
     
     public int getId(){
@@ -67,13 +67,13 @@ public class Employee extends Person {
         return admissionDate;
     }
     
-    public Roles getUserAccount(){
-        return role;
+    public EmployeePositions getPosition(){
+        return position;
     }
     
     private int id;
     private String rfc;
     private double basicSalary;
     private Date admissionDate;
-    private Roles role;
+    private EmployeePositions position;
 }
