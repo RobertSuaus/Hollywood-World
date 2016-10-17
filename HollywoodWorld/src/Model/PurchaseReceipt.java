@@ -12,6 +12,9 @@ import java.util.Date;
 public class PurchaseReceipt {
     /*Recibo de compra de películas*/
     
-    private Date paymentDate;
+    private int id;
+    private Date date;
+    private PurchaseReceiptRecord[] records;
+    private double totalPrice;
     
 }
