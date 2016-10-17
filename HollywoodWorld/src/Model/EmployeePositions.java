@@ -9,8 +9,7 @@ package Model;
  *
  * @author Robert
  */
-public enum Roles {
-    toBeDefined,
+public enum EmployeePositions {
     vendor,
     manager,
     humanResources,
