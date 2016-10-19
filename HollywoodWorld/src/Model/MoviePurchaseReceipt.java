@@ -9,10 +9,10 @@ import java.util.Date;
  *
  * @author Robert
  */
-public class PurchaseReceipt {
+public class MoviePurchaseReceipt {
     /*Recibo de compra de películas*/
     
-    private int id;
+    private int number;
     private Date date;
     private PurchaseReceiptRecord[] records;
     private double totalPrice;
