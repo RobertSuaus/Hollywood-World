@@ -15,7 +15,7 @@ public class MovieProfile {
     public MovieProfile(
         String title,
         Date releaseDate,
-        String rating,
+        String rating, 
         String description,
         int runTime,
         int serialCode
