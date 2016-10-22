@@ -14,9 +14,9 @@ import java.sql.ResultSet;
  *
  * @author Robert
  */
-public class UserAccountDAO {
+public class UserDAO {
     
-    public UserAccountDAO(){
+    public UserDAO(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(
@@ -41,37 +41,30 @@ public class UserAccountDAO {
         
     }
     
-    public boolean isUserNameOccupied(){
+    public User getUserInfo(String userName){
+        
+    }
+    
+    public boolean isUserNameOccupied(String userName){
         return true;
     }
     
-    public boolean isUserInfoCoincident(UserAccount inUserAccount){
-        boolean isInfoValid = false;
-        String sql = "SELECT * FROM CuentasUsuario WHERE "+
-                    "nombreCuenta ='" + inUserAccount.getUserName() + "'" +
-                    " AND contrasenia='" + inUserAccount.getPassword() + "'";
+    public boolean isUserInfoCoincident(User user){
+        boolean isInfoCoincident;
+        String sql = "SELECT" + "FROM User WHERE "+
+                    "userName ='" + user.getUserName() + "'" +
+                    " AND password ='" + user.getPassword() + "'";
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            isInfoValid = resultSet.first();
+            isInfoCoincident = resultSet.first();
             
         }catch(Exception error){
             error.printStackTrace();
+            isInfoCoincident = false;
         }
         
-        return isInfoValid;
-    }
-    
-    public Employee getUserAccountOwner(UserAccount inUserAccount){
-        String sql = "";
-        try{
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-            
-        }catch(Exception error){
-            error.printStackTrace();
-        }
-        //Crear empleado y llenarlo con el conjunto que se generó
+        return isInfoCoincident;
     }
     
     private Connection connection;

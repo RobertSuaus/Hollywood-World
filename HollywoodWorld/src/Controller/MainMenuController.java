@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.Employee;
+import Model.User;
+import Model.UserPermissions;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,44 +13,36 @@ public class MainMenuController implements ValidateMainMenuInterface {
     Verifica que el empleado usando el sistema tenga acceso a las secciones
     correspondientes.*/
     
-    public MainMenuController(Employee loggedEmployee){
-        this.loggedEmployee = loggedEmployee;
+    public MainMenuController(User user){
+        this.user = user;
         mainMenuUI = new MainMenuUI(this);
     }
     
     @Override
-    public void handleRentOption(){
-        if(employeeHasPosition("Vendor")){
-            
-        }else{
-            JOptionPane.showMessageDialog(null, 
-                "No puedes acceder a esta función"
-            );
-        }
-    }
-    
-    @Override
-    public void handleHumanResourcesOption(){
+    public boolean verifyAdminPermission(){
+        int userPermission = user.getUserPermissions().
+                getPermissionLevel();
+        int adminPermission = UserPermissions.administrator.
+                getPermissionLevel();
         
+        return userPermission <= adminPermission;
     }
     
     @Override
-    public void handleManagingOption(){
+    public boolean verifyHumanResourcesPermission(){
         
     }
     
     @Override
-    public void terminateSession(){
+    public boolean verifyManagerPermission(){
         
     }
     
-    private boolean employeeHasPosition(String position){
-        //Verifica que el empleado tenga el puesto indicado
-        String employeePosition = loggedEmployee.getPosition().toString();
+    @Override
+    public boolean verifyRenterPermission(){
         
-        return employeePosition.equals(position);
     }
     
-    private Employee loggedEmployee;
+    private User user;
     private MainMenuUI mainMenuUI;
 }

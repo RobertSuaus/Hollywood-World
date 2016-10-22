@@ -16,7 +16,7 @@ public class Employee extends Person {
         String rfc,
         double basicSalary,
         Date admissionDate,
-        EmployeePositions position
+        String position
         ){
             super(name, lastName, telephone, address);
             this.id = id;
@@ -42,7 +42,7 @@ public class Employee extends Person {
         this.admissionDate = admissionDate;
     }
     
-    public void setPosition(EmployeePositions position){
+    public void setPosition(String position){
         this.position = position;
     }
     
@@ -62,7 +62,7 @@ public class Employee extends Person {
         return admissionDate;
     }
     
-    public EmployeePositions getPosition(){
+    public String getPosition(){
         return position;
     }
     
@@ -70,5 +70,5 @@ public class Employee extends Person {
     private String rfc;
     private double basicSalary;
     private Date admissionDate;
-    private EmployeePositions position;
+    private String position;
 }
