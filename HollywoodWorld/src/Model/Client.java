@@ -12,19 +12,19 @@ public class Client extends Person {
         String lastName,
         String telephone,
         String address,
-        Membership membership
+        ClientMembership membership
     ){
         super(name, lastName, telephone, address);
         this.membership = membership;
     }
     
-    public void setMembership(Membership membership){
+    public void setMembership(ClientMembership membership){
         this.membership = membership;
     }
     
-    public Membership getMembership(){
+    public ClientMembership getMembership(){
         return membership;
     }
     
-    private Membership membership;
+    private ClientMembership membership;
 }

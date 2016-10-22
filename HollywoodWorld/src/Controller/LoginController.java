@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
-import Model.Employee;
-import Model.UserAccount;
-import Model.UserAccountDAO;
-import javax.swing.JOptionPane;
+import Model.User;
+import Model.UserDAO;
 
 /**
  *
@@ -18,51 +11,54 @@ public class LoginController implements ValidateLoginInterface {
     /*Clase encargada de la funcionalidad del sistema de login*/
     
     public LoginController(){
-        userAccountDAO = new UserAccountDAO();
-        userAccount = new UserAccount();
+        userDAO = new UserDAO();
+        user = new User();
         loginUI = new LoginUI(this);
     }
     
-    //Métodos para la validación de datos de cuenta de usuario
+    //Métodos para la validación de datos de usuario
     @Override
     public void validateUserName(String inUserName){
+        
         int minNameLength = 4;
         int inNameLength = inUserName.length();
         
         if (inNameLength >= minNameLength){
-            userAccount.setUserName(inUserName);
+            user.setUserName(inUserName);
         }
     }
     
     @Override
     public void validatePassword(String inPassword){
+        
         int minPasswordLength = 4;
         int inPasswordLength = inPassword.length();
         
         if(inPasswordLength >= minPasswordLength){
-            userAccount.setPassword(inPassword);
+            user.setPassword(inPassword);
         }
     }
     
     @Override
-    public void handleLoginAction(){
-        if( userAccountDAO.isUserInfoCoincident(userAccount) ){
-            Employee currentEmployee = getEmployeeInfo(userAccount);
-            new MainMenuController(currentEmployee);
-            
-            loginUI.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Datos de usuario incorrectos");
-        }
+    public boolean authenticateUser(){
+        /*Verificar que en la base de datos se encuentre
+        el usuario con la contraseña correspondiente*/
+        
+        boolean isInfoValid = userDAO.isUserInfoCoincident(user);
+        return isInfoValid;
     }
     
-    //Obtiene los datos de empleado, dada una cuenta de usuario
-    private Employee getEmployeeInfo(UserAccount userAccount){
-        return userAccountDAO.getUserAccountOwner(userAccount);
+    @Override
+    public void initiateSession(){
+        /*Iniciar el sistema con la sesión de usuario correspondiente*/
+        
+        String userName = user.getUserName();
+        User authenticatedUser = userDAO.getUserInfo(userName);
+        
+        new MainMenuController (authenticatedUser);
     }
     
-    
-    private UserAccountDAO userAccountDAO;
-    private UserAccount userAccount;
+    private UserDAO userDAO;
+    private User user;
     private LoginUI loginUI;
 }

@@ -6,8 +6,10 @@ package Controller;
  */
 public interface ValidateMainMenuInterface {
     
-    public void handleRentOption();
-    public void handleHumanResourcesOption();
-    public void handleManagingOption();
-    public void terminateSession();
+    public boolean verifyAdminPermission();
+    public boolean verifyHumanResourcesPermission();
+    public boolean verifyManagerPermission();
+    public boolean verifyRenterPermission();
+    
+    public void launchFunction(String functionName);
 }

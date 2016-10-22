@@ -4,11 +4,11 @@ package Model;
  *
  * @author Robert
  */
-public class Membership {
+public class ClientMembership {
     /*Representa la membresia de socio de un cliente. Todos los clientes
     tienen una y solo una membresia.*/
     
-    public Membership(
+    public ClientMembership(
         int id,
         boolean activeStatus
     ){
