@@ -51,7 +51,7 @@ public class UserDAO {
     
     public boolean isUserInfoCoincident(User user){
         boolean isInfoCoincident;
-        String sql = "SELECT" + "FROM User WHERE "+
+        String sql = "SELECT FROM User WHERE "+
                     "userName ='" + user.getUserName() + "'" +
                     " AND password ='" + user.getPassword() + "'";
         try{

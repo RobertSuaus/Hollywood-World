@@ -6,10 +6,10 @@ package Controller;
  */
 public interface ValidateMainMenuInterface {
     
-    public boolean verifyAdminPermission();
-    public boolean verifyHumanResourcesPermission();
-    public boolean verifyManagerPermission();
-    public boolean verifyRenterPermission();
+    public boolean userHasAdminPermissions();
+    public boolean userHasHumanResourcesPermissions();
+    public boolean userHasManagerPermissions();
+    public boolean userHasRenterPermissions();
     
-    public void launchFunction(String functionName);
+    public void openWindow(String windowName);
 }

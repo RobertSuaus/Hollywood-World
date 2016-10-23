@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 /**
@@ -14,15 +9,15 @@ public enum UserPermissions
     administrator (0),
     manager (1),
     humanResources (2),
-    vendor (3);
+    renter (3);
     
-    UserPermissions(int permissionLevel){
-        this.permissionLevel = permissionLevel;
+    UserPermissions(int value){
+        this.value = value;
     }
     
-    public int getPermissionLevel(){
-        return permissionLevel;
+    public int getValue(){
+        return value;
     }
     
-    private final int permissionLevel;
+    private final int value;
 }
