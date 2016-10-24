@@ -2,6 +2,7 @@ package Controller;
 
 import Model.User;
 import Model.UserDAO;
+import View.LoginUI;
 
 /**
  *
@@ -66,10 +67,12 @@ public class LoginController implements ValidateLoginInterface {
     public void initiateSession(){
         /*Iniciar el sistema con la sesión de usuario correspondiente*/
         
+        
         String userName = user.getUserName();
         User authenticatedUser = userDAO.getUserInfo(userName);
         
         new MainMenuController (authenticatedUser);
+        loginUI.dispose();
     }
     
     private UserDAO userDAO;

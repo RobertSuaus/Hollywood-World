@@ -17,7 +17,7 @@ public interface ValidateClientInterface {
     public void assignClientTelephone(String clientTelephone);
     public void assignMembershipStatus(/*boolean o MembershipStatus enum*/);
     
-    public int getNextMembershipId();
+    public int getLastId();
     
     
 }
