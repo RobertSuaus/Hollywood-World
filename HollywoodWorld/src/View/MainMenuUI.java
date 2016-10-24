@@ -6,6 +6,9 @@
 
 package View;
 
+import Controller.ValidateMainMenuInterface;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author che_i
@@ -13,8 +16,10 @@ package View;
 public class MainMenuUI extends javax.swing.JFrame {
 
     /** Creates new form MainMenuIU */
-    public MainMenuUI() {
+    public MainMenuUI(ValidateMainMenuInterface validateMainMenu) {
         initComponents();
+        this.setVisible(true);
+        this.validateMainMenu = validateMainMenu;
     }
 
     /** This method is called from within the constructor to
@@ -30,10 +35,11 @@ public class MainMenuUI extends javax.swing.JFrame {
         RentButton = new javax.swing.JButton();
         RestorationButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        ManageMenu = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        ClientButton = new javax.swing.JMenu();
+        clientButton = new javax.swing.JMenuItem();
+        filmsButton = new javax.swing.JMenuItem();
+        employeeButton = new javax.swing.JMenuItem();
+        usersButton = new javax.swing.JMenuItem();
         ReportsMenu = new javax.swing.JMenu();
         payrollMenu = new javax.swing.JMenu();
         SessionMenu = new javax.swing.JMenu();
@@ -45,22 +51,55 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         RentButton.setFont(new java.awt.Font("Berlin Sans FB", 3, 18)); // NOI18N
         RentButton.setText("Rent");
+        RentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RentButtonActionPerformed(evt);
+            }
+        });
 
         RestorationButton.setFont(new java.awt.Font("Berlin Sans FB", 3, 24)); // NOI18N
         RestorationButton.setText("Restoration");
+        RestorationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RestorationButtonActionPerformed(evt);
+            }
+        });
 
-        ManageMenu.setText("Manage");
+        ClientButton.setText("Manage");
 
-        jMenuItem4.setText("Clients");
-        ManageMenu.add(jMenuItem4);
+        clientButton.setText("Clients");
+        clientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientButtonActionPerformed(evt);
+            }
+        });
+        ClientButton.add(clientButton);
 
-        jMenuItem5.setText("Films");
-        ManageMenu.add(jMenuItem5);
+        filmsButton.setText("Films");
+        filmsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filmsButtonActionPerformed(evt);
+            }
+        });
+        ClientButton.add(filmsButton);
 
-        jMenuItem6.setText("Employees");
-        ManageMenu.add(jMenuItem6);
+        employeeButton.setText("Employees");
+        employeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeButtonActionPerformed(evt);
+            }
+        });
+        ClientButton.add(employeeButton);
 
-        jMenuBar1.add(ManageMenu);
+        usersButton.setText("Users");
+        usersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usersButtonActionPerformed(evt);
+            }
+        });
+        ClientButton.add(usersButton);
+
+        jMenuBar1.add(ClientButton);
 
         ReportsMenu.setText("Reports");
         jMenuBar1.add(ReportsMenu);
@@ -102,54 +141,78 @@ public class MainMenuUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenuUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void usersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasHumanResourcesPermissions()){
+            JOptionPane.showMessageDialog(null, "Welcome, human resources!!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
         }
-        //</editor-fold>
-        //</editor-fold>
+    }//GEN-LAST:event_usersButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenuUI().setVisible(true);
-            }
-        });
-    }
+    private void RentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasRenterPermissions() ||
+                validateMainMenu.userHasManagerPermissions()){
+            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
+        }
+    }//GEN-LAST:event_RentButtonActionPerformed
+
+    private void RestorationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestorationButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasRenterPermissions() ||
+                validateMainMenu.userHasManagerPermissions()){
+            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
+        }
+    }//GEN-LAST:event_RestorationButtonActionPerformed
+
+    private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasRenterPermissions() ||
+                validateMainMenu.userHasManagerPermissions()){
+            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
+        }
+    }//GEN-LAST:event_clientButtonActionPerformed
+
+    private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasManagerPermissions()){
+            JOptionPane.showMessageDialog(null, "Welcome, manager!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
+        }
+    }//GEN-LAST:event_filmsButtonActionPerformed
+
+    private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
+        // TODO add your handling code here:
+        if(validateMainMenu.userHasHumanResourcesPermissions()){
+            JOptionPane.showMessageDialog(null, "Human Resources!");
+        }else{
+            JOptionPane.showMessageDialog(null, "You cannot access this function");
+        }
+    }//GEN-LAST:event_employeeButtonActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu ManageMenu;
+    private javax.swing.JMenu ClientButton;
     private javax.swing.JButton RentButton;
     private javax.swing.JMenu ReportsMenu;
     private javax.swing.JButton RestorationButton;
     private javax.swing.JMenu SessionMenu;
+    private javax.swing.JMenuItem clientButton;
+    private javax.swing.JMenuItem employeeButton;
+    private javax.swing.JMenuItem filmsButton;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu payrollMenu;
+    private javax.swing.JMenuItem usersButton;
     // End of variables declaration//GEN-END:variables
-
+    private ValidateMainMenuInterface validateMainMenu;
 }

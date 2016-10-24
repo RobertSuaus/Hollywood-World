@@ -11,5 +11,4 @@ public interface ValidateMainMenuInterface {
     public boolean userHasManagerPermissions();
     public boolean userHasRenterPermissions();
     
-    public void openWindow(String windowName);
 }

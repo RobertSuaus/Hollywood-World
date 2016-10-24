@@ -50,7 +50,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                   <Component id="jInternalFrame1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,7 +89,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="userNameTxt" max="32767" attributes="0"/>
-                                  <Component id="Password" max="32767" attributes="0"/>
+                                  <Component id="password" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -115,7 +115,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="Password" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="password" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="loginButton" min="-2" max="-2" attributes="0"/>
@@ -165,7 +165,10 @@
                 <Property name="text" type="java.lang.String" value="Hollywood World!"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="Password">
+            <Component class="javax.swing.JPasswordField" name="password">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="passwordCaretUpdate"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

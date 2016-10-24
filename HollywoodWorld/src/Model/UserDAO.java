@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +22,7 @@ public class UserDAO {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/Hollywood_World",
+                "jdbc:mysql://localhost/hollywood_world?autoReconnect=true&useSSL=false",
                 "root",
                 ""
             );
@@ -42,16 +44,48 @@ public class UserDAO {
     }
     
     public User getUserInfo(String userName){
-        
+        String sql = "SELECT * FROM user WHERE userName ='" +"'";
+        User user = null;
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            user = new User(
+                resultSet.getString("name"),
+                resultSet.getString("lastname"),
+                resultSet.getString("userName"),
+                resultSet.getString("password"),
+                resultSet.getString("userPermissions")
+                );
+        }catch(SQLException ex){
+            System.err.println("Error al obtener información de usuario " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener información de usuario.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return user;
     }
     
     public boolean isUserNameOccupied(String userName){
-        return true;
+        boolean isNameOccupied;
+        String sql = "SELECT * FROM user WHERE "+
+                    "userName ='" + userName + "'";
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            isNameOccupied = resultSet.first();
+            
+        }catch(SQLException ex){
+            System.err.println("Error al verificar que el nombre esté ocupado " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener información de usuario.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            isNameOccupied = false;
+        }
+        return isNameOccupied;
     }
     
     public boolean isUserInfoCoincident(User user){
         boolean isInfoCoincident;
-        String sql = "SELECT FROM User WHERE "+
+        String sql = "SELECT * FROM user WHERE "+
                     "userName ='" + user.getUserName() + "'" +
                     " AND password ='" + user.getPassword() + "'";
         try{
@@ -59,11 +93,12 @@ public class UserDAO {
             resultSet = statement.executeQuery(sql);
             isInfoCoincident = resultSet.first();
             
-        }catch(Exception error){
-            error.printStackTrace();
+        }catch(SQLException ex){
+            System.err.println("Error al obtener información de usuario " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener información de usuario.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             isInfoCoincident = false;
         }
-        
         return isInfoCoincident;
     }
     

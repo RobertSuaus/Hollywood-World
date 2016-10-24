@@ -12,7 +12,7 @@ public class User {
         String lastName,
         String userName, //El alias o login
         String password,
-        UserPermissions permissions
+        String permissions
         
         ){
             this.name = name;
@@ -44,7 +44,7 @@ public class User {
         this.password = password;
     }
     
-    public void setPermissions(UserPermissions permissions){
+    public void setPermissions(String permissions){
         this.permissions = permissions;
     }
     
@@ -64,7 +64,7 @@ public class User {
         return password;
     }
     
-    public UserPermissions getPermissions(){
+    public String getPermissions(){
         return permissions;
     }
     
@@ -72,5 +72,5 @@ public class User {
     private String lastName;
     private String userName;
     private String password;
-    private UserPermissions permissions;
+    private String permissions;
 }

@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.User;
-import Model.UserPermissions;
+import View.MainMenuUI;
 
 /**
  *
@@ -20,45 +20,49 @@ public class MainMenuController implements ValidateMainMenuInterface {
     @Override
     public boolean userHasAdminPermissions(){
         
-        int userPermissions = getCurrentUserPermissions();
-        int adminPermissions = UserPermissions.
-                administrator.getValue();
+        String userPermissions = user.getPermissions();
         
-        return userPermissions <= adminPermissions;
+        if(userPermissions.equals("ADMIN")){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     @Override
     public boolean userHasHumanResourcesPermissions(){
         
-        int userPermissions = getCurrentUserPermissions();
-        int humanResPermissions = UserPermissions
-                .humanResources.getValue();
+        String userPermissions = user.getPermissions();
         
-        return userPermissions <= humanResPermissions;
+        if(userPermissions.equals("HUMAN_RESOURCES")){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     @Override
     public boolean userHasManagerPermissions(){
         
-        int userPermissions = getCurrentUserPermissions();
-        int managerPermissions = UserPermissions.
-                manager.getValue();
+        String userPermissions = user.getPermissions();
         
-        return userPermissions <= managerPermissions;
+        if(userPermissions.equals("MANAGER")){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     @Override
     public boolean userHasRenterPermissions(){
         
-        int userPermissions = getCurrentUserPermissions();
-        int renterPermissions = UserPermissions.
-                renter.getValue();
+        String userPermissions = user.getPermissions();
         
-        return userPermissions <= renterPermissions;
-    }
-    
-    private int getCurrentUserPermissions(){
-        return user.getPermissions().getValue();
+        if(userPermissions.equals("RENTER")){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     private User user;
