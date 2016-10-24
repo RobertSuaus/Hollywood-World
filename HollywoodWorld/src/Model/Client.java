@@ -18,6 +18,10 @@ public class Client extends Person {
         this.membership = membership;
     }
     
+    public Client(){
+        super("","","","");
+    }
+    
     public void setMembership(ClientMembership membership){
         this.membership = membership;
     }

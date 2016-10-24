@@ -2,7 +2,6 @@ package Controller;
 
 import Model.User;
 import Model.UserPermissions;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,28 +18,47 @@ public class MainMenuController implements ValidateMainMenuInterface {
     }
     
     @Override
-    public boolean verifyAdminPermission(){
-        int userPermission = user.getUserPermissions().
-                getPermissionLevel();
-        int adminPermission = UserPermissions.administrator.
-                getPermissionLevel();
+    public boolean userHasAdminPermissions(){
         
-        return userPermission <= adminPermission;
+        int userPermissions = getCurrentUserPermissions();
+        int adminPermissions = UserPermissions.
+                administrator.getValue();
+        
+        return userPermissions <= adminPermissions;
     }
     
     @Override
-    public boolean verifyHumanResourcesPermission(){
+    public boolean userHasHumanResourcesPermissions(){
         
+        int userPermissions = getCurrentUserPermissions();
+        int humanResPermissions = UserPermissions
+                .humanResources.getValue();
+        
+        return userPermissions <= humanResPermissions;
     }
     
     @Override
-    public boolean verifyManagerPermission(){
+    public boolean userHasManagerPermissions(){
         
+        int userPermissions = getCurrentUserPermissions();
+        int managerPermissions = UserPermissions.
+                manager.getValue();
+        
+        return userPermissions <= managerPermissions;
     }
     
     @Override
-    public boolean verifyRenterPermission(){
+    public boolean userHasRenterPermissions(){
         
+        int userPermissions = getCurrentUserPermissions();
+        int renterPermissions = UserPermissions.
+                renter.getValue();
+        
+        return userPermissions <= renterPermissions;
+    }
+    
+    private int getCurrentUserPermissions(){
+        return user.getPermissions().getValue();
     }
     
     private User user;

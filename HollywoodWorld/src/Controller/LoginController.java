@@ -16,27 +16,40 @@ public class LoginController implements ValidateLoginInterface {
         loginUI = new LoginUI(this);
     }
     
-    //Métodos para la validación de datos de usuario
     @Override
-    public void validateUserName(String inUserName){
+    public boolean isUserNameValid(String userName){
         
         int minNameLength = 4;
-        int inNameLength = inUserName.length();
+        int nameLength = userName.length();
         
-        if (inNameLength >= minNameLength){
-            user.setUserName(inUserName);
+        if (nameLength >= minNameLength){
+            return true;
+        }else{
+            return false;
         }
     }
     
     @Override
-    public void validatePassword(String inPassword){
+    public boolean isPasswordValid(String password){
         
         int minPasswordLength = 4;
-        int inPasswordLength = inPassword.length();
+        int passwordLength = password.length();
         
-        if(inPasswordLength >= minPasswordLength){
-            user.setPassword(inPassword);
+        if(passwordLength >= minPasswordLength){
+            return true;
+        }else{
+            return false;
         }
+    }
+    
+    @Override
+    public void assignUserName(String userName){
+        user.setUserName(userName);
+    }
+    
+    @Override
+    public void assignPassword(String password){
+        user.setPassword(password);
     }
     
     @Override
@@ -45,6 +58,7 @@ public class LoginController implements ValidateLoginInterface {
         el usuario con la contraseña correspondiente*/
         
         boolean isInfoValid = userDAO.isUserInfoCoincident(user);
+        
         return isInfoValid;
     }
     

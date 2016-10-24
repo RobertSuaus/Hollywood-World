@@ -12,14 +12,14 @@ public class User {
         String lastName,
         String userName, //El alias o login
         String password,
-        UserPermissions userPermissions
+        UserPermissions permissions
         
         ){
             this.name = name;
             this.lastName = lastName;
             this.userName = userName;
             this.password = password;
-            this.userPermissions = userPermissions;
+            this.permissions = permissions;
         }
     
     //
@@ -44,8 +44,8 @@ public class User {
         this.password = password;
     }
     
-    public void setUserPermissions(UserPermissions userPermissions){
-        this.userPermissions = userPermissions;
+    public void setPermissions(UserPermissions permissions){
+        this.permissions = permissions;
     }
     
     public String getName(){
@@ -64,13 +64,13 @@ public class User {
         return password;
     }
     
-    public UserPermissions getUserPermissions(){
-        return userPermissions;
+    public UserPermissions getPermissions(){
+        return permissions;
     }
     
     private String name;
     private String lastName;
     private String userName;
     private String password;
-    private UserPermissions userPermissions;
+    private UserPermissions permissions;
 }
