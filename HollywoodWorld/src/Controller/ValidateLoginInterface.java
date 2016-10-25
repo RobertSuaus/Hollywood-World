@@ -1,17 +1,13 @@
 package Controller;
 
+import Model.User;
+
 /**
  *
  * @author Robert
  */
 public interface ValidateLoginInterface {
     
-    public boolean isUserNameValid(String userName);
-    public boolean isPasswordValid(String password);
-    
-    public void assignUserName(String userName);
-    public void assignPassword(String password);
-    
-    public boolean authenticateUser();
-    public void initiateSession();
+    public boolean authenticateUser(User user);
+    public void initiateSession(User user);
 }
