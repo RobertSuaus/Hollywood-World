@@ -1,23 +1,19 @@
 package Controller;
 
+import Model.Client;
+
 /**
  *
  * @author Robert
  */
 public interface ValidateClientInterface {
     
-    public boolean isClientNameValid(String clientName);
-    public boolean isClientLastNameValid(String clientLastName);
-    public boolean isClientAddressValid(String clientAddress);
-    public boolean isClientTelephoneValid(String clientTelephone);
+    public boolean isMembershipIdAvailable(int membershipId);
     
-    public void assignClientName(String clientName);
-    public void assignClientLastName(String clientLastName);
-    public void assignClientAddress(String clientAddress);
-    public void assignClientTelephone(String clientTelephone);
-    public void assignMembershipStatus(/*boolean o MembershipStatus enum*/);
+    public Client getClientInfo(int membershipId);
+    public int getNextMembershipId();
     
-    public int getLastId();
-    
+    public void addClient(Client client);
+    public void modifyClient(Client client);
     
 }
