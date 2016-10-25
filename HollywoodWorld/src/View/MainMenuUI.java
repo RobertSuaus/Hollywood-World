@@ -34,9 +34,11 @@ public class MainMenuUI extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         ReportsMenu = new javax.swing.JMenu();
         payrollMenu = new javax.swing.JMenu();
         SessionMenu = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +62,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         jMenuItem6.setText("Employees");
         ManageMenu.add(jMenuItem6);
 
+        jMenuItem1.setText("Users");
+        ManageMenu.add(jMenuItem1);
+
         jMenuBar1.add(ManageMenu);
 
         ReportsMenu.setText("Reports");
@@ -69,6 +74,10 @@ public class MainMenuUI extends javax.swing.JFrame {
         jMenuBar1.add(payrollMenu);
 
         SessionMenu.setText("Session");
+
+        jMenuItem2.setText("Log Out");
+        SessionMenu.add(jMenuItem2);
+
         jMenuBar1.add(SessionMenu);
 
         setJMenuBar(jMenuBar1);
@@ -96,7 +105,7 @@ public class MainMenuUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(RentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RestorationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,6 +155,8 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenu SessionMenu;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
