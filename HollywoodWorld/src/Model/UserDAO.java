@@ -44,7 +44,7 @@ public class UserDAO {
     }
     
     public User getUserInfo(String userName){
-        String sql = "SELECT * FROM user WHERE userName ='" +"'";
+        String sql = "SELECT * FROM user WHERE userName ='" + userName +"'";
         User user = null;
         try{
             statement = connection.createStatement();

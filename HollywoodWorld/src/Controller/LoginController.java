@@ -66,8 +66,6 @@ public class LoginController implements ValidateLoginInterface {
     @Override
     public void initiateSession(){
         /*Iniciar el sistema con la sesión de usuario correspondiente*/
-        
-        
         String userName = user.getUserName();
         User authenticatedUser = userDAO.getUserInfo(userName);
         
