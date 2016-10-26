@@ -22,7 +22,7 @@ public class User {
             this.permissions = permissions;
         }
     
-    //
+    
     public User(){
         userName = "";
         password = "";
