@@ -31,6 +31,8 @@ public class MainMenuUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         RentButton = new javax.swing.JButton();
         RestorationButton = new javax.swing.JButton();
@@ -44,7 +46,12 @@ public class MainMenuUI extends javax.swing.JFrame {
         payrollMenu = new javax.swing.JMenu();
         SessionMenu = new javax.swing.JMenu();
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hollywood World - Main Menu");
 
         jLabel3.setFont(new java.awt.Font("Bodoni MT", 3, 48)); // NOI18N
         jLabel3.setText("Hollywood World!");
@@ -211,6 +218,8 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem filmsButton;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu payrollMenu;
     private javax.swing.JMenuItem usersButton;
     // End of variables declaration//GEN-END:variables
