@@ -73,6 +73,8 @@ public class MainMenuController implements ValidateMainMenuInterface {
                 break;
             case "Client Manager" : new ClientController();
                 break;
+            case "Movie Manager" : new MovieController();
+                break;
             default : ;
         }
     }

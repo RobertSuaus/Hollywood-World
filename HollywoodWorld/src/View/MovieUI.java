@@ -1,13 +1,31 @@
 package View;
 
+import Controller.ValidateMovieInterface;
+import Model.Movie;
+import Model.MovieProfile;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Robert
+ * 
+ * Interfaz gráfica del manejador de películas. Permite agregar
+ * películas al inventario, crear nuevos perfiles de películas y editarlos
  */
 public class MovieUI extends javax.swing.JFrame {
 
-    public MovieUI() {
-        initComponents();
+    public MovieUI(ValidateMovieInterface validateMovie) {
+        initComponents(); //Componentes visuales de swing
+        this.setVisible(true);
+        this.existingProfilePanel.setVisible(false);
+        this.validateMovie = validateMovie;
+        
+        this.newMovie = new Movie(validateMovie.getNextMovieId());
+        fillMovieIdField();
+        
+        this.newProfile = new MovieProfile();
+        this.existingProfile = new MovieProfile();
     }
 
     /**
@@ -27,7 +45,7 @@ public class MovieUI extends javax.swing.JFrame {
         addSerialCodeTxt = new javax.swing.JTextField();
         amountToAddTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        movieId = new javax.swing.JTextField();
         addMoviesBtn = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         newProfilePanel = new javax.swing.JPanel();
@@ -37,7 +55,7 @@ public class MovieUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        newMovieTitleTxt = new javax.swing.JTextField();
+        newProfileTitleTxt = new javax.swing.JTextField();
         newRatingTxt = new javax.swing.JTextField();
         newDescriptionTxt = new javax.swing.JTextField();
         newRuntimeTxt = new javax.swing.JTextField();
@@ -47,11 +65,11 @@ public class MovieUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         editProfilePanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        editInputSerial = new javax.swing.JTextField();
+        searchSerialTxt = new javax.swing.JTextField();
         searchSerialBtn = new javax.swing.JButton();
         existingProfilePanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        editMovieTitleTxt = new javax.swing.JTextField();
+        editProfileTitleTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         editReleaseDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel13 = new javax.swing.JLabel();
@@ -66,7 +84,7 @@ public class MovieUI extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Movies");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -80,7 +98,7 @@ public class MovieUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setText("Movie(s) code(s):");
 
-        jTextField2.setEditable(false);
+        movieId.setEditable(false);
 
         addMoviesBtn.setText("Add movies");
         addMoviesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +129,7 @@ public class MovieUI extends javax.swing.JFrame {
                                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(addSerialCodeTxt)
                                     .addComponent(amountToAddTxt)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))))
+                                    .addComponent(movieId, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))))
                     .addGroup(inventoryPanelLayout.createSequentialGroup()
                         .addGap(232, 232, 232)
                         .addComponent(jLabel17)))
@@ -133,7 +151,7 @@ public class MovieUI extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(movieId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(addMoviesBtn)
                 .addGap(33, 33, 33))
@@ -160,6 +178,11 @@ public class MovieUI extends javax.swing.JFrame {
         jLabel9.setText("Serial code:");
 
         addNewProfileBtn.setText("Add new profile");
+        addNewProfileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewProfileBtnActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
         jLabel18.setText("Add movie profile");
@@ -184,7 +207,7 @@ public class MovieUI extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(newMovieTitleTxt)
+                                    .addComponent(newProfileTitleTxt)
                                     .addComponent(newRatingTxt)
                                     .addComponent(newDescriptionTxt)
                                     .addComponent(newRuntimeTxt)
@@ -203,7 +226,7 @@ public class MovieUI extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(newMovieTitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newProfileTitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -259,7 +282,14 @@ public class MovieUI extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel16.setText("Serial code:");
 
+        editSerialCodeTxt.setEditable(false);
+
         saveProfileChangeBtn.setText("Save changes");
+        saveProfileChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveProfileChangeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout existingProfilePanelLayout = new javax.swing.GroupLayout(existingProfilePanel);
         existingProfilePanel.setLayout(existingProfilePanelLayout);
@@ -279,7 +309,7 @@ public class MovieUI extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(existingProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(editMovieTitleTxt)
+                            .addComponent(editProfileTitleTxt)
                             .addComponent(editReleaseDate, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                             .addComponent(editRatingTxt)
                             .addComponent(editDescriptionTxt)
@@ -293,7 +323,7 @@ public class MovieUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(existingProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(editMovieTitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editProfileTitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(existingProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
@@ -327,7 +357,7 @@ public class MovieUI extends javax.swing.JFrame {
                 .addGap(104, 104, 104)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(editInputSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchSerialTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchSerialBtn)
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -342,7 +372,7 @@ public class MovieUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(editProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(editInputSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchSerialTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchSerialBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(existingProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,24 +398,122 @@ public class MovieUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addMoviesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMoviesBtnActionPerformed
-        // TODO add your handling code here:
+        
+        String newMovieSerial = addSerialCodeTxt.getText();
+        if(!validateMovie.isSerialCodeAvailable(newMovieSerial)){
+            
+            newMovie.setProfile(
+                    validateMovie.getMovieProfileInfo(newMovieSerial)
+                    );
+            int addAmount = Integer.valueOf(amountToAddTxt.getText() );
+            String operationStatus;
+            operationStatus = validateMovie.addMovie(newMovie, addAmount);
+            
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Serial code not registered");
+        }
     }//GEN-LAST:event_addMoviesBtnActionPerformed
 
-    private void searchSerialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSerialBtnActionPerformed
-        // TODO add your handling code here:
+    private void addNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProfileBtnActionPerformed
         
+        gatherNewProfileInformation();
+        if(validateMovie.isSerialCodeAvailable(newProfile.getSerialCode() ) ){
+            String operationStatus;
+            operationStatus = validateMovie.addMovieProfile(newProfile);
+            
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Serial code already in use");
+        }
+    }//GEN-LAST:event_addNewProfileBtnActionPerformed
+
+    private void saveProfileChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileChangeBtnActionPerformed
+        
+        gatherExistingProfileInformation();
+        String operationStatus;
+        operationStatus = validateMovie.modifyMovieProfile(existingProfile);
+        
+        JOptionPane.showMessageDialog(null, operationStatus);
+    }//GEN-LAST:event_saveProfileChangeBtnActionPerformed
+
+    private void searchSerialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSerialBtnActionPerformed
+        
+        String selectedSerial = searchSerialTxt.getText();
+        
+        if(!validateMovie.isSerialCodeAvailable(selectedSerial) ){
+            existingProfile = validateMovie.getMovieProfileInfo(selectedSerial);
+            existingProfilePanel.setVisible(true);
+            fillExistingProfileInformation();
+        }else{
+            JOptionPane.showMessageDialog(null, "Serial not registered");
+        }
     }//GEN-LAST:event_searchSerialBtnActionPerformed
 
-
+    private void gatherNewProfileInformation(){
+        
+        String newTitle = newProfileTitleTxt.getText();
+        Date newDate = newReleaseDate.getDate();
+        String newRating = newRatingTxt.getText();
+        String newDescription = newDescriptionTxt.getText();
+        String newRuntime = newRuntimeTxt.getText();
+        String newSerialcode = newSerialcodeTxt.getText();
+        
+        newProfile = new MovieProfile(
+            newTitle,
+            newDate,
+            newRating,
+            newDescription,
+            newRuntime,
+            newSerialcode
+            );
+    }
+    
+    private void gatherExistingProfileInformation(){
+        
+        String editTitle = editProfileTitleTxt.getText();
+        Date editDate = editReleaseDate.getDate();
+        String editRating = editRatingTxt.getText();
+        String editDescription = editDescriptionTxt.getText();
+        String editRuntime = editRuntimeTxt.getText();
+        String editSerialCode = editSerialCodeTxt.getText();
+        
+        existingProfile = new MovieProfile(
+            editTitle,
+            editDate,
+            editRating,
+            editDescription,
+            editRuntime,
+            editSerialCode
+            );
+    }
+    
+    private void fillExistingProfileInformation(){
+        
+        editProfileTitleTxt.setText(existingProfile.getTitle() );
+        editReleaseDate.setDate(existingProfile.getReleaseDate() );
+        editRatingTxt.setText(existingProfile.getRating() );
+        editDescriptionTxt.setText(existingProfile.getDescription() );
+        editRuntimeTxt.setText(existingProfile.getRunTime() );
+        editSerialCodeTxt.setText(existingProfile.getSerialCode() );
+    }
+    
+    private void fillMovieIdField(){
+        this.movieId.setText(String.valueOf(newMovie.getId() ) );
+    }
+    
+    private ValidateMovieInterface validateMovie;
+    private Movie newMovie;
+    private MovieProfile newProfile;
+    private MovieProfile existingProfile;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMoviesBtn;
     private javax.swing.JButton addNewProfileBtn;
     private javax.swing.JTextField addSerialCodeTxt;
     private javax.swing.JTextField amountToAddTxt;
     private javax.swing.JTextField editDescriptionTxt;
-    private javax.swing.JTextField editInputSerial;
-    private javax.swing.JTextField editMovieTitleTxt;
     private javax.swing.JPanel editProfilePanel;
+    private javax.swing.JTextField editProfileTitleTxt;
     private javax.swing.JTextField editRatingTxt;
     private org.jdesktop.swingx.JXDatePicker editReleaseDate;
     private javax.swing.JTextField editRuntimeTxt;
@@ -412,15 +540,16 @@ public class MovieUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField movieId;
     private javax.swing.JTextField newDescriptionTxt;
-    private javax.swing.JTextField newMovieTitleTxt;
     private javax.swing.JPanel newProfilePanel;
+    private javax.swing.JTextField newProfileTitleTxt;
     private javax.swing.JTextField newRatingTxt;
     private org.jdesktop.swingx.JXDatePicker newReleaseDate;
     private javax.swing.JTextField newRuntimeTxt;
     private javax.swing.JTextField newSerialcodeTxt;
     private javax.swing.JToggleButton saveProfileChangeBtn;
     private javax.swing.JButton searchSerialBtn;
+    private javax.swing.JTextField searchSerialTxt;
     // End of variables declaration//GEN-END:variables
 }

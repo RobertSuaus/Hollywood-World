@@ -20,6 +20,7 @@ public class ClientUI extends javax.swing.JFrame {
      * Creates new form ClientUI
      */
     public ClientUI(ValidateClientInterface validateClient) {
+        
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         
@@ -99,30 +100,6 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Membership number:");
 
-        newNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newNameTxtCaretUpdate(evt);
-            }
-        });
-
-        newLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newLastNameTxtCaretUpdate(evt);
-            }
-        });
-
-        newTelephoneTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newTelephoneTxtCaretUpdate(evt);
-            }
-        });
-
-        newAddressTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newAddressTxtCaretUpdate(evt);
-            }
-        });
-
         newMembershipTxt.setEditable(false);
 
         registerNewBtn.setText("Register new client");
@@ -197,38 +174,14 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Name:");
 
-        editNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editNameTxtCaretUpdate(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Last name:");
-
-        editLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editLastNameTxtCaretUpdate(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Telephone:");
 
-        editTelephoneTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editTelephoneTxtCaretUpdate(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Address:");
-
-        editAddressTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editAddressTxtCaretUpdate(evt);
-            }
-        });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Membership number:");
@@ -239,11 +192,6 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel12.setText("Membership status:");
 
         membershipStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
-        membershipStatus.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                membershipStatusItemStateChanged(evt);
-            }
-        });
 
         saveChangesBtn.setText("Save Changes");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -316,12 +264,6 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Membership number:");
 
-        searchMembershipTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                searchMembershipTxtCaretUpdate(evt);
-            }
-        });
-
         searchClientBtn.setText("Search");
         searchClientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,6 +327,7 @@ public class ClientUI extends javax.swing.JFrame {
 
     private void registerNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewBtnActionPerformed
         
+        gatherNewClientInformation();
         ClientMembership newMembership = newClient.getMembership();
         int newMembershipId = newMembership.getId();
         
@@ -399,7 +342,7 @@ public class ClientUI extends javax.swing.JFrame {
 
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
         
-        int membershipId = existingClient.getMembership().getId();
+        int membershipId = Integer.valueOf(searchMembershipTxt.getText() );
         if(!validateClient.isMembershipIdAvailable(membershipId)){
             
             existingClient = validateClient.getClientInfo(membershipId);
@@ -411,75 +354,46 @@ public class ClientUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchClientBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        
+        gatherExistingClientInformation();
         String operationStatus;
         operationStatus= validateClient.modifyClient(existingClient);
         
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
-    private void newNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newNameTxtCaretUpdate
-        //Validación de sintaxis pendiente
-        String newClientName = newNameTxt.getText();
-        newClient.setName(newClientName);
-    }//GEN-LAST:event_newNameTxtCaretUpdate
-
-    private void newLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newLastNameTxtCaretUpdate
-        //Validación de sintaxis pendiente
-        String lastName = newLastNameTxt.getText();
-        newClient.setLastName(lastName);
-    }//GEN-LAST:event_newLastNameTxtCaretUpdate
-
-    private void newTelephoneTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newTelephoneTxtCaretUpdate
-        String newTelephone = newTelephoneTxt.getText();
-        newClient.setTelephone(newTelephone);
-    }//GEN-LAST:event_newTelephoneTxtCaretUpdate
-
-    private void newAddressTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newAddressTxtCaretUpdate
-        String newAddress = newAddressTxt.getText();
-        newClient.setAddress(newAddress);
-    }//GEN-LAST:event_newAddressTxtCaretUpdate
-
-    private void editNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editNameTxtCaretUpdate
-        String editName = editNameTxt.getText();
-        existingClient.setName(editName);
-    }//GEN-LAST:event_editNameTxtCaretUpdate
-
-    private void editLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editLastNameTxtCaretUpdate
-        String editLastName = editLastNameTxt.getText();
-        existingClient.setLastName(editLastName);
-    }//GEN-LAST:event_editLastNameTxtCaretUpdate
-
-    private void editTelephoneTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editTelephoneTxtCaretUpdate
-        String editTelephone = editTelephoneTxt.getText();
-        existingClient.setTelephone(editTelephone);
-    }//GEN-LAST:event_editTelephoneTxtCaretUpdate
-
-    private void editAddressTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editAddressTxtCaretUpdate
-        String editAddress = editAddressTxt.getText();
-        existingClient.setAddress(editAddress);
-    }//GEN-LAST:event_editAddressTxtCaretUpdate
-
-    private void membershipStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_membershipStatusItemStateChanged
+    private void gatherNewClientInformation(){
+        
+        newClient.setName(newNameTxt.getText() );
+        newClient.setLastName(newLastNameTxt.getText() ); 
+        newClient.setTelephone(newTelephoneTxt.getText() );
+        newClient.setAddress(newAddressTxt.getText() );
+        
+    }
+    
+    private void gatherExistingClientInformation(){
+        
+        existingClient.setName(editNameTxt.getText() );
+        existingClient.setLastName(editLastNameTxt.getText() );
+        existingClient.setTelephone(editTelephoneTxt.getText() );
+        existingClient.setAddress(editAddressTxt.getText());
+        
         int currentId = existingClient.getMembership().getId();
         String currentStatus = String.valueOf(membershipStatus.getSelectedItem());
         
         existingClient.setMembership(
                 new ClientMembership(currentId, currentStatus)
                 );
-    }//GEN-LAST:event_membershipStatusItemStateChanged
-
-    private void searchMembershipTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchMembershipTxtCaretUpdate
-        int membershipId = Integer.valueOf(searchMembershipTxt.getText());
-        existingClient.setMembership(
-                new ClientMembership(membershipId)
-                );
-    }//GEN-LAST:event_searchMembershipTxtCaretUpdate
-
+        
+    }
+    
     private void fillMembershipField(){
+        
         newMembershipTxt.setText(String.valueOf(newClient.getMembership().getId()));
     }
     
     private void fillExistingClientForm(){
+        
         editNameTxt.setText(existingClient.getName());
         editLastNameTxt.setText(existingClient.getLastName());
         editTelephoneTxt.setText(existingClient.getTelephone());

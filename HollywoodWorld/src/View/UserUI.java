@@ -97,35 +97,6 @@ public class UserUI extends javax.swing.JFrame {
         jLabel5.setText("Permissions:");
 
         newPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Human Resources", "Manager", "Renter" }));
-        newPermissions.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                newPermissionsItemStateChanged(evt);
-            }
-        });
-
-        newPassword.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newPasswordCaretUpdate(evt);
-            }
-        });
-
-        newUserNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newUserNameTxtCaretUpdate(evt);
-            }
-        });
-
-        newLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newLastNameTxtCaretUpdate(evt);
-            }
-        });
-
-        newNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                newNameTxtCaretUpdate(evt);
-            }
-        });
 
         createNewBtn.setText("Create user");
         createNewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -199,12 +170,6 @@ public class UserUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("User name:");
 
-        searchUserNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                searchUserNameTxtCaretUpdate(evt);
-            }
-        });
-
         searchUserBtn.setText("Search");
         searchUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,20 +180,8 @@ public class UserUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Name:");
 
-        editNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editNameTxtCaretUpdate(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Last name:");
-
-        editLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editLastNameTxtCaretUpdate(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("User name:");
@@ -238,21 +191,10 @@ public class UserUI extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Password:");
 
-        editPassword.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                editPasswordCaretUpdate(evt);
-            }
-        });
-
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Permissions:");
 
         editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Human Resources", "Manager", "Renter" }));
-        editPermissions.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                editPermissionsItemStateChanged(evt);
-            }
-        });
 
         saveChangesBtn.setText("Save changes");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +317,7 @@ public class UserUI extends javax.swing.JFrame {
     //Agrega un usuario nuevo, si el nombre no esta ocupado.
     private void createNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewBtnActionPerformed
         
+        gatherNewUserInformation();
         String userName = newUser.getUserName();
         if(validateUser.isUserNameAvailable(userName)){
             String operationStatus;
@@ -387,6 +330,8 @@ public class UserUI extends javax.swing.JFrame {
 
     //Guarda los cambios hechos a un usuario existente
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        
+        gatherExistingUserInformation();
         String operationStatus;
         operationStatus = validateUser.modifyUser(existingUser);
         JOptionPane.showMessageDialog(null, operationStatus);
@@ -395,7 +340,7 @@ public class UserUI extends javax.swing.JFrame {
     //Busca los datos de usuario existentes y llena el formulario con los datos
     private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
         
-        String userName = existingUser.getUserName();
+        String userName = searchUserNameTxt.getText();
         
         if(!validateUser.isUserNameAvailable(userName)){
             existingUser = validateUser.getUserInfo(userName);
@@ -406,59 +351,39 @@ public class UserUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchUserBtnActionPerformed
 
-    private void newNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newNameTxtCaretUpdate
-        //Validación de sintaxis pendiente
-        newUser.setName(newNameTxt.getText());
-    }//GEN-LAST:event_newNameTxtCaretUpdate
-
-    private void newLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newLastNameTxtCaretUpdate
-        // Validación de sintaxis
-        newUser.setLastName(newLastNameTxt.getText());
-    }//GEN-LAST:event_newLastNameTxtCaretUpdate
-
-    private void newUserNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newUserNameTxtCaretUpdate
-        // Validación de sintaxis
-        newUser.setUserName(newUserNameTxt.getText());
-    }//GEN-LAST:event_newUserNameTxtCaretUpdate
-
-    private void newPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newPasswordCaretUpdate
-        // Validación de sintaxis
-        String i_newPassword = String.valueOf(newPassword.getPassword());
-        newUser.setPassword(i_newPassword);
+    private void gatherNewUserInformation(){
         
-    }//GEN-LAST:event_newPasswordCaretUpdate
-
-    private void newPermissionsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_newPermissionsItemStateChanged
+        String newName = newNameTxt.getText();
+        String newLastName = newLastNameTxt.getText();
+        String newUserName = newUserNameTxt.getText();
+        String newPassword = String.valueOf(this.newPassword.getPassword() );
+        String newPermissions = this.newPermissions.getSelectedItem().toString();
         
-        String i_newPermissions = newPermissions.getSelectedItem().toString();
-        newUser.setPermissions(i_newPermissions);
-    }//GEN-LAST:event_newPermissionsItemStateChanged
-
-    private void searchUserNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserNameTxtCaretUpdate
-        existingUser.setUserName(searchUserNameTxt.getText());
-    }//GEN-LAST:event_searchUserNameTxtCaretUpdate
-
-    private void editNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editNameTxtCaretUpdate
-        //Validación de sintaxis pendiente
-        existingUser.setName(editNameTxt.getText());
-    }//GEN-LAST:event_editNameTxtCaretUpdate
-
-    private void editLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editLastNameTxtCaretUpdate
-        //Validación de sintaxis pendiente
-        existingUser.setLastName(editLastNameTxt.getText());
-    }//GEN-LAST:event_editLastNameTxtCaretUpdate
-
-    private void editPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editPasswordCaretUpdate
-        //Validación de sintaxis pendiente
-        String i_editPassword = String.valueOf(editPassword.getPassword());
-        existingUser.setPassword(i_editPassword);
-    }//GEN-LAST:event_editPasswordCaretUpdate
-
-    private void editPermissionsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_editPermissionsItemStateChanged
+        newUser = new User(
+            newName,
+            newLastName,
+            newUserName,
+            newPassword,
+            newPermissions
+            );
+    }
+    
+    private void gatherExistingUserInformation(){
         
-        String i_editPermissions = editPermissions.getSelectedItem().toString();
-        existingUser.setPermissions(i_editPermissions);
-    }//GEN-LAST:event_editPermissionsItemStateChanged
+        String editName = editNameTxt.getText();
+        String editLastName = editLastNameTxt.getText();
+        String editUserName = editUserNameTxt.getText();
+        String editPassword = String.valueOf(this.editPassword.getPassword() );
+        String editPermissions = this.editPermissions.getSelectedItem().toString();
+        
+        existingUser = new User(
+            editName,
+            editLastName,
+            editUserName,
+            editPassword,
+            editPermissions
+            );
+    }
 
     //Llena el formulario con los datos de usuario existentes
     private void fillExistingUserForm(){
