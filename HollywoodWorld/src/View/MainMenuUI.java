@@ -194,7 +194,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
         // TODO add your handling code here:
         if(validateMainMenu.userHasManagerPermissions()){
-            JOptionPane.showMessageDialog(null, "Welcome, manager!");
+            validateMainMenu.openWindow("Movie Manager");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
         }

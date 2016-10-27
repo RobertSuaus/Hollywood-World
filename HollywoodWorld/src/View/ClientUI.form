@@ -173,24 +173,12 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="newNameTxt">
-              <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newNameTxtCaretUpdate"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newLastNameTxt">
-              <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newLastNameTxtCaretUpdate"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newTelephoneTxt">
-              <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newTelephoneTxtCaretUpdate"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newAddressTxt">
-              <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newAddressTxtCaretUpdate"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newMembershipTxt">
               <Properties>
@@ -346,9 +334,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editNameTxt">
-                  <Events>
-                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editNameTxtCaretUpdate"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
@@ -359,9 +344,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editLastNameTxt">
-                  <Events>
-                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editLastNameTxtCaretUpdate"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
@@ -372,9 +354,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editTelephoneTxt">
-                  <Events>
-                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editTelephoneTxtCaretUpdate"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
@@ -385,9 +364,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editAddressTxt">
-                  <Events>
-                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editAddressTxtCaretUpdate"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
@@ -419,9 +395,6 @@
                       </StringArray>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="membershipStatusItemStateChanged"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -453,9 +426,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="searchMembershipTxt">
-              <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="searchMembershipTxtCaretUpdate"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="searchClientBtn">
               <Properties>

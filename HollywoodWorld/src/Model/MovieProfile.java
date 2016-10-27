@@ -12,8 +12,8 @@ public class MovieProfile {
         Date releaseDate,
         String rating, 
         String description,
-        int runTime,
-        int serialCode
+        String runTime,
+        String serialCode
         ){
             this.title = title;
             this.releaseDate = releaseDate;
@@ -23,6 +23,10 @@ public class MovieProfile {
             this.serialCode = serialCode;
         }
 
+    public MovieProfile(){
+        
+    }
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -39,11 +43,11 @@ public class MovieProfile {
         this.description = description;
     }
     
-    public void setRunTime(int runTime) {
+    public void setRunTime(String runTime) {
         this.runTime = runTime;
     }
     
-    public void setSerialCode(int serialCode) {
+    public void setSerialCode(String serialCode) {
         this.serialCode = serialCode;
     }
 
@@ -63,11 +67,11 @@ public class MovieProfile {
         return description;
     }
 
-    public int getRunTime() {
+    public String getRunTime() {
         return runTime;
     }
 
-    public int getSerialCode() {
+    public String getSerialCode() {
         return serialCode;
     }
 
@@ -75,6 +79,6 @@ public class MovieProfile {
     private Date releaseDate;
     private String rating;
     private String description;
-    private int runTime;
-    private int serialCode;
+    private String runTime;
+    private String serialCode;
 }

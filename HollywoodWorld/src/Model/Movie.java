@@ -16,6 +16,10 @@ public class Movie {
         
         }
     
+    public Movie(int id){
+        this.id = id;
+    }
+    
     public void setId(int id){
         this.id = id;
     }
