@@ -162,6 +162,7 @@ public class MovieDAO {
     }
     
     public Movie getMovieInfo(){
+        return null;
         
     }
     

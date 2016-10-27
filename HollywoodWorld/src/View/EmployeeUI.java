@@ -46,9 +46,9 @@ public class EmployeeUI extends javax.swing.JFrame {
         newEmployeeNumberTxt = new javax.swing.JTextField();
         newRfcTxt = new javax.swing.JTextField();
         newBasicSalaryTxt = new javax.swing.JTextField();
-        newAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         newPositionTxt = new javax.swing.JTextField();
         addEmployeeBtn = new javax.swing.JButton();
+        newAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         editEmployeePanel = new javax.swing.JPanel();
         existingEmployeePanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -66,10 +66,10 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         editBasicSalaryTxt = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        editAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel21 = new javax.swing.JLabel();
         editPositionTxt = new javax.swing.JTextField();
         saveChangedBtn = new javax.swing.JButton();
+        editAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel19 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         searchEmployeeTxt = new javax.swing.JTextField();
@@ -110,12 +110,6 @@ public class EmployeeUI extends javax.swing.JFrame {
 
         newEmployeeNumberTxt.setEditable(false);
 
-        newAdmissionDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAdmissionDateActionPerformed(evt);
-            }
-        });
-
         addEmployeeBtn.setText("Register Employee");
 
         javax.swing.GroupLayout newEmployeePanelLayout = new javax.swing.GroupLayout(newEmployeePanel);
@@ -144,15 +138,15 @@ public class EmployeeUI extends javax.swing.JFrame {
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(newNameTxt)
+                                    .addComponent(newNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                     .addComponent(newLastNameTxt)
                                     .addComponent(newTelephoneTxt)
                                     .addComponent(newAddressTxt)
                                     .addComponent(newEmployeeNumberTxt)
                                     .addComponent(newRfcTxt)
                                     .addComponent(newBasicSalaryTxt)
-                                    .addComponent(newAdmissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                    .addComponent(newPositionTxt))))))
+                                    .addComponent(newPositionTxt)
+                                    .addComponent(newAdmissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         newEmployeePanelLayout.setVerticalGroup(
@@ -190,14 +184,14 @@ public class EmployeeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(newAdmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newAdmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(newPositionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addEmployeeBtn)
-                .addGap(0, 65, Short.MAX_VALUE))
+                .addGap(0, 62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("New Employee Registration", newEmployeePanel);
@@ -237,8 +231,12 @@ public class EmployeeUI extends javax.swing.JFrame {
         existingEmployeePanel.setLayout(existingEmployeePanelLayout);
         existingEmployeePanelLayout.setHorizontalGroup(
             existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(existingEmployeePanelLayout.createSequentialGroup()
+                .addContainerGap(211, Short.MAX_VALUE)
+                .addComponent(editAdmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingEmployeePanelLayout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveChangedBtn)
                 .addGap(33, 33, 33))
             .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,14 +261,15 @@ public class EmployeeUI extends javax.swing.JFrame {
                         .addComponent(editEmployeeNumberTxt)
                         .addComponent(editRfcTxt)
                         .addComponent(editBasicSalaryTxt)
-                        .addComponent(editAdmissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                         .addComponent(editPositionTxt))
                     .addContainerGap(73, Short.MAX_VALUE)))
         );
         existingEmployeePanelLayout.setVerticalGroup(
             existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingEmployeePanelLayout.createSequentialGroup()
-                .addGap(0, 309, Short.MAX_VALUE)
+                .addGap(0, 247, Short.MAX_VALUE)
+                .addComponent(editAdmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(saveChangedBtn))
             .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(existingEmployeePanelLayout.createSequentialGroup()
@@ -303,9 +302,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                         .addComponent(jLabel17)
                         .addComponent(editBasicSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel20)
-                        .addComponent(editAdmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel20)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel21)
@@ -373,9 +370,9 @@ public class EmployeeUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newAdmissionDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAdmissionDateActionPerformed
+    private void newAdmissionDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_newAdmissionDateActionPerformed
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     
 
