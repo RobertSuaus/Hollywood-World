@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.StatusValidator;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -22,7 +23,7 @@ public class ClientDAO {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/hollywood_prueba?autoReconnect=true&useSSL=false",
+                "jdbc:mysql://localhost/hollywood_world?autoReconnect=true&useSSL=false",
                 "root",
                 ""
             );
@@ -31,52 +32,82 @@ public class ClientDAO {
         }
     }
     
-    public void add(Client client){
-        String sql = "INSERT INTO client(id_client,"
-                + "name, lastname, telephone, address,"
-                + "activestatus)"
-                + "VALUES ('" + client.getMembership()+"'"
-                + "'" + client.getName()+"'"
-                + "'" + client.getLastName() + "'"
-                + "'" + client.getTelephone() + "'"
-                + "'" + client.getAddress() + "'"
-                + "TRUE)";
+    public int add(Client client){
+        String sql = "INSERT INTO client(membership_id, name, lastname,"+
+                " telephone, address, status) VALUES("+
+                "$membership_id$, '$name$', '$lastname$', '$telephone$',"+ 
+                " '$address$', '$status$');";
+        
+        sql = sql.replace("$membership_id$",
+                String.valueOf(client.getMembership().getId())
+                );
+        sql = sql.replace("$name$", client.getName());
+        sql = sql.replace("$lastname$", client.getLastName());
+        sql = sql.replace("$telephone$", client.getTelephone());
+        sql = sql.replace("$address$", client.getAddress());
+        sql = sql.replace("$status$", client.getMembership().getStatus());
+        
+        try{
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return StatusValidator.SUCCESS;
+        }catch(SQLException ex){
+            System.err.println("Error al guardar datos de cliente"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al guardar datos de cliente",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return StatusValidator.ERROR;
+        }
     }
     
-    public void modify(Client client){
-        String sql = "UPDATE client SET id_client = $id_client$" + client.getMembership()
-                + "name = $name$" + client.getName()
-                + "lastname = $lastname$" + client.getLastName()
-                + "telephone = $telephone$" + client.getTelephone()
-                + "address = $address$" + client.getAddress();
+    public int modify(Client client){
+        String sql = "UPDATE client SET"+
+                " name = '$name$', lastname = '$lastname$', telephone = '$telephone$',"+
+                " address = '$address$', status = '$status$'"+
+                " WHERE membership_id = $membership_id$ ";
         
         sql = sql.replace("$name$", client.getName());
         sql = sql.replace("$lastname$", client.getLastName());
         sql = sql.replace("$telephone$", client.getTelephone());
-        sql = sql.replace("$name$", client.getAddress());
+        sql = sql.replace("$address$", client.getAddress());
+        sql = sql.replace("$status$", client.getMembership().getStatus());
+        sql = sql.replace("$membership_id$", 
+                String.valueOf(client.getMembership().getId())
+                );
         
+        try{
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return StatusValidator.SUCCESS;
+        }catch(SQLException ex){
+            System.err.println("Error al guardar datos de cliente"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al guardar datos de cliente",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return StatusValidator.ERROR;
+        }
     }
     
-    public String getLastMembershipId(String membership){
-        String sql = "SELECT * FROM client WHERE "+
-                "id_client ='" + membership+"'";
+    public int getLastMembershipId(){
+        String sql = "SELECT * FROM  client WHERE membership_id ="+
+                " (SELECT MAX(membership_id)  FROM client)";
+        int lastId;
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            lastId = resultSet.getInt("membership_id");
+            return lastId;
         }catch(SQLException ex){
-            System.err.println("Membresia Utilizada, reintente otra vez " + ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Error de membresia.",
+            System.err.println("Error al obtener el ultimo registro " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener registro.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
-     return sql;   
+            return StatusValidator.ERROR;
+        }   
     }
     
-    public boolean isMembershipOccupied(String membership){
+    public boolean isMembershipOccupied(int membershipId){
         boolean isOccupied;
         String sql = "SELECT * FROM client WHERE "+
-                "id_client ='" + membership+"'";
+                "membership_id ='" + membershipId+"'";
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
@@ -91,12 +122,33 @@ public class ClientDAO {
         
     }
     
-    public String clientFind(String membership){
+    public Client getClientInfo(int membershipId){
         String sql = "SELECT * FROM client WHERE"
-                + "id_client = $id_client$"
-                + "AND status = $activestatus$";
-        sql = sql.replace("activestatus", membership);
-        return sql;
+                + " membership_id = $membershipId$";
+        sql = sql.replace("$membershipId$", String.valueOf(membershipId));
+        Client client = null;
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            client = new Client(
+                resultSet.getString("name"),
+                resultSet.getString("lastName"),
+                resultSet.getString("telephone"),
+                resultSet.getString("address"),
+                new ClientMembership(
+                    resultSet.getInt("membership_id"),
+                    resultSet.getString("status")
+                    )
+                );
+            return client;
+            
+        }catch(SQLException ex){
+            System.err.println("Error al obtener información de cliente"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al obtener información de cliente",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return client;
+        }
     }
     private Connection connection;
     private Statement statement;

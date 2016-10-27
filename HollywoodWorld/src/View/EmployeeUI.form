@@ -247,6 +247,9 @@
             <Component class="javax.swing.JTextField" name="newBasicSalaryTxt">
             </Component>
             <Component class="org.jdesktop.swingx.JXDatePicker" name="newAdmissionDate">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newAdmissionDateActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newPositionTxt">
             </Component>

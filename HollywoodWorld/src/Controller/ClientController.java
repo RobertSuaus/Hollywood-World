@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.Client;
+import Model.ClientDAO;
+import Model.StatusValidator;
+import View.ClientUI;
 
 /**
  *
@@ -19,27 +22,47 @@ public class ClientController implements ValidateClientInterface {
     @Override
     public boolean isMembershipIdAvailable(int membershipId){
         
+        boolean isAvailable;
+        if(clientDAO.isMembershipOccupied(membershipId)){
+            isAvailable = false;
+        }else{
+            isAvailable = true;
+        }
+        return isAvailable;
     }
     
-    //Obtiene todos los datos de un cliente
     @Override
     public Client getClientInfo(int membershipId){
         
+        Client clientInformation = clientDAO.getClientInfo(membershipId);
+        return clientInformation;
     }
     
     @Override
     public int getNextMembershipId(){
         
+        int lastRegisteredId;
+        lastRegisteredId = clientDAO.getLastMembershipId();
+        int nextId= lastRegisteredId + 1; //Recorrer una posición
+        return nextId;
     }
     
     @Override
-    public void addClient(Client client){
-        
+    public String addClient(Client client){
+        if(StatusValidator.success(clientDAO.add(client))){
+            return "New client succesfully registered!";
+        }else{
+            return "Couldn't register the client...";
+        }
     }
     
     @Override
-    public void modifyClient(Client client){
-        
+    public String modifyClient(Client client){
+        if(StatusValidator.success(clientDAO.modify(client))){
+            return "Client succesfully updated!";
+        }else{
+            return "Couldn't update the client";
+        }
     }
     
     private ClientDAO clientDAO;

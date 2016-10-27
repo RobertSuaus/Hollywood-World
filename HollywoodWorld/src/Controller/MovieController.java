@@ -7,7 +7,7 @@ import Model.MovieProfile;
  *
  * @author Robert
  */
-public class MovieController implements ValidateMovieInterface {
+/*public class MovieController implements ValidateMovieInterface {
     
     public MovieController(){
         this.movieDAO = new MovieDAO();
@@ -62,3 +62,4 @@ public class MovieController implements ValidateMovieInterface {
     private MovieDAO movieDAO;
     private MovieUI movieUI;
 }
+*/

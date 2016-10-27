@@ -6,7 +6,7 @@ import Model.Employee;
  *
  * @author Robert
  */
-public class EmployeeController implements ValidateEmployeeInterface {
+/*public class EmployeeController implements ValidateEmployeeInterface {
     
     public EmployeeController(){
         this.employeeDAO = new EmployeeDAO();
@@ -41,3 +41,4 @@ public class EmployeeController implements ValidateEmployeeInterface {
     private EmployeeDAO employeeDAO;
     private EmployeeUI employeeUI;
 }
+*/

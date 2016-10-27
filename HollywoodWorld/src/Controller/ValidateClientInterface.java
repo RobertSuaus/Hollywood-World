@@ -13,7 +13,7 @@ public interface ValidateClientInterface {
     public Client getClientInfo(int membershipId);
     public int getNextMembershipId();
     
-    public void addClient(Client client);
-    public void modifyClient(Client client);
+    public String addClient(Client client);
+    public String modifyClient(Client client);
     
 }
