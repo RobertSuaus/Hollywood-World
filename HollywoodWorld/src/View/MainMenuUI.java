@@ -17,7 +17,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     /** Creates new form MainMenuIU */
     public MainMenuUI(ValidateMainMenuInterface validateMainMenu) {
-        initComponents();
+        initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         this.validateMainMenu = validateMainMenu;
     }
@@ -151,16 +151,17 @@ public class MainMenuUI extends javax.swing.JFrame {
     private void usersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersButtonActionPerformed
         // TODO add your handling code here:
         if(validateMainMenu.userHasHumanResourcesPermissions()){
-            JOptionPane.showMessageDialog(null, "Welcome, human resources!!");
+            validateMainMenu.openWindow("User Manager");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
         }
     }//GEN-LAST:event_usersButtonActionPerformed
 
     private void RentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentButtonActionPerformed
-        // TODO add your handling code here:
-        if(validateMainMenu.userHasRenterPermissions() ||
-                validateMainMenu.userHasManagerPermissions()){
+        if(
+            validateMainMenu.userHasRenterPermissions() ||
+            validateMainMenu.userHasManagerPermissions()
+        ){
             JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
@@ -168,9 +169,10 @@ public class MainMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_RentButtonActionPerformed
 
     private void RestorationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestorationButtonActionPerformed
-        // TODO add your handling code here:
-        if(validateMainMenu.userHasRenterPermissions() ||
-                validateMainMenu.userHasManagerPermissions()){
+        if(
+            validateMainMenu.userHasRenterPermissions() ||
+            validateMainMenu.userHasManagerPermissions()
+        ){
             JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
@@ -179,9 +181,11 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
         // TODO add your handling code here:
-        if(validateMainMenu.userHasRenterPermissions() ||
-                validateMainMenu.userHasManagerPermissions()){
-            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
+        if(
+            validateMainMenu.userHasRenterPermissions() ||
+            validateMainMenu.userHasManagerPermissions()
+        ){
+            validateMainMenu.openWindow("Client Manager");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
         }

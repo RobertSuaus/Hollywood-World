@@ -11,6 +11,6 @@ public interface ValidateUserInterface {
     public boolean isUserNameAvailable(String userName);
     public User getUserInfo(String userName);
     
-    public void addUser(User user);
-    public void modifyUser(User user);
+    public String addUser(User user);
+    public String modifyUser(User user);
 }

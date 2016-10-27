@@ -22,6 +22,11 @@ public class Client extends Person {
         super("","","","");
     }
     
+    public Client(ClientMembership membership){
+        super("","","","");
+        this.membership = membership;
+    }
+    
     public void setMembership(ClientMembership membership){
         this.membership = membership;
     }

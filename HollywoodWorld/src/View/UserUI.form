@@ -19,8 +19,9 @@
     </Container>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Hollywood World - Manage Users"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -194,22 +195,40 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="newPermissionsItemStateChanged"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JPasswordField" name="newPassword">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newPasswordCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newUserNameTxt">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newUserNameTxtCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newLastNameTxt">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newLastNameTxtCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newNameTxt">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="newNameTxtCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="createNewBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create user"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createNewBtnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -288,11 +307,17 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="searchUserNameTxt">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="searchUserNameTxtCaretUpdate"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="searchUserBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchUserBtnActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="existingUserInfoPanel">
 
@@ -377,6 +402,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editNameTxt">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editNameTxtCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
@@ -387,6 +415,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editLastNameTxt">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editLastNameTxtCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
@@ -397,6 +428,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editUserNameTxt">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
@@ -407,6 +441,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="editPassword">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="editPasswordCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
@@ -427,6 +464,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="editPermissionsItemStateChanged"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -435,6 +475,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Save changes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesBtnActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import Model.StatusValidator;
 import Model.User;
 import Model.UserDAO;
+import View.UserUI;
 
 /**
  *
@@ -22,21 +24,39 @@ public class UserController implements ValidateUserInterface {
     @Override
     public boolean isUserNameAvailable(String userName){
         
+        boolean isAvailable;
+        if(userDAO.isUserNameOccupied(userName)){
+            isAvailable = false;
+        }else{
+            isAvailable = true;
+        }
+        return isAvailable;
     }
     
     @Override
     public User getUserInfo(String userName){
         
+        User userInformation= new User();
+        userInformation = userDAO.getUserInfo(userName);
+        return userInformation;
     }
     
     @Override
-    public void addUser(User user){
-        
+    public String addUser(User user){
+        if(StatusValidator.success(userDAO.add(user))){
+            return "User succesfully added to database.";
+        }else{
+            return "Couldn't add user...";
+        }
     }
     
     @Override
-    public void modifyUser(User user){
-        
+    public String modifyUser(User user){
+        if(StatusValidator.success(userDAO.modify(user))){
+            return "User information succesfully updated.";
+        }else{
+            return "Couldn't update user information...";
+        }
     }
     
     private UserDAO userDAO;

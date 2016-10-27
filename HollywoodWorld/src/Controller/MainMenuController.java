@@ -2,6 +2,7 @@ package Controller;
 
 import Model.User;
 import View.MainMenuUI;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("ADMIN")){
+        if(userPermissions.equals("Admin")){
             return true;
         }else{
             return false;
@@ -34,7 +35,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("HUMAN_RESOURCES")){
+        if(userPermissions.equals("Human Resources")){
             return true;
         }else{
             return false;
@@ -46,7 +47,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("MANAGER")){
+        if(userPermissions.equals("Manager")){
             return true;
         }else{
             return false;
@@ -58,10 +59,21 @@ public class MainMenuController implements ValidateMainMenuInterface {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("RENTER")){
+        if(userPermissions.equals("Renter")){
             return true;
         }else{
             return false;
+        }
+    }
+    
+    @Override
+    public void openWindow(String windowName){
+        switch(windowName){
+            case "User Manager" : new UserController();
+                break;
+            case "Client Manager" : new ClientController();
+                break;
+            default : ;
         }
     }
     

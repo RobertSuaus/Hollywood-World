@@ -31,19 +31,46 @@ public class UserDAO {
         }
     }
     
-    public void add(){
-        
+    public int add(User user){
+        String sql = "INSERT INTO user(userName, name, lastName, password, userPermissions) VALUES ("+
+                "'" + user.getUserName()+"' ," +
+                "'" + user.getName()+"' ," +
+                "'" + user.getLastName() + "' ," +
+                "'" + user.getPassword() + "' ," +
+                "'" + user.getPermissions() + "');";
+        try{
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return StatusValidator.SUCCESS;
+        }catch(SQLException ex){
+            System.err.println("Error al guardar datos de usuario " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al guardar datos de usuario.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return StatusValidator.ERROR;
+        }
     }
     
-    public void modify(){
-        
-    }
-    
-    public void delete(){
-        
+    public int modify(User user){
+        String sql = "UPDATE user SET " +
+                "name = '" + user.getName() + "' ," +
+                "lastname = '" + user.getLastName()+"' ," +
+                "password = '" + user.getPassword()+"' ," +
+                "userPermissions = '" + user.getPermissions()+"' " +
+                "WHERE userName= '"+ user.getUserName() + "'";
+        try{
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return StatusValidator.SUCCESS;
+        }catch(SQLException ex){
+            System.err.println("Error al modificar datos de usuario " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al modificar datos de usuario.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return StatusValidator.ERROR;
+        }
     }
     
     public User getUserInfo(String userName){
+        
         String sql = "SELECT * FROM user WHERE userName ='" + userName +"'";
         User user = null;
         try{

@@ -10,32 +10,32 @@ public class ClientMembership {
     
     public ClientMembership(
         int id,
-        boolean activeStatus
+        String status
     ){
         this.id = id;
-        this.activeStatus = activeStatus;
+        this.status = status;
+    }
+    
+    public ClientMembership(int id){
+        this.id = id;
     }
     
     public void setId(int id){
         this.id = id;
     }
     
-    public void setAsActive(){
-        this.activeStatus = true;
-    }
-    
-    public void setAsInactive(){
-        this.activeStatus = false;
+    public void setStatus(String status){
+        this.status = status;
     }
     
     public int getId(){
         return id;
     }
     
-    public boolean isActive(){
-        return activeStatus;
+    public String getStatus(){
+        return status;
     }
     
     private int id;
-    private boolean activeStatus;
+    private String status;
 }

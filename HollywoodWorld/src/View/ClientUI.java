@@ -5,6 +5,11 @@
  */
 package View;
 
+import Controller.ValidateClientInterface;
+import Model.Client;
+import Model.ClientMembership;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Robert
@@ -14,8 +19,18 @@ public class ClientUI extends javax.swing.JFrame {
     /**
      * Creates new form ClientUI
      */
-    public ClientUI() {
-        initComponents();
+    public ClientUI(ValidateClientInterface validateClient) {
+        initComponents(); //Componentes visuales de Swing
+        this.setVisible(true);
+        
+        this.validateClient = validateClient;
+        this.newClient = new Client(
+            new ClientMembership(this.validateClient.getNextMembershipId(), "Active")
+        );
+        fillMembershipField();
+        
+        this.existingClient = new Client();
+        this.existingClientInfoPanel.setVisible(false);
     }
 
     /**
@@ -40,7 +55,7 @@ public class ClientUI extends javax.swing.JFrame {
         newTelephoneTxt = new javax.swing.JTextField();
         newAddressTxt = new javax.swing.JTextField();
         newMembershipTxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        registerNewBtn = new javax.swing.JButton();
         editClientPanel = new javax.swing.JPanel();
         existingClientInfoPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -61,9 +76,10 @@ public class ClientUI extends javax.swing.JFrame {
         searchMembershipTxt = new javax.swing.JTextField();
         searchClientBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Clients");
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
         jLabel17.setText("Client Registration");
@@ -83,9 +99,38 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Membership number:");
 
+        newNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                newNameTxtCaretUpdate(evt);
+            }
+        });
+
+        newLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                newLastNameTxtCaretUpdate(evt);
+            }
+        });
+
+        newTelephoneTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                newTelephoneTxtCaretUpdate(evt);
+            }
+        });
+
+        newAddressTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                newAddressTxtCaretUpdate(evt);
+            }
+        });
+
         newMembershipTxt.setEditable(false);
 
-        jButton1.setText("Register new client");
+        registerNewBtn.setText("Register new client");
+        registerNewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerNewBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout newClientPanelLayout = new javax.swing.GroupLayout(newClientPanel);
         newClientPanel.setLayout(newClientPanelLayout);
@@ -114,7 +159,7 @@ public class ClientUI extends javax.swing.JFrame {
                 .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newClientPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(registerNewBtn)
                 .addGap(85, 85, 85))
         );
         newClientPanelLayout.setVerticalGroup(
@@ -143,7 +188,7 @@ public class ClientUI extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(newMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(jButton1)
+                .addComponent(registerNewBtn)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -152,14 +197,38 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Name:");
 
+        editNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                editNameTxtCaretUpdate(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Last name:");
+
+        editLastNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                editLastNameTxtCaretUpdate(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Telephone:");
 
+        editTelephoneTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                editTelephoneTxtCaretUpdate(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Address:");
+
+        editAddressTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                editAddressTxtCaretUpdate(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Membership number:");
@@ -170,8 +239,18 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel12.setText("Membership status:");
 
         membershipStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+        membershipStatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                membershipStatusItemStateChanged(evt);
+            }
+        });
 
         saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout existingClientInfoPanelLayout = new javax.swing.GroupLayout(existingClientInfoPanel);
         existingClientInfoPanel.setLayout(existingClientInfoPanelLayout);
@@ -237,7 +316,18 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Membership number:");
 
+        searchMembershipTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                searchMembershipTxtCaretUpdate(evt);
+            }
+        });
+
         searchClientBtn.setText("Search");
+        searchClientBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchClientBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editClientPanelLayout = new javax.swing.GroupLayout(editClientPanel);
         editClientPanel.setLayout(editClientPanelLayout);
@@ -293,7 +383,132 @@ public class ClientUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void registerNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewBtnActionPerformed
+        
+        ClientMembership newMembership = newClient.getMembership();
+        int newMembershipId = newMembership.getId();
+        
+        if(validateClient.isMembershipIdAvailable(newMembershipId)){
+            String operationStatus;
+            operationStatus= validateClient.addClient(newClient);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Membership number already in use");
+        }
+    }//GEN-LAST:event_registerNewBtnActionPerformed
+
+    private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
+        
+        int membershipId = existingClient.getMembership().getId();
+        if(!validateClient.isMembershipIdAvailable(membershipId)){
+            
+            existingClient = validateClient.getClientInfo(membershipId);
+            existingClientInfoPanel.setVisible(true);
+            fillExistingClientForm();
+        }else{
+            JOptionPane.showMessageDialog(null, "That membership number doesn't exists");
+        }
+    }//GEN-LAST:event_searchClientBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        String operationStatus;
+        operationStatus= validateClient.modifyClient(existingClient);
+        
+        JOptionPane.showMessageDialog(null, operationStatus);
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void newNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newNameTxtCaretUpdate
+        //Validación de sintaxis pendiente
+        String newClientName = newNameTxt.getText();
+        newClient.setName(newClientName);
+    }//GEN-LAST:event_newNameTxtCaretUpdate
+
+    private void newLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newLastNameTxtCaretUpdate
+        //Validación de sintaxis pendiente
+        String lastName = newLastNameTxt.getText();
+        newClient.setLastName(lastName);
+    }//GEN-LAST:event_newLastNameTxtCaretUpdate
+
+    private void newTelephoneTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newTelephoneTxtCaretUpdate
+        String newTelephone = newTelephoneTxt.getText();
+        newClient.setTelephone(newTelephone);
+    }//GEN-LAST:event_newTelephoneTxtCaretUpdate
+
+    private void newAddressTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_newAddressTxtCaretUpdate
+        String newAddress = newAddressTxt.getText();
+        newClient.setAddress(newAddress);
+    }//GEN-LAST:event_newAddressTxtCaretUpdate
+
+    private void editNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editNameTxtCaretUpdate
+        String editName = editNameTxt.getText();
+        existingClient.setName(editName);
+    }//GEN-LAST:event_editNameTxtCaretUpdate
+
+    private void editLastNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editLastNameTxtCaretUpdate
+        String editLastName = editLastNameTxt.getText();
+        existingClient.setLastName(editLastName);
+    }//GEN-LAST:event_editLastNameTxtCaretUpdate
+
+    private void editTelephoneTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editTelephoneTxtCaretUpdate
+        String editTelephone = editTelephoneTxt.getText();
+        existingClient.setTelephone(editTelephone);
+    }//GEN-LAST:event_editTelephoneTxtCaretUpdate
+
+    private void editAddressTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_editAddressTxtCaretUpdate
+        String editAddress = editAddressTxt.getText();
+        existingClient.setAddress(editAddress);
+    }//GEN-LAST:event_editAddressTxtCaretUpdate
+
+    private void membershipStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_membershipStatusItemStateChanged
+        int currentId = existingClient.getMembership().getId();
+        String currentStatus = String.valueOf(membershipStatus.getSelectedItem());
+        
+        existingClient.setMembership(
+                new ClientMembership(currentId, currentStatus)
+                );
+    }//GEN-LAST:event_membershipStatusItemStateChanged
+
+    private void searchMembershipTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchMembershipTxtCaretUpdate
+        int membershipId = Integer.valueOf(searchMembershipTxt.getText());
+        existingClient.setMembership(
+                new ClientMembership(membershipId)
+                );
+    }//GEN-LAST:event_searchMembershipTxtCaretUpdate
+
+    private void fillMembershipField(){
+        newMembershipTxt.setText(String.valueOf(newClient.getMembership().getId()));
+    }
     
+    private void fillExistingClientForm(){
+        editNameTxt.setText(existingClient.getName());
+        editLastNameTxt.setText(existingClient.getLastName());
+        editTelephoneTxt.setText(existingClient.getTelephone());
+        editAddressTxt.setText(existingClient.getAddress());
+        
+        String membershipNumber = String.valueOf(
+            existingClient.getMembership().getId()
+            );
+        
+        editMembershipTxt.setText(membershipNumber);
+        
+        membershipStatus.setSelectedIndex(
+            getStatusIndex(existingClient.getMembership().getStatus())
+            );
+    }
+    
+    private int getStatusIndex(String membershipStatus){
+        
+        int statusIndex;
+        
+        switch(membershipStatus){
+            case "Active" : statusIndex = 0;
+                break;
+            case "Inactive" : statusIndex = 1;
+                break;
+            default : statusIndex = ERROR;
+        }
+        return statusIndex;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editAddressTxt;
@@ -303,7 +518,6 @@ public class ClientUI extends javax.swing.JFrame {
     private javax.swing.JTextField editNameTxt;
     private javax.swing.JTextField editTelephoneTxt;
     private javax.swing.JPanel existingClientInfoPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -326,8 +540,12 @@ public class ClientUI extends javax.swing.JFrame {
     private javax.swing.JTextField newMembershipTxt;
     private javax.swing.JTextField newNameTxt;
     private javax.swing.JTextField newTelephoneTxt;
+    private javax.swing.JButton registerNewBtn;
     private javax.swing.JButton saveChangesBtn;
     private javax.swing.JButton searchClientBtn;
     private javax.swing.JTextField searchMembershipTxt;
     // End of variables declaration//GEN-END:variables
+    private ValidateClientInterface validateClient;
+    private Client newClient;
+    private Client existingClient;
 }
