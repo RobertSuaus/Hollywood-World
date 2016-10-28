@@ -471,6 +471,58 @@ public class EmployeeUI extends javax.swing.JFrame {
         newIdTxt.setText(String.valueOf(newEmployee.getId() ) );
     }
     
+    private boolean isEveryInputValid(Employee employee){
+        if(isValidInputText( employee.getName() )
+            && isValidInputText( employee.getLastName() )
+            && isValidInputAddress( employee.getAddress() )
+            && isValidRFC( employee.getRfc()) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputText(String input){
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputAddress(String input){
+        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputTelephone(String input){
+        if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidRFC(String input){
+        if (input.matches("([a-ZA-Z][0-9])*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     private ValidateEmployeeInterface validateEmployee;
     private Employee newEmployee;
     private Employee existingEmployee;

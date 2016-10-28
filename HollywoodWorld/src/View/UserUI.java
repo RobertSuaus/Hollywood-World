@@ -418,9 +418,11 @@ public class UserUI extends javax.swing.JFrame {
         return permissionIndex;
     }
     
-    private boolean isEveryInputsValid(User user){
+    private boolean isEveryInputValid(User user){
         if(isValidInputText( user.getName() )
-            && isValidInputText( user.getLastName() ) ){
+            && isValidInputText( user.getLastName() ) 
+            && isValidAccountElements( user.getUserName() )
+            && isValidAccountElements( user.getPassword() ) ){
             return true;
         }
         else{
@@ -428,13 +430,22 @@ public class UserUI extends javax.swing.JFrame {
         }
     }
     
-    private static boolean isValidInputText(String input){
+    private boolean isValidInputText(String input){
         if (input.matches("([A-Za-z]|\\s)*") 
             && input.equals(" ") == false 
             && input.equals("") == false){
             return true;
         }else{
             return false;
+        }
+    }
+    
+    private boolean isValidAccountElements(String input){
+        if ( input.length() >= 4) {
+            return true;
+        }
+        else {
+        return false;
         }
     }
 

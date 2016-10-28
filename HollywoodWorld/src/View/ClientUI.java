@@ -424,7 +424,7 @@ public class ClientUI extends javax.swing.JFrame {
         return statusIndex;
     }
     
-    private boolean isEveryInputsValid(Client client){
+    private boolean isEveryInputValid(Client client){
         if(isValidInputText( client.getName() )
             && isValidInputText( client.getLastName() )
             && isValidInputTelephone( client.getTelephone() )
