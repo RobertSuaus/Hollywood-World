@@ -387,28 +387,37 @@ public class EmployeeUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
-        
-        //Antes de obtener la información se debe validar
+
         gatherNewEmployeeInformation();
-        int newEmployeeId = newEmployee.getId();
         
-        if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
-            String operationStatus;
-            operationStatus = validateEmployee.addEmployee(newEmployee);
-            JOptionPane.showMessageDialog(null, operationStatus);
-        }else{
-            JOptionPane.showMessageDialog(null, "Employee Id already in use");
+        if ( isEveryInputValid(existingEmployee) ) {
+            int newEmployeeId = newEmployee.getId();
+
+            if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
+                String operationStatus;
+                operationStatus = validateEmployee.addEmployee(newEmployee);
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "Employee Id already in use");
+            }
         }
-        
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid parameters to employee");
+        }        
     }//GEN-LAST:event_addEmployeeBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         
-        //Antes de obtener la información se debe validar
         gatherExistingEmployeeInformation();
-        String operationStatus;
-        operationStatus = validateEmployee.modifyEmployee(existingEmployee);
-        JOptionPane.showMessageDialog(null, operationStatus);
+        
+        if ( isEveryInputValid(existingEmployee) ) {
+            String operationStatus;
+            operationStatus = validateEmployee.modifyEmployee(existingEmployee);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid parameters to employee");
+        }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed

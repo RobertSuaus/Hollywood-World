@@ -343,31 +343,31 @@ public class ClientUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerNewClientBtnActionPerformed
 
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
-        
-        if ( isEveryInputValid(existingClient) ) {
+
         int membershipId = Integer.valueOf(searchMembershipTxt.getText() );
         if(!validateClient.isMembershipIdAvailable(membershipId) ){
-            
+
             existingClient = validateClient.getClientInfo(membershipId);
             existingClientInfoPanel.setVisible(true);
             fillExistingClientForm();
         }else{
             JOptionPane.showMessageDialog(null, "That membership number doesn't exist");
         }
+    }//GEN-LAST:event_searchClientBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+
+        gatherExistingClientInformation();
+        
+        if ( isEveryInputValid(existingClient) ) {
+            String operationStatus;
+            operationStatus= validateClient.modifyClient(existingClient);
+
+            JOptionPane.showMessageDialog(null, operationStatus);
         }
         else {
             JOptionPane.showMessageDialog(null, "Invalid parameters");
         }
-    }//GEN-LAST:event_searchClientBtnActionPerformed
-
-    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
-        
-        //Antes de obtener la información, validar
-        gatherExistingClientInformation();
-        String operationStatus;
-        operationStatus= validateClient.modifyClient(existingClient);
-        
-        JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
     private void gatherNewClientInformation(){
