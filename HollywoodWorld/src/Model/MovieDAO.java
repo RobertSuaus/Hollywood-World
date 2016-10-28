@@ -44,8 +44,8 @@ public class MovieDAO {
             ps.executeBatch();
             return StatusValidator.SUCCESS;
         }catch(SQLException ex){
-            System.err.println("Error al guardar perfil de película"+ ex.getMessage());
-            JOptionPane.showMessageDialog(null,"Error al guardar perfil",
+            System.err.println("Error al guardar película"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al guardar película",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return StatusValidator.ERROR;
         }
@@ -121,7 +121,7 @@ public class MovieDAO {
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultSet.next();
+            if(!resultSet.first()) return 0; //Si no hay registros, empezar en 0
             lastId = resultSet.getInt("id_box");
             return lastId;
         }catch(SQLException ex){
@@ -133,6 +133,7 @@ public class MovieDAO {
     }
     
     public MovieProfile getProfileInfo(String serialCode) throws ParseException{
+        
         String sql = "SELECT * FROM movie WHERE"
                 + " serialCode = '$serialCode$'";
         sql = sql.replace("$serialCode$", serialCode );
@@ -141,6 +142,7 @@ public class MovieDAO {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
             resultSet.next();
+            
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date releaseDate = new Date();
             movieProfile = new MovieProfile(
@@ -152,6 +154,7 @@ public class MovieDAO {
                 resultSet.getString("runtime"),
                 resultSet.getString("serialCode")
                 );
+            
             return movieProfile;
         }catch(SQLException ex){
             System.err.println("Error al obtener el ultimo registro " + ex.getMessage());
@@ -161,8 +164,8 @@ public class MovieDAO {
         }
     }
     
-    public Movie getMovieInfo(){
-        
+    public Movie getMovieInfo(int movieId){
+        return null; //TODO
     }
     
     public boolean isSerialCodeOccupied(String serialCode){

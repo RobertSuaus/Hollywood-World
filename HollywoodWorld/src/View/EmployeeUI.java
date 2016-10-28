@@ -5,6 +5,10 @@
  */
 package View;
 
+import Controller.ValidateEmployeeInterface;
+import Model.Employee;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Robert
@@ -14,8 +18,16 @@ public class EmployeeUI extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeUI
      */
-    public EmployeeUI() {
+    public EmployeeUI(ValidateEmployeeInterface validateEmployee) {
         initComponents();
+        this.setVisible(true);
+        existingEmployeePanel.setVisible(false);
+        
+        this.validateEmployee = validateEmployee;
+        this.newEmployee = new Employee(
+            validateEmployee.getNextEmployeeId()
+            );
+        fillEmployeeIdField();
     }
 
     /**
@@ -43,9 +55,9 @@ public class EmployeeUI extends javax.swing.JFrame {
         newLastNameTxt = new javax.swing.JTextField();
         newTelephoneTxt = new javax.swing.JTextField();
         newAddressTxt = new javax.swing.JTextField();
-        newEmployeeNumberTxt = new javax.swing.JTextField();
+        newIdTxt = new javax.swing.JTextField();
         newRfcTxt = new javax.swing.JTextField();
-        newBasicSalaryTxt = new javax.swing.JTextField();
+        newSalaryTxt = new javax.swing.JTextField();
         newAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         newPositionTxt = new javax.swing.JTextField();
         addEmployeeBtn = new javax.swing.JButton();
@@ -60,22 +72,22 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         editAddressTxt = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        editEmployeeNumberTxt = new javax.swing.JTextField();
+        editIdTxt = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         editRfcTxt = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        editBasicSalaryTxt = new javax.swing.JTextField();
+        editSalaryTxt = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         editAdmissionDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel21 = new javax.swing.JLabel();
         editPositionTxt = new javax.swing.JTextField();
-        saveChangedBtn = new javax.swing.JButton();
+        saveChangesBtn = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        searchEmployeeTxt = new javax.swing.JTextField();
+        searchEmployeeIdTxt = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Employees");
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
@@ -108,15 +120,14 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Employee Position:");
 
-        newEmployeeNumberTxt.setEditable(false);
-
-        newAdmissionDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAdmissionDateActionPerformed(evt);
-            }
-        });
+        newIdTxt.setEditable(false);
 
         addEmployeeBtn.setText("Register Employee");
+        addEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmployeeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout newEmployeePanelLayout = new javax.swing.GroupLayout(newEmployeePanel);
         newEmployeePanel.setLayout(newEmployeePanelLayout);
@@ -148,9 +159,9 @@ public class EmployeeUI extends javax.swing.JFrame {
                                     .addComponent(newLastNameTxt)
                                     .addComponent(newTelephoneTxt)
                                     .addComponent(newAddressTxt)
-                                    .addComponent(newEmployeeNumberTxt)
+                                    .addComponent(newIdTxt)
                                     .addComponent(newRfcTxt)
-                                    .addComponent(newBasicSalaryTxt)
+                                    .addComponent(newSalaryTxt)
                                     .addComponent(newAdmissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                     .addComponent(newPositionTxt))))))
                 .addContainerGap(110, Short.MAX_VALUE))
@@ -178,7 +189,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(newEmployeeNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -186,7 +197,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(newBasicSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -217,7 +228,7 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel15.setText("Employee number:");
 
-        editEmployeeNumberTxt.setEditable(false);
+        editIdTxt.setEditable(false);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel16.setText("RFC:");
@@ -231,7 +242,12 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel21.setText("Employee Position:");
 
-        saveChangedBtn.setText("Save Changes");
+        saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout existingEmployeePanelLayout = new javax.swing.GroupLayout(existingEmployeePanel);
         existingEmployeePanel.setLayout(existingEmployeePanelLayout);
@@ -239,7 +255,7 @@ public class EmployeeUI extends javax.swing.JFrame {
             existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingEmployeePanelLayout.createSequentialGroup()
                 .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(saveChangedBtn)
+                .addComponent(saveChangesBtn)
                 .addGap(33, 33, 33))
             .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(existingEmployeePanelLayout.createSequentialGroup()
@@ -260,9 +276,9 @@ public class EmployeeUI extends javax.swing.JFrame {
                         .addComponent(editLastNameTxt)
                         .addComponent(editTelephoneTxt)
                         .addComponent(editAddressTxt)
-                        .addComponent(editEmployeeNumberTxt)
+                        .addComponent(editIdTxt)
                         .addComponent(editRfcTxt)
-                        .addComponent(editBasicSalaryTxt)
+                        .addComponent(editSalaryTxt)
                         .addComponent(editAdmissionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                         .addComponent(editPositionTxt))
                     .addContainerGap(73, Short.MAX_VALUE)))
@@ -271,7 +287,7 @@ public class EmployeeUI extends javax.swing.JFrame {
             existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingEmployeePanelLayout.createSequentialGroup()
                 .addGap(0, 309, Short.MAX_VALUE)
-                .addComponent(saveChangedBtn))
+                .addComponent(saveChangesBtn))
             .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(existingEmployeePanelLayout.createSequentialGroup()
                     .addGap(23, 23, 23)
@@ -293,7 +309,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(editEmployeeNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
@@ -301,7 +317,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel17)
-                        .addComponent(editBasicSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
@@ -320,6 +336,11 @@ public class EmployeeUI extends javax.swing.JFrame {
         jLabel10.setText("Employee Number:");
 
         searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editEmployeePanelLayout = new javax.swing.GroupLayout(editEmployeePanel);
         editEmployeePanel.setLayout(editEmployeePanelLayout);
@@ -337,7 +358,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchEmployeeIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchBtn)))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -350,7 +371,7 @@ public class EmployeeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(searchEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchEmployeeIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(existingEmployeePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,23 +394,105 @@ public class EmployeeUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newAdmissionDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAdmissionDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newAdmissionDateActionPerformed
+    private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
+        
+        //Antes de obtener la información se debe validar
+        gatherNewEmployeeInformation();
+        int newEmployeeId = newEmployee.getId();
+        
+        if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
+            String operationStatus;
+            operationStatus = validateEmployee.addEmployee(newEmployee);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Employee Id already in use");
+        }
+        
+    }//GEN-LAST:event_addEmployeeBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        
+        //Antes de obtener la información se debe validar
+        gatherExistingEmployeeInformation();
+        String operationStatus;
+        operationStatus = validateEmployee.modifyEmployee(existingEmployee);
+        JOptionPane.showMessageDialog(null, operationStatus);
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        
+        //Antes de obtener la información se debe validar
+        int employeeId = Integer.valueOf(searchEmployeeIdTxt.getText() );
+        
+        if(!validateEmployee.isEmployeeIdAvailable(employeeId) ){
+            existingEmployee = validateEmployee.getEmployeeInfo(employeeId);
+            existingEmployeePanel.setVisible(true);
+            fillExistingEmployeeForm();
+        }else{
+            JOptionPane.showMessageDialog(null, "Employee Id not registered");
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     
-
+    
+    private void gatherNewEmployeeInformation(){
+        
+        newEmployee.setName(newNameTxt.getText() );
+        newEmployee.setLastName(newLastNameTxt.getText() );
+        newEmployee.setTelephone(newTelephoneTxt.getText() );
+        newEmployee.setAddress(newAddressTxt.getText() );
+        newEmployee.setRfc(newRfcTxt.getText() );
+        newEmployee.setBasicSalary(Double.valueOf(newSalaryTxt.getText() ) );
+        newEmployee.setAdmissionDate(newAdmissionDate.getDate() );
+        newEmployee.setPosition(newPositionTxt.getText() );
+    }
+    
+    private void gatherExistingEmployeeInformation(){
+        
+        existingEmployee.setName(editNameTxt.getText() );
+        existingEmployee.setLastName(editLastNameTxt.getText() );
+        existingEmployee.setTelephone(editTelephoneTxt.getText() );
+        existingEmployee.setAddress(editAddressTxt.getText() );
+        existingEmployee.setRfc(editRfcTxt.getText() );
+        existingEmployee.setBasicSalary(Double.valueOf(editSalaryTxt.getText() ) );
+        existingEmployee.setAdmissionDate(editAdmissionDate.getDate() );
+        existingEmployee.setPosition(editPositionTxt.getText() );
+    }
+    
+    private void fillExistingEmployeeForm(){
+        
+        editNameTxt.setText(existingEmployee.getName() );
+        editLastNameTxt.setText(existingEmployee.getLastName() );
+        editTelephoneTxt.setText(existingEmployee.getTelephone() );
+        editAddressTxt.setText(existingEmployee.getAddress() );
+        editIdTxt.setText(String.valueOf(existingEmployee.getId() ) );
+        editRfcTxt.setText(existingEmployee.getRfc() );
+        editSalaryTxt.setText(
+                String.valueOf(existingEmployee.getBasicSalary() )
+                );
+        editAdmissionDate.setDate(existingEmployee.getAdmissionDate() );
+        editPositionTxt.setText(existingEmployee.getPosition() );
+    }
+    
+    private void fillEmployeeIdField(){
+        
+        newIdTxt.setText(String.valueOf(newEmployee.getId() ) );
+    }
+    
+    private ValidateEmployeeInterface validateEmployee;
+    private Employee newEmployee;
+    private Employee existingEmployee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployeeBtn;
     private javax.swing.JTextField editAddressTxt;
     private org.jdesktop.swingx.JXDatePicker editAdmissionDate;
-    private javax.swing.JTextField editBasicSalaryTxt;
-    private javax.swing.JTextField editEmployeeNumberTxt;
     private javax.swing.JPanel editEmployeePanel;
+    private javax.swing.JTextField editIdTxt;
     private javax.swing.JTextField editLastNameTxt;
     private javax.swing.JTextField editNameTxt;
     private javax.swing.JTextField editPositionTxt;
     private javax.swing.JTextField editRfcTxt;
+    private javax.swing.JTextField editSalaryTxt;
     private javax.swing.JTextField editTelephoneTxt;
     private javax.swing.JPanel existingEmployeePanel;
     private javax.swing.JLabel jLabel1;
@@ -416,16 +519,16 @@ public class EmployeeUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField newAddressTxt;
     private org.jdesktop.swingx.JXDatePicker newAdmissionDate;
-    private javax.swing.JTextField newBasicSalaryTxt;
-    private javax.swing.JTextField newEmployeeNumberTxt;
     private javax.swing.JPanel newEmployeePanel;
+    private javax.swing.JTextField newIdTxt;
     private javax.swing.JTextField newLastNameTxt;
     private javax.swing.JTextField newNameTxt;
     private javax.swing.JTextField newPositionTxt;
     private javax.swing.JTextField newRfcTxt;
+    private javax.swing.JTextField newSalaryTxt;
     private javax.swing.JTextField newTelephoneTxt;
-    private javax.swing.JButton saveChangedBtn;
+    private javax.swing.JButton saveChangesBtn;
     private javax.swing.JButton searchBtn;
-    private javax.swing.JTextField searchEmployeeTxt;
+    private javax.swing.JTextField searchEmployeeIdTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Controller.ValidateClientInterface;
@@ -23,15 +18,16 @@ public class ClientUI extends javax.swing.JFrame {
         
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
+        this.existingClientInfoPanel.setVisible(false);
         
         this.validateClient = validateClient;
         this.newClient = new Client(
-            new ClientMembership(this.validateClient.getNextMembershipId(), "Active")
-        );
+            new ClientMembership(
+                    this.validateClient.getNextMembershipId(),
+                    "Active"
+                )
+            );
         fillMembershipField();
-        
-        this.existingClient = new Client();
-        this.existingClientInfoPanel.setVisible(false);
     }
 
     /**
@@ -56,7 +52,7 @@ public class ClientUI extends javax.swing.JFrame {
         newTelephoneTxt = new javax.swing.JTextField();
         newAddressTxt = new javax.swing.JTextField();
         newMembershipTxt = new javax.swing.JTextField();
-        registerNewBtn = new javax.swing.JButton();
+        registerNewClientBtn = new javax.swing.JButton();
         editClientPanel = new javax.swing.JPanel();
         existingClientInfoPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -79,7 +75,6 @@ public class ClientUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Clients");
-        setAlwaysOnTop(true);
         setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
@@ -102,10 +97,10 @@ public class ClientUI extends javax.swing.JFrame {
 
         newMembershipTxt.setEditable(false);
 
-        registerNewBtn.setText("Register new client");
-        registerNewBtn.addActionListener(new java.awt.event.ActionListener() {
+        registerNewClientBtn.setText("Register new client");
+        registerNewClientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerNewBtnActionPerformed(evt);
+                registerNewClientBtnActionPerformed(evt);
             }
         });
 
@@ -136,7 +131,7 @@ public class ClientUI extends javax.swing.JFrame {
                 .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newClientPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(registerNewBtn)
+                .addComponent(registerNewClientBtn)
                 .addGap(85, 85, 85))
         );
         newClientPanelLayout.setVerticalGroup(
@@ -165,7 +160,7 @@ public class ClientUI extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(newMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(registerNewBtn)
+                .addComponent(registerNewClientBtn)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -325,36 +320,38 @@ public class ClientUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registerNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewBtnActionPerformed
+    private void registerNewClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewClientBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherNewClientInformation();
         ClientMembership newMembership = newClient.getMembership();
         int newMembershipId = newMembership.getId();
         
-        if(validateClient.isMembershipIdAvailable(newMembershipId)){
+        if(validateClient.isMembershipIdAvailable(newMembershipId) ){
             String operationStatus;
             operationStatus= validateClient.addClient(newClient);
             JOptionPane.showMessageDialog(null, operationStatus);
         }else{
             JOptionPane.showMessageDialog(null, "Membership number already in use");
         }
-    }//GEN-LAST:event_registerNewBtnActionPerformed
+    }//GEN-LAST:event_registerNewClientBtnActionPerformed
 
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
         
         int membershipId = Integer.valueOf(searchMembershipTxt.getText() );
-        if(!validateClient.isMembershipIdAvailable(membershipId)){
+        if(!validateClient.isMembershipIdAvailable(membershipId) ){
             
             existingClient = validateClient.getClientInfo(membershipId);
             existingClientInfoPanel.setVisible(true);
             fillExistingClientForm();
         }else{
-            JOptionPane.showMessageDialog(null, "That membership number doesn't exists");
+            JOptionPane.showMessageDialog(null, "That membership number doesn't exist");
         }
     }//GEN-LAST:event_searchClientBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherExistingClientInformation();
         String operationStatus;
         operationStatus= validateClient.modifyClient(existingClient);
@@ -379,7 +376,9 @@ public class ClientUI extends javax.swing.JFrame {
         existingClient.setAddress(editAddressTxt.getText());
         
         int currentId = existingClient.getMembership().getId();
-        String currentStatus = String.valueOf(membershipStatus.getSelectedItem());
+        String currentStatus = String.valueOf(
+                membershipStatus.getSelectedItem() 
+                );
         
         existingClient.setMembership(
                 new ClientMembership(currentId, currentStatus)
@@ -389,15 +388,16 @@ public class ClientUI extends javax.swing.JFrame {
     
     private void fillMembershipField(){
         
-        newMembershipTxt.setText(String.valueOf(newClient.getMembership().getId()));
+        newMembershipTxt.setText(
+                String.valueOf(newClient.getMembership().getId() ) );
     }
     
     private void fillExistingClientForm(){
         
-        editNameTxt.setText(existingClient.getName());
-        editLastNameTxt.setText(existingClient.getLastName());
-        editTelephoneTxt.setText(existingClient.getTelephone());
-        editAddressTxt.setText(existingClient.getAddress());
+        editNameTxt.setText(existingClient.getName() );
+        editLastNameTxt.setText(existingClient.getLastName() );
+        editTelephoneTxt.setText(existingClient.getTelephone() );
+        editAddressTxt.setText(existingClient.getAddress() );
         
         String membershipNumber = String.valueOf(
             existingClient.getMembership().getId()
@@ -406,7 +406,7 @@ public class ClientUI extends javax.swing.JFrame {
         editMembershipTxt.setText(membershipNumber);
         
         membershipStatus.setSelectedIndex(
-            getStatusIndex(existingClient.getMembership().getStatus())
+            getStatusIndex(existingClient.getMembership().getStatus() )
             );
     }
     
@@ -424,6 +424,9 @@ public class ClientUI extends javax.swing.JFrame {
         return statusIndex;
     }
 
+    private ValidateClientInterface validateClient;
+    private Client newClient;
+    private Client existingClient;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editAddressTxt;
     private javax.swing.JPanel editClientPanel;
@@ -454,12 +457,10 @@ public class ClientUI extends javax.swing.JFrame {
     private javax.swing.JTextField newMembershipTxt;
     private javax.swing.JTextField newNameTxt;
     private javax.swing.JTextField newTelephoneTxt;
-    private javax.swing.JButton registerNewBtn;
+    private javax.swing.JButton registerNewClientBtn;
     private javax.swing.JButton saveChangesBtn;
     private javax.swing.JButton searchClientBtn;
     private javax.swing.JTextField searchMembershipTxt;
     // End of variables declaration//GEN-END:variables
-    private ValidateClientInterface validateClient;
-    private Client newClient;
-    private Client existingClient;
+    
 }

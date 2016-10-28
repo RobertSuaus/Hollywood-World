@@ -26,6 +26,11 @@ public class Employee extends Person {
             this.position = position;
         }
     
+    public Employee(int id){
+        super("","","","");
+        this.id = id;
+    }
+    
     public void setId(int id){
         this.id = id;
     }

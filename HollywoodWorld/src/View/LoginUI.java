@@ -15,9 +15,11 @@ public class LoginUI extends javax.swing.JFrame {
      */
     public LoginUI(ValidateLoginInterface validateLogin) {
         initComponents();
+        this.setVisible(true);
+        
         this.validateLogin = validateLogin;
         this.user = new User();
-        this.setVisible(true);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -183,6 +185,8 @@ public class LoginUI extends javax.swing.JFrame {
         }
     }
     
+    private ValidateLoginInterface validateLogin;
+    private User user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
@@ -192,6 +196,5 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
-    private ValidateLoginInterface validateLogin;
-    private User user;
+    
 }

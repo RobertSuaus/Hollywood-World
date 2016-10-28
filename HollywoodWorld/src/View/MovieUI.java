@@ -19,13 +19,11 @@ public class MovieUI extends javax.swing.JFrame {
         initComponents(); //Componentes visuales de swing
         this.setVisible(true);
         this.existingProfilePanel.setVisible(false);
+        
         this.validateMovie = validateMovie;
-        
-        this.newMovie = new Movie(validateMovie.getNextMovieId());
+        this.newMovie = new Movie(validateMovie.getNextMovieId() );
         fillMovieIdField();
-        
         this.newProfile = new MovieProfile();
-        this.existingProfile = new MovieProfile();
     }
 
     /**
@@ -399,6 +397,7 @@ public class MovieUI extends javax.swing.JFrame {
 
     private void addMoviesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMoviesBtnActionPerformed
         
+        //Antes de obtener la información, validar
         String newMovieSerial = addSerialCodeTxt.getText();
         if(!validateMovie.isSerialCodeAvailable(newMovieSerial)){
             
@@ -417,6 +416,7 @@ public class MovieUI extends javax.swing.JFrame {
 
     private void addNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProfileBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherNewProfileInformation();
         if(validateMovie.isSerialCodeAvailable(newProfile.getSerialCode() ) ){
             String operationStatus;
@@ -430,6 +430,7 @@ public class MovieUI extends javax.swing.JFrame {
 
     private void saveProfileChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileChangeBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherExistingProfileInformation();
         String operationStatus;
         operationStatus = validateMovie.modifyMovieProfile(existingProfile);
@@ -439,6 +440,7 @@ public class MovieUI extends javax.swing.JFrame {
 
     private void searchSerialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSerialBtnActionPerformed
         
+        //Antes de obtener la información, validar
         String selectedSerial = searchSerialTxt.getText();
         
         if(!validateMovie.isSerialCodeAvailable(selectedSerial) ){

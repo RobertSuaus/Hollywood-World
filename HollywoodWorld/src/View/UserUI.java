@@ -19,12 +19,13 @@ public class UserUI extends javax.swing.JFrame {
      * Creates new form UserUI
      */
     public UserUI(ValidateUserInterface validateUser) {
+        
         initComponents();
+        this.setVisible(true);
+        existingUserInfoPanel.setVisible(false);
+        
         this.validateUser = validateUser;
         this.newUser = new User();
-        this.existingUser = new User();
-        existingUserInfoPanel.setVisible(false);
-        this.setVisible(true);
     }
 
     /**
@@ -317,8 +318,10 @@ public class UserUI extends javax.swing.JFrame {
     //Agrega un usuario nuevo, si el nombre no esta ocupado.
     private void createNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherNewUserInformation();
         String userName = newUser.getUserName();
+        
         if(validateUser.isUserNameAvailable(userName)){
             String operationStatus;
             operationStatus = validateUser.addUser(newUser);
@@ -331,6 +334,7 @@ public class UserUI extends javax.swing.JFrame {
     //Guarda los cambios hechos a un usuario existente
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         
+        //Antes de obtener la información, validar
         gatherExistingUserInformation();
         String operationStatus;
         operationStatus = validateUser.modifyUser(existingUser);
@@ -340,6 +344,7 @@ public class UserUI extends javax.swing.JFrame {
     //Busca los datos de usuario existentes y llena el formulario con los datos
     private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
         
+        //Antes de obtener la información, validar
         String userName = searchUserNameTxt.getText();
         
         if(!validateUser.isUserNameAvailable(userName)){
@@ -413,6 +418,9 @@ public class UserUI extends javax.swing.JFrame {
         return permissionIndex;
     }
 
+    private User newUser;
+    private User existingUser;
+    private ValidateUserInterface validateUser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createNewBtn;
     private javax.swing.JTextField editLastNameTxt;
@@ -448,7 +456,5 @@ public class UserUI extends javax.swing.JFrame {
     private javax.swing.JToggleButton searchUserBtn;
     private javax.swing.JTextField searchUserNameTxt;
     // End of variables declaration//GEN-END:variables
-    private User newUser;
-    private User existingUser;
-    private ValidateUserInterface validateUser;
+    
 }
