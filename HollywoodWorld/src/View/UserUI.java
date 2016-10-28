@@ -417,6 +417,26 @@ public class UserUI extends javax.swing.JFrame {
         }
         return permissionIndex;
     }
+    
+    private boolean isEveryInputsValid(User user){
+        if(isValidInputText( user.getName() )
+            && isValidInputText( user.getLastName() ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private static boolean isValidInputText(String input){
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     private User newUser;
     private User existingUser;
