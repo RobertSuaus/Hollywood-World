@@ -317,28 +317,38 @@ public class UserUI extends javax.swing.JFrame {
 
     //Agrega un usuario nuevo, si el nombre no esta ocupado.
     private void createNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewBtnActionPerformed
-        
-        //Antes de obtener la información, validar
+
         gatherNewUserInformation();
-        String userName = newUser.getUserName();
         
-        if(validateUser.isUserNameAvailable(userName)){
-            String operationStatus;
-            operationStatus = validateUser.addUser(newUser);
-            JOptionPane.showMessageDialog(null, operationStatus);
-        }else{
-            JOptionPane.showMessageDialog(null, "User name already occupied...");
+        if( isEveryInputValid(newUser) ) {
+            String userName = newUser.getUserName();
+        
+            if(validateUser.isUserNameAvailable(userName)){
+                String operationStatus;
+                operationStatus = validateUser.addUser(newUser);
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "User name already occupied...");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid parameters to User");
         }
     }//GEN-LAST:event_createNewBtnActionPerformed
 
     //Guarda los cambios hechos a un usuario existente
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
-        
-        //Antes de obtener la información, validar
+
         gatherExistingUserInformation();
-        String operationStatus;
-        operationStatus = validateUser.modifyUser(existingUser);
-        JOptionPane.showMessageDialog(null, operationStatus);
+                
+        if( isEveryInputValid(existingUser) ) {
+            String operationStatus;
+            operationStatus = validateUser.modifyUser(existingUser);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid parameters to User");
+        }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
     //Busca los datos de usuario existentes y llena el formulario con los datos

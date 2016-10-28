@@ -390,7 +390,7 @@ public class EmployeeUI extends javax.swing.JFrame {
 
         gatherNewEmployeeInformation();
         
-        if ( isEveryInputValid(existingEmployee) ) {
+        if ( isEveryInputValid(newEmployee) ) {
             int newEmployeeId = newEmployee.getId();
 
             if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
