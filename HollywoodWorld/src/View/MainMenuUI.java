@@ -19,6 +19,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     public MainMenuUI(ValidateMainMenuInterface validateMainMenu) {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
+        
         this.validateMainMenu = validateMainMenu;
     }
 
@@ -44,7 +45,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         usersButton = new javax.swing.JMenuItem();
         ReportsMenu = new javax.swing.JMenu();
         payrollMenu = new javax.swing.JMenu();
-        SessionMenu = new javax.swing.JMenu();
+        Session = new javax.swing.JMenu();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -114,8 +115,13 @@ public class MainMenuUI extends javax.swing.JFrame {
         payrollMenu.setText("Payroll");
         jMenuBar1.add(payrollMenu);
 
-        SessionMenu.setText("Session");
-        jMenuBar1.add(SessionMenu);
+        Session.setText("Terminate Session");
+        Session.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SessionMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(Session);
 
         setJMenuBar(jMenuBar1);
 
@@ -203,11 +209,16 @@ public class MainMenuUI extends javax.swing.JFrame {
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
         // TODO add your handling code here:
         if(validateMainMenu.userHasHumanResourcesPermissions()){
-            JOptionPane.showMessageDialog(null, "Human Resources!");
+            validateMainMenu.openWindow("Employee Manager");
         }else{
             JOptionPane.showMessageDialog(null, "You cannot access this function");
         }
     }//GEN-LAST:event_employeeButtonActionPerformed
+
+    private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
+        
+        validateMainMenu.terminateSession();
+    }//GEN-LAST:event_SessionMouseClicked
 
     
 
@@ -216,7 +227,7 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton RentButton;
     private javax.swing.JMenu ReportsMenu;
     private javax.swing.JButton RestorationButton;
-    private javax.swing.JMenu SessionMenu;
+    private javax.swing.JMenu Session;
     private javax.swing.JMenuItem clientButton;
     private javax.swing.JMenuItem employeeButton;
     private javax.swing.JMenuItem filmsButton;

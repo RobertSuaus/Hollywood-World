@@ -87,13 +87,16 @@ public class ClientDAO {
     }
     
     public int getLastMembershipId(){
+        
         String sql = "SELECT * FROM  client WHERE membership_id ="+
                 " (SELECT MAX(membership_id)  FROM client)";
         int lastId;
         try{
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultSet.next();
+            
+            if(!resultSet.first()) return 0; //Si no hay registros, empezar en 0
+            
             lastId = resultSet.getInt("membership_id");
             return lastId;
         }catch(SQLException ex){

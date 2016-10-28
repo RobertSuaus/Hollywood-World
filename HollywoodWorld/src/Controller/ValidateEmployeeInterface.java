@@ -13,6 +13,6 @@ public interface ValidateEmployeeInterface {
     public Employee getEmployeeInfo(int employeeId);
     public int getNextEmployeeId();
     
-    public void addEmployee(Employee employee);
-    public void modifyEmployee(Employee employee);
+    public String addEmployee(Employee employee);
+    public String modifyEmployee(Employee employee);
 }

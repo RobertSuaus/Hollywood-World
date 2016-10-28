@@ -68,10 +68,13 @@
             <Property name="text" type="java.lang.String" value="Payroll"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="SessionMenu">
+        <Menu class="javax.swing.JMenu" name="Session">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Session"/>
+            <Property name="text" type="java.lang.String" value="Terminate Session"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SessionMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>

@@ -75,8 +75,16 @@ public class MainMenuController implements ValidateMainMenuInterface {
                 break;
             case "Movie Manager" : new MovieController();
                 break;
+            case "Employee Manager" : new EmployeeController();
+                break;
             default : ;
         }
+    }
+    
+    @Override
+    public void terminateSession(){
+        mainMenuUI.dispose();
+        new LoginController();
     }
     
     private User user;
