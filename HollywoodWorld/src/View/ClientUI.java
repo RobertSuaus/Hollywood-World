@@ -424,6 +424,49 @@ public class ClientUI extends javax.swing.JFrame {
         return statusIndex;
     }
     
+    private boolean isEveryInputsValid(Client client){
+        if(isValidInputText( client.getName() )
+            && isValidInputText( client.getLastName() )
+            && isValidInputTelephone( client.getTelephone() )
+            && isValidInputAddress( client.getAddress() ) ){
+            
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputText(String input){
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputAddress(String input){
+        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputTelephone(String input){
+        if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     private ValidateClientInterface validateClient;
     private Client newClient;
     private Client existingClient;
