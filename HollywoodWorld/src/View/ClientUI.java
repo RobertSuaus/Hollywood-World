@@ -322,18 +322,24 @@ public class ClientUI extends javax.swing.JFrame {
 
     private void registerNewClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewClientBtnActionPerformed
         
-        //Antes de obtener la información, validar
         gatherNewClientInformation();
-        ClientMembership newMembership = newClient.getMembership();
-        int newMembershipId = newMembership.getId();
         
-        if(validateClient.isMembershipIdAvailable(newMembershipId) ){
-            String operationStatus;
-            operationStatus= validateClient.addClient(newClient);
-            JOptionPane.showMessageDialog(null, operationStatus);
+        if(isEveryInputValid(newClient) ){
+            
+            ClientMembership newMembership = newClient.getMembership();
+            int newMembershipId = newMembership.getId();
+
+            if(validateClient.isMembershipIdAvailable(newMembershipId) ){
+                String operationStatus;
+                operationStatus= validateClient.addClient(newClient);
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "Membership number already in use");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Membership number already in use");
+            JOptionPane.showMessageDialog(null, "Invalid client parameters");
         }
+        
     }//GEN-LAST:event_registerNewClientBtnActionPerformed
 
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
@@ -353,10 +359,17 @@ public class ClientUI extends javax.swing.JFrame {
         
         //Antes de obtener la información, validar
         gatherExistingClientInformation();
-        String operationStatus;
-        operationStatus= validateClient.modifyClient(existingClient);
         
-        JOptionPane.showMessageDialog(null, operationStatus);
+        if(isEveryInputValid(existingClient) ){
+            
+            String operationStatus;
+            operationStatus= validateClient.modifyClient(existingClient);
+        
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Invalid client parameters");
+        }
+        
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
     private void gatherNewClientInformation(){
@@ -422,6 +435,49 @@ public class ClientUI extends javax.swing.JFrame {
             default : statusIndex = ERROR;
         }
         return statusIndex;
+    }
+    
+    private boolean isEveryInputValid(Client client){
+        if(isValidInputText( client.getName() )
+            && isValidInputText( client.getLastName() )
+            && isValidInputTelephone( client.getTelephone() )
+            && isValidInputAddress( client.getAddress() ) ){
+            
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputText(String input){
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputAddress(String input){
+        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputTelephone(String input){
+        if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private ValidateClientInterface validateClient;

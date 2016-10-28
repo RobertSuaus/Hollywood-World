@@ -416,31 +416,40 @@ public class MovieUI extends javax.swing.JFrame {
 
     private void addNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProfileBtnActionPerformed
         
-        //Antes de obtener la información, validar
         gatherNewProfileInformation();
-        if(validateMovie.isSerialCodeAvailable(newProfile.getSerialCode() ) ){
-            String operationStatus;
-            operationStatus = validateMovie.addMovieProfile(newProfile);
-            
-            JOptionPane.showMessageDialog(null, operationStatus);
+        
+        if(isEveryInputValid(newProfile) ){
+            if(validateMovie.isSerialCodeAvailable(newProfile.getSerialCode() ) ){
+                String operationStatus;
+                operationStatus = validateMovie.addMovieProfile(newProfile);
+
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "Serial code already in use");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Serial code already in use");
-        }
+            JOptionPane.showMessageDialog(null, "Invalid profile parameters");
+        }    
     }//GEN-LAST:event_addNewProfileBtnActionPerformed
 
     private void saveProfileChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProfileChangeBtnActionPerformed
         
-        //Antes de obtener la información, validar
         gatherExistingProfileInformation();
-        String operationStatus;
-        operationStatus = validateMovie.modifyMovieProfile(existingProfile);
         
-        JOptionPane.showMessageDialog(null, operationStatus);
+        if(isEveryInputValid(existingProfile) ){
+            String operationStatus;
+            operationStatus = validateMovie.modifyMovieProfile(existingProfile);
+        
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Invalid profile parameters");
+        }
+        
+        
     }//GEN-LAST:event_saveProfileChangeBtnActionPerformed
 
     private void searchSerialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSerialBtnActionPerformed
         
-        //Antes de obtener la información, validar
         String selectedSerial = searchSerialTxt.getText();
         
         if(!validateMovie.isSerialCodeAvailable(selectedSerial) ){
@@ -502,6 +511,64 @@ public class MovieUI extends javax.swing.JFrame {
     
     private void fillMovieIdField(){
         this.movieId.setText(String.valueOf(newMovie.getId() ) );
+    }
+    
+    private boolean isEveryInputValid(MovieProfile profile){
+        
+        if(isValidInputText( profile.getTitle() )&& 
+            isValidInputDate( profile.getReleaseDate() )&&
+            isValidInputRating( profile.getRating())&&
+            isValidInputText( profile.getDescription() ) &&
+            isValidInputText( profile.getRunTime() )&&
+            isValidInputSerialCode( profile.getSerialCode() )
+        ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputText(String input){
+        
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputSerialCode(String input){
+        
+        if (input.matches("([A-Za-z]|[0-9]|-)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputRating(String input){
+        
+        if (input.matches("([A-Z]|[0-9])*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputDate(Date date){
+        
+        if (date!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     private ValidateMovieInterface validateMovie;

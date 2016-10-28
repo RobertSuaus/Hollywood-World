@@ -7,6 +7,7 @@ package View;
 
 import Controller.ValidateEmployeeInterface;
 import Model.Employee;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -396,27 +397,36 @@ public class EmployeeUI extends javax.swing.JFrame {
 
     private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
         
-        //Antes de obtener la información se debe validar
         gatherNewEmployeeInformation();
-        int newEmployeeId = newEmployee.getId();
         
-        if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
-            String operationStatus;
-            operationStatus = validateEmployee.addEmployee(newEmployee);
-            JOptionPane.showMessageDialog(null, operationStatus);
+        if(isEveryInputValid(newEmployee)){
+            
+            int newEmployeeId = newEmployee.getId();
+        
+            if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
+                String operationStatus;
+                operationStatus = validateEmployee.addEmployee(newEmployee);
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "Employee Id already in use");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Employee Id already in use");
+            JOptionPane.showMessageDialog(null, "Invalid employee parameters");
         }
-        
     }//GEN-LAST:event_addEmployeeBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         
-        //Antes de obtener la información se debe validar
         gatherExistingEmployeeInformation();
-        String operationStatus;
-        operationStatus = validateEmployee.modifyEmployee(existingEmployee);
-        JOptionPane.showMessageDialog(null, operationStatus);
+        
+        if(this.isEveryInputValid(existingEmployee) ){
+            String operationStatus;
+            operationStatus = validateEmployee.modifyEmployee(existingEmployee);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        }else{
+            JOptionPane.showMessageDialog(null, "Invalid employee parameters");
+        }
+        
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -477,6 +487,78 @@ public class EmployeeUI extends javax.swing.JFrame {
     private void fillEmployeeIdField(){
         
         newIdTxt.setText(String.valueOf(newEmployee.getId() ) );
+    }
+    
+    private boolean isEveryInputValid(Employee employee){
+        
+        if(isValidInputText( employee.getName() )&& 
+            isValidInputText( employee.getLastName() )&&
+            isValidInputTelephone( employee.getTelephone() )&&
+            isValidInputAddress( employee.getAddress() ) &&
+            isValidInputText( employee.getRfc() )&&
+            isValidInputNumber( String.valueOf(employee.getBasicSalary() ) )&&
+            isValidInputDate(employee.getAdmissionDate() ) &&
+            isValidInputText( employee.getPosition() ) 
+        ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputText(String input){
+        
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputNumber(String input){
+        if (input.matches("(|[0-9])*.([0-9])*") && 
+            input.equals(" ") == false && 
+            input.equals("") == false
+            ){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "aaaaaa");
+                return false;
+            }
+    }
+    
+    private boolean isValidInputAddress(String input){
+        
+        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputTelephone(String input){
+        
+        if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputDate(Date date){
+        
+        if (date!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     private ValidateEmployeeInterface validateEmployee;
