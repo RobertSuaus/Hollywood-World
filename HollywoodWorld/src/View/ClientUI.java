@@ -321,23 +321,30 @@ public class ClientUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerNewClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewClientBtnActionPerformed
-        
-        //Antes de obtener la información, validar
+
         gatherNewClientInformation();
-        ClientMembership newMembership = newClient.getMembership();
-        int newMembershipId = newMembership.getId();
         
-        if(validateClient.isMembershipIdAvailable(newMembershipId) ){
-            String operationStatus;
-            operationStatus= validateClient.addClient(newClient);
-            JOptionPane.showMessageDialog(null, operationStatus);
-        }else{
-            JOptionPane.showMessageDialog(null, "Membership number already in use");
+        if( isEveryInputValid(newClient) ) {
+            ClientMembership newMembership = newClient.getMembership();
+            int newMembershipId = newMembership.getId();
+
+            if(validateClient.isMembershipIdAvailable(newMembershipId) ){
+                String operationStatus;
+                operationStatus= validateClient.addClient(newClient);
+                JOptionPane.showMessageDialog(null, operationStatus);
+            }else{
+                JOptionPane.showMessageDialog(null, "Membership number already in use");
+            }
         }
+        else {
+            JOptionPane.showMessageDialog(null, "Invalid parameters");
+        }
+        
     }//GEN-LAST:event_registerNewClientBtnActionPerformed
 
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
         
+        if ( isEveryInputValid(existingClient) ) {
         int membershipId = Integer.valueOf(searchMembershipTxt.getText() );
         if(!validateClient.isMembershipIdAvailable(membershipId) ){
             
@@ -346,6 +353,10 @@ public class ClientUI extends javax.swing.JFrame {
             fillExistingClientForm();
         }else{
             JOptionPane.showMessageDialog(null, "That membership number doesn't exist");
+        }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Invalid parameters");
         }
     }//GEN-LAST:event_searchClientBtnActionPerformed
 
