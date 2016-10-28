@@ -100,13 +100,6 @@ public class ClientUI extends javax.swing.JFrame {
                 newNameTxtFocusLost(evt);
             }
         });
-        newNameTxt.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                newNameTxtCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
 
         newLastNameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -384,10 +377,6 @@ public class ClientUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
-    private void newNameTxtCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_newNameTxtCaretPositionChanged
-
-    }//GEN-LAST:event_newNameTxtCaretPositionChanged
-
     private void newNameTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newNameTxtFocusLost
         if(!isValidInputText(newNameTxt.getText())){
             JOptionPane.showMessageDialog(null, "Invalid client name");
@@ -469,36 +458,6 @@ public class ClientUI extends javax.swing.JFrame {
             default : statusIndex = ERROR;
         }
         return statusIndex;
-    }
-    
-    private boolean isValidInputText(String input){
-        if (input.matches("([A-Za-z]|\\s)*") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    private boolean isValidInputAddress(String input){
-        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    private boolean isValidInputTelephone(String input){
-        if (input.matches("([0-9]|\\s)*") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
     }
     
     private ValidateClientInterface validateClient;
