@@ -74,21 +74,20 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="newNameTxt" max="32767" attributes="0"/>
+                                          <Component id="newNameTxt" pref="173" max="32767" attributes="0"/>
                                           <Component id="newLastNameTxt" max="32767" attributes="0"/>
                                           <Component id="newTelephoneTxt" alignment="0" max="32767" attributes="0"/>
                                           <Component id="newAddressTxt" alignment="0" max="32767" attributes="0"/>
                                           <Component id="newIdTxt" alignment="0" max="32767" attributes="0"/>
                                           <Component id="newRfcTxt" alignment="0" max="32767" attributes="0"/>
                                           <Component id="newSalaryTxt" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="newAdmissionDate" alignment="0" pref="173" max="32767" attributes="0"/>
                                           <Component id="newPositionTxt" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace pref="112" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -132,10 +131,7 @@
                           <Component id="newSalaryTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="newAdmissionDate" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -143,7 +139,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="addEmployeeBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="65" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -246,8 +242,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="newSalaryTxt">
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="newAdmissionDate">
-            </Component>
             <Component class="javax.swing.JTextField" name="newPositionTxt">
             </Component>
             <Component class="javax.swing.JButton" name="addEmployeeBtn">
@@ -347,7 +341,6 @@
                                   <Component id="editIdTxt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="editRfcTxt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="editSalaryTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="editAdmissionDate" alignment="0" pref="173" max="32767" attributes="0"/>
                                   <Component id="editPositionTxt" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="73" max="32767" attributes="0"/>
@@ -358,7 +351,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="309" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="310" max="32767" attributes="0"/>
                           <Component id="saveChangesBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -399,10 +392,7 @@
                                   <Component id="editSalaryTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="editAdmissionDate" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -495,8 +485,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Admission Date:"/>
                   </Properties>
-                </Component>
-                <Component class="org.jdesktop.swingx.JXDatePicker" name="editAdmissionDate">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>
