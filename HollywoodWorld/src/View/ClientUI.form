@@ -172,19 +172,10 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="newNameTxt">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="newNameTxtFocusLost"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newLastNameTxt">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="newLastNameTxtFocusLost"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newTelephoneTxt">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="newTelephoneTxtFocusLost"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="newAddressTxt">
             </Component>
