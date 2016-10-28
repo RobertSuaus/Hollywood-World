@@ -95,6 +95,31 @@ public class ClientUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Membership number:");
 
+        newNameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                newNameTxtFocusLost(evt);
+            }
+        });
+        newNameTxt.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                newNameTxtCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+
+        newLastNameTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                newLastNameTxtFocusLost(evt);
+            }
+        });
+
+        newTelephoneTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                newTelephoneTxtFocusLost(evt);
+            }
+        });
+
         newMembershipTxt.setEditable(false);
 
         registerNewClientBtn.setText("Register new client");
@@ -359,6 +384,28 @@ public class ClientUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
+    private void newNameTxtCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_newNameTxtCaretPositionChanged
+
+    }//GEN-LAST:event_newNameTxtCaretPositionChanged
+
+    private void newNameTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newNameTxtFocusLost
+        if(!isValidInputText(newNameTxt.getText())){
+            JOptionPane.showMessageDialog(null, "Invalid client name");
+        }
+    }//GEN-LAST:event_newNameTxtFocusLost
+
+    private void newLastNameTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newLastNameTxtFocusLost
+        if(!isValidInputText(newLastNameTxt.getText())){
+            JOptionPane.showMessageDialog(null, "Invalid client last name");
+        }
+    }//GEN-LAST:event_newLastNameTxtFocusLost
+
+    private void newTelephoneTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newTelephoneTxtFocusLost
+        if(!isValidInputTelephone(newTelephoneTxt.getText())){
+             JOptionPane.showMessageDialog(null, "Invalid client telephone");
+        }
+    }//GEN-LAST:event_newTelephoneTxtFocusLost
+
     private void gatherNewClientInformation(){
         
         newClient.setName(newNameTxt.getText() );
@@ -423,7 +470,37 @@ public class ClientUI extends javax.swing.JFrame {
         }
         return statusIndex;
     }
-
+    
+    private boolean isValidInputText(String input){
+        if (input.matches("([A-Za-z]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputAddress(String input){
+        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputTelephone(String input){
+        if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     private ValidateClientInterface validateClient;
     private Client newClient;
     private Client existingClient;
