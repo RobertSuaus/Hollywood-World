@@ -5,12 +5,16 @@
  */
 package Controller;
 
+import Model.DBConnection;
+import View.LoginUI;
+
 /**
  *
  * @author Robert
  */
 public class Main {
     public static void main(String[] args) {
-        new LoginController();
+        DBConnection.Connect();
+        new LoginUI();
     }
 }

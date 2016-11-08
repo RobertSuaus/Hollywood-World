@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ValidateClientInterface;
+import Controller.ClientAdministrator;
 import Model.Client;
 import Model.ClientMembership;
 import javax.swing.JOptionPane;
@@ -14,16 +14,15 @@ public class ClientUI extends javax.swing.JFrame {
     /**
      * Creates new form ClientUI
      */
-    public ClientUI(ValidateClientInterface validateClient) {
+    public ClientUI() {
         
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         this.existingClientInfoPanel.setVisible(false);
         
-        this.validateClient = validateClient;
         this.newClient = new Client(
             new ClientMembership(
-                    this.validateClient.getNextMembershipId(),
+                    ClientAdministrator.generateNextMembershipId(),
                     "Active"
                 )
             );
@@ -326,16 +325,10 @@ public class ClientUI extends javax.swing.JFrame {
         
         if(isEveryInputValid(newClient) ){
             
-            ClientMembership newMembership = newClient.getMembership();
-            int newMembershipId = newMembership.getId();
-
-            if(validateClient.isMembershipIdAvailable(newMembershipId) ){
-                String operationStatus;
-                operationStatus= validateClient.addClient(newClient);
-                JOptionPane.showMessageDialog(null, operationStatus);
-            }else{
-                JOptionPane.showMessageDialog(null, "Membership number already in use");
-            }
+            String operationStatus;
+            operationStatus= ClientAdministrator.addClient(newClient);
+            JOptionPane.showMessageDialog(null, operationStatus);
+            
         }else{
             JOptionPane.showMessageDialog(null, "Invalid client parameters");
         }
@@ -345,25 +338,22 @@ public class ClientUI extends javax.swing.JFrame {
     private void searchClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchClientBtnActionPerformed
         
         int membershipId = Integer.valueOf(searchMembershipTxt.getText() );
-        if(!validateClient.isMembershipIdAvailable(membershipId) ){
-            
-            existingClient = validateClient.getClientInfo(membershipId);
-            existingClientInfoPanel.setVisible(true);
-            fillExistingClientForm();
-        }else{
-            JOptionPane.showMessageDialog(null, "That membership number doesn't exist");
-        }
+        
+        existingClient = ClientAdministrator.getClientInfo(membershipId);
+        existingClientInfoPanel.setVisible(true);
+        
+        fillExistingClientForm();
+        
     }//GEN-LAST:event_searchClientBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         
-        //Antes de obtener la información, validar
         gatherExistingClientInformation();
         
         if(isEveryInputValid(existingClient) ){
             
             String operationStatus;
-            operationStatus= validateClient.modifyClient(existingClient);
+            operationStatus= ClientAdministrator.modifyClient(existingClient);
         
             JOptionPane.showMessageDialog(null, operationStatus);
         }else{
@@ -480,7 +470,6 @@ public class ClientUI extends javax.swing.JFrame {
         }
     }
 
-    private ValidateClientInterface validateClient;
     private Client newClient;
     private Client existingClient;
     // Variables declaration - do not modify//GEN-BEGIN:variables

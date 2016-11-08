@@ -1,25 +1,85 @@
 package Controller;
 
 import Model.User;
+import Model.User;
+import View.ClientUI;
+import View.EmployeeUI;
 import View.MainMenuUI;
+import View.ModifyUserForm;
+import View.MovieUI;
+import View.RegisterUserForm;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Robert
  */
-public class MainMenuController implements ValidateMainMenuInterface {
+public class MainMenuController {
     /*Clase encargada de la funcionalidad del menú principal.
     Verifica que el empleado usando el sistema tenga acceso a las secciones
     correspondientes.*/
     
-    public MainMenuController(User user){
+    public MainMenuController(User user, MainMenuUI mainMenu){
+        
         this.user = user;
-        mainMenuUI = new MainMenuUI(this);
+        this.mainMenu = mainMenu;
     }
     
-    @Override
-    public boolean userHasAdminPermissions(){
+    public void processUserRegistrationWindowRequest(){
+        
+        if(userHasHumanResourcesPermissions() ){
+            MainMenuManager.accessUserRegistrationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void processUserModificationWindowRequest(){
+        
+        if(userHasHumanResourcesPermissions() ){
+            MainMenuManager.accessUserModificationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void processClientRegistrationWindowRequest(){
+        
+    }
+    
+    public void processClientModificationWindowRequest(){
+        
+    }
+    
+    public void processEmployeeRegistrationWindowRequest(){
+        
+    }
+    
+    public void processEmployeeModificationWindowRequest(){
+        
+    }
+    
+    public void processMovieInventoryWindowRequest(){
+        
+    }
+    
+    public void processNewProfileWindowRequest(){
+        
+    }
+    
+    public void processProfileModificationWindowRequest(){
+        
+    }
+    
+    public void processNewRentWindowRequest(){
+        
+    }
+    
+    public void processReturnsWindowRequest(){
+        
+    }
+    
+    private boolean userHasAdminPermissions(){
         
         String userPermissions = user.getPermissions();
         
@@ -30,8 +90,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         }
     }
     
-    @Override
-    public boolean userHasHumanResourcesPermissions(){
+    private boolean userHasHumanResourcesPermissions(){
         
         String userPermissions = user.getPermissions();
         
@@ -42,8 +101,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         }
     }
     
-    @Override
-    public boolean userHasManagerPermissions(){
+    private boolean userHasManagerPermissions(){
         
         String userPermissions = user.getPermissions();
         
@@ -54,8 +112,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         }
     }
     
-    @Override
-    public boolean userHasRenterPermissions(){
+    private boolean userHasRenterPermissions(){
         
         String userPermissions = user.getPermissions();
         
@@ -66,27 +123,7 @@ public class MainMenuController implements ValidateMainMenuInterface {
         }
     }
     
-    @Override
-    public void openWindow(String windowName){
-        switch(windowName){
-            case "User Manager" : new UserController();
-                break;
-            case "Client Manager" : new ClientController();
-                break;
-            case "Movie Manager" : new MovieController();
-                break;
-            case "Employee Manager" : new EmployeeController();
-                break;
-            default : ;
-        }
-    }
-    
-    @Override
-    public void terminateSession(){
-        mainMenuUI.dispose();
-        new LoginController();
-    }
-    
     private User user;
-    private MainMenuUI mainMenuUI;
+    private MainMenuUI mainMenu;
+    private final String NO_PERMISSION = "No puedes acceder a esta funcionalidad";
 }

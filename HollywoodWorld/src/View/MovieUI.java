@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ValidateMovieInterface;
+import Controller.MovieAdministrator;
 import Model.Movie;
 import Model.MovieProfile;
 import java.util.Date;
@@ -15,13 +15,12 @@ import javax.swing.JOptionPane;
  */
 public class MovieUI extends javax.swing.JFrame {
 
-    public MovieUI(ValidateMovieInterface validateMovie) {
+    public MovieUI() {
         initComponents(); //Componentes visuales de swing
         this.setVisible(true);
         this.existingProfilePanel.setVisible(false);
         
-        this.validateMovie = validateMovie;
-        this.newMovie = new Movie(validateMovie.getNextMovieId() );
+        this.newMovie = new Movie(MovieAdministrator.generateNextMovieId() );
         fillMovieIdField();
         this.newProfile = new MovieProfile();
     }
@@ -399,19 +398,15 @@ public class MovieUI extends javax.swing.JFrame {
         
         //Antes de obtener la información, validar
         String newMovieSerial = addSerialCodeTxt.getText();
-        if(!validateMovie.isSerialCodeAvailable(newMovieSerial)){
-            
-            newMovie.setProfile(
-                    validateMovie.getMovieProfileInfo(newMovieSerial)
+        newMovie.setProfile(
+                    MovieAdministrator.getMovieProfileInfo(newMovieSerial)
                     );
-            int addAmount = Integer.valueOf(amountToAddTxt.getText() );
-            String operationStatus;
-            operationStatus = validateMovie.addMovie(newMovie, addAmount);
+        int addAmount = Integer.valueOf(amountToAddTxt.getText() );
+        String operationStatus;
+        operationStatus = MovieAdministrator.addMoviesToInventory(newMovie, addAmount);
             
-            JOptionPane.showMessageDialog(null, operationStatus);
-        }else{
-            JOptionPane.showMessageDialog(null, "Serial code not registered");
-        }
+        JOptionPane.showMessageDialog(null, operationStatus);
+        
     }//GEN-LAST:event_addMoviesBtnActionPerformed
 
     private void addNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewProfileBtnActionPerformed
@@ -419,14 +414,11 @@ public class MovieUI extends javax.swing.JFrame {
         gatherNewProfileInformation();
         
         if(isEveryInputValid(newProfile) ){
-            if(validateMovie.isSerialCodeAvailable(newProfile.getSerialCode() ) ){
-                String operationStatus;
-                operationStatus = validateMovie.addMovieProfile(newProfile);
+            
+            String operationStatus;
+            operationStatus = MovieAdministrator.registerMovieProfile(newProfile);
 
-                JOptionPane.showMessageDialog(null, operationStatus);
-            }else{
-                JOptionPane.showMessageDialog(null, "Serial code already in use");
-            }
+            JOptionPane.showMessageDialog(null, operationStatus);
         }else{
             JOptionPane.showMessageDialog(null, "Invalid profile parameters");
         }    
@@ -438,7 +430,7 @@ public class MovieUI extends javax.swing.JFrame {
         
         if(isEveryInputValid(existingProfile) ){
             String operationStatus;
-            operationStatus = validateMovie.modifyMovieProfile(existingProfile);
+            operationStatus = MovieAdministrator.modifyMovieProfile(existingProfile);
         
             JOptionPane.showMessageDialog(null, operationStatus);
         }else{
@@ -452,13 +444,9 @@ public class MovieUI extends javax.swing.JFrame {
         
         String selectedSerial = searchSerialTxt.getText();
         
-        if(!validateMovie.isSerialCodeAvailable(selectedSerial) ){
-            existingProfile = validateMovie.getMovieProfileInfo(selectedSerial);
+        existingProfile = MovieAdministrator.getMovieProfileInfo(selectedSerial);
             existingProfilePanel.setVisible(true);
             fillExistingProfileInformation();
-        }else{
-            JOptionPane.showMessageDialog(null, "Serial not registered");
-        }
     }//GEN-LAST:event_searchSerialBtnActionPerformed
 
     private void gatherNewProfileInformation(){
@@ -571,7 +559,6 @@ public class MovieUI extends javax.swing.JFrame {
         }
     }
     
-    private ValidateMovieInterface validateMovie;
     private Movie newMovie;
     private MovieProfile newProfile;
     private MovieProfile existingProfile;

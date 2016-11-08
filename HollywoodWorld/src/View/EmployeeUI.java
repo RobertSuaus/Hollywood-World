@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.ValidateEmployeeInterface;
+import Controller.EmployeeAdministrator;
 import Model.Employee;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -19,14 +19,13 @@ public class EmployeeUI extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeUI
      */
-    public EmployeeUI(ValidateEmployeeInterface validateEmployee) {
+    public EmployeeUI() {
         initComponents();
         this.setVisible(true);
         existingEmployeePanel.setVisible(false);
         
-        this.validateEmployee = validateEmployee;
         this.newEmployee = new Employee(
-            validateEmployee.getNextEmployeeId()
+            EmployeeAdministrator.generateNextEmployeeId()
             );
         fillEmployeeIdField();
     }
@@ -401,15 +400,10 @@ public class EmployeeUI extends javax.swing.JFrame {
         
         if(isEveryInputValid(newEmployee)){
             
-            int newEmployeeId = newEmployee.getId();
-        
-            if(validateEmployee.isEmployeeIdAvailable(newEmployeeId) ){
-                String operationStatus;
-                operationStatus = validateEmployee.addEmployee(newEmployee);
-                JOptionPane.showMessageDialog(null, operationStatus);
-            }else{
-                JOptionPane.showMessageDialog(null, "Employee Id already in use");
-            }
+            String operationStatus;
+            operationStatus = EmployeeAdministrator.registerEmployee(newEmployee);
+            JOptionPane.showMessageDialog(null, operationStatus);
+            
         }else{
             JOptionPane.showMessageDialog(null, "Invalid employee parameters");
         }
@@ -419,9 +413,9 @@ public class EmployeeUI extends javax.swing.JFrame {
         
         gatherExistingEmployeeInformation();
         
-        if(this.isEveryInputValid(existingEmployee) ){
+        if(isEveryInputValid(existingEmployee) ){
             String operationStatus;
-            operationStatus = validateEmployee.modifyEmployee(existingEmployee);
+            operationStatus = EmployeeAdministrator.modifyEmployee(existingEmployee);
             JOptionPane.showMessageDialog(null, operationStatus);
         }else{
             JOptionPane.showMessageDialog(null, "Invalid employee parameters");
@@ -434,13 +428,9 @@ public class EmployeeUI extends javax.swing.JFrame {
         //Antes de obtener la información se debe validar
         int employeeId = Integer.valueOf(searchEmployeeIdTxt.getText() );
         
-        if(!validateEmployee.isEmployeeIdAvailable(employeeId) ){
-            existingEmployee = validateEmployee.getEmployeeInfo(employeeId);
-            existingEmployeePanel.setVisible(true);
-            fillExistingEmployeeForm();
-        }else{
-            JOptionPane.showMessageDialog(null, "Employee Id not registered");
-        }
+        existingEmployee = EmployeeAdministrator.getEmployeeInfo(employeeId);
+        existingEmployeePanel.setVisible(true);
+        fillExistingEmployeeForm();
     }//GEN-LAST:event_searchBtnActionPerformed
 
     
@@ -561,7 +551,6 @@ public class EmployeeUI extends javax.swing.JFrame {
         }
     }
     
-    private ValidateEmployeeInterface validateEmployee;
     private Employee newEmployee;
     private Employee existingEmployee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
