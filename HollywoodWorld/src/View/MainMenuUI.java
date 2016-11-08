@@ -6,7 +6,9 @@
 
 package View;
 
-import Controller.ValidateMainMenuInterface;
+import Controller.MainMenuController;
+import Controller.SessionController;
+import Model.User;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,11 +18,16 @@ import javax.swing.JOptionPane;
 public class MainMenuUI extends javax.swing.JFrame {
 
     /** Creates new form MainMenuIU */
-    public MainMenuUI(ValidateMainMenuInterface validateMainMenu) {
+    public MainMenuUI(User user) {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         
-        this.validateMainMenu = validateMainMenu;
+        this.sessionController = new SessionController();
+        this.mainMenuController = new MainMenuController(user, this);
+    }
+    
+    public void displayPermissionError(){
+        JOptionPane.showMessageDialog(null, "No tienes permisos para acceder a la función");
     }
 
     /** This method is called from within the constructor to
@@ -42,7 +49,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         clientButton = new javax.swing.JMenuItem();
         filmsButton = new javax.swing.JMenuItem();
         employeeButton = new javax.swing.JMenuItem();
-        usersButton = new javax.swing.JMenuItem();
+        usersSubMenu = new javax.swing.JMenu();
+        userRegistrationBtn = new javax.swing.JMenuItem();
+        userModificationBtn = new javax.swing.JMenuItem();
         ReportsMenu = new javax.swing.JMenu();
         payrollMenu = new javax.swing.JMenu();
         Session = new javax.swing.JMenu();
@@ -99,13 +108,25 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         ClientButton.add(employeeButton);
 
-        usersButton.setText("Users");
-        usersButton.addActionListener(new java.awt.event.ActionListener() {
+        usersSubMenu.setText("Users");
+
+        userRegistrationBtn.setText("Register user");
+        userRegistrationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usersButtonActionPerformed(evt);
+                userRegistrationBtnActionPerformed(evt);
             }
         });
-        ClientButton.add(usersButton);
+        usersSubMenu.add(userRegistrationBtn);
+
+        userModificationBtn.setText("Edit user");
+        userModificationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userModificationBtnActionPerformed(evt);
+            }
+        });
+        usersSubMenu.add(userModificationBtn);
+
+        ClientButton.add(usersSubMenu);
 
         jMenuBar1.add(ClientButton);
 
@@ -154,74 +175,49 @@ public class MainMenuUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersButtonActionPerformed
-        // TODO add your handling code here:
-        if(validateMainMenu.userHasHumanResourcesPermissions()){
-            validateMainMenu.openWindow("User Manager");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
-    }//GEN-LAST:event_usersButtonActionPerformed
-
     private void RentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentButtonActionPerformed
-        if(
-            validateMainMenu.userHasRenterPermissions() ||
-            validateMainMenu.userHasManagerPermissions()
-        ){
-            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
+        
+        mainMenuController.processNewRentWindowRequest();
     }//GEN-LAST:event_RentButtonActionPerformed
 
     private void RestorationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestorationButtonActionPerformed
-        if(
-            validateMainMenu.userHasRenterPermissions() ||
-            validateMainMenu.userHasManagerPermissions()
-        ){
-            JOptionPane.showMessageDialog(null, "Welcome, renter/manager!");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
+        
+        mainMenuController.processReturnsWindowRequest();
     }//GEN-LAST:event_RestorationButtonActionPerformed
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
-        // TODO add your handling code here:
-        if(
-            validateMainMenu.userHasRenterPermissions() ||
-            validateMainMenu.userHasManagerPermissions()
-        ){
-            validateMainMenu.openWindow("Client Manager");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
+        
+        mainMenuController.processClientRegistrationWindowRequest();
     }//GEN-LAST:event_clientButtonActionPerformed
 
     private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
-        // TODO add your handling code here:
-        if(validateMainMenu.userHasManagerPermissions()){
-            validateMainMenu.openWindow("Movie Manager");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
+        
+        mainMenuController.processMovieInventoryWindowRequest();
     }//GEN-LAST:event_filmsButtonActionPerformed
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-        // TODO add your handling code here:
-        if(validateMainMenu.userHasHumanResourcesPermissions()){
-            validateMainMenu.openWindow("Employee Manager");
-        }else{
-            JOptionPane.showMessageDialog(null, "You cannot access this function");
-        }
+        
+        mainMenuController.processEmployeeRegistrationWindowRequest();
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
         
-        validateMainMenu.terminateSession();
+        sessionController.processLogoutRequest();
     }//GEN-LAST:event_SessionMouseClicked
 
-    
+    private void userRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegistrationBtnActionPerformed
+        
+        mainMenuController.processUserRegistrationWindowRequest();
+    }//GEN-LAST:event_userRegistrationBtnActionPerformed
 
+    private void userModificationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userModificationBtnActionPerformed
+        
+        mainMenuController.processUserModificationWindowRequest();
+    }//GEN-LAST:event_userModificationBtnActionPerformed
+
+    
+    private MainMenuController mainMenuController;
+    private SessionController sessionController;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ClientButton;
     private javax.swing.JButton RentButton;
@@ -236,7 +232,9 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu payrollMenu;
-    private javax.swing.JMenuItem usersButton;
+    private javax.swing.JMenuItem userModificationBtn;
+    private javax.swing.JMenuItem userRegistrationBtn;
+    private javax.swing.JMenu usersSubMenu;
     // End of variables declaration//GEN-END:variables
-    private ValidateMainMenuInterface validateMainMenu;
+    
 }

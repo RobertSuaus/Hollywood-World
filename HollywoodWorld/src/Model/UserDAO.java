@@ -5,10 +5,7 @@
  */
 package Model;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import Model.User;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -16,22 +13,9 @@ import javax.swing.JOptionPane;
  *
  * @author Robert
  */
-public class UserDAO {
+public class UserDAO extends BaseDAO {
     
-    public UserDAO(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/hollywood_world?autoReconnect=true&useSSL=false",
-                "root",
-                ""
-            );
-        }catch(Exception error){
-            error.printStackTrace();
-        }
-    }
-    
-    public int add(User user){
+    public static int save(User user){
         String sql = "INSERT INTO user(userName, name, lastName, password, userPermissions) VALUES ("+
                 "'" + user.getUserName()+"' ," +
                 "'" + user.getName()+"' ," +
@@ -41,16 +25,16 @@ public class UserDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al guardar datos de usuario " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al guardar datos de usuario.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public int modify(User user){
+    public static int update(User user){
         String sql = "UPDATE user SET " +
                 "name = '" + user.getName() + "' ," +
                 "lastname = '" + user.getLastName()+"' ," +
@@ -60,16 +44,16 @@ public class UserDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al modificar datos de usuario " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al modificar datos de usuario.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public User getUserInfo(String userName){
+    public static User obtainRegistry(String userName){
         
         String sql = "SELECT * FROM user WHERE userName ='" + userName +"'";
         User user = null;
@@ -92,7 +76,7 @@ public class UserDAO {
         return user;
     }
     
-    public boolean isUserNameOccupied(String userName){
+    public static boolean registryExists(String userName){
         boolean isNameOccupied;
         String sql = "SELECT * FROM user WHERE "+
                     "userName ='" + userName + "'";
@@ -110,7 +94,7 @@ public class UserDAO {
         return isNameOccupied;
     }
     
-    public boolean isUserInfoCoincident(User user){
+    public static boolean registryExists(User user){
         boolean isInfoCoincident;
         String sql = "SELECT * FROM user WHERE "+
                     "userName ='" + user.getUserName() + "'" +
@@ -129,7 +113,4 @@ public class UserDAO {
         return isInfoCoincident;
     }
     
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
 }

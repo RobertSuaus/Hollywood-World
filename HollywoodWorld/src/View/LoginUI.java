@@ -1,7 +1,6 @@
 package View;
 
-import Controller.ValidateLoginInterface;
-import Model.User;
+import Controller.SessionController;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,15 +12,19 @@ public class LoginUI extends javax.swing.JFrame {
     /**
      * Creates new form LoginIU
      */
-    public LoginUI(ValidateLoginInterface validateLogin) {
-        initComponents();
+    public LoginUI() {
+        initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
-        
-        this.validateLogin = validateLogin;
-        this.user = new User();
-        
+        this.sessionController = new SessionController(this);
     }
     
+    public void displayAuthenticationError(){
+        JOptionPane.showMessageDialog(null, "No se pudo autenticar el usuario");
+    }
+    
+    public void displayInvalidDataError(){
+        JOptionPane.showMessageDialog(null, "Error en el formato de datos");
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,20 +56,9 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         userNameTxt.setName(""); // NOI18N
-        userNameTxt.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                userNameTxtCaretUpdate(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Bodoni MT", 3, 36)); // NOI18N
         jLabel3.setText("Hollywood World!");
-
-        password.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                passwordCaretUpdate(evt);
-            }
-        });
 
         jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -138,55 +130,20 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
-        if(validateLogin.authenticateUser(user)){
-            validateLogin.initiateSession(user);
-        }else{
-            JOptionPane.showMessageDialog(null, "User data invalid");
-        }
+        String[] userInputs = gatherAllUserInput();
+        
+        sessionController.processLoginRequest(userInputs);
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void userNameTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_userNameTxtCaretUpdate
+    private String[] gatherAllUserInput(){
         
-        String i_userName= userNameTxt.getText();
-        if (isUserNameValid(i_userName)){
-            user.setUserName(i_userName);
-        }
-    }//GEN-LAST:event_userNameTxtCaretUpdate
-
-    private void passwordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_passwordCaretUpdate
-        
-        String i_password= String.valueOf(password.getPassword());
-        if(isPasswordValid(i_password)){
-            user.setPassword(i_password);
-        }
-    }//GEN-LAST:event_passwordCaretUpdate
-
-    private boolean isUserNameValid(String userName){
-        
-        int minNameLength = 4;
-        int nameLength = userName.length();
-        
-        if (nameLength >= minNameLength){
-            return true;
-        }else{
-            return false;
-        }
+        String[] userInputs = new String[2];
+        userInputs[0] = userNameTxt.getText();
+        userInputs[1] =  String.valueOf(password.getPassword() );
+        return userInputs;
     }
     
-    private boolean isPasswordValid(String password){
-        
-        int minPasswordLength = 4;
-        int passwordLength = password.length();
-        
-        if(passwordLength >= minPasswordLength){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    private ValidateLoginInterface validateLogin;
-    private User user;
+    private SessionController sessionController;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;

@@ -5,10 +5,6 @@
  */
 package Model;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,22 +15,9 @@ import javax.swing.JOptionPane;
  *
  * @author Reynaldo Marrufo
  */
-public class EmployeeDAO {
+public class EmployeeDAO extends BaseDAO {
     
-     public  EmployeeDAO(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/hollywood_world?autoReconnect=true&useSSL=false",
-                "root",
-                ""
-            );
-        }catch(Exception error){
-            error.printStackTrace();
-        }
-    }
-    
-    public int add(Employee employee){
+    public static int save(Employee employee){
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -60,16 +43,16 @@ public class EmployeeDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al guardar datos de empleado"+ ex.getMessage());
             JOptionPane.showMessageDialog(null,"Error al guardar empleado",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public int modify(Employee employee){
+    public static int update(Employee employee){
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String sql = "UPDATE employee SET " +
@@ -100,16 +83,16 @@ public class EmployeeDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al guardar datos de empleado"+ ex.getMessage());
             JOptionPane.showMessageDialog(null,"Error al guardar empleado",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public Employee getEmployeeInformation(int employeeId) throws ParseException{
+    public static Employee getRegistry(int employeeId) throws ParseException{
         
         String sql = "SELECT * FROM employee WHERE"
                 + " employee_id = $employeeId$";
@@ -145,7 +128,7 @@ public class EmployeeDAO {
         }
     }
     
-    public int getLastRegisteredId(){
+    public static int getLastRegistryIndex(){
         
         String sql = "SELECT * FROM  employee WHERE employee_id ="+
                 " (SELECT MAX(employee_id) FROM employee)";
@@ -160,11 +143,11 @@ public class EmployeeDAO {
             System.err.println("Error al obtener el ultimo registro " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al obtener registro.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }   
     }
     
-    public boolean isEmployeeIdOccupied(int employeeId){
+    public static boolean registryExists(int employeeId){
         boolean isOccupied;
         String sql = "SELECT * FROM employee WHERE "+
                 "employee_id ='" + employeeId + "'";
@@ -180,8 +163,4 @@ public class EmployeeDAO {
         }
         return isOccupied;
     }
-    
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
 }

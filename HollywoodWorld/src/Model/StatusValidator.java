@@ -12,7 +12,7 @@ package Model;
 public final class StatusValidator {
     
     public static final boolean success(int status){
-        if (status == SUCCESS){
+        if (status == 0){
             return true;
         }else{
             return false;
@@ -20,13 +20,10 @@ public final class StatusValidator {
     }
     
     public static final boolean error(int status){
-        if (status == ERROR){
+        if (status == -1){
             return true;
         }else{
             return false;
         }
     }
-            
-    public static final int ERROR = -1;
-    public static final int SUCCESS = 0;
 }

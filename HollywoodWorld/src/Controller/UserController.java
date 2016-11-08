@@ -5,27 +5,82 @@
  */
 package Controller;
 
-import Model.StatusValidator;
 import Model.User;
 import Model.UserDAO;
-import View.UserUI;
+import View.ModifyUserForm;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Robert
  */
-public class UserController implements ValidateUserInterface {
+public class UserController {
     
     public UserController(){
-        this.userDAO = new UserDAO();
-        this.userUI = new UserUI(this);
+        
+        user = new User();
+        userDataIsValid = false;
     }
     
-    @Override
-    public boolean isUserNameAvailable(String userName){
+    public UserController(ModifyUserForm modifyUserForm){
+        
+        user = new User();
+        this.modifyUserForm = modifyUserForm;
+        userDataIsValid = false;
+    }
+    
+    public String processUserCreationRequest(String[] userInputs){
+        
+        setUserInformation(userInputs);
+        if(userDataIsValid){
+            if(isUserNameAvailable() ){
+                return UserAdministrator.createUser(user);
+            }
+            return OCCUPIED_USERNAME_MSG;
+        }
+        return INVALID_DATA_MSG;
+    }
+    
+    public String processUserModificationRequest(String[] userInputs){
+        
+        setUserInformation(userInputs);
+        if(userDataIsValid){
+            return UserAdministrator.modifyUser(user);
+        }
+        return INVALID_DATA_MSG;
+    }
+    
+    public String processUserInformationRequest(String userNameInput){
+        
+        user.setUserName(userNameInput);
+        
+        if(isUserNameValid() ){
+            if(!isUserNameAvailable() ){
+                user = UserAdministrator.getUser(userNameInput);
+                modifyUserForm.fillExistingUserForm(user);
+                return "Obtenida exitosamente información del usuario: "+ user.getUserName();
+            }
+            return USERNAME_NOT_FOUND_MSG;
+        }
+        return INVALID_DATA_MSG;
+    }
+    
+    //Asigna los datos de usuario obtenidos desde el formulario de la vista
+    private void setUserInformation(String[] userInput){
+        
+        user.setName(userInput[0]);
+        user.setLastName(userInput[1]);
+        user.setUserName(userInput[2]);
+        user.setPassword(userInput[3]);
+        user.setPermissions(userInput[4]);
+        
+        userDataIsValid = isUserDataValid();
+    }
+    
+    private boolean isUserNameAvailable(){
         
         boolean isAvailable;
-        if(userDAO.isUserNameOccupied(userName)){
+        if(UserDAO.registryExists(user.getUserName() ) ){
             isAvailable = false;
         }else{
             isAvailable = true;
@@ -33,32 +88,74 @@ public class UserController implements ValidateUserInterface {
         return isAvailable;
     }
     
-    @Override
-    public User getUserInfo(String userName){
+    //Validaciones de Sintaxis de los datos 
+    private boolean isUserDataValid(){
         
-        User userInformation= new User();
-        userInformation = userDAO.getUserInfo(userName);
-        return userInformation;
-    }
-    
-    @Override
-    public String addUser(User user){
-        if(StatusValidator.success(userDAO.add(user))){
-            return "User succesfully added to database.";
+        if( isNameValid() &&
+            isLastNameValid() &&
+            isUserNameValid() &&
+            isPasswordValid() 
+        ){
+            return true;
         }else{
-            return "Couldn't add user...";
+            return false;
         }
     }
     
-    @Override
-    public String modifyUser(User user){
-        if(StatusValidator.success(userDAO.modify(user))){
-            return "User information succesfully updated.";
+    private boolean isNameValid(){
+        
+        String input = user.getName();
+        if (input.matches("([A-Za-z]|\\s)*") && 
+            input.equals(" ") == false &&
+            input.equals("") == false){
+            return true;
         }else{
-            return "Couldn't update user information...";
+            return false;
         }
     }
     
-    private UserDAO userDAO;
-    private UserUI userUI;
+    private boolean isLastNameValid(){
+        
+        String input = user.getLastName();
+        if (input.matches("([A-Za-z]|\\s)*") &&
+            input.equals(" ") == false &&
+            input.equals("") == false
+            ){
+                return true;
+            }else{
+                return false;
+            }
+    }
+    
+    private boolean isUserNameValid(){
+        
+        int minNameLength = 4;
+        int nameLength = user.getUserName().length();
+        
+        if (nameLength >= minNameLength){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isPasswordValid(){
+        
+        int minPasswordLength = 4;
+        int nameLength = user.getPassword().length();
+        
+        if (nameLength >= minPasswordLength){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private User user;
+    private ModifyUserForm modifyUserForm;
+    private Boolean userDataIsValid;
+    
+    private final String INVALID_DATA_MSG = "Los datos ingresados no son correctos";
+    private final String OCCUPIED_USERNAME_MSG = "El nombre de usuario ya está ocupado";
+    private final String USERNAME_NOT_FOUND_MSG = "El nombre de usuario no existe";
 }

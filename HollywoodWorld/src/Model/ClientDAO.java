@@ -5,11 +5,6 @@
  */
 package Model;
 
-import Model.StatusValidator;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -17,22 +12,9 @@ import javax.swing.JOptionPane;
  *
  * @author Reynaldo Marrufo
  */
-public class ClientDAO {
+public class ClientDAO extends BaseDAO {
     
-    public  ClientDAO(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/hollywood_world?autoReconnect=true&useSSL=false",
-                "root",
-                ""
-            );
-        }catch(Exception error){
-            error.printStackTrace();
-        }
-    }
-    
-    public int add(Client client){
+    public static int save(Client client){
         String sql = "INSERT INTO client(membership_id, name, lastname,"+
                 " telephone, address, status) VALUES("+
                 "$membership_id$, '$name$', '$lastname$', '$telephone$',"+ 
@@ -50,16 +32,16 @@ public class ClientDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al guardar datos de cliente"+ ex.getMessage());
             JOptionPane.showMessageDialog(null,"Error al guardar datos de cliente",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public int modify(Client client){
+    public static int update(Client client){
         String sql = "UPDATE client SET"+
                 " name = '$name$', lastname = '$lastname$', telephone = '$telephone$',"+
                 " address = '$address$', status = '$status$'"+
@@ -77,16 +59,16 @@ public class ClientDAO {
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            return StatusValidator.SUCCESS;
+            return SUCCESS;
         }catch(SQLException ex){
             System.err.println("Error al guardar datos de cliente"+ ex.getMessage());
             JOptionPane.showMessageDialog(null,"Error al guardar datos de cliente",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }
     }
     
-    public int getLastMembershipId(){
+    public static int getLastRegistryIndex(){
         
         String sql = "SELECT * FROM  client WHERE membership_id ="+
                 " (SELECT MAX(membership_id)  FROM client)";
@@ -103,11 +85,11 @@ public class ClientDAO {
             System.err.println("Error al obtener el ultimo registro " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al obtener registro.",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            return StatusValidator.ERROR;
+            return ERROR;
         }   
     }
     
-    public boolean isMembershipOccupied(int membershipId){
+    public static boolean registryExists(int membershipId){
         boolean isOccupied;
         String sql = "SELECT * FROM client WHERE "+
                 "membership_id ='" + membershipId+"'";
@@ -125,7 +107,7 @@ public class ClientDAO {
         
     }
     
-    public Client getClientInfo(int membershipId){
+    public static Client getRegistry(int membershipId){
         String sql = "SELECT * FROM client WHERE"
                 + " membership_id = $membershipId$";
         sql = sql.replace("$membershipId$", String.valueOf(membershipId));
@@ -153,7 +135,4 @@ public class ClientDAO {
             return client;
         }
     }
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
 }
