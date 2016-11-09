@@ -1,6 +1,6 @@
 package View;
 
-import Controller.SessionController;
+import Controller.SessionRequestHandler;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +15,7 @@ public class LoginUI extends javax.swing.JFrame {
     public LoginUI() {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
-        this.sessionController = new SessionController(this);
+        this.sessionRequestHandler = new SessionRequestHandler(this);
     }
     
     public void displayAuthenticationError(){
@@ -132,7 +132,7 @@ public class LoginUI extends javax.swing.JFrame {
         
         String[] userInputs = gatherAllUserInput();
         
-        sessionController.processLoginRequest(userInputs);
+        sessionRequestHandler.processLoginRequest(userInputs);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private String[] gatherAllUserInput(){
@@ -143,7 +143,7 @@ public class LoginUI extends javax.swing.JFrame {
         return userInputs;
     }
     
-    private SessionController sessionController;
+    private SessionRequestHandler sessionRequestHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;

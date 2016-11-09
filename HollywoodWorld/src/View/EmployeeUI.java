@@ -122,6 +122,12 @@ public class EmployeeUI extends javax.swing.JFrame {
 
         newIdTxt.setEditable(false);
 
+        newAdmissionDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAdmissionDateActionPerformed(evt);
+            }
+        });
+
         addEmployeeBtn.setText("Register Employee");
         addEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,6 +438,10 @@ public class EmployeeUI extends javax.swing.JFrame {
         existingEmployeePanel.setVisible(true);
         fillExistingEmployeeForm();
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void newAdmissionDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAdmissionDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newAdmissionDateActionPerformed
 
     
     
