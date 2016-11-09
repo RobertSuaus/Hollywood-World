@@ -6,8 +6,8 @@
 
 package View;
 
-import Controller.MainMenuController;
-import Controller.SessionController;
+import Controller.MainMenuRequestHandler;
+import Controller.SessionRequestHandler;
 import Model.User;
 import javax.swing.JOptionPane;
 
@@ -22,8 +22,8 @@ public class MainMenuUI extends javax.swing.JFrame {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         
-        this.sessionController = new SessionController();
-        this.mainMenuController = new MainMenuController(user, this);
+        this.sessionRequestHandler = new SessionRequestHandler();
+        this.mainMenuRequestHandler = new MainMenuRequestHandler(user, this);
     }
     
     public void displayPermissionError(){
@@ -177,47 +177,47 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void RentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentButtonActionPerformed
         
-        mainMenuController.processNewRentWindowRequest();
+        mainMenuRequestHandler.processNewRentWindowRequest();
     }//GEN-LAST:event_RentButtonActionPerformed
 
     private void RestorationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestorationButtonActionPerformed
         
-        mainMenuController.processReturnsWindowRequest();
+        mainMenuRequestHandler.processReturnsWindowRequest();
     }//GEN-LAST:event_RestorationButtonActionPerformed
 
     private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
         
-        mainMenuController.processClientRegistrationWindowRequest();
+        mainMenuRequestHandler.processClientRegistrationWindowRequest();
     }//GEN-LAST:event_clientButtonActionPerformed
 
     private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
         
-        mainMenuController.processMovieInventoryWindowRequest();
+        mainMenuRequestHandler.processMovieInventoryWindowRequest();
     }//GEN-LAST:event_filmsButtonActionPerformed
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
         
-        mainMenuController.processEmployeeRegistrationWindowRequest();
+        mainMenuRequestHandler.processEmployeeRegistrationWindowRequest();
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
         
-        sessionController.processLogoutRequest();
+        sessionRequestHandler.processLogoutRequest();
     }//GEN-LAST:event_SessionMouseClicked
 
     private void userRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegistrationBtnActionPerformed
         
-        mainMenuController.processUserRegistrationWindowRequest();
+        mainMenuRequestHandler.processUserRegistrationWindowRequest();
     }//GEN-LAST:event_userRegistrationBtnActionPerformed
 
     private void userModificationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userModificationBtnActionPerformed
         
-        mainMenuController.processUserModificationWindowRequest();
+        mainMenuRequestHandler.processUserModificationWindowRequest();
     }//GEN-LAST:event_userModificationBtnActionPerformed
 
     
-    private MainMenuController mainMenuController;
-    private SessionController sessionController;
+    private MainMenuRequestHandler mainMenuRequestHandler;
+    private SessionRequestHandler sessionRequestHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ClientButton;
     private javax.swing.JButton RentButton;

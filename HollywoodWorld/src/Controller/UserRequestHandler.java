@@ -8,28 +8,27 @@ package Controller;
 import Model.User;
 import Model.UserDAO;
 import View.ModifyUserForm;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Robert
  */
-public class UserController {
+public class UserRequestHandler {
     
-    public UserController(){
+    public UserRequestHandler(){
         
         user = new User();
         userDataIsValid = false;
     }
     
-    public UserController(ModifyUserForm modifyUserForm){
+    public UserRequestHandler(ModifyUserForm modifyUserForm){
         
         user = new User();
         this.modifyUserForm = modifyUserForm;
         userDataIsValid = false;
     }
     
-    public String processUserCreationRequest(String[] userInputs){
+    public String processCreation(String[] userInputs){
         
         setUserInformation(userInputs);
         if(userDataIsValid){
@@ -41,7 +40,7 @@ public class UserController {
         return INVALID_DATA_MSG;
     }
     
-    public String processUserModificationRequest(String[] userInputs){
+    public String processModification(String[] userInputs){
         
         setUserInformation(userInputs);
         if(userDataIsValid){
@@ -50,7 +49,7 @@ public class UserController {
         return INVALID_DATA_MSG;
     }
     
-    public String processUserInformationRequest(String userNameInput){
+    public String processRetrieve(String userNameInput){
         
         user.setUserName(userNameInput);
         
@@ -58,7 +57,7 @@ public class UserController {
             if(!isUserNameAvailable() ){
                 user = UserAdministrator.getUser(userNameInput);
                 modifyUserForm.fillExistingUserForm(user);
-                return "Obtenida exitosamente información del usuario: "+ user.getUserName();
+                return "Mostrando información del usuario: "+ user.getUserName();
             }
             return USERNAME_NOT_FOUND_MSG;
         }

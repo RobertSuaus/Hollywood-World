@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author Robert
  */
-public class MainMenuController {
+public class MainMenuRequestHandler {
     /*Clase encargada de la funcionalidad del menú principal.
     Verifica que el empleado usando el sistema tenga acceso a las secciones
     correspondientes.*/
     
-    public MainMenuController(User user, MainMenuUI mainMenu){
+    public MainMenuRequestHandler(User user, MainMenuUI mainMenu){
         
         this.user = user;
         this.mainMenu = mainMenu;
@@ -28,7 +28,7 @@ public class MainMenuController {
     public void processUserRegistrationWindowRequest(){
         
         if(userHasHumanResourcesPermissions() ){
-            MainMenuManager.accessUserRegistrationWindow();
+            MainMenuAdministrator.accessUserRegistrationWindow();
         }else{
             mainMenu.displayPermissionError();
         }
@@ -37,7 +37,7 @@ public class MainMenuController {
     public void processUserModificationWindowRequest(){
         
         if(userHasHumanResourcesPermissions() ){
-            MainMenuManager.accessUserModificationWindow();
+            MainMenuAdministrator.accessUserModificationWindow();
         }else{
             mainMenu.displayPermissionError();
         }

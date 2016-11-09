@@ -13,16 +13,16 @@ import View.LoginUI;
  *
  * @author Robert
  */
-public class SessionController {
+public class SessionRequestHandler {
     
-    public SessionController(){
+    public SessionRequestHandler(){
         
         user = new User();
         
         userCredentialsAreValid = false;
     }
     
-    public SessionController(LoginUI loginUI){
+    public SessionRequestHandler(LoginUI loginUI){
         
         user = new User();
         this.loginUI = loginUI;
@@ -35,7 +35,7 @@ public class SessionController {
         
         if(userCredentialsAreValid){
             if(authenticateUser(user) ){
-                SessionManager.initiateSession(user);
+                SessionAdministrator.initiateSession(user);
                 loginUI.dispose();
             }else{
                 loginUI.displayAuthenticationError();
@@ -48,7 +48,7 @@ public class SessionController {
     
     public void processLogoutRequest(){
         
-        SessionManager.terminateSession();
+        SessionAdministrator.terminateSession();
     }
     
     //Obtiene las entradas de la vista y las almacena en un objeto User

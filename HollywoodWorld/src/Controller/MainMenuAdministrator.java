@@ -10,7 +10,7 @@ import View.*;
  *
  * @author Robert
  */
-public class MainMenuManager {
+public class MainMenuAdministrator {
     
     public static void accessUserRegistrationWindow(){
         new RegisterUserForm();

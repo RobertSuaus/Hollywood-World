@@ -10,7 +10,7 @@ import java.awt.Window;
  *
  * @author Robert
  */
-public class SessionManager {
+public class SessionAdministrator {
     /*Clase encargada de la funcionalidad del sistema de login
     Autentifica los usuarios e inicia sesión con sus datos*/
     
