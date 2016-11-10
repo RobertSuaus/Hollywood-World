@@ -21,11 +21,11 @@ public class MainMenuAdministrator {
     }
     
     public static void accessClientRegistrationWindow(){
-        
+        new RegisterClientForm();
     }
     
     public static void accessClientModificationWindow(){
-        
+        new ModifyClientForm();
     }
     
     public static void accessEmployeeRegistrationWindow(){

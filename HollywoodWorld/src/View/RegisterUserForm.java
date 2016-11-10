@@ -22,7 +22,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         
-        this.userRequestHandler = new UserRequestHandler();
+        this.userRequestHandler = new UserRequestHandler(this);
     }
 
     /**
@@ -168,7 +168,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userRequestHandler.processCreation(userInput);
+                userRequestHandler.handleCreation(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_createNewBtnActionPerformed
 

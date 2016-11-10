@@ -8,6 +8,7 @@ package Controller;
 import Model.User;
 import Model.UserDAO;
 import View.ModifyUserForm;
+import View.RegisterUserForm;
 
 /**
  *
@@ -15,10 +16,11 @@ import View.ModifyUserForm;
  */
 public class UserRequestHandler {
     
-    public UserRequestHandler(){
+    public UserRequestHandler(RegisterUserForm registerUserForm){
         
         user = new User();
         userDataIsValid = false;
+        this.registerUserForm = registerUserForm;
     }
     
     public UserRequestHandler(ModifyUserForm modifyUserForm){
@@ -28,7 +30,7 @@ public class UserRequestHandler {
         userDataIsValid = false;
     }
     
-    public String processCreation(String[] userInputs){
+    public String handleCreation(String[] userInputs){
         
         setUserInformation(userInputs);
         if(userDataIsValid){
@@ -40,7 +42,7 @@ public class UserRequestHandler {
         return INVALID_DATA_MSG;
     }
     
-    public String processModification(String[] userInputs){
+    public String handleModification(String[] userInputs){
         
         setUserInformation(userInputs);
         if(userDataIsValid){
@@ -49,7 +51,7 @@ public class UserRequestHandler {
         return INVALID_DATA_MSG;
     }
     
-    public String processRetrieve(String userNameInput){
+    public String handleRetrieval(String userNameInput){
         
         user.setUserName(userNameInput);
         
@@ -151,6 +153,7 @@ public class UserRequestHandler {
     }
     
     private User user;
+    private RegisterUserForm registerUserForm;
     private ModifyUserForm modifyUserForm;
     private Boolean userDataIsValid;
     

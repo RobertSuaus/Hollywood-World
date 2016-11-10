@@ -33,7 +33,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         editLastNameTxt.setText(user.getLastName());
         editUserNameTxt.setText(user.getUserName());
         editPermissions.setSelectedIndex(
-            getPermissionIndex(user.getPermissions())
+            getPermissionIndex(user.getPermissions() )
             );
     }
 
@@ -228,7 +228,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userRequestHandler.processModification(userInput);
+                userRequestHandler.handleModification(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
@@ -238,7 +238,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         //Antes de obtener la información, validar
         String userName = searchUserNameTxt.getText();
         String operationStatus = 
-                userRequestHandler.processRetrieve(userName);
+                userRequestHandler.handleRetrieval(userName);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_searchUserBtnActionPerformed
