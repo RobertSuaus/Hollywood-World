@@ -46,7 +46,9 @@ public class MainMenuUI extends javax.swing.JFrame {
         RestorationButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         ClientButton = new javax.swing.JMenu();
-        clientButton = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        clientRegistrationBtn = new javax.swing.JMenuItem();
+        clientModificationBtn = new javax.swing.JMenuItem();
         filmsButton = new javax.swing.JMenuItem();
         employeeButton = new javax.swing.JMenuItem();
         usersSubMenu = new javax.swing.JMenu();
@@ -84,13 +86,25 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         ClientButton.setText("Manage");
 
-        clientButton.setText("Clients");
-        clientButton.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Clients");
+
+        clientRegistrationBtn.setText("Register client");
+        clientRegistrationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientButtonActionPerformed(evt);
+                clientRegistrationBtnActionPerformed(evt);
             }
         });
-        ClientButton.add(clientButton);
+        jMenu1.add(clientRegistrationBtn);
+
+        clientModificationBtn.setText("Edit client");
+        clientModificationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientModificationBtnActionPerformed(evt);
+            }
+        });
+        jMenu1.add(clientModificationBtn);
+
+        ClientButton.add(jMenu1);
 
         filmsButton.setText("Films");
         filmsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -177,27 +191,22 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void RentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentButtonActionPerformed
         
-        mainMenuRequestHandler.processNewRentWindowRequest();
+        mainMenuRequestHandler.handleNewRentRequest();
     }//GEN-LAST:event_RentButtonActionPerformed
 
     private void RestorationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestorationButtonActionPerformed
         
-        mainMenuRequestHandler.processReturnsWindowRequest();
+        mainMenuRequestHandler.handleReturnsRequest();
     }//GEN-LAST:event_RestorationButtonActionPerformed
-
-    private void clientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientButtonActionPerformed
-        
-        mainMenuRequestHandler.processClientRegistrationWindowRequest();
-    }//GEN-LAST:event_clientButtonActionPerformed
 
     private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
         
-        mainMenuRequestHandler.processMovieInventoryWindowRequest();
+        mainMenuRequestHandler.handleMovieInventoryRequest();
     }//GEN-LAST:event_filmsButtonActionPerformed
 
     private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
         
-        mainMenuRequestHandler.processEmployeeRegistrationWindowRequest();
+        mainMenuRequestHandler.handleEmployeeRegistrationRequest();
     }//GEN-LAST:event_employeeButtonActionPerformed
 
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
@@ -207,13 +216,23 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void userRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegistrationBtnActionPerformed
         
-        mainMenuRequestHandler.processUserRegistrationWindowRequest();
+        mainMenuRequestHandler.handleUserRegistrationRequest();
     }//GEN-LAST:event_userRegistrationBtnActionPerformed
 
     private void userModificationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userModificationBtnActionPerformed
         
-        mainMenuRequestHandler.processUserModificationWindowRequest();
+        mainMenuRequestHandler.handleUserModificationRequest();
     }//GEN-LAST:event_userModificationBtnActionPerformed
+
+    private void clientRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientRegistrationBtnActionPerformed
+        
+        mainMenuRequestHandler.handleClientRegistrationRequest();
+    }//GEN-LAST:event_clientRegistrationBtnActionPerformed
+
+    private void clientModificationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientModificationBtnActionPerformed
+        
+        mainMenuRequestHandler.handleClientModificationRequest();
+    }//GEN-LAST:event_clientModificationBtnActionPerformed
 
     
     private MainMenuRequestHandler mainMenuRequestHandler;
@@ -224,10 +243,12 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenu ReportsMenu;
     private javax.swing.JButton RestorationButton;
     private javax.swing.JMenu Session;
-    private javax.swing.JMenuItem clientButton;
+    private javax.swing.JMenuItem clientModificationBtn;
+    private javax.swing.JMenuItem clientRegistrationBtn;
     private javax.swing.JMenuItem employeeButton;
     private javax.swing.JMenuItem filmsButton;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

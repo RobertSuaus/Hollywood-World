@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ClientAdministrator;
+import Controller.ClientRequestHandler;
 import Model.Client;
 import Model.ClientMembership;
 import javax.swing.JOptionPane;
@@ -18,15 +19,14 @@ public class RegisterClientForm extends javax.swing.JFrame {
         
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
-        this.existingClientInfoPanel.setVisible(false);
         
-        this.newClient = new Client(
-            new ClientMembership(
-                    ClientAdministrator.generateNextMembershipId(),
-                    "Active"
-                )
-            );
-        fillMembershipField();
+        this.clientRequestHandler = new ClientRequestHandler(this);
+        clientRequestHandler.handleWindowInitialization();
+    }
+    
+    public void fillMembershipField(int membershipId){
+        
+        newMembershipTxt.setText(String.valueOf(membershipId ) );
     }
 
     /**
@@ -165,130 +165,33 @@ public class RegisterClientForm extends javax.swing.JFrame {
 
     private void registerNewClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewClientBtnActionPerformed
         
-        gatherNewClientInformation();
+        String[] userInputs = new String[6];
+        userInputs = gatherAllUserInput();
         
-        if(isEveryInputValid(newClient) ){
-            
-            String operationStatus;
-            operationStatus= ClientAdministrator.addClient(newClient);
-            JOptionPane.showMessageDialog(null, operationStatus);
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Invalid client parameters");
-        }
+        String operationStatus =
+                clientRequestHandler.handleRegistration(userInputs);
+        JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_registerNewClientBtnActionPerformed
 
-    private void gatherNewClientInformation(){
+    private String[] gatherAllUserInput(){
         
-        newClient.setName(newNameTxt.getText() );
-        newClient.setLastName(newLastNameTxt.getText() ); 
-        newClient.setTelephone(newTelephoneTxt.getText() );
-        newClient.setAddress(newAddressTxt.getText() );
+        String[] userInput = new String[6];
+        userInput[0] = newNameTxt.getText();
+        userInput[1] = newLastNameTxt.getText();
+        userInput[2] = newTelephoneTxt.getText();
+        userInput[3] = newAddressTxt.getText();
+        userInput[4] = newMembershipTxt.getText();
+        userInput[5] = "Active";
         
-    }
-    
-    private void gatherExistingClientInformation(){
-        
-        existingClient.setName(editNameTxt.getText() );
-        existingClient.setLastName(editLastNameTxt.getText() );
-        existingClient.setTelephone(editTelephoneTxt.getText() );
-        existingClient.setAddress(editAddressTxt.getText());
-        
-        int currentId = existingClient.getMembership().getId();
-        String currentStatus = String.valueOf(
-                membershipStatus.getSelectedItem() 
-                );
-        
-        existingClient.setMembership(
-                new ClientMembership(currentId, currentStatus)
-                );
+        return userInput;
         
     }
     
-    private void fillMembershipField(){
-        
-        newMembershipTxt.setText(
-                String.valueOf(newClient.getMembership().getId() ) );
-    }
     
-    private void fillExistingClientForm(){
-        
-        editNameTxt.setText(existingClient.getName() );
-        editLastNameTxt.setText(existingClient.getLastName() );
-        editTelephoneTxt.setText(existingClient.getTelephone() );
-        editAddressTxt.setText(existingClient.getAddress() );
-        
-        String membershipNumber = String.valueOf(
-            existingClient.getMembership().getId()
-            );
-        
-        editMembershipTxt.setText(membershipNumber);
-        
-        membershipStatus.setSelectedIndex(
-            getStatusIndex(existingClient.getMembership().getStatus() )
-            );
-    }
     
-    private int getStatusIndex(String membershipStatus){
-        
-        int statusIndex;
-        
-        switch(membershipStatus){
-            case "Active" : statusIndex = 0;
-                break;
-            case "Inactive" : statusIndex = 1;
-                break;
-            default : statusIndex = ERROR;
-        }
-        return statusIndex;
-    }
     
-    private boolean isEveryInputValid(Client client){
-        if(isValidInputText( client.getName() )
-            && isValidInputText( client.getLastName() )
-            && isValidInputTelephone( client.getTelephone() )
-            && isValidInputAddress( client.getAddress() ) ){
-            
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    private boolean isValidInputText(String input){
-        if (input.matches("([A-Za-z]|\\s)*") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    private boolean isValidInputAddress(String input){
-        if (input.matches("([A-Za-z]|\\s|[0-9]|#|-)*") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    private boolean isValidInputTelephone(String input){
-        if (input.matches("([0-9]|\\s)*") 
-            && input.equals(" ") == false 
-            && input.equals("") == false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    private Client newClient;
-    private Client existingClient;
+    private ClientRequestHandler clientRequestHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;

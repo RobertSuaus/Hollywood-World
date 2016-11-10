@@ -1,14 +1,7 @@
 package Controller;
 
 import Model.User;
-import Model.User;
-import View.ClientUI;
-import View.EmployeeUI;
 import View.MainMenuUI;
-import View.ModifyUserForm;
-import View.MovieUI;
-import View.RegisterUserForm;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +18,7 @@ public class MainMenuRequestHandler {
         this.mainMenu = mainMenu;
     }
     
-    public void processUserRegistrationWindowRequest(){
+    public void handleUserRegistrationRequest(){
         
         if(userHasHumanResourcesPermissions() ){
             MainMenuAdministrator.accessUserRegistrationWindow();
@@ -34,7 +27,7 @@ public class MainMenuRequestHandler {
         }
     }
     
-    public void processUserModificationWindowRequest(){
+    public void handleUserModificationRequest(){
         
         if(userHasHumanResourcesPermissions() ){
             MainMenuAdministrator.accessUserModificationWindow();
@@ -43,39 +36,49 @@ public class MainMenuRequestHandler {
         }
     }
     
-    public void processClientRegistrationWindowRequest(){
+    public void handleClientRegistrationRequest(){
+        
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessClientRegistrationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handleClientModificationRequest(){
+        
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessClientModificationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handleEmployeeRegistrationRequest(){
         
     }
     
-    public void processClientModificationWindowRequest(){
+    public void handleEmployeeModificationRequest(){
         
     }
     
-    public void processEmployeeRegistrationWindowRequest(){
+    public void handleMovieInventoryRequest(){
         
     }
     
-    public void processEmployeeModificationWindowRequest(){
+    public void handleNewProfileRequest(){
         
     }
     
-    public void processMovieInventoryWindowRequest(){
+    public void handleProfileModificationRequest(){
         
     }
     
-    public void processNewProfileWindowRequest(){
+    public void handleNewRentRequest(){
         
     }
     
-    public void processProfileModificationWindowRequest(){
-        
-    }
-    
-    public void processNewRentWindowRequest(){
-        
-    }
-    
-    public void processReturnsWindowRequest(){
+    public void handleReturnsRequest(){
         
     }
     
