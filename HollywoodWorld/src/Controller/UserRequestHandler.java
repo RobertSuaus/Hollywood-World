@@ -19,7 +19,6 @@ public class UserRequestHandler {
     public UserRequestHandler(RegisterUserForm registerUserForm){
         
         user = new User();
-        userDataIsValid = false;
         this.registerUserForm = registerUserForm;
     }
     
@@ -27,13 +26,12 @@ public class UserRequestHandler {
         
         user = new User();
         this.modifyUserForm = modifyUserForm;
-        userDataIsValid = false;
     }
     
     public String handleCreation(String[] userInputs){
         
         setUserInformation(userInputs);
-        if(userDataIsValid){
+        if(isUserDataValid() ){
             if(isUserNameAvailable() ){
                 return UserAdministrator.createUser(user);
             }
@@ -45,7 +43,7 @@ public class UserRequestHandler {
     public String handleModification(String[] userInputs){
         
         setUserInformation(userInputs);
-        if(userDataIsValid){
+        if(isUserDataValid() ){
             return UserAdministrator.modifyUser(user);
         }
         return INVALID_DATA_MSG;
@@ -75,7 +73,7 @@ public class UserRequestHandler {
         user.setPassword(userInput[3]);
         user.setPermissions(userInput[4]);
         
-        userDataIsValid = isUserDataValid();
+        //userDataIsValid = isUserDataValid();
     }
     
     private boolean isUserNameAvailable(){
@@ -155,7 +153,6 @@ public class UserRequestHandler {
     private User user;
     private RegisterUserForm registerUserForm;
     private ModifyUserForm modifyUserForm;
-    private Boolean userDataIsValid;
     
     private final String INVALID_DATA_MSG = "Los datos ingresados no son correctos";
     private final String OCCUPIED_USERNAME_MSG = "El nombre de usuario ya está ocupado";
