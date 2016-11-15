@@ -201,12 +201,12 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="newProfileTitleTxt" max="32767" attributes="0"/>
+                                          <Component id="newProfileTitleTxt" pref="207" max="32767" attributes="0"/>
                                           <Component id="newRatingTxt" max="32767" attributes="0"/>
                                           <Component id="newDescriptionTxt" max="32767" attributes="0"/>
                                           <Component id="newRuntimeTxt" max="32767" attributes="0"/>
                                           <Component id="newSerialcodeTxt" max="32767" attributes="0"/>
-                                          <Component id="newReleaseDate" alignment="0" pref="207" max="32767" attributes="0"/>
+                                          <Component id="newReleaseDate" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -329,8 +329,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addNewProfileBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="newReleaseDate">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -338,6 +336,8 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add movie profile"/>
               </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="newReleaseDate">
             </Component>
           </SubComponents>
         </Container>
@@ -424,16 +424,16 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="editProfileTitleTxt" max="32767" attributes="0"/>
-                                      <Component id="editReleaseDate" pref="194" max="32767" attributes="0"/>
+                                      <Component id="editProfileTitleTxt" pref="194" max="32767" attributes="0"/>
                                       <Component id="editRatingTxt" max="32767" attributes="0"/>
                                       <Component id="editDescriptionTxt" max="32767" attributes="0"/>
                                       <Component id="editRuntimeTxt" max="32767" attributes="0"/>
                                       <Component id="editSerialCodeTxt" max="32767" attributes="0"/>
+                                      <Component id="editReleaseDate" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="139" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -446,9 +446,9 @@
                               <Component id="editProfileTitleTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <Component id="editReleaseDate" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="editReleaseDate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -495,8 +495,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Release date:"/>
                   </Properties>
-                </Component>
-                <Component class="org.jdesktop.swingx.JXDatePicker" name="editReleaseDate">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
@@ -548,6 +546,8 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveProfileChangeBtnActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="org.jdesktop.swingx.JXDatePicker" name="editReleaseDate">
                 </Component>
               </SubComponents>
             </Container>
