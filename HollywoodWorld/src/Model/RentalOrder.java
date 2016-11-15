@@ -12,9 +12,9 @@ import java.util.Date;
  *
  * @author Reynaldo Marrufo
  */
-public class RentSummary {
+public class RentalOrder {
     
-    public RentSummary(
+    public RentalOrder(
             int folio,
             String employeeName,
             String clientName,

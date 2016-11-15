@@ -21,14 +21,12 @@ public class ClientRequestHandler {
         
         this.registerClientForm = registerClientForm;
         this.client = new Client();
-        clientDataIsValid = false;
     }
     
     public ClientRequestHandler(ModifyClientForm modifyClientForm){
         
         this.modifyClientForm = modifyClientForm;
         this.client = new Client();
-        clientDataIsValid = false;
     }
     
     public String handleRegistration(String[] userInputs){
@@ -154,7 +152,6 @@ public class ClientRequestHandler {
     private Client client;
     private RegisterClientForm registerClientForm;
     private ModifyClientForm modifyClientForm;
-    private boolean clientDataIsValid;
     private final String INVALID_DATA_MSG = "Los datos ingresados no son validos";
     private final String MEMBERSHIP_NOT_FOUND_MSG = "El número de membresía no está asignado";
     private final String MEMBERSHIP_OCCUPIED_MSG = "El número de membresía no esta disponible";
