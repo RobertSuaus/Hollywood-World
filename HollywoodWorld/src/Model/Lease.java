@@ -9,9 +9,9 @@ package Model;
  *
  * @author Reynaldo Marrufo
  */
-public class RentDetail {
+public class Lease {
     
-    public RentDetail(
+    public Lease(
             int movieId,
             String movieTitle,
             double price
@@ -44,8 +44,6 @@ public class RentDetail {
     public void setPrice(double price) {
         this.price = price;
     }
-    
-    
     
     private int movieId;
     private String movieTitle;

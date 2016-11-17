@@ -48,7 +48,7 @@ public class MovieAdministrator {
         }
     }
     
-    public static Movie getMovieInfo(int movieId){
+    public static Movie getMovieInfo(int movieId) throws ParseException{
         
         Movie movieInfo = MovieDAO.getRegistry(movieId);
         return movieInfo;
