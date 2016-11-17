@@ -146,8 +146,39 @@ public class MovieDAO extends BaseDAO {
         }
     }
     
-    public static Movie getRegistry(int movieId){
-        return null; //TODO
+    public static Movie getRegistry(int movieId) throws ParseException{
+        
+        String sql = "(SELECT inventory.id_box, movie.* FROM inventory JOIN movie"
+                + " WHERE id_box = $movieId$";
+        sql = sql.replace("$movieId$", String.valueOf(movieId) );
+        Movie movie = null;
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date releaseDate = new Date();
+            movie = new Movie(
+                resultSet.getInt("id_box"),
+                new MovieProfile(
+                    resultSet.getString("title"),
+                    releaseDate = dateFormat.
+                        parse(resultSet.getString("releaseDate") ),
+                    resultSet.getString("rating"),
+                    resultSet.getString("description"),  
+                    resultSet.getString("runtime"),
+                    resultSet.getString("serialCode")
+                )
+            );
+            return movie;
+        }catch(SQLException ex){
+            System.err.println("Error al obtener registro de película" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener registro.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return movie;
+        }
+        
     }
     
     public static boolean registryExists(String serialCode){

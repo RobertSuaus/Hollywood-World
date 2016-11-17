@@ -20,7 +20,7 @@ public class RentalOrder {
             String clientName,
             Date transactionDate,
             Date returnDate,
-            ArrayList<RentDetail> rentDetails,
+            ArrayList<Lease> leases,
             double totalRent   
     ){
        this.folio = folio;
@@ -29,7 +29,7 @@ public class RentalOrder {
        this.transactionDate = transactionDate;
        this.returnDate = returnDate;
        this.totalRent = totalRent;
-       this.rentDetails = rentDetails;
+       this.leases = leases;
     } 
 
     public int getFolio() {
@@ -80,25 +80,25 @@ public class RentalOrder {
         this.totalRent = totalRent;
     }
 
-    public ArrayList<RentDetail> getRentDetails() {
-        return rentDetails;
+    public ArrayList<Lease> getRentDetails() {
+        return leases;
     }
 
-    public void setRentDetails(ArrayList<RentDetail> rentDetails) {
-        this.rentDetails = rentDetails;
+    public void setLeases(ArrayList<Lease> leases) {
+        this.leases = leases;
     }
     
-    public ArrayList getRentDetails(ArrayList<RentDetail> rentDetails){
-        return rentDetails;
+    public ArrayList getLeases(){
+        return leases;
         
     }
     
-    public void addRentDetail(RentDetail rentDetail){
-        rentDetails.add(rentDetail);
+    public void addLease(Lease rentDetail){
+        leases.add(rentDetail);
     }
     
-    public void removeRentDetail(int detailIndex){
-        rentDetails.remove(detailIndex);
+    public void removeLease(int detailIndex){
+        leases.remove(detailIndex);
     }
     
     public double computeTotal(){
@@ -112,6 +112,6 @@ public class RentalOrder {
     private Date transactionDate;
     private Date returnDate;
     private double totalRent;
-    private ArrayList<RentDetail> rentDetails;
+    private ArrayList<Lease> leases;
 
 }

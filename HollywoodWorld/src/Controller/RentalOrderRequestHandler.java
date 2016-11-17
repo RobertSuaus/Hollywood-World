@@ -9,7 +9,12 @@ import Model.Client;
 import Model.ClientDAO;
 import Model.Movie;
 import Model.MovieDAO;
+import Model.Lease;
 import Model.RentalOrder;
+import View.ReturnsUI;
+import java.text.ParseException;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 /**
  *
@@ -20,6 +25,12 @@ public class RentalOrderRequestHandler {
     public RentalOrderRequestHandler(/*UI reference*/){
         
         this.rentalOrder = new RentalOrder();
+    }
+    
+    public RentalOrderRequestHandler(ReturnsUI returnsUI){
+        
+        this.rentalOrder = new RentalOrder();
+        this.returnsUI = returnsUI;
     }
     
     //Maneja el procedimiento para obtener el nombre de cliente de la orden de renta
@@ -38,16 +49,13 @@ public class RentalOrderRequestHandler {
     
     
     //Maneja el procedimiento para agregar un nuevo detalle a la orden de renta
-    public void handleRentDetailAggregation(String movieIdInput){
+    public void handleLeaseAggregation(String movieIdInput) throws ParseException{
         
         if(isValidInputNumber (movieIdInput) ){
             int movieId = Integer.valueOf(movieIdInput);
             if(movieExists (movieId) ){
                 Movie movie = MovieAdministrator.getMovieInfo(movieId);
-                /*Crear, de algun modo el detalle de renta a partir de
-                 la película obtenida
-                "Private createDetail(Movie movie)*/
-                rentalOrder.addRentDetail(rentDetail);
+                rentalOrder.addLease(generateLease(movie) );
                 //Actualizar tabla de la vista
                 
             }//La película no existe
@@ -60,6 +68,21 @@ public class RentalOrderRequestHandler {
          película en la lista*/
         
         //Llamar al administrador de orden de renta para archivar la orden
+    }
+    
+    public String handleRentalOrderRetrieval(String membershipInput){
+        
+        if(isValidInputNumber(membershipInput) ){
+            int membershipId = Integer.valueOf(membershipInput);
+            if(membershipExists(membershipId ) ){
+                //si tiene una renta en proceso...
+                    rentalOrder = RentalOrderAdministrator.
+                            getRentalOrderInfo(membershipId);
+                    //Checar si hay importe adicional
+                    returnsUI.fillRentalOrderField(rentalOrder);
+                //No tiene rentas pendientes    
+            } //No existe la membresía
+        } //No es un número válido de membresía
     }
     
     /*Maneja el procedimiento para establecer la ventana con los datos
@@ -101,6 +124,31 @@ public class RentalOrderRequestHandler {
         //Necesita el DAO de RentOrder
     }
     
+    private Lease generateLease(Movie movie){
+        
+        Lease lease = new Lease(
+            movie.getId(),
+            movie.getProfile().getTitle()
+        );
+        
+        Date releaseDate = movie.getProfile().getReleaseDate();
+        lease.setPrice(findLeasePrice(releaseDate) );
+        
+        return lease;
+    }
+    
+    private double findLeasePrice(Date releaseDate){
+        
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime threeMonthsAgo = now.plusDays(-90);
+
+        if (releaseDate.toInstant().isBefore(threeMonthsAgo.toInstant() ) ) {
+            return 20; //No estreno
+        }else{
+            return 30; //Estreno
+        }
+    }
+    
     private boolean isValidInputNumber(String input){
         if (input.matches("([0-9]|\\s)*") 
             && input.equals(" ") == false 
@@ -112,5 +160,6 @@ public class RentalOrderRequestHandler {
     }
     
     private RentalOrder rentalOrder;
+    private ReturnsUI returnsUI;
     //referencia a la vista
 }

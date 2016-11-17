@@ -14,9 +14,9 @@ import Model.StatusValidator;
  */
 public class RentalOrderAdministrator {
     
-    public static RentalOrder getRentalOrderInfo(int folio){
+    public static RentalOrder getRentalOrderInfo(int membershipId){
         
-        RentalOrder clientInformation = RentalOrderDAO.getRegistry(folio);
+        RentalOrder clientInformation = RentalOrderDAO.getRegistry(membershipId);
         return clientInformation;
     }
     
