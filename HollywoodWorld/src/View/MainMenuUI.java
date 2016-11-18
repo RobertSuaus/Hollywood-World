@@ -41,6 +41,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel3 = new javax.swing.JLabel();
         RentButton = new javax.swing.JButton();
         RestorationButton = new javax.swing.JButton();
@@ -49,8 +50,13 @@ public class MainMenuUI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         clientRegistrationBtn = new javax.swing.JMenuItem();
         clientModificationBtn = new javax.swing.JMenuItem();
-        filmsButton = new javax.swing.JMenuItem();
-        employeeButton = new javax.swing.JMenuItem();
+        newFilmSubMenu = new javax.swing.JMenu();
+        newProfileSubMenu = new javax.swing.JMenuItem();
+        modifyProfileSubMenu = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        modifyEmployeeSubForm = new javax.swing.JMenu();
+        newEmployeeSubMenu = new javax.swing.JMenuItem();
+        modifyEmployeeSubMenu = new javax.swing.JMenuItem();
         usersSubMenu = new javax.swing.JMenu();
         userRegistrationBtn = new javax.swing.JMenuItem();
         userModificationBtn = new javax.swing.JMenuItem();
@@ -61,6 +67,8 @@ public class MainMenuUI extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hollywood World - Main Menu");
@@ -106,21 +114,33 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         ClientButton.add(jMenu1);
 
-        filmsButton.setText("Films");
-        filmsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filmsButtonActionPerformed(evt);
-            }
-        });
-        ClientButton.add(filmsButton);
+        newFilmSubMenu.setText("Films");
 
-        employeeButton.setText("Employees");
-        employeeButton.addActionListener(new java.awt.event.ActionListener() {
+        newProfileSubMenu.setText("Nuevo perfil");
+        newProfileSubMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeButtonActionPerformed(evt);
+                newProfileSubMenuActionPerformed(evt);
             }
         });
-        ClientButton.add(employeeButton);
+        newFilmSubMenu.add(newProfileSubMenu);
+
+        modifyProfileSubMenu.setText("Modificar perfil");
+        newFilmSubMenu.add(modifyProfileSubMenu);
+
+        jMenuItem2.setText("Nueva película");
+        newFilmSubMenu.add(jMenuItem2);
+
+        ClientButton.add(newFilmSubMenu);
+
+        modifyEmployeeSubForm.setText("Employee");
+
+        newEmployeeSubMenu.setText("Nuevo");
+        modifyEmployeeSubForm.add(newEmployeeSubMenu);
+
+        modifyEmployeeSubMenu.setText("Modificar");
+        modifyEmployeeSubForm.add(modifyEmployeeSubMenu);
+
+        ClientButton.add(modifyEmployeeSubForm);
 
         usersSubMenu.setText("Users");
 
@@ -199,16 +219,6 @@ public class MainMenuUI extends javax.swing.JFrame {
         mainMenuRequestHandler.handleReturnsRequest();
     }//GEN-LAST:event_RestorationButtonActionPerformed
 
-    private void filmsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmsButtonActionPerformed
-        
-        mainMenuRequestHandler.handleMovieInventoryRequest();
-    }//GEN-LAST:event_filmsButtonActionPerformed
-
-    private void employeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeButtonActionPerformed
-        
-        mainMenuRequestHandler.handleEmployeeRegistrationRequest();
-    }//GEN-LAST:event_employeeButtonActionPerformed
-
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
         
         sessionRequestHandler.processLogoutRequest();
@@ -234,6 +244,11 @@ public class MainMenuUI extends javax.swing.JFrame {
         mainMenuRequestHandler.handleClientModificationRequest();
     }//GEN-LAST:event_clientModificationBtnActionPerformed
 
+    private void newProfileSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProfileSubMenuActionPerformed
+        
+        mainMenuRequestHandler.handleNewProfileRequest();
+    }//GEN-LAST:event_newProfileSubMenuActionPerformed
+
     
     private MainMenuRequestHandler mainMenuRequestHandler;
     private SessionRequestHandler sessionRequestHandler;
@@ -245,13 +260,19 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenu Session;
     private javax.swing.JMenuItem clientModificationBtn;
     private javax.swing.JMenuItem clientRegistrationBtn;
-    private javax.swing.JMenuItem employeeButton;
-    private javax.swing.JMenuItem filmsButton;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JMenu modifyEmployeeSubForm;
+    private javax.swing.JMenuItem modifyEmployeeSubMenu;
+    private javax.swing.JMenuItem modifyProfileSubMenu;
+    private javax.swing.JMenuItem newEmployeeSubMenu;
+    private javax.swing.JMenu newFilmSubMenu;
+    private javax.swing.JMenuItem newProfileSubMenu;
     private javax.swing.JMenu payrollMenu;
     private javax.swing.JMenuItem userModificationBtn;
     private javax.swing.JMenuItem userRegistrationBtn;
