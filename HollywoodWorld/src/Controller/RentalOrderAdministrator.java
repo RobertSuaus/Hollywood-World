@@ -27,6 +27,14 @@ public class RentalOrderAdministrator {
             }else{
                 return "No se puso almacenar la orden de renta";
             }
+    }
+    
+    public static String modifyRentalOrderStatus(int folio){
         
+        if(StatusValidator.success(RentalOrderDAO.update(folio) ) ){
+                return "Se ha almacenado la modificado el estado con éxtio";
+            }else{
+                return "No se pudo modificar el estado";
+            }
     }
 }

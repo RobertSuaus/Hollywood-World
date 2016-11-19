@@ -211,7 +211,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
         
-        sessionRequestHandler.processLogoutRequest();
+        sessionRequestHandler.handleLogout();
     }//GEN-LAST:event_SessionMouseClicked
 
     private void userRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegistrationBtnActionPerformed

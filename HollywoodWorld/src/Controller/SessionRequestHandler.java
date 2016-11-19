@@ -14,6 +14,8 @@ import View.LoginUI;
  * @author Robert
  */
 public class SessionRequestHandler {
+    /*Clase que maneja y le da un sentido a las solicitudes de inicio de
+    sesión y terminación de sesión (login/logout)*/
     
     public SessionRequestHandler(){
         
@@ -29,7 +31,7 @@ public class SessionRequestHandler {
         userCredentialsAreValid = false;
     }
     
-    public void processLoginRequest(String[] userInputs){
+    public void handleLogin(String[] userInputs){
         
         setUserCredentials(userInputs);
         
@@ -46,7 +48,7 @@ public class SessionRequestHandler {
         
     }
     
-    public void processLogoutRequest(){
+    public void handleLogout(){
         
         SessionAdministrator.terminateSession();
     }

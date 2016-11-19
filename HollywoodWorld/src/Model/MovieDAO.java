@@ -148,8 +148,8 @@ public class MovieDAO extends BaseDAO {
     
     public static Movie getRegistry(int movieId) throws ParseException{
         
-        String sql = "(SELECT inventory.id_box, movie.* FROM inventory JOIN movie"
-                + " WHERE id_box = $movieId$";
+        String sql = "SELECT inventory.id_box, movie.* FROM inventory JOIN movie"
+                + " WHERE id_box = $movieId$ ";
         sql = sql.replace("$movieId$", String.valueOf(movieId) );
         Movie movie = null;
         try{
@@ -203,7 +203,7 @@ public class MovieDAO extends BaseDAO {
     public static boolean registryExists(int movieId){
         
         boolean isOccupied;
-        String sql = "SELECT * FROM client WHERE "+
+        String sql = "SELECT * FROM inventory WHERE "+
                 "id_box ='$movieId$'";
         sql = sql.replace("$movieId$", String.valueOf(movieId) );
         

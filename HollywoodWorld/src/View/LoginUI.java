@@ -131,7 +131,7 @@ public class LoginUI extends javax.swing.JFrame {
         
         String[] userInputs = gatherAllUserInput();
         
-        sessionRequestHandler.processLoginRequest(userInputs);
+        sessionRequestHandler.handleLogin(userInputs);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private String[] gatherAllUserInput(){

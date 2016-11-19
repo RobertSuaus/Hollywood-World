@@ -20,6 +20,11 @@ public class Lease {
         this.movieTitle = movieTitle;
         this.price = price;
     }
+    
+    public Lease(int movieId, String movieTitle){
+        this.movieId = movieId;
+        this.movieTitle = movieTitle;
+    }
 
     public int getMovieId() {
         return movieId;

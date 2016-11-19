@@ -18,6 +18,7 @@ public class RentalOrder {
             int folio,
             String employeeName,
             String clientName,
+            int clientMembership,
             Date transactionDate,
             Date returnDate,
             ArrayList<Lease> leases,
@@ -26,11 +27,24 @@ public class RentalOrder {
        this.folio = folio;
        this.employeeName = employeeName;
        this.clientName = clientName;
+       this.clientMembership = clientMembership;
        this.transactionDate = transactionDate;
        this.returnDate = returnDate;
        this.totalRent = totalRent;
        this.leases = leases;
     } 
+    
+    public RentalOrder(int folio, String employeeName){
+        
+        this.folio = folio;
+        this.employeeName = employeeName;
+        this.transactionDate = new Date();
+        this.leases = new ArrayList<Lease>();
+    }
+    
+    public RentalOrder(){
+        
+    }
 
     public int getFolio() {
         return folio;
@@ -51,9 +65,17 @@ public class RentalOrder {
     public String getClientName() {
         return clientName;
     }
-
+    
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+    
+    public int getClientMembership(){
+        return clientMembership;
+    }
+    
+    public void setClientMembership( int clientMembership){
+        this.clientMembership = clientMembership;
     }
 
     public Date getTransactionDate() {
@@ -101,17 +123,23 @@ public class RentalOrder {
         leases.remove(detailIndex);
     }
     
-    public double computeTotal(){
+    public void computeTotal(){
         
-        return 0;
+        double total = 0;
+        for(Lease lease : leases){
+            total = total + lease.getPrice();
+        }
+        totalRent = total;
     }
     
     private int folio;
     private String employeeName;
     private String clientName;
+    private int clientMembership;
     private Date transactionDate;
     private Date returnDate;
     private double totalRent;
     private ArrayList<Lease> leases;
+    
 
 }

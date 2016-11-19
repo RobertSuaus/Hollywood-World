@@ -6,7 +6,14 @@
 package View;
 
 import Controller.RentalOrderRequestHandler;
+import Model.Lease;
 import Model.RentalOrder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,15 +24,52 @@ public class ReturnsUI extends javax.swing.JFrame {
     /**
      * Creates new form ReturnsUI
      */
-    public ReturnsUI(RentalOrderRequestHandler rentalOrderHandler) {
+    public ReturnsUI() {
         initComponents();
         this.setVisible(true);
         
-        this.rentalOrderHandler = rentalOrderHandler;
+        this.rentalOrderHandler = new RentalOrderRequestHandler(this);
     }
     
     public void fillRentalOrderField(RentalOrder rentalOrder){
         //Llena los datos
+        folioTxt.setText(String.valueOf(rentalOrder.getFolio() ) );
+        clientNameTxt.setText(rentalOrder.getClientName() );
+        employeeNameTxt.setText(rentalOrder.getEmployeeName() );
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        returnDateTxt.setText(
+            dateFormat.format(rentalOrder.getReturnDate() )
+        );
+        
+        currentDateTxt.setText(
+            dateFormat.format(new Date() )
+        );
+        
+        //additionalCostTxt.setText(rentalOrder.getAdditionalImport() );
+        
+    }
+    
+    private void fillLeaseTable(ArrayList leases){
+        
+        Vector <String> title = new Vector<String>();
+        Vector<Vector<Object>> data= new Vector<Vector<Object>>();
+        
+        title.add("Id película");
+        title.add("Título");
+        
+        for(int i=0; i<leases.size(); i++){
+            Vector<Object> row= new Vector<Object>();
+            
+            row.add(((Lease)leases.get(i)).getMovieId() );
+            row.add(((Lease)leases.get(i)).getMovieTitle() );
+            
+            data.add(row);
+        }
+        
+        DefaultTableModel modelo= new javax.swing.table.DefaultTableModel(data, title);
+        leaseTable.setModel(modelo);
     }
 
     /**
@@ -52,15 +96,15 @@ public class ReturnsUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         currentDateTxt = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        additionalCostTxt = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        detailTable = new javax.swing.JTable();
+        leaseTable = new javax.swing.JTable();
         memebershipIdTxt = new javax.swing.JTextField();
         searchBtn = new javax.swing.JToggleButton();
         terminateRentBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Devolución de películas");
@@ -97,12 +141,12 @@ public class ReturnsUI extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("Importe Adicional:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel9.setText("####");
+        additionalCostTxt.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        additionalCostTxt.setText("####");
 
         jLabel11.setText("MXN");
 
-        detailTable.setModel(new javax.swing.table.DefaultTableModel(
+        leaseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
             },
@@ -125,7 +169,7 @@ public class ReturnsUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(detailTable);
+        jScrollPane1.setViewportView(leaseTable);
 
         javax.swing.GroupLayout rentOrderInformationLayout = new javax.swing.GroupLayout(rentOrderInformation);
         rentOrderInformation.setLayout(rentOrderInformationLayout);
@@ -141,7 +185,7 @@ public class ReturnsUI extends javax.swing.JFrame {
                     .addGroup(rentOrderInformationLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
+                        .addComponent(additionalCostTxt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11))
                     .addGroup(rentOrderInformationLayout.createSequentialGroup()
@@ -198,7 +242,7 @@ public class ReturnsUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(rentOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel9)
+                            .addComponent(additionalCostTxt)
                             .addComponent(jLabel11))
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -264,12 +308,15 @@ public class ReturnsUI extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         
-        rentalOrderHandler.handleRentalOrderRetrieval(memebershipIdTxt.getText());
+        String operationStatus =
+            rentalOrderHandler.handleRetrieval(memebershipIdTxt.getText() );
+        JOptionPane.showMessageDialog(null,operationStatus);
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void terminateRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateRentBtnActionPerformed
         // TODO add your handling code here:
         
+        rentalOrderHandler.handleStatusModification();
     }//GEN-LAST:event_terminateRentBtnActionPerformed
 
     /**
@@ -278,9 +325,9 @@ public class ReturnsUI extends javax.swing.JFrame {
     
     private RentalOrderRequestHandler rentalOrderHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel additionalCostTxt;
     private javax.swing.JLabel clientNameTxt;
     private javax.swing.JLabel currentDateTxt;
-    private javax.swing.JTable detailTable;
     private javax.swing.JLabel employeeNameTxt;
     private javax.swing.JLabel folioTxt;
     private javax.swing.JLabel jLabel1;
@@ -293,8 +340,8 @@ public class ReturnsUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable leaseTable;
     private javax.swing.JTextField memebershipIdTxt;
     private javax.swing.JPanel rentOrderInformation;
     private javax.swing.JLabel returnDateTxt;

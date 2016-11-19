@@ -16,6 +16,8 @@ import View.RegisterClientForm;
  * @author Robert
  */
 public class ClientRequestHandler {
+    /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
+    con clientes*/
     
     public ClientRequestHandler(RegisterClientForm registerClientForm){
         
@@ -29,6 +31,7 @@ public class ClientRequestHandler {
         this.client = new Client();
     }
     
+    /*Manejar el procedimiento de registro de cliente*/
     public String handleRegistration(String[] userInputs){
         
         setClientInformation(userInputs);
@@ -41,6 +44,7 @@ public class ClientRequestHandler {
         return INVALID_DATA_MSG;
     }
     
+    /*Manejar el procedimiento de modificación de datos de cliente*/
     public String handleModification(String[] userInputs){
         
         setClientInformation(userInputs);
@@ -50,6 +54,7 @@ public class ClientRequestHandler {
         return INVALID_DATA_MSG;
     }
     
+    /*Manejar el procedimiento de obtención de datos del cliente*/
     public String handleRetrieval(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput)){
@@ -64,6 +69,8 @@ public class ClientRequestHandler {
         return INVALID_DATA_MSG;
     }
     
+    /*Maneja el procedimiento de inicialización de parametros
+    en la ventana de registro de clientes*/
     public void handleWindowInitialization(){
         
         int nextId = generateNextMembershipId();
