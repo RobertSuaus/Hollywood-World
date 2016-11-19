@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controller;
+import Model.User;
 import View.*;
 
 /**
@@ -48,11 +49,11 @@ public class MainMenuAdministrator {
         
     }
     
-    public static void accessNewRentWindow(){
-        
+    public static void accessNewRentWindow(User user){
+        new RentalOrderForm(user);
     }
     
     public static void accessReturnsWindow(){
-        
+        new ReturnsUI();
     }
 }

@@ -15,6 +15,8 @@ import View.RegisterUserForm;
  * @author Robert
  */
 public class UserRequestHandler {
+    /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
+    con usuarios*/
     
     public UserRequestHandler(RegisterUserForm registerUserForm){
         
@@ -27,7 +29,7 @@ public class UserRequestHandler {
         user = new User();
         this.modifyUserForm = modifyUserForm;
     }
-    
+    /*Manejar el procedimiento de creación de usuario*/
     public String handleCreation(String[] userInputs){
         
         setUserInformation(userInputs);
@@ -40,6 +42,7 @@ public class UserRequestHandler {
         return INVALID_DATA_MSG;
     }
     
+    /*Manejar el procedimiento de modificacion de usuario*/
     public String handleModification(String[] userInputs){
         
         setUserInformation(userInputs);
@@ -49,6 +52,7 @@ public class UserRequestHandler {
         return INVALID_DATA_MSG;
     }
     
+    /*Manejar el procedimiento de obtención de datos de usuario*/
     public String handleRetrieval(String userNameInput){
         
         user.setUserName(userNameInput);

@@ -14,6 +14,8 @@ import Model.UserDAO;
  * @author Robert
  */
 public class UserAdministrator{
+    /*Clase encargada del control de la información relacionada
+    a los usuarios: Crear nuevos usuarios, modificarlos y listarlos*/
     
     public static User getUser(String userName){
         

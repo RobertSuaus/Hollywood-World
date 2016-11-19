@@ -2,6 +2,7 @@ package Controller;
 
 import Model.User;
 import View.MainMenuUI;
+import View.RentalOrderForm;
 
 /**
  *
@@ -76,10 +77,20 @@ public class MainMenuRequestHandler {
     
     public void handleNewRentRequest(){
         
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessNewRentWindow(user);
+        }else{
+            mainMenu.displayPermissionError();
+        }
     }
     
     public void handleReturnsRequest(){
         
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessReturnsWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
     }
     
     private boolean userHasAdminPermissions(){
