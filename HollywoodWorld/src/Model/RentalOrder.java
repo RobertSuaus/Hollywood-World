@@ -17,6 +17,7 @@ public class RentalOrder {
     public RentalOrder(
             int folio,
             String employeeName,
+            int membershipId,
             String clientName,
             int clientMembership,
             Date transactionDate,
@@ -27,7 +28,7 @@ public class RentalOrder {
        this.folio = folio;
        this.employeeName = employeeName;
        this.clientName = clientName;
-       this.clientMembership = clientMembership;
+       this.membershipId = membershipId;
        this.transactionDate = transactionDate;
        this.returnDate = returnDate;
        this.totalRent = totalRent;
@@ -40,6 +41,26 @@ public class RentalOrder {
         this.employeeName = employeeName;
         this.transactionDate = new Date();
         this.leases = new ArrayList<Lease>();
+    }
+    
+    public RentalOrder(
+            int folio,
+            String employeeName,
+            int membershipId,
+            String clientName,
+            int clientMembership,
+            Date transactionDate,
+            Date returnDate,
+            double totalRent
+    ){
+        this.folio = folio;
+       this.employeeName = employeeName;
+       this.clientName = clientName;
+       this.membershipId = membershipId;
+       this.transactionDate = transactionDate;
+       this.returnDate = returnDate;
+       this.totalRent = totalRent;
+        
     }
     
     public RentalOrder(){
@@ -61,6 +82,8 @@ public class RentalOrder {
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
+    
+    
 
     public String getClientName() {
         return clientName;
@@ -70,12 +93,12 @@ public class RentalOrder {
         this.clientName = clientName;
     }
     
-    public int getClientMembership(){
-        return clientMembership;
+    public int getMembershipId(){
+        return membershipId;
     }
     
-    public void setClientMembership( int clientMembership){
-        this.clientMembership = clientMembership;
+    public void setMembershipId( int clientMembership){
+        this.membershipId = clientMembership;
     }
 
     public Date getTransactionDate() {
@@ -110,7 +133,7 @@ public class RentalOrder {
         this.leases = leases;
     }
     
-    public ArrayList getLeases(){
+    public ArrayList<Lease> getLeases(){
         return leases;
         
     }
@@ -135,7 +158,7 @@ public class RentalOrder {
     private int folio;
     private String employeeName;
     private String clientName;
-    private int clientMembership;
+    private int membershipId;
     private Date transactionDate;
     private Date returnDate;
     private double totalRent;

@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.RentalOrder;
+import Model.RentalOrderDAO;
 import Model.StatusValidator;
 
 /**
@@ -16,7 +17,7 @@ public class RentalOrderAdministrator {
     
     public static RentalOrder getRentalOrderInfo(int membershipId){
         
-        RentalOrder clientInformation = RentalOrderDAO.getRegistry(membershipId);
+        RentalOrder clientInformation = RentalOrderDAO.obtainRegistry(membershipId);
         return clientInformation;
     }
     

@@ -55,10 +55,10 @@ public class RentalOrderRequestHandler {
                     rentalOrder.setClientName(
                         client.getName() + " " + client.getLastName() 
                     );
-                    rentalOrder.setClientMembership(membershipId);
+                    rentalOrder.setMembershipId(membershipId);
                     rentalOrderForm.fillClientInfoFields(
                         rentalOrder.getClientName(),
-                        String.valueOf(rentalOrder.getClientMembership() )
+                        String.valueOf(rentalOrder.getMembershipId() )
                     );
                     return "Datos de cliente obtenidos exitosamente";
                 }
@@ -184,6 +184,7 @@ public class RentalOrderRequestHandler {
     }
     
     private boolean isFolioAvailable(){
+        return false;
         
         //Verificar si no esta registrado, necesita el DAO de RentOrder
     }
