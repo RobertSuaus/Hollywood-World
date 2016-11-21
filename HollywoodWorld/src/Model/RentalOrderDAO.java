@@ -23,9 +23,9 @@ public class RentalOrderDAO extends BaseDAO {
     public static int save(RentalOrder rentalOrder){
         
         String sqlRentOrder = "INSERT INTO rentalorder(folio, employeeName, membership_id, clientName,"
-                + "transactionDate, returnDate, totalRent, status) VALUES("
+                + "transactionDate, returnDate, totalRent, additionalCost, status) VALUES("
                 + "$folio$, '$employeeName$', $membership_id$, '$clientName$',"
-                + "'$transactionDate$', '$returnDate$', $totalRent$,"
+                + "'$transactionDate$', '$returnDate$', $totalRent$, 0,"
                 + "'$status$' )";
         sqlRentOrder = sqlRentOrder.replace("$folio$",String.valueOf(rentalOrder.getFolio()));
         sqlRentOrder = sqlRentOrder.replace("$employeeName$", rentalOrder.getEmployeeName());
@@ -62,10 +62,12 @@ public class RentalOrderDAO extends BaseDAO {
         }
     }
     
-    public static int update(int folio){
-        String sql = "UPDATE rentalorder SET status = 'Terminado' WHERE " +
-                "folio = $folio$";
+    public static int update(int folio, double additionalCost){
+        String sql = "UPDATE rentalorder SET status = 'Terminado',"+
+                " additionalCost = $additionalCost$"+
+                "  WHERE folio = $folio$";
         
+        sql = sql.replace("$additionalCost$", String.valueOf(additionalCost) );
         sql = sql.replace("$folio$", String.valueOf(folio) );
         try{
             statement = connection.createStatement();
@@ -103,7 +105,8 @@ public class RentalOrderDAO extends BaseDAO {
                resultSet.getString("clientName"),
                dateFormat.parse(resultSet.getString("transactionDate")),
                dateFormat.parse(resultSet.getString("returnDate")),
-               resultSet.getDouble("totalRent")
+               resultSet.getDouble("totalRent"),
+               resultSet.getDouble("additionalCost")
             );
             
             String sqlLease = "SELECT * FROM lease WHERE folio = $folio$";

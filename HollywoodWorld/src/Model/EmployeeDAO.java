@@ -73,12 +73,10 @@ public class EmployeeDAO extends BaseDAO {
         sql = sql.replace("$basicSalary$",
                 String.valueOf(employee.getBasicSalary() )
                 );
-        sql = sql.replace("$admissionDate$", employee.getAddress() );
         sql = sql.replace("$admissionDate$", dateFormat.
                 format(employee.getAdmissionDate() ) 
                 );
         sql = sql.replace("$position$", employee.getPosition() );
-        sql = sql.replace("$employee_id$", String.valueOf(employee.getId()) );
         
         try{
             statement = connection.createStatement();

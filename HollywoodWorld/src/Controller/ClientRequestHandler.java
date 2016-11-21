@@ -23,6 +23,7 @@ public class ClientRequestHandler {
         
         this.registerClientForm = registerClientForm;
         this.client = new Client();
+        handleWindowInitialization();
     }
     
     public ClientRequestHandler(ModifyClientForm modifyClientForm){
@@ -71,7 +72,7 @@ public class ClientRequestHandler {
     
     /*Maneja el procedimiento de inicialización de parametros
     en la ventana de registro de clientes*/
-    public void handleWindowInitialization(){
+    private void handleWindowInitialization(){
         
         int nextId = generateNextMembershipId();
         registerClientForm.fillMembershipField(nextId);
