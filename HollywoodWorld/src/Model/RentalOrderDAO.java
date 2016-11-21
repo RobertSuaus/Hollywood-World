@@ -8,6 +8,7 @@ package Model;
 import static Model.BaseDAO.statement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,31 +22,35 @@ public class RentalOrderDAO extends BaseDAO {
     
     public static int save(RentalOrder rentalOrder){
         
-        String sql = "INSERT INTO rentalorder(folio, employeeName, membership_id, clientName,"
+        String sqlRentOrder = "INSERT INTO rentalorder(folio, employeeName, membership_id, clientName,"
                 + "transactionDate, returnDate, totalRent, status) VALUES("
-                + "'$folio$', '$employeeName$', '$membership_id$', '$clientName',"
-                + "'$transactionDate$', '$returnDate$', '$totalRent$'"
+                + "$folio$, '$employeeName$', $membership_id$, '$clientName$',"
+                + "'$transactionDate$', '$returnDate$', $totalRent$,"
                 + "'$status$' )";
-        sql = sql.replace("$folio$",String.valueOf(rentalOrder.getFolio()));
-        sql = sql.replace("$employeeName$", rentalOrder.getEmployeeName());
-        sql = sql.replace("$employeeName$", String.valueOf(rentalOrder.getMembershipId()));
-        sql = sql.replace("$employeeName$", rentalOrder.getClientName());
+        sqlRentOrder = sqlRentOrder.replace("$folio$",String.valueOf(rentalOrder.getFolio()));
+        sqlRentOrder = sqlRentOrder.replace("$employeeName$", rentalOrder.getEmployeeName());
+        sqlRentOrder = sqlRentOrder.replace("$membership_id$", String.valueOf(rentalOrder.getMembershipId()));
+        sqlRentOrder = sqlRentOrder.replace("$clientName$", rentalOrder.getClientName());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        sql = sql.replace("$releaseDate$", dateFormat.
+        sqlRentOrder = sqlRentOrder.replace("$transactionDate$", dateFormat.
                 format(rentalOrder.getTransactionDate()) );
-        sql = sql.replace("$releaseDate$", dateFormat.
+        sqlRentOrder = sqlRentOrder.replace("$returnDate$", dateFormat.
                 format(rentalOrder.getReturnDate()) );
-        sql = sql.replace("$employeeName$", String.valueOf(rentalOrder.getTotalRent()));
-        sql = sql.replace("$status$", "Pendiente");
+        sqlRentOrder = sqlRentOrder.replace("$totalRent$", String.valueOf(rentalOrder.getTotalRent()));
+        sqlRentOrder = sqlRentOrder.replace("$status$", "Pendiente");
         
-        sql = "INSERT INTO lease(folio, movieId, movieTitle, price) VALUES(?, ?, ?, ?)";
+        String sqlLeases = "INSERT INTO lease(folio, movieId, movieTitle, price) VALUES(?, ?, ?, ?)";
        try{
-            PreparedStatement ps = connection.prepareStatement(sql);
+           statement = connection.createStatement();
+           statement.executeUpdate(sqlRentOrder);
+           
+           PreparedStatement ps = connection.prepareStatement(sqlLeases);
             for (Lease lease : rentalOrder.getLeases() ){
                ps.setInt(1, rentalOrder.getFolio());
                ps.setInt(2, lease.getMovieId());
                ps.setString(3, lease.getMovieTitle());
                ps.setDouble(4, lease.getPrice());
+               ps.addBatch();
             }
             ps.executeBatch();
             return SUCCESS;
@@ -58,9 +63,10 @@ public class RentalOrderDAO extends BaseDAO {
     }
     
     public static int update(int folio){
-        String sql = "UPDATE rentalorder SET folio = '$folio$','$status$'";
+        String sql = "UPDATE rentalorder SET status = 'Terminado' WHERE " +
+                "folio = $folio$";
         
-        sql = sql.replace("$status$", "Terminado");
+        sql = sql.replace("$folio$", String.valueOf(folio) );
         try{
             statement = connection.createStatement();
             statement.executeUpdate(sql);
@@ -75,20 +81,35 @@ public class RentalOrderDAO extends BaseDAO {
         
     }
     
-    public static RentalOrder obtainRegistry(int membershipId){
+    public static RentalOrder obtainRegistry(int membershipId) throws ParseException{
         //obtener todo el objeto RentalOrder
         //generar todos los datos
-        String sql = "SELECT * FROM rentalorder WHERE"
-                + " membershipId = $membershipId$";
+        String sqlRentalOrder = "SELECT * FROM rentalorder WHERE" +
+                " membership_Id = $membershipId$ AND Status = 'Pendiente'";
+        sqlRentalOrder = sqlRentalOrder.replace("$membershipId$", String.valueOf(membershipId) );
         
-        
-        sql = "SELECT * FROM lease WHERE folio = $folio$";
        RentalOrder rentalOrder = null;
-       ArrayList<Lease> leases = null;
+       ArrayList<Lease> leases = new ArrayList<Lease>();
        
         try{
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            resultSet = statement.executeQuery(sqlRentalOrder);
+            resultSet.next();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            rentalOrder = new RentalOrder(
+               resultSet.getInt("folio"),
+               resultSet.getString("employeeName"),
+               resultSet.getInt("membership_id"),
+               resultSet.getString("clientName"),
+               dateFormat.parse(resultSet.getString("transactionDate")),
+               dateFormat.parse(resultSet.getString("returnDate")),
+               resultSet.getDouble("totalRent")
+            );
+            
+            String sqlLease = "SELECT * FROM lease WHERE folio = $folio$";
+            sqlLease = sqlLease.replace("$folio$", String.valueOf(rentalOrder.getFolio() ) );
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlLease);
             while(resultSet.next()){
                 leases.add(new Lease(
                 resultSet.getInt("movieId"),
@@ -96,19 +117,7 @@ public class RentalOrderDAO extends BaseDAO {
                 resultSet.getDouble("price")));
             }
             
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat dateReturn = new SimpleDateFormat("yyyy-MM-dd");
-            Date transactionDate = new Date();
-            Date returnDate = new Date();
-            rentalOrder = new RentalOrder(
-                resultSet.getInt("folio"),
-                resultSet.getString("employeeName"),
-                resultSet.getInt("membership_id"),
-                resultSet.getString("clientName"),
-                dateFormat.parse(resultSet.getString("transactionDate")),
-                dateReturn.parse(resultSet.getString("returnDate")),
-                resultSet.getDouble("totalRent")
-                );
+            
             rentalOrder.setLeases(leases);
             return rentalOrder;
             
@@ -124,7 +133,7 @@ public class RentalOrderDAO extends BaseDAO {
     public static boolean registryExists(int folio){
         boolean isOccupied;
         String sql = "SELECT * FROM rentalorder WHERE "+
-                "folio ='$folio$'";
+                "folio =$folio$";
         sql = sql.replace("$folio$", String.valueOf(folio) );
         try{
             statement = connection.createStatement();
@@ -137,15 +146,32 @@ public class RentalOrderDAO extends BaseDAO {
             isOccupied = false;
         }
         return isOccupied;
+    }
+    
+    public static boolean registryExists(int membershipId, String status){
         
-        
-        
+        String sql = "SELECT * FROM rentalorder WHERE" +
+                " membership_Id = $membershipId$ AND status = '$status$'";
+        sql = sql.replace("$membershipId$", String.valueOf(membershipId) );
+        sql = sql.replace("$status$", status );
+        boolean exists = false;
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            exists = resultSet.first();
+        }catch(SQLException ex){
+            System.err.println("Error al obtener registro"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al obtener registro",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            exists = false;
+        }
+        return exists;
     }
     
     public static int getLastRegistryIndex(){
         
         String sql = "SELECT * FROM  rentalorder WHERE folio ="+
-                " (SELECT MAX(folio) FROM folio)";
+                " (SELECT MAX(folio) FROM rentalorder)";
         int lastId;
         try{
             statement = connection.createStatement();

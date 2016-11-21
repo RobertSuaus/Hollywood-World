@@ -187,7 +187,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Berlin Sans FB" size="24" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Restoration"/>
+        <Property name="text" type="java.lang.String" value="Returns"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RestorationButtonActionPerformed"/>

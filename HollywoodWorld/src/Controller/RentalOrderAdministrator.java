@@ -8,6 +8,7 @@ package Controller;
 import Model.RentalOrder;
 import Model.RentalOrderDAO;
 import Model.StatusValidator;
+import java.text.ParseException;
 
 /**
  *
@@ -15,7 +16,7 @@ import Model.StatusValidator;
  */
 public class RentalOrderAdministrator {
     
-    public static RentalOrder getRentalOrderInfo(int membershipId){
+    public static RentalOrder getRentalOrderInfo(int membershipId) throws ParseException{
         
         RentalOrder clientInformation = RentalOrderDAO.obtainRegistry(membershipId);
         return clientInformation;
@@ -33,7 +34,7 @@ public class RentalOrderAdministrator {
     public static String modifyRentalOrderStatus(int folio){
         
         if(StatusValidator.success(RentalOrderDAO.update(folio) ) ){
-                return "Se ha almacenado la modificado el estado con éxtio";
+                return "Se ha modificado el estado con éxtio";
             }else{
                 return "No se pudo modificar el estado";
             }
