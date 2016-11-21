@@ -31,9 +31,9 @@ public class RentalOrderAdministrator {
             }
     }
     
-    public static String modifyRentalOrderStatus(int folio){
+    public static String modifyRentalOrderStatus(int folio, double additionalCost){
         
-        if(StatusValidator.success(RentalOrderDAO.update(folio) ) ){
+        if(StatusValidator.success(RentalOrderDAO.update(folio, additionalCost) ) ){
                 return "Se ha modificado el estado con éxtio";
             }else{
                 return "No se pudo modificar el estado";

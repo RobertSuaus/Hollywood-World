@@ -240,5 +240,4 @@ public class RentalOrderRequestHandler {
     
     private RentalOrder rentalOrder;
     private RentalOrderForm rentalOrderForm;
-    //referencia a la vista
 }

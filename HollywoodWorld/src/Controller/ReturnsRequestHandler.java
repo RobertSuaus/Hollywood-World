@@ -32,9 +32,9 @@ public class ReturnsRequestHandler {
                 
                 rentalOrder = RentalOrderAdministrator.
                         getRentalOrderInfo(membershipId);
-                //Checar si hay importe adicional
+                additionalCost = computeAdditionalCost();
                 
-                returnsUI.fillRentalOrderField(rentalOrder);
+                returnsUI.fillRentalOrderField(rentalOrder, additionalCost);
                 return "Obtenida información de la renta exitosamente";  
             }
             return "No existe la membresía ingresada";
@@ -46,13 +46,26 @@ public class ReturnsRequestHandler {
         
         returnsUI.dispose();
         return RentalOrderAdministrator.
-                modifyRentalOrderStatus(rentalOrder.getFolio() );
+                modifyRentalOrderStatus(rentalOrder.getFolio(), additionalCost );
+    }
+    
+    private double computeAdditionalCost(){
+        double additionalCost;
+        long daysPast = getDifferenceDays();
+        
+        if(daysPast>0){
+            additionalCost = daysPast * 15; //15 pesos por día
+            return additionalCost;
+        }else{
+            additionalCost = 0;
+            return additionalCost;
+        }
     }
     
     private long getDifferenceDays() {
         
         Date todayDate = new Date();
-        long difference = rentalOrder.getReturnDate().getTime() - todayDate.getTime();
+        long difference =  todayDate.getTime() - rentalOrder.getReturnDate().getTime();
         return TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
     }
     
@@ -77,6 +90,7 @@ public class ReturnsRequestHandler {
         }
     }
     
+    private double additionalCost;
     private RentalOrder rentalOrder;
     private ReturnsUI returnsUI;
 }

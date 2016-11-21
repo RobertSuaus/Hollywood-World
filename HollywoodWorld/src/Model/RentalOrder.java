@@ -22,16 +22,19 @@ public class RentalOrder {
             Date transactionDate,
             Date returnDate,
             ArrayList<Lease> leases,
-            double totalRent   
+            double totalRent,
+            double additionalCost
     ){
        this.folio = folio;
        this.employeeName = employeeName;
-       this.clientName = clientName;
        this.membershipId = membershipId;
+       this.clientName = clientName;
        this.transactionDate = transactionDate;
        this.returnDate = returnDate;
-       this.totalRent = totalRent;
        this.leases = leases;
+       this.totalRent = totalRent;
+       this.additionalCost = additionalCost;
+       
     } 
     
     public RentalOrder(int folio, String employeeName){
@@ -50,15 +53,17 @@ public class RentalOrder {
             String clientName,
             Date transactionDate,
             Date returnDate,
-            double totalRent
+            double totalRent,
+            double additionalCost
     ){
        this.folio = folio;
        this.employeeName = employeeName;
-       this.clientName = clientName;
        this.membershipId = membershipId;
+       this.clientName = clientName;
        this.transactionDate = transactionDate;
        this.returnDate = returnDate;
        this.totalRent = totalRent;
+       this.additionalCost = additionalCost;
         
     }
     
@@ -82,8 +87,6 @@ public class RentalOrder {
         this.employeeName = employeeName;
     }
     
-    
-
     public String getClientName() {
         return clientName;
     }
@@ -156,12 +159,13 @@ public class RentalOrder {
     
     private int folio;
     private String employeeName;
-    private String clientName;
     private int membershipId;
+    private String clientName;
     private Date transactionDate;
     private Date returnDate;
-    private double totalRent;
     private ArrayList<Lease> leases;
+    private double totalRent;
+    private double additionalCost;
     
 
 }

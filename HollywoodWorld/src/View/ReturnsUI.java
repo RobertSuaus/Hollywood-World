@@ -35,7 +35,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         this.returnsHandler = new ReturnsRequestHandler(this);
     }
     
-    public void fillRentalOrderField(RentalOrder rentalOrder){
+    public void fillRentalOrderField(RentalOrder rentalOrder, double AdditionalCost){
         //Llena los datos
         folioTxt.setText(String.valueOf(rentalOrder.getFolio() ) );
         clientNameTxt.setText(rentalOrder.getClientName() );
@@ -50,6 +50,8 @@ public class ReturnsUI extends javax.swing.JFrame {
         currentDateTxt.setText(
             dateFormat.format(new Date() )
         );
+        
+        additionalCostTxt.setText(String.valueOf(AdditionalCost));
         
         //additionalCostTxt.setText(rentalOrder.getAdditionalImport() );
         this.fillLeaseTable(rentalOrder.getLeases());

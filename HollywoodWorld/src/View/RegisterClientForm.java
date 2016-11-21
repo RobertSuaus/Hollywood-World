@@ -21,7 +21,6 @@ public class RegisterClientForm extends javax.swing.JFrame {
         this.setVisible(true);
         
         this.clientRequestHandler = new ClientRequestHandler(this);
-        clientRequestHandler.handleWindowInitialization();
     }
     
     public void fillMembershipField(int membershipId){
