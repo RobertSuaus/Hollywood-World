@@ -77,7 +77,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
 
         RestorationButton.setFont(new java.awt.Font("Berlin Sans FB", 3, 24)); // NOI18N
-        RestorationButton.setText("Restoration");
+        RestorationButton.setText("Returns");
         RestorationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RestorationButtonActionPerformed(evt);

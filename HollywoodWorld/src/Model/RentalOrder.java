@@ -19,7 +19,6 @@ public class RentalOrder {
             String employeeName,
             int membershipId,
             String clientName,
-            int clientMembership,
             Date transactionDate,
             Date returnDate,
             ArrayList<Lease> leases,
@@ -40,6 +39,7 @@ public class RentalOrder {
         this.folio = folio;
         this.employeeName = employeeName;
         this.transactionDate = new Date();
+        this.clientName = "";
         this.leases = new ArrayList<Lease>();
     }
     
@@ -48,12 +48,11 @@ public class RentalOrder {
             String employeeName,
             int membershipId,
             String clientName,
-            int clientMembership,
             Date transactionDate,
             Date returnDate,
             double totalRent
     ){
-        this.folio = folio;
+       this.folio = folio;
        this.employeeName = employeeName;
        this.clientName = clientName;
        this.membershipId = membershipId;

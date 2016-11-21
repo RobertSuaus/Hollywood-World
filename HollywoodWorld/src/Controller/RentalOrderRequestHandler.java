@@ -11,8 +11,8 @@ import Model.Movie;
 import Model.MovieDAO;
 import Model.Lease;
 import Model.RentalOrder;
+import Model.RentalOrderDAO;
 import View.RentalOrderForm;
-import View.ReturnsUI;
 import java.text.ParseException;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
@@ -34,16 +34,11 @@ public class RentalOrderRequestHandler {
         handleWindowInitialization();
     }
     
-    public RentalOrderRequestHandler(ReturnsUI returnsUI){
-        
-        this.rentalOrder = new RentalOrder();
-        this.returnsUI = returnsUI;
-    }
-    
     //Maneja el procedimiento para asignar los datos de un cliente a la orden de renta
     public String handleClientAssignation(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
+            
             int membershipId = Integer.valueOf(membershipIdInput);
             
             if(membershipExists(membershipId) ){
@@ -52,15 +47,21 @@ public class RentalOrderRequestHandler {
                 
                 if(client.getMembership().getStatus().equals("Active") ){
                     
-                    rentalOrder.setClientName(
-                        client.getName() + " " + client.getLastName() 
-                    );
-                    rentalOrder.setMembershipId(membershipId);
-                    rentalOrderForm.fillClientInfoFields(
-                        rentalOrder.getClientName(),
-                        String.valueOf(rentalOrder.getMembershipId() )
-                    );
-                    return "Datos de cliente obtenidos exitosamente";
+                    if(clientHasNoPendingRents(client.getMembership().getId() ) ){
+                        
+                        rentalOrder.setClientName(
+                            client.getName() + " " + client.getLastName() 
+                        );
+                        rentalOrder.setMembershipId(membershipId);
+                        
+                        rentalOrderForm.fillClientInfoFields(
+                            rentalOrder.getClientName(),
+                            String.valueOf(rentalOrder.getMembershipId() )
+                        );
+                        
+                        return "Datos de cliente obtenidos exitosamente";
+                    }
+                    return "El cliente tiene una renta pendiente";
                 }
                 return "La membresía del cliente está inactiva";
             } 
@@ -69,16 +70,19 @@ public class RentalOrderRequestHandler {
         return "El número de membresía no es válido";
     }
     
-    
     //Maneja el procedimiento para agregar un nuevo arrendamiento a la orden de renta
     public String handleLeaseAggregation(String movieIdInput) throws ParseException{
         
         if(isValidInputNumber (movieIdInput) ){
+            
             int movieId = Integer.valueOf(movieIdInput);
+            
             if(movieExists (movieId) ){
                 Movie movie = MovieAdministrator.getMovieInfo(movieId);
+                
                 rentalOrder.addLease(generateLease(movie) );
                 rentalOrder.computeTotal();
+                
                 rentalOrderForm.fillTotalPriceField(
                     String.valueOf(rentalOrder.getTotalRent() ) 
                 );
@@ -95,8 +99,10 @@ public class RentalOrderRequestHandler {
         
         //-1 es el default del componente JTable si no hay una fila seleccionada
         if(selectedTableIndex != -1){
+            
             rentalOrder.removeLease(selectedTableIndex);
             rentalOrder.computeTotal();
+            
             rentalOrderForm.fillTotalPriceField(
                     String.valueOf(rentalOrder.getTotalRent() ) 
                 );
@@ -108,38 +114,17 @@ public class RentalOrderRequestHandler {
     //Maneja el procedimiento para archivar la orden de renta
     public String handleArchiving(){
         
-        /*Validaciones, el cliente debe haberse asignado, debe haber al menos una
-         película en la lista*/
         if(isRentalOrderInfoValid() ){
+            
             if(isFolioAvailable() ){
+                
+                rentalOrderForm.dispose();
                 return RentalOrderAdministrator.archieveRentOrder(rentalOrder);
+                
             }
-            return "El número de folio está ocupado, generando nuevo...";
+            return "El número de folio está ocupado";
         }
         return "Por favor, llene todos los campos primero";
-    }
-    
-    public String handleRetrieval(String membershipInput){
-        
-        if(isValidInputNumber(membershipInput) ){
-            int membershipId = Integer.valueOf(membershipInput);
-            if(membershipExists(membershipId ) ){
-                //si tiene una renta en proceso...
-                    rentalOrder = RentalOrderAdministrator.
-                            getRentalOrderInfo(membershipId);
-                    //Checar si hay importe adicional
-                    returnsUI.fillRentalOrderField(rentalOrder);
-                //No tiene rentas pendientes    
-            }
-            return "No existe la membresía ingresada";
-        }
-        return "Por favor, ingrese un número válido de membresía";
-    }
-    
-    public String handleStatusModification(){
-        
-        return RentalOrderAdministrator.
-                modifyRentalOrderStatus(rentalOrder.getFolio() );
     }
     
     /*Maneja el procedimiento para establecer la ventana con los datos
@@ -152,7 +137,7 @@ public class RentalOrderRequestHandler {
     private boolean isRentalOrderInfoValid(){
         
         //Verificar que todos los datos sean correctos
-        if( rentalOrder.getClientName() != "" &&
+        if( !rentalOrder.getClientName().equals("") &&
             !rentalOrder.getLeases().isEmpty()
         ){
             return true;  
@@ -184,14 +169,28 @@ public class RentalOrderRequestHandler {
     }
     
     private boolean isFolioAvailable(){
-        return false;
         
-        //Verificar si no esta registrado, necesita el DAO de RentOrder
+        if(RentalOrderDAO.registryExists(rentalOrder.getFolio()) ){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    private boolean clientHasNoPendingRents(int membershipId){
+        
+        if(RentalOrderDAO.registryExists(membershipId, "Pendiente")){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     private int generateNextFolio(){
         
-        return 1;
+        int lastFolio = RentalOrderDAO.getLastRegistryIndex();
+        int nextFolio = lastFolio + 1;
+        return nextFolio;
     }
     
     private Lease generateLease(Movie movie){
@@ -239,6 +238,5 @@ public class RentalOrderRequestHandler {
     
     private RentalOrder rentalOrder;
     private RentalOrderForm rentalOrderForm;
-    private ReturnsUI returnsUI;
     //referencia a la vista
 }

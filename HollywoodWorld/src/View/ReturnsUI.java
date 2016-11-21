@@ -6,12 +6,16 @@
 package View;
 
 import Controller.RentalOrderRequestHandler;
+import Controller.ReturnsRequestHandler;
 import Model.Lease;
 import Model.RentalOrder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,7 +32,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         
-        this.rentalOrderHandler = new RentalOrderRequestHandler(this);
+        this.returnsHandler = new ReturnsRequestHandler(this);
     }
     
     public void fillRentalOrderField(RentalOrder rentalOrder){
@@ -48,7 +52,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         );
         
         //additionalCostTxt.setText(rentalOrder.getAdditionalImport() );
-        
+        this.fillLeaseTable(rentalOrder.getLeases());
     }
     
     private void fillLeaseTable(ArrayList leases){
@@ -308,22 +312,27 @@ public class ReturnsUI extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         
-        String operationStatus =
-            rentalOrderHandler.handleRetrieval(memebershipIdTxt.getText() );
+        String operationStatus;
+        try {
+            operationStatus = returnsHandler.handleRetrieval(memebershipIdTxt.getText() );
+        } catch (ParseException ex) {
+            operationStatus = "Error de parseo de fechas";
+        }
         JOptionPane.showMessageDialog(null,operationStatus);
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void terminateRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateRentBtnActionPerformed
         // TODO add your handling code here:
         
-        rentalOrderHandler.handleStatusModification();
+        String operationStatus = returnsHandler.handleStatusModification();
+        JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_terminateRentBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     
-    private RentalOrderRequestHandler rentalOrderHandler;
+    private ReturnsRequestHandler returnsHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel additionalCostTxt;
     private javax.swing.JLabel clientNameTxt;

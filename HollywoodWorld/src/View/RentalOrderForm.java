@@ -50,7 +50,9 @@ public class RentalOrderForm extends javax.swing.JFrame {
         transactionDateTxt.setText( 
             dateFormat.format(rentalOrder.getTransactionDate()) 
         ); 
-        
+        clientNameTxt.setText("_____________________________");
+        membershipTxt.setText("_____");
+        ((DefaultTableModel)leaseTable.getModel()).setRowCount(0);
         returnDateTxt.setText(
             dateFormat.format(rentalOrder.getReturnDate() )
         );
