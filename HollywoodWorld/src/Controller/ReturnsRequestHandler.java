@@ -27,10 +27,9 @@ public class ReturnsRequestHandler {
     public String handleRetrieval(String membershipInput) throws ParseException{
         
         if(isValidInputNumber(membershipInput) ){
-            
             int membershipId = Integer.valueOf(membershipInput);
-            
             if(membershipExists(membershipId ) ){
+                
                 rentalOrder = RentalOrderAdministrator.
                         getRentalOrderInfo(membershipId);
                 //Checar si hay importe adicional

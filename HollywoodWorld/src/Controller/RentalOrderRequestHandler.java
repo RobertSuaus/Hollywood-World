@@ -38,32 +38,24 @@ public class RentalOrderRequestHandler {
     public String handleClientAssignation(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
-            
             int membershipId = Integer.valueOf(membershipIdInput);
-            
             if(membershipExists(membershipId) ){
                 
                 Client client = ClientAdministrator.getClientInfo(membershipId);
-                
-                if(client.getMembership().getStatus().equals("Active") ){
+                if(clientCanRent(client)){
                     
-                    if(clientHasNoPendingRents(client.getMembership().getId() ) ){
+                    rentalOrder.setClientName(
+                        client.getName() + " " + client.getLastName() 
+                    );
+                    rentalOrder.setMembershipId(membershipId);
                         
-                        rentalOrder.setClientName(
-                            client.getName() + " " + client.getLastName() 
-                        );
-                        rentalOrder.setMembershipId(membershipId);
-                        
-                        rentalOrderForm.fillClientInfoFields(
-                            rentalOrder.getClientName(),
-                            String.valueOf(rentalOrder.getMembershipId() )
-                        );
-                        
-                        return "Datos de cliente obtenidos exitosamente";
-                    }
-                    return "El cliente tiene una renta pendiente";
+                    rentalOrderForm.fillClientInfoFields(
+                        rentalOrder.getClientName(),
+                        String.valueOf(rentalOrder.getMembershipId() )
+                    );
+                    return "Datos de cliente obtenidos exitosamente";
                 }
-                return "La membresía del cliente está inactiva";
+                return "El cliente tiene una renta pendiente o esta dado de baja";
             } 
             return "No existe esa membresía de cliente";
         }
@@ -74,10 +66,9 @@ public class RentalOrderRequestHandler {
     public String handleLeaseAggregation(String movieIdInput) throws ParseException{
         
         if(isValidInputNumber (movieIdInput) ){
-            
             int movieId = Integer.valueOf(movieIdInput);
-            
             if(movieExists (movieId) ){
+                
                 Movie movie = MovieAdministrator.getMovieInfo(movieId);
                 
                 rentalOrder.addLease(generateLease(movie) );
@@ -115,7 +106,6 @@ public class RentalOrderRequestHandler {
     public String handleArchiving(){
         
         if(isRentalOrderInfoValid() ){
-            
             if(isFolioAvailable() ){
                 
                 rentalOrderForm.dispose();
@@ -177,13 +167,25 @@ public class RentalOrderRequestHandler {
         }
     }
     
-    private boolean clientHasNoPendingRents(int membershipId){
+    private boolean clientCanRent(Client client){
         
-        if(RentalOrderDAO.registryExists(membershipId, "Pendiente")){
-            return false;
+        boolean hasNoPendingRents, isActive;
+        
+        //Tiene rentas pendientes?
+        if(RentalOrderDAO.registryExists(client.getMembership().getId(), "Pendiente")){
+            hasNoPendingRents = false;
         }else{
-            return true;
+            hasNoPendingRents = true;
         }
+        
+        //Su membresía está dada de alta?
+        if(client.getMembership().getStatus().equals("Active")){
+            isActive = true;
+        }else{
+            isActive = false;
+        }
+        
+        return hasNoPendingRents && isActive;
     }
     
     private int generateNextFolio(){
