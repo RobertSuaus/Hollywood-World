@@ -13,15 +13,11 @@ import javax.swing.JOptionPane;
 public class EmployeeAdministrator {
     
     public static String registerEmployee(Employee employee){
-        
-        if(isEmployeeIdAvailable(employee.getId() ) ){
-            if(StatusValidator.success(EmployeeDAO.save(employee) ) ){
-                return "Employee succesfully registered";
-            }else{
-                return "Couldn't register employee...";
-            }
+
+        if(StatusValidator.success(EmployeeDAO.save(employee) ) ){
+            return "Employee succesfully registered";
         }else{
-            return "Employee number not available";
+            return "Couldn't register employee...";
         }
     }
     
@@ -51,16 +47,6 @@ public class EmployeeAdministrator {
         int nextId = lastRegisteredId + 1;
         
         return nextId;
-    }
-    
-    private static boolean isEmployeeIdAvailable(int employeeId){
-        
-        boolean isAvailable;
-        if(EmployeeDAO.registryExists(employeeId) ){
-            return false;
-        }else{
-            return true;
-        }
     }
     
 }

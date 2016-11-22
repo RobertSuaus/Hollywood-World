@@ -29,27 +29,26 @@ public class MainMenuAdministrator {
     }
     
     public static void accessEmployeeRegistrationWindow(){
-        
+        new RegisterEmployeeForm();
     }
     
     public static void accessEmployeeModificationWindow(){
-        
+        new ModifyEmployeeForm();
     }
     
     public static void accessMovieInventoryWindow(){
-        
+        new RegisterMovieForm();
     }
     
     public static void accessNewProfileWindow(){
-        
+        new RegisterMovieProfileForm();
     }
     
     public static void accessProfileModificationWindow(){
-        
+        new ModifyMovieProfileForm();
     }
     
     public static void accessNewRentWindow(){
-        
     }
     
     public static void accessReturnsWindow(){

@@ -3,7 +3,10 @@ package View;
 import Controller.MovieRequestHandler;
 import Model.Movie;
 import Model.MovieProfile;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,9 +19,9 @@ import javax.swing.JOptionPane;
 public class RegisterMovieForm extends javax.swing.JFrame {
 
     public RegisterMovieForm() {
-        initComponents(); //Componentes visuales de swing
-        this.setVisible(true);
         
+        initComponents(); //Componentes visuales de swing
+        this.setVisible(true);        
         this.movieRequestHandler = new MovieRequestHandler(this );
     }
 
@@ -38,9 +41,11 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         addSerialCodeTxt = new javax.swing.JTextField();
         amountToAddTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        movieId = new javax.swing.JTextField();
+        movieLowerId = new javax.swing.JTextField();
         addMoviesBtn = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        movieUpperId = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -55,10 +60,16 @@ public class RegisterMovieForm extends javax.swing.JFrame {
 
         addSerialCodeTxt.setToolTipText("");
 
+        amountToAddTxt.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                amountToAddTxtCaretUpdate(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setText("Movie(s) code(s):");
 
-        movieId.setEditable(false);
+        movieLowerId.setEditable(false);
 
         addMoviesBtn.setText("Add movies");
         addMoviesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +80,11 @@ public class RegisterMovieForm extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
         jLabel17.setText("Add movies");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("-");
+
+        movieUpperId.setEditable(false);
 
         javax.swing.GroupLayout inventoryPanelLayout = new javax.swing.GroupLayout(inventoryPanel);
         inventoryPanel.setLayout(inventoryPanelLayout);
@@ -87,9 +103,14 @@ public class RegisterMovieForm extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(44, 44, 44)
                                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(addSerialCodeTxt)
+                                    .addComponent(addSerialCodeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                                     .addComponent(amountToAddTxt)
-                                    .addComponent(movieId, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))))
+                                    .addGroup(inventoryPanelLayout.createSequentialGroup()
+                                        .addComponent(movieLowerId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(movieUpperId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(inventoryPanelLayout.createSequentialGroup()
                         .addGap(232, 232, 232)
                         .addComponent(jLabel17)))
@@ -111,7 +132,9 @@ public class RegisterMovieForm extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(movieId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(movieLowerId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(movieUpperId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(addMoviesBtn)
                 .addGap(33, 33, 33))
@@ -142,22 +165,34 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         String[] userInputs = gatherAllUserInput();
         
         String operationStatus;
-        operationStatus = movieRequestHandler.handleAddToInventory(userInputs);
-        JOptionPane.showMessageDialog(null, operationStatus);          
+        try {
+            operationStatus = movieRequestHandler.handleAddToInventory(userInputs);            
+            JOptionPane.showMessageDialog(null, operationStatus);   
+        } catch (ParseException ex) {
+            Logger.getLogger(RegisterMovieForm.class.getName()).log(Level.SEVERE, null, ex);
+        }       
     }//GEN-LAST:event_addMoviesBtnActionPerformed
+
+    private void amountToAddTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_amountToAddTxtCaretUpdate
+        movieRequestHandler.handleMovieAmountModification(amountToAddTxt.getText());
+    }//GEN-LAST:event_amountToAddTxtCaretUpdate
     
     private String[] gatherAllUserInput(){
         
         String[] userInput = new String[3];
         userInput[0] = addSerialCodeTxt.getText();
         userInput[1] = amountToAddTxt.getText();
-        userInput[2] = movieId.getText();
+        userInput[2] = movieLowerId.getText();
         
         return userInput;
     }
     
-    private void fillMovieIdField(int id){
-        this.movieId.setText(String.valueOf(id ) );
+    public void fillMovieUpperIdField( int UpperId ) {
+        this.movieUpperId.setText(String.valueOf(UpperId));
+    }
+    
+    public void fillMovieLowerIdField(int LowerId){
+        this.movieLowerId.setText(String.valueOf(LowerId ) );
     }
     
     private MovieRequestHandler movieRequestHandler;
@@ -166,11 +201,13 @@ public class RegisterMovieForm extends javax.swing.JFrame {
     private javax.swing.JTextField addSerialCodeTxt;
     private javax.swing.JTextField amountToAddTxt;
     private javax.swing.JPanel inventoryPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField movieId;
+    private javax.swing.JTextField movieLowerId;
+    private javax.swing.JTextField movieUpperId;
     // End of variables declaration//GEN-END:variables
 }

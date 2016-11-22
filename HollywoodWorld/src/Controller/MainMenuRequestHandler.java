@@ -55,23 +55,27 @@ public class MainMenuRequestHandler {
     }
     
     public void handleEmployeeRegistrationRequest(){
-        
+        //Permisos
+        MainMenuAdministrator.accessEmployeeRegistrationWindow();
     }
     
     public void handleEmployeeModificationRequest(){
-        
+        MainMenuAdministrator.accessEmployeeModificationWindow();
     }
     
     public void handleMovieInventoryRequest(){
-        
+        //Permisos
+        MainMenuAdministrator.accessMovieInventoryWindow();
     }
     
     public void handleNewProfileRequest(){
-        
+        //Permisos
+        MainMenuAdministrator.accessNewProfileWindow();
     }
     
     public void handleProfileModificationRequest(){
-        
+        //Permisos
+        MainMenuAdministrator.accessProfileModificationWindow();
     }
     
     public void handleNewRentRequest(){

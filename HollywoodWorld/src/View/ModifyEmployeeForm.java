@@ -279,16 +279,17 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
     private String[] gatherAllUserInput(){
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String[] userInput = new String[6];
+        String[] userInput = new String[9];
         userInput[0] = editNameTxt.getText();
         userInput[1] = editLastNameTxt.getText();
         userInput[2] = editTelephoneTxt.getText();
         userInput[3] = editAddressTxt.getText();
-        userInput[4] = editRfcTxt.getText();
-        userInput[5] = editSalaryTxt.getText();
-        userInput[6] =  dateFormat.
+        userInput[4] = editIdTxt.getText();
+        userInput[5] = editRfcTxt.getText();
+        userInput[6] = editSalaryTxt.getText();
+        userInput[7] =  dateFormat.
                 format( editAdmissionDate.getDate() );
-        userInput[7] = editPositionTxt.getText();
+        userInput[8] = editPositionTxt.getText();
         
         return userInput;
     }

@@ -125,9 +125,19 @@ public class MainMenuUI extends javax.swing.JFrame {
         newFilmSubMenu.add(newProfileSubMenu);
 
         modifyProfileSubMenu.setText("Modificar perfil");
+        modifyProfileSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyProfileSubMenuActionPerformed(evt);
+            }
+        });
         newFilmSubMenu.add(modifyProfileSubMenu);
 
         jMenuItem2.setText("Nueva película");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         newFilmSubMenu.add(jMenuItem2);
 
         ClientButton.add(newFilmSubMenu);
@@ -135,9 +145,19 @@ public class MainMenuUI extends javax.swing.JFrame {
         modifyEmployeeSubForm.setText("Employee");
 
         newEmployeeSubMenu.setText("Nuevo");
+        newEmployeeSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newEmployeeSubMenuActionPerformed(evt);
+            }
+        });
         modifyEmployeeSubForm.add(newEmployeeSubMenu);
 
         modifyEmployeeSubMenu.setText("Modificar");
+        modifyEmployeeSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyEmployeeSubMenuActionPerformed(evt);
+            }
+        });
         modifyEmployeeSubForm.add(modifyEmployeeSubMenu);
 
         ClientButton.add(modifyEmployeeSubForm);
@@ -248,6 +268,22 @@ public class MainMenuUI extends javax.swing.JFrame {
         
         mainMenuRequestHandler.handleNewProfileRequest();
     }//GEN-LAST:event_newProfileSubMenuActionPerformed
+
+    private void modifyProfileSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyProfileSubMenuActionPerformed
+       mainMenuRequestHandler.handleProfileModificationRequest();
+    }//GEN-LAST:event_modifyProfileSubMenuActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       mainMenuRequestHandler.handleMovieInventoryRequest();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void newEmployeeSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEmployeeSubMenuActionPerformed
+        mainMenuRequestHandler.handleEmployeeRegistrationRequest();
+    }//GEN-LAST:event_newEmployeeSubMenuActionPerformed
+
+    private void modifyEmployeeSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyEmployeeSubMenuActionPerformed
+        mainMenuRequestHandler.handleEmployeeModificationRequest();
+    }//GEN-LAST:event_modifyEmployeeSubMenuActionPerformed
 
     
     private MainMenuRequestHandler mainMenuRequestHandler;

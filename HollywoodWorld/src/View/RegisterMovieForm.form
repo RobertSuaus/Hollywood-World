@@ -68,9 +68,15 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="addSerialCodeTxt" max="32767" attributes="0"/>
+                                      <Component id="addSerialCodeTxt" pref="128" max="32767" attributes="0"/>
                                       <Component id="amountToAddTxt" max="32767" attributes="0"/>
-                                      <Component id="movieId" pref="128" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="movieLowerId" min="-2" pref="49" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="movieUpperId" min="-2" pref="49" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -102,7 +108,9 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="movieId" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="movieLowerId" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="movieUpperId" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="84" max="32767" attributes="0"/>
                   <Component id="addMoviesBtn" min="-2" max="-2" attributes="0"/>
@@ -134,6 +142,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="amountToAddTxt">
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="amountToAddTxtCaretUpdate"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -143,7 +154,7 @@
             <Property name="text" type="java.lang.String" value="Movie(s) code(s):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="movieId">
+        <Component class="javax.swing.JTextField" name="movieLowerId">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -162,6 +173,19 @@
               <Font name="Bodoni MT" size="24" style="3"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Add movies"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="movieUpperId">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

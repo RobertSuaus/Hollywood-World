@@ -211,7 +211,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
 
         String operationStatus;
         try {
-            operationStatus = movieRequestHandler.handleRegistrationProfile(userInputs);
+            operationStatus = movieRequestHandler.handleModificationProfile(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(ModifyMovieProfileForm.class.getName()).log(Level.SEVERE, null, ex);

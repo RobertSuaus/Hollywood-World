@@ -28,7 +28,6 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         this.setVisible(true);
         
         this.employeeRequestHandler = new EmployeeRequestHandler(this);
-        employeeRequestHandler.handleWindowInitialization();
     }
 
     /**
@@ -222,16 +221,17 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
     private String[] gatherAllUserInput(){
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String[] userInput = new String[8];
+        String[] userInput = new String[9];
         userInput[0] = newNameTxt.getText();
         userInput[1] = newLastNameTxt.getText();
         userInput[2] = newTelephoneTxt.getText();
         userInput[3] = newAddressTxt.getText();
-        userInput[4] = newRfcTxt.getText();
-        userInput[5] = newSalaryTxt.getText();
-        userInput[6] =  dateFormat.
+        userInput[4] = newIdTxt.getText();
+        userInput[5] = newRfcTxt.getText();
+        userInput[6] = newSalaryTxt.getText();
+        userInput[7] =  dateFormat.
                 format( newAdmissionDate.getDate() );
-        userInput[7] = newPositionTxt.getText();
+        userInput[8] = newPositionTxt.getText();
         
         return userInput;
     }
