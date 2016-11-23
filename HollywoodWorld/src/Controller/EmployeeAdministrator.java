@@ -41,12 +41,4 @@ public class EmployeeAdministrator {
         return employeeInfo;
     }
     
-    public static int generateNextEmployeeId(){
-        
-        int lastRegisteredId = EmployeeDAO.getLastRegistryIndex();
-        int nextId = lastRegisteredId + 1;
-        
-        return nextId;
-    }
-    
 }

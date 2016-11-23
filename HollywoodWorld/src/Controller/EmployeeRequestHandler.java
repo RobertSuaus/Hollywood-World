@@ -91,7 +91,7 @@ public class EmployeeRequestHandler {
         
     }
     
-    public int generateNextEmployeeId(){
+    private int generateNextEmployeeId(){
         
         int lastRegisteredId = EmployeeDAO.getLastRegistryIndex();
         int nextId = lastRegisteredId + 1;
@@ -116,7 +116,7 @@ public class EmployeeRequestHandler {
             isValidInputText( employee.getLastName() )&&
             isValidInputTelephone( employee.getTelephone() )&&
             isValidInputAddress( employee.getAddress() ) &&
-            isValidInputText( employee.getRfc() )&&
+            isValidInputRFC( employee.getRfc() )&&
             isValidInputBasicSalary( String.valueOf(employee.getBasicSalary() ) )&&
             isValidInputDate(employee.getAdmissionDate() ) &&
             isValidInputText( employee.getPosition() ) 
@@ -146,7 +146,6 @@ public class EmployeeRequestHandler {
             ){
                 return true;
             }else{
-                JOptionPane.showMessageDialog(null, "aaaaaa");
                 return false;
             }
     }
@@ -165,6 +164,17 @@ public class EmployeeRequestHandler {
     private boolean isValidInputTelephone(String input){
         
         if (input.matches("([0-9]|\\s)*") 
+            && input.equals(" ") == false 
+            && input.equals("") == false){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean isValidInputRFC(String input){
+        
+        if (input.matches("([A-Z]|[0-9])*") 
             && input.equals(" ") == false 
             && input.equals("") == false){
             return true;
