@@ -56,22 +56,50 @@ public class MainMenuRequestHandler {
     
     public void handleEmployeeRegistrationRequest(){
         
+        if(userHasHumanResourcesPermissions() ){
+            MainMenuAdministrator.accessEmployeeRegistrationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
     }
     
     public void handleEmployeeModificationRequest(){
+        
+        if(userHasHumanResourcesPermissions() ){
+            MainMenuAdministrator.accessEmployeeModificationWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
         
     }
     
     public void handleMovieInventoryRequest(){
         
+        if(userHasManagerPermissions()){
+            MainMenuAdministrator.accessMovieInventoryWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+        
     }
     
     public void handleNewProfileRequest(){
+        
+        if(userHasManagerPermissions()){
+            MainMenuAdministrator.accessNewProfileWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
         
     }
     
     public void handleProfileModificationRequest(){
         
+        if(userHasManagerPermissions()){
+            MainMenuAdministrator.accessProfileModificationWindow() ;
+        }else{
+            mainMenu.displayPermissionError();
+        }
     }
     
     public void handleNewRentRequest(){
@@ -138,5 +166,4 @@ public class MainMenuRequestHandler {
     
     private User user;
     private MainMenuUI mainMenu;
-    private final String NO_PERMISSION = "No puedes acceder a esta funcionalidad";
 }
