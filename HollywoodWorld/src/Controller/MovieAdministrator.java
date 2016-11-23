@@ -14,29 +14,21 @@ import javax.swing.JOptionPane;
 public class MovieAdministrator {
     
     public static String addMoviesToInventory(Movie movie, int amount){
-        
-        if(isMovieIdAvailable(movie.getId() ) ){
-            if(StatusValidator.success(MovieDAO.save(movie, amount) ) ){
-                return "Movies added to inventory";
-            }else{
-                return "Couldn't add movies";
-            }
+
+        if(StatusValidator.success(MovieDAO.save(movie, amount) ) ){
+            return "Movies added to inventory";
         }else{
-            return "Movie id not available";
+            return "Couldn't add movies";
         }
     }
     
     public static String registerMovieProfile(MovieProfile movieProfile){
-        
-        if(isSerialCodeAvailable(movieProfile.getSerialCode() ) ){
-           if(StatusValidator.success(MovieDAO.save(movieProfile) ) ){
-                return "New profile registered";
-            }else{
-                return "Couldn't add profile";
-            } 
-        }else{
-            return "Serial code not available";
-        }
+
+        if(StatusValidator.success(MovieDAO.save(movieProfile) ) ){
+             return "New profile registered";
+         }else{
+             return "Couldn't add profile";
+         } 
     }
     
     public static String modifyMovieProfile(MovieProfile movieProfile){
@@ -63,35 +55,5 @@ public class MovieAdministrator {
             JOptionPane.showMessageDialog(null, "Error al convertir la fecha");
         }
         return profileInfo;
-    }
-    
-    public static int generateNextMovieId(){
-        
-        int lastRegisteredId;
-        lastRegisteredId = MovieDAO.getLastRegistryIndex();
-        int nextId= lastRegisteredId + 1; //Recorrer una posición
-        return nextId;
-    }
-    
-    private static boolean isMovieIdAvailable(int movieId){
-        
-        boolean isAvailable;
-        if(MovieDAO.registryExists(movieId) ){
-            isAvailable = false;
-        }else{
-            isAvailable = true;
-        }
-        return isAvailable;
-    }
-    
-    private static boolean isSerialCodeAvailable(String serialCode){
-        
-        boolean isAvailable;
-        if(MovieDAO.registryExists(serialCode) ){
-            isAvailable = false;
-        }else{
-            isAvailable = true;
-        }
-        return isAvailable;
     }
 }

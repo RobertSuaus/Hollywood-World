@@ -42,7 +42,7 @@ public class RentalOrderRequestHandler {
             if(membershipExists(membershipId) ){
                 
                 Client client = ClientAdministrator.getClientInfo(membershipId);
-                if(clientCanRent(client)){
+                if(clientCanRent(client) ){
                     
                     rentalOrder.setClientName(
                         client.getName() + " " + client.getLastName() 
@@ -110,7 +110,6 @@ public class RentalOrderRequestHandler {
                 
                 rentalOrderForm.dispose();
                 return RentalOrderAdministrator.archieveRentOrder(rentalOrder);
-                
             }
             return "El número de folio está ocupado";
         }

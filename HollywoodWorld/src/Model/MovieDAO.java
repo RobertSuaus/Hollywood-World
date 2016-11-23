@@ -148,8 +148,8 @@ public class MovieDAO extends BaseDAO {
     
     public static Movie getRegistry(int movieId) throws ParseException{
         
-        String sql = "SELECT inventory.id_box, movie.* FROM inventory JOIN movie"
-                + " WHERE id_box = $movieId$ ";
+        String sql = "SELECT * FROM movie WHERE serialCode = " +
+                "(SELECT serialCode FROM inventory WHERE id_box = $movieId$)";
         sql = sql.replace("$movieId$", String.valueOf(movieId) );
         Movie movie = null;
         try{
@@ -160,7 +160,7 @@ public class MovieDAO extends BaseDAO {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date releaseDate = new Date();
             movie = new Movie(
-                resultSet.getInt("id_box"),
+                movieId,
                 new MovieProfile(
                     resultSet.getString("title"),
                     releaseDate = dateFormat.

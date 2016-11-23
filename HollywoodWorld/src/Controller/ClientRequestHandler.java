@@ -58,9 +58,10 @@ public class ClientRequestHandler {
     /*Manejar el procedimiento de obtención de datos del cliente*/
     public String handleRetrieval(String membershipIdInput){
         
-        if(isValidInputNumber(membershipIdInput)){
+        if(isValidInputNumber(membershipIdInput) ){
            int membershipId = Integer.valueOf(membershipIdInput);
-           if(!isMembershipIdAvailable(membershipId)){
+           if(membershipExists(membershipId)){
+               
                client = ClientAdministrator.getClientInfo(membershipId);
                modifyClientForm.fillExistingClientForm(client);
                return "Mostrando datos de: "+client.getName();
@@ -102,6 +103,17 @@ public class ClientRequestHandler {
             isAvailable = true;
         }
         return isAvailable;
+    }
+    
+    private boolean membershipExists(int membershipId){
+        
+        boolean exists;
+        if(ClientDAO.registryExists(membershipId) ){
+            exists = true;
+        }else{
+            exists = false;
+        }
+        return exists;
     }
     
     private int generateNextMembershipId(){

@@ -35,7 +35,7 @@ public class SessionRequestHandler {
         
         setUserCredentials(userInputs);
         
-        if(userCredentialsAreValid){
+        if(isUserDataValid() ){
             if(authenticateUser(user) ){
                 SessionAdministrator.initiateSession(user);
                 loginUI.dispose();
@@ -58,7 +58,6 @@ public class SessionRequestHandler {
         
         user.setUserName(userInputs[0]);
         user.setPassword(userInputs[1]);
-        userCredentialsAreValid = isUserDataValid();
     }
     
     private boolean authenticateUser(User user){
