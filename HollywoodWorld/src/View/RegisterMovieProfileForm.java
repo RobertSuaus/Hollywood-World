@@ -177,7 +177,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = inventoryControl.RegistrationProfile(userInputs);
+            operationStatus = inventoryControl.registerProfile(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);  
         } catch (ParseException ex) {
             Logger.getLogger(RegisterMovieProfileForm.class.getName()).log(Level.SEVERE, null, ex);

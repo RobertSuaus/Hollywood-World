@@ -31,11 +31,11 @@ public class Renter {
         this.rentalOrderForm = rentalOrderForm;
         this.rentalOrder = new RentalOrder(generateNextFolio(), userName );
         setRentalOrderReturnDate(3); //3 días por defecto
-        WindowInitialization();
+        initilizeWindow();
     }
     
     //Maneja el procedimiento para asignar los datos de un cliente a la orden de renta
-    public String handleClientAssignation(String membershipIdInput){
+    public String assingClientInformation(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
             int membershipId = Integer.valueOf(membershipIdInput);
@@ -63,7 +63,7 @@ public class Renter {
     }
     
     //Maneja el procedimiento para agregar un nuevo arrendamiento a la orden de renta
-    public String LeaseAggregation(String movieIdInput) throws ParseException{
+    public String addLease(String movieIdInput) throws ParseException{
         
         if(isValidInputNumber (movieIdInput) ){
             int movieId = Integer.valueOf(movieIdInput);
@@ -86,7 +86,7 @@ public class Renter {
         return "Por favor, ingrese un número de película válido";
     }
     
-    public void LeaseRemoval(int selectedTableIndex){
+    public void removeLease(int selectedTableIndex){
         
         //-1 es el default del componente JTable si no hay una fila seleccionada
         if(selectedTableIndex != -1){
@@ -103,7 +103,7 @@ public class Renter {
     }
     
     //Maneja el procedimiento para archivar la orden de renta
-    public String Archiving(){
+    public String fileOrder(){
         
         if(isRentalOrderInfoValid() ){
             if(isFolioAvailable() ){
@@ -118,7 +118,7 @@ public class Renter {
     
     /*Maneja el procedimiento para establecer la ventana con los datos
     que se conocen inicialmente de la orden de renta*/
-    private void WindowInitialization(){
+    private void initilizeWindow(){
         
         rentalOrderForm.fillInitialValuesFields(rentalOrder);
     }

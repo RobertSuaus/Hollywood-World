@@ -6,7 +6,7 @@
 package View;
 
 import Controller.Renter;
-import Controller.ReturnsRequestHandler;
+import Controller.ReturnAgent;
 import Model.Lease;
 import Model.RentalOrder;
 import java.text.ParseException;
@@ -32,7 +32,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         
-        this.returnsHandler = new ReturnsRequestHandler(this);
+        this.returnsHandler = new ReturnAgent(this);
     }
     
     public void fillRentalOrderField(RentalOrder rentalOrder, double AdditionalCost){
@@ -316,7 +316,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = returnsHandler.handleRetrieval(memebershipIdTxt.getText() );
+            operationStatus = returnsHandler.retrieveInformation(memebershipIdTxt.getText() );
         } catch (ParseException ex) {
             operationStatus = "Error de parseo de fechas";
         }
@@ -326,7 +326,7 @@ public class ReturnsUI extends javax.swing.JFrame {
     private void terminateRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateRentBtnActionPerformed
         // TODO add your handling code here:
         
-        String operationStatus = returnsHandler.handleStatusModification();
+        String operationStatus = returnsHandler.modifyStatus();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_terminateRentBtnActionPerformed
 
@@ -334,7 +334,7 @@ public class ReturnsUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    private ReturnsRequestHandler returnsHandler;
+    private ReturnAgent returnsHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel additionalCostTxt;
     private javax.swing.JLabel clientNameTxt;

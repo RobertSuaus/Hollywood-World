@@ -261,7 +261,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         String operationStatus;
         try {
             operationStatus =
-                    recruiter.Modification(userInputs);
+                    recruiter.modifyInformation(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(ModifyEmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,7 +272,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
 
         String employeeId = searchEmployeeIdTxt.getText();
         
-        String operationStatus = recruiter.Retrieval(employeeId);
+        String operationStatus = recruiter.retrieveInformation(employeeId);
         existingEmployeePanel.setVisible(true);
     }//GEN-LAST:event_searchBtnActionPerformed
     

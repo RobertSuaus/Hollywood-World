@@ -23,7 +23,7 @@ public class ClientServiceAgent {
         
         this.registerClientForm = registerClientForm;
         this.client = new Client();
-        WindowInitialization();
+        initizalizeWindow();
     }
     
     public ClientServiceAgent(ModifyClientForm modifyClientForm){
@@ -33,7 +33,7 @@ public class ClientServiceAgent {
     }
     
     /*Manejar el procedimiento de registro de cliente*/
-    public String Registration(String[] userInputs){
+    public String registerInformation(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
@@ -46,7 +46,7 @@ public class ClientServiceAgent {
     }
     
     /*Manejar el procedimiento de modificación de datos de cliente*/
-    public String Modification(String[] userInputs){
+    public String modifyInformation(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
@@ -56,7 +56,7 @@ public class ClientServiceAgent {
     }
     
     /*Manejar el procedimiento de obtención de datos del cliente*/
-    public String Retrieval(String membershipIdInput){
+    public String retrieveInformation(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
            int membershipId = Integer.valueOf(membershipIdInput);
@@ -73,7 +73,7 @@ public class ClientServiceAgent {
     
     /*Maneja el procedimiento de inicialización de parametros
     en la ventana de registro de clientes*/
-    private void WindowInitialization(){
+    private void initizalizeWindow(){
         
         int nextId = generateNextMembershipId();
         registerClientForm.fillMembershipField(nextId);

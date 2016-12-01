@@ -211,7 +211,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
 
         String operationStatus;
         try {
-            operationStatus = inventoryControl.ModificationProfile(userInputs);
+            operationStatus = inventoryControl.modifyProfile(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(ModifyMovieProfileForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +222,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
         
         String selectedSerial = searchSerialTxt.getText();
         
-        String operationStatus = inventoryControl.Retrieval(selectedSerial);
+        String operationStatus = inventoryControl.retrieveInformation(selectedSerial);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_searchSerialBtnActionPerformed
     

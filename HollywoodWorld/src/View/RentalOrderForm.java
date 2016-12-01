@@ -397,20 +397,20 @@ public class RentalOrderForm extends javax.swing.JFrame {
 
     private void removeLeaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLeaseBtnActionPerformed
         // TODO add your handling code here:
-        renter.LeaseRemoval(leaseTable.getSelectedRow() ); 
+        renter.removeLease(leaseTable.getSelectedRow() ); 
     }//GEN-LAST:event_removeLeaseBtnActionPerformed
 
     private void assignClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignClientBtnActionPerformed
         // TODO add your handling code here:
         String operationStatus =
-            renter.handleClientAssignation(membershipInputTxt.getText() );
+            renter.assingClientInformation(membershipInputTxt.getText() );
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_assignClientBtnActionPerformed
 
     private void leaseAggregationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaseAggregationBtnActionPerformed
         try {
             String operationStatus =
-                    renter.LeaseAggregation(movieIdInput.getText());
+                    renter.addLease(movieIdInput.getText());
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             //Error de parseo
@@ -420,7 +420,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         
         String operationStatus =
-            renter.Archiving();
+            renter.fileOrder();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_confirmBtnActionPerformed
 

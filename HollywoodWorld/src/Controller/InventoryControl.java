@@ -42,7 +42,7 @@ public class InventoryControl {
         this.movieProfile = new MovieProfile();
     }
     
-    public void MovieAmountModification(String input) {
+    public void modifyMovieAmount(String input) {
         
         if( isValidInputNumber(input) ) {
             int amount = Integer.parseInt(input);
@@ -53,7 +53,7 @@ public class InventoryControl {
         }
     }
     
-    public String AddToInventory(String[] userInputs) throws ParseException{
+    public String addToInventory(String[] userInputs) throws ParseException{
         
         String serialCode = userInputs[0];
         if ( isExistSerialCode(serialCode) ){
@@ -66,7 +66,7 @@ public class InventoryControl {
         return SERIAL_CODE_UNEXIST_MSG;
     }
      
-    public String ModificationProfile(String[] userInputs) throws ParseException{
+    public String modifyProfile(String[] userInputs) throws ParseException{
         
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
@@ -75,7 +75,7 @@ public class InventoryControl {
         return INVALID_DATA_MSG;
     }
     
-    public String RegistrationProfile(String[] userInputs) throws ParseException {
+    public String registerProfile(String[] userInputs) throws ParseException {
          
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
@@ -87,7 +87,7 @@ public class InventoryControl {
         return INVALID_DATA_MSG;
     }
     
-    public String Retrieval(String serialCode){
+    public String retrieveInformation(String serialCode){
         
         if( isExistSerialCode(serialCode) ){
             movieProfile = InventoryManager.getMovieProfileInfo(serialCode);
@@ -101,11 +101,6 @@ public class InventoryControl {
         
         int nextMovieId =  generateNextMovieId();
         registerMovieForm.fillMovieLowerIdField(nextMovieId);
-    }
-    
-    private void setMovieInformation(String[] userInputs){
-        
-        movie.setId(Integer.parseInt(userInputs[2]));       
     }
     
     private void setMovieProfileInformation(String[] userInputs) throws ParseException{

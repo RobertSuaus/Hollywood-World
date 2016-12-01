@@ -228,7 +228,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userServiceAgent.Modification(userInput);
+                userServiceAgent.modifyInformation(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
@@ -238,7 +238,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         //Antes de obtener la información, validar
         String userName = searchUserNameTxt.getText();
         String operationStatus = 
-                userServiceAgent.Retrieval(userName);
+                userServiceAgent.retrieveInformation(userName);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_searchUserBtnActionPerformed

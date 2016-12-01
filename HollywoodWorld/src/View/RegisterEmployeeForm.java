@@ -211,7 +211,7 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         userInputs = gatherAllUserInput();
         String operationStatus;
         try {
-            operationStatus = recruiter.Registration(userInputs);
+            operationStatus = recruiter.registryInformation(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(RegisterEmployeeForm.class.getName()).log(Level.SEVERE, null, ex);

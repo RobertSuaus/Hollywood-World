@@ -43,7 +43,7 @@ public class UserServiceAgent {
     }
     
     /*Manejar el procedimiento de modificacion de usuario*/
-    public String Modification(String[] userInputs){
+    public String modifyInformation(String[] userInputs){
         
         setUserInformation(userInputs);
         if(isUserDataValid() ){
@@ -53,7 +53,7 @@ public class UserServiceAgent {
     }
     
     /*Manejar el procedimiento de obtención de datos de usuario*/
-    public String Retrieval(String userNameInput){
+    public String retrieveInformation(String userNameInput){
         
         user.setUserName(userNameInput);
         

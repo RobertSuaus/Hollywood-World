@@ -167,7 +167,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = inventoryControl.AddToInventory(userInputs);            
+            operationStatus = inventoryControl.addToInventory(userInputs);            
             JOptionPane.showMessageDialog(null, operationStatus);   
         } catch (ParseException ex) {
             Logger.getLogger(RegisterMovieForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +175,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addMoviesBtnActionPerformed
 
     private void amountToAddTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_amountToAddTxtCaretUpdate
-        inventoryControl.MovieAmountModification(amountToAddTxt.getText());
+        inventoryControl.modifyMovieAmount(amountToAddTxt.getText());
     }//GEN-LAST:event_amountToAddTxtCaretUpdate
     
     private String[] gatherAllUserInput(){

@@ -16,15 +16,15 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Robert
  */
-public class ReturnsRequestHandler {
+public class ReturnAgent {
     
-    public ReturnsRequestHandler(ReturnsUI returnsUI){
+    public ReturnAgent(ReturnsUI returnsUI){
         
         this.rentalOrder = new RentalOrder();
         this.returnsUI = returnsUI;
     }
     
-    public String handleRetrieval(String membershipInput) throws ParseException{
+    public String retrieveInformation(String membershipInput) throws ParseException{
         
         if(isValidInputNumber(membershipInput) ){
             int membershipId = Integer.valueOf(membershipInput);
@@ -42,7 +42,7 @@ public class ReturnsRequestHandler {
         return "Por favor, ingrese un número válido de membresía";
     }
     
-    public String handleStatusModification(){
+    public String modifyStatus(){
         
         returnsUI.dispose();
         return RenterManager.

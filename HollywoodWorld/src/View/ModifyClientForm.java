@@ -239,7 +239,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         String membershipIdInput = searchMembershipTxt.getText();
         
         String operationStatus = 
-                clientServiceAgent.Retrieval(membershipIdInput);
+                clientServiceAgent.retrieveInformation(membershipIdInput);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_searchClientBtnActionPerformed
@@ -248,7 +248,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         
         String[] userInputs = gatherAllUserInput();
         String operationStatus = 
-                clientServiceAgent.Modification(userInputs);
+                clientServiceAgent.modifyInformation(userInputs);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 

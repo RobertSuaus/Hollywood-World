@@ -27,7 +27,7 @@ public class Recruiter {
         this.employee = new Employee(
             generateNextEmployeeId()
         );
-        WindowInitialization();        
+        initializeWindow();        
     }
     
     public Recruiter(ModifyEmployeeForm modifyEmployeeForm) {
@@ -38,7 +38,7 @@ public class Recruiter {
         );
     }
     
-    public String Registration(String[] userInputs) throws ParseException{
+    public String registryInformation(String[] userInputs) throws ParseException{
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
@@ -47,7 +47,7 @@ public class Recruiter {
         return INVALID_DATA_MSG;
     }
     
-    public String Modification(String[] userInputs) throws ParseException{
+    public String modifyInformation(String[] userInputs) throws ParseException{
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
@@ -56,7 +56,7 @@ public class Recruiter {
         return INVALID_DATA_MSG;
     }
     
-    public String Retrieval(String employeeIdInput){
+    public String retrieveInformation(String employeeIdInput){
         
         if(isValidInputNumber(employeeIdInput)){
             int employeeId = Integer.valueOf(employeeIdInput);
@@ -67,7 +67,7 @@ public class Recruiter {
         return INVALID_DATA_MSG;
     }
     
-    private void WindowInitialization(){
+    private void initializeWindow(){
         int nextId = generateNextEmployeeId();
         registerEmployeeForm.fillEmployeeIdField(nextId);
     }
