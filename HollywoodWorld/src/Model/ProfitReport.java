@@ -89,11 +89,11 @@ public class ProfitReport {
     
     
     
-    public Date startDate;
-    public Date endDate;
-    public String employeeName;
-    public ArrayList<String[]> registryList;
-    public double totalProfit;
-    public double averageProfit;
+    private Date startDate;
+    private Date endDate;
+    private String employeeName;
+    private ArrayList<String[]> registryList;
+    private double totalProfit;
+    private double averageProfit;
     
 }

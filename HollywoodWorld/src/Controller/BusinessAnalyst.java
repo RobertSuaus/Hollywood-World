@@ -5,7 +5,9 @@
  */
 package Controller;
 
-import java.util.ArrayList;
+import Model.PerformanceReport;
+import Model.ProfitReport;
+import Model.TendencyReport;
 import java.util.Date;
 
 /**
@@ -17,20 +19,26 @@ public class BusinessAnalyst {
     por los agentes de finanzas con los datos correspondientes del negocio.*/
     
     public static ProfitReport fillProfitReport(
-        ProfitReport requestedReport
+        String employeeName,
+        Date startDate,
+        Date endDate
     ){
-        
+        //DAO reference
     }
     
     public static TendencyReport fillTendencyReport(
-        TendencyReport requestedReport
+        String employeeName,
+        Date startDate,
+        Date endDate
     ){
-        
+        //DAO reference
     }
     
     public static PerformanceReport fillPerformanceReport(
-        PerformanceReport requestedReport
+        String employeeName,
+        Date startDate,
+        Date endDate
     ){
-        
+        //DAO reference
     }
 }

@@ -6,6 +6,7 @@
 package View;
 
 import Controller.FinancesAgent;
+import Model.TendencyReport;
 import Model.User;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class TendencyReportUI extends javax.swing.JFrame {
     
     public void fillReportFields(TendencyReport tendencyReport){
         
-        fillRegistryTable();
+        fillRegistryTable(tendencyReport.getRegistryList() );
         mostRentedMovieTxt.setText("");
     }
     

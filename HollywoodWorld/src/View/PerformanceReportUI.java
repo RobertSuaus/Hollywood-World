@@ -6,6 +6,7 @@
 package View;
 
 import Controller.FinancesAgent;
+import Model.PerformanceReport;
 import Model.User;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class PerformanceReportUI extends javax.swing.JFrame {
     
     public void fillReportFields(PerformanceReport performanceReport){
         
-        fillRegistryTable();
+        fillRegistryTable(performanceReport.getRegistryList());
         mostEfficentEmployeeTxt.setText("");
         averageRentsField.setText("");
     }
