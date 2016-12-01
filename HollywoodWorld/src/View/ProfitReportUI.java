@@ -5,6 +5,12 @@
  */
 package View;
 
+import Controller.FinancesAgent;
+import Model.User;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Robert
@@ -14,8 +20,40 @@ public class ProfitReportUI extends javax.swing.JFrame {
     /**
      * Creates new form ReportsUI
      */
-    public ProfitReportUI() {
+    public ProfitReportUI(User user) {
         initComponents();
+        setVisible(true);
+        
+        String userName = user.getName() + " "+ user.getLastName();
+        financesAgent = new FinancesAgent(this, userName);
+    }
+    
+    public void fillReportFields(ProfitReport profitReport){
+        
+        fillRegistryTable();
+        totalProfitField.setText("");
+        averageProfitField.setText("");
+    }
+    
+    private void fillRegistryTable(ArrayList<String[]> registries){
+        
+        Vector <String> title = new Vector<String>();
+        Vector<Vector<Object>> data= new Vector<Vector<Object>>();
+        
+        title.add("Folio");
+        title.add("Ganancia");
+        
+        for(int i=0; i<registries.size(); i++){
+            Vector<Object> row= new Vector<Object>();
+            
+            row.add(((String)registries.get(i)[0] ) );
+            row.add(((String)registries.get(i)[1] ) );
+            
+            data.add(row);
+        }
+        
+        DefaultTableModel modelo= new javax.swing.table.DefaultTableModel(data, title);
+        registryTable.setModel(modelo);
     }
 
     /**
@@ -149,7 +187,7 @@ public class ProfitReportUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private FinancesAgent financesAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField averageProfitField;
     private javax.swing.JLabel currentEmployeeTxt;
