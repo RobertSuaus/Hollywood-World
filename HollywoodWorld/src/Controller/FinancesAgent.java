@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.PerformanceReport;
+import Model.ProfitReport;
+import Model.TendencyReport;
 import View.PerformanceReportUI;
 import View.ProfitReportUI;
 import View.TendencyReportUI;
@@ -18,18 +21,21 @@ public class FinancesAgent {
     public FinancesAgent(ProfitReportUI profitUI, String userName){
         
         this.profitUI = profitUI;
+        this.name = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
     public FinancesAgent(TendencyReportUI tendencyUI, String userName){
         
         this.tendencyUI = tendencyUI;
+        this.name = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
     public FinancesAgent(PerformanceReportUI performanceUI, String userName){
         
         this.performanceUI = performanceUI;
+        this.name = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
@@ -38,11 +44,12 @@ public class FinancesAgent {
         if(isDateInputNotEmpty(startDateInput, endDateInput ) ){
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
-                //Llenar datos iniciales de reporte
-                ProfitReport profitReport = new ProfitReport();
-                
-                //Entregar el reporte al analista para que sea llenado
-                profitReport = BusinessAnalyst.fillProfitReport(profitReport);
+                //Entregar la solicitud al analista para que sea llenado
+                ProfitReport profitReport = BusinessAnalyst.fillProfitReport(
+                    name,
+                    startDateInput,
+                    endDateInput
+                );
                 
                 //Desplegar resultado al usuario
                 profitUI.fillReportFields(profitReport);
@@ -55,11 +62,12 @@ public class FinancesAgent {
         if(isDateInputNotEmpty(startDateInput, endDateInput ) ){
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
-                //Llenar datos iniciales de reporte
-                TendencyReport tendencyReport = new TendencyReport();
-                
-                //Entregar el reporte al analista para que sea llenado
-                tendencyReport = BusinessAnalyst.fillTendencyReport(tendencyReport);
+                //Entregar la solicitud al analista para que sea llenado
+                TendencyReport tendencyReport = BusinessAnalyst.fillTendencyReport(
+                    name,
+                    startDateInput,
+                    endDateInput
+                );
                 
                 //Desplegar resultado al usuario
                 tendencyUI.fillReportFields(tendencyReport);
@@ -72,11 +80,12 @@ public class FinancesAgent {
         if(isDateInputNotEmpty(startDateInput, endDateInput ) ){
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
-                //Llenar datos iniciales de reporte
-                PerformanceReport performanceReport = new PerformanceReport();
-                
-                //Entregar el reporte al analista para que sea llenado
-                performanceReport = BusinessAnalyst.fillPerformanceReport(performanceReport);
+                //Entregar la solicitud al analista para que sea llenado
+                PerformanceReport performanceReport = BusinessAnalyst.fillPerformanceReport(
+                    name,
+                    startDateInput,
+                    endDateInput
+                );
                 
                 //Desplegar resultado al usuario
                 performanceUI.fillReportFields(performanceReport);
@@ -99,9 +108,15 @@ public class FinancesAgent {
     //Revisa que la fecha de inicio sea menor o igual a la fecha final
     private boolean isDateRangeValid(Date startDate, Date endDate){
         
-        return true;
+        /*Java Date compareTo: Retorna 0 si las fechas son iguales, retorna un
+         valor menor a 0 si la fecha es menor a la fecha de argumento*/
+        if(startDate.compareTo(endDate) == 0 ||  startDate.compareTo(endDate) < 0){
+            return true;
+        }else{
+            return false;
+        }
     }
-    
+    private String name;
     private ProfitReportUI profitUI;
     private TendencyReportUI tendencyUI;
     private PerformanceReportUI performanceUI;

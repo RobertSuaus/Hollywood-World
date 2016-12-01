@@ -6,6 +6,7 @@
 package View;
 
 import Controller.FinancesAgent;
+import Model.ProfitReport;
 import Model.User;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class ProfitReportUI extends javax.swing.JFrame {
     
     public void fillReportFields(ProfitReport profitReport){
         
-        fillRegistryTable();
+        fillRegistryTable(profitReport.getRegistryList());
         totalProfitField.setText("");
         averageProfitField.setText("");
     }

@@ -28,7 +28,7 @@ public class TendencyReport {
         this.registryList = registryList;
         this.mostRentedMovie = mostRentedMovie;
     }
-
+    
     public Date getStartDate() {
         return startDate;
     }
@@ -71,10 +71,10 @@ public class TendencyReport {
 
     
     
-    public Date startDate;
-    public Date endDate;
-    public String employeeName;
-    public ArrayList<String[]> registryList;
-    public String mostRentedMovie;
+    private Date startDate;
+    private Date endDate;
+    private String employeeName;
+    private ArrayList<String[]> registryList;
+    private String mostRentedMovie;
     
 }
