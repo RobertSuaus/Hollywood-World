@@ -14,7 +14,7 @@ import java.text.ParseException;
  *
  * @author Robert
  */
-public class RentalOrderAdministrator {
+public class RenterManager {
     
     public static RentalOrder getRentalOrderInfo(int membershipId) throws ParseException{
         

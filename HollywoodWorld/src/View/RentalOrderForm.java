@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.RentalOrderRequestHandler;
+import Controller.Renter;
 import Model.Lease;
 import Model.RentalOrder;
 import Model.User;
@@ -32,7 +32,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
         this.setVisible(true);
         
         String currentUserName = user.getName() + " " + user.getLastName();
-        this.rentalOrderHandler = new RentalOrderRequestHandler(this, currentUserName);
+        this.renter = new Renter(this, currentUserName);
     }
     
     public void fillClientInfoFields(String clientName, String clientMembership){
@@ -397,20 +397,20 @@ public class RentalOrderForm extends javax.swing.JFrame {
 
     private void removeLeaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLeaseBtnActionPerformed
         // TODO add your handling code here:
-        rentalOrderHandler.handleLeaseRemoval(leaseTable.getSelectedRow() ); 
+        renter.removeLease(leaseTable.getSelectedRow() ); 
     }//GEN-LAST:event_removeLeaseBtnActionPerformed
 
     private void assignClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignClientBtnActionPerformed
         // TODO add your handling code here:
         String operationStatus =
-            rentalOrderHandler.handleClientAssignation(membershipInputTxt.getText() );
+            renter.assingClientInformation(membershipInputTxt.getText() );
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_assignClientBtnActionPerformed
 
     private void leaseAggregationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaseAggregationBtnActionPerformed
         try {
             String operationStatus =
-                    rentalOrderHandler.handleLeaseAggregation(movieIdInput.getText());
+                    renter.addLease(movieIdInput.getText());
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             //Error de parseo
@@ -420,7 +420,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         
         String operationStatus =
-            rentalOrderHandler.handleArchiving();
+            renter.fileOrder();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_confirmBtnActionPerformed
 
@@ -428,7 +428,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    private RentalOrderRequestHandler rentalOrderHandler;
+    private Renter renter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignClientBtn;
     private javax.swing.ButtonGroup buttonGroup1;

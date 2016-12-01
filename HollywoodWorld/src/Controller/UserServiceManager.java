@@ -13,7 +13,7 @@ import Model.UserDAO;
  *
  * @author Robert
  */
-public class UserAdministrator{
+public class UserServiceManager{
     /*Clase encargada del control de la información relacionada
     a los usuarios: Crear nuevos usuarios, modificarlos y listarlos*/
     

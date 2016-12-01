@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author Robert
  */
-public class EmployeeAdministrator {
+public class HumanResourcesManager {
     
     public static String registerEmployee(Employee employee){
 

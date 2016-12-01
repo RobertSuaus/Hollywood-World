@@ -19,18 +19,18 @@ import javax.swing.JOptionPane;
  *
  * @author che_i
  */
-public class EmployeeRequestHandler {
+public class Recruiter {
     
-    public EmployeeRequestHandler(RegisterEmployeeForm registerEmployeeForm) {
+    public Recruiter(RegisterEmployeeForm registerEmployeeForm) {
         
         this.registerEmployeeForm = registerEmployeeForm;
         this.employee = new Employee(
             generateNextEmployeeId()
         );
-        handleWindowInitialization();        
+        initializeWindow();        
     }
     
-    public EmployeeRequestHandler(ModifyEmployeeForm modifyEmployeeForm) {
+    public Recruiter(ModifyEmployeeForm modifyEmployeeForm) {
         
         this.modifyEmployeeForm = modifyEmployeeForm;
         this.employee = new Employee(
@@ -38,36 +38,36 @@ public class EmployeeRequestHandler {
         );
     }
     
-    public String handleRegistration(String[] userInputs) throws ParseException{
+    public String registryInformation(String[] userInputs) throws ParseException{
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
-            return EmployeeAdministrator.registerEmployee(employee);
+            return HumanResourcesManager.registerEmployee(employee);
         }
         return INVALID_DATA_MSG;
     }
     
-    public String handleModification(String[] userInputs) throws ParseException{
+    public String modifyInformation(String[] userInputs) throws ParseException{
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
-            return EmployeeAdministrator.modifyEmployee(employee);
+            return HumanResourcesManager.modifyEmployee(employee);
         }        
         return INVALID_DATA_MSG;
     }
     
-    public String handleRetrieval(String employeeIdInput){
+    public String retrieveInformation(String employeeIdInput){
         
         if(isValidInputNumber(employeeIdInput)){
             int employeeId = Integer.valueOf(employeeIdInput);
-            employee = EmployeeAdministrator.getEmployeeInfo(employeeId);
+            employee = HumanResourcesManager.getEmployeeInfo(employeeId);
             modifyEmployeeForm.fillExistingEmployeeForm(employee);
             return "Mostrando datos de: "+employee.getName();
         }
         return INVALID_DATA_MSG;
     }
     
-    private void handleWindowInitialization(){
+    private void initializeWindow(){
         int nextId = generateNextEmployeeId();
         registerEmployeeForm.fillEmployeeIdField(nextId);
     }

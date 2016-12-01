@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author Robert
  */
-public class MovieAdministrator {
+public class InventoryManager {
     
     public static String addMoviesToInventory(Movie movie, int amount){
 

@@ -15,30 +15,30 @@ import View.RegisterClientForm;
  *
  * @author Robert
  */
-public class ClientRequestHandler {
+public class ClientServiceAgent {
     /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
     con clientes*/
     
-    public ClientRequestHandler(RegisterClientForm registerClientForm){
+    public ClientServiceAgent(RegisterClientForm registerClientForm){
         
         this.registerClientForm = registerClientForm;
         this.client = new Client();
-        handleWindowInitialization();
+        initizalizeWindow();
     }
     
-    public ClientRequestHandler(ModifyClientForm modifyClientForm){
+    public ClientServiceAgent(ModifyClientForm modifyClientForm){
         
         this.modifyClientForm = modifyClientForm;
         this.client = new Client();
     }
     
     /*Manejar el procedimiento de registro de cliente*/
-    public String handleRegistration(String[] userInputs){
+    public String registerInformation(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
            if(isMembershipIdAvailable(client.getMembership().getId() ) ){
-               return ClientAdministrator.registerClient(client);
+               return ClientServiceManager.registerClient(client);
            } 
            return MEMBERSHIP_OCCUPIED_MSG;
         } 
@@ -46,23 +46,23 @@ public class ClientRequestHandler {
     }
     
     /*Manejar el procedimiento de modificación de datos de cliente*/
-    public String handleModification(String[] userInputs){
+    public String modifyInformation(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
-            return ClientAdministrator.modifyClient(client);
+            return ClientServiceManager.modifyClient(client);
         }
         return INVALID_DATA_MSG;
     }
     
     /*Manejar el procedimiento de obtención de datos del cliente*/
-    public String handleRetrieval(String membershipIdInput){
+    public String retrieveInformation(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
            int membershipId = Integer.valueOf(membershipIdInput);
            if(membershipExists(membershipId)){
                
-               client = ClientAdministrator.getClientInfo(membershipId);
+               client = ClientServiceManager.getClientInfo(membershipId);
                modifyClientForm.fillExistingClientForm(client);
                return "Mostrando datos de: "+client.getName();
            } 
@@ -73,7 +73,7 @@ public class ClientRequestHandler {
     
     /*Maneja el procedimiento de inicialización de parametros
     en la ventana de registro de clientes*/
-    private void handleWindowInitialization(){
+    private void initizalizeWindow(){
         
         int nextId = generateNextMembershipId();
         registerClientForm.fillMembershipField(nextId);

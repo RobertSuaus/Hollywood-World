@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.UserRequestHandler;
+import Controller.UserServiceAgent;
 import Model.User;
 import javax.swing.JOptionPane;
 
@@ -24,7 +24,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         this.setVisible(true);
         existingUserInfoPanel.setVisible(false);
         
-        this.userRequestHandler = new UserRequestHandler(this);
+        this.userServiceAgent = new UserServiceAgent(this);
     }
     
     public void fillExistingUserForm(User user){
@@ -228,7 +228,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userRequestHandler.handleModification(userInput);
+                userServiceAgent.modifyInformation(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
@@ -238,7 +238,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         //Antes de obtener la información, validar
         String userName = searchUserNameTxt.getText();
         String operationStatus = 
-                userRequestHandler.handleRetrieval(userName);
+                userServiceAgent.retrieveInformation(userName);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_searchUserBtnActionPerformed
@@ -280,7 +280,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
     
 
 
-    private UserRequestHandler userRequestHandler;
+    private UserServiceAgent userServiceAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editLastNameTxt;
     private javax.swing.JTextField editNameTxt;

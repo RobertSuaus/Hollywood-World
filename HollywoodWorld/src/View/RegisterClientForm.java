@@ -1,7 +1,7 @@
 package View;
 
-import Controller.ClientAdministrator;
-import Controller.ClientRequestHandler;
+import Controller.ClientServiceManager;
+import Controller.ClientServiceAgent;
 import Model.Client;
 import Model.ClientMembership;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         
-        this.clientRequestHandler = new ClientRequestHandler(this);
+        this.clientServiceAgent = new ClientServiceAgent(this);
     }
     
     public void fillMembershipField(int membershipId){
@@ -168,7 +168,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
         userInputs = gatherAllUserInput();
         
         String operationStatus =
-                clientRequestHandler.handleRegistration(userInputs);
+                clientServiceAgent.registerInformation(userInputs);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_registerNewClientBtnActionPerformed
@@ -190,7 +190,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
     
     
     
-    private ClientRequestHandler clientRequestHandler;
+    private ClientServiceAgent clientServiceAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;

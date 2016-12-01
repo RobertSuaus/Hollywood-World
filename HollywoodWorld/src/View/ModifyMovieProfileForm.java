@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MovieRequestHandler;
+import Controller.InventoryControl;
 import Model.MovieProfile;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +23,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
         this.setVisible(true);
         this.existingProfilePanel.setVisible(false);
         
-        this.movieRequestHandler = new MovieRequestHandler(this );
+        this.inventoryControl = new InventoryControl(this );
     }
 
     /**
@@ -211,7 +211,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
 
         String operationStatus;
         try {
-            operationStatus = movieRequestHandler.handleModificationProfile(userInputs);
+            operationStatus = inventoryControl.modifyProfile(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(ModifyMovieProfileForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +222,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
         
         String selectedSerial = searchSerialTxt.getText();
         
-        String operationStatus = movieRequestHandler.handleRetrieval(selectedSerial);
+        String operationStatus = inventoryControl.retrieveInformation(selectedSerial);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_searchSerialBtnActionPerformed
     
@@ -253,7 +253,7 @@ public class ModifyMovieProfileForm extends javax.swing.JFrame {
         
     }
     
-    private MovieRequestHandler movieRequestHandler;
+    private InventoryControl inventoryControl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editDescriptionTxt;
     private javax.swing.JPanel editProfilePanel;

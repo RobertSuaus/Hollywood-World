@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.EmployeeRequestHandler;
+import Controller.Recruiter;
 import Model.Employee;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +27,7 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         
-        this.employeeRequestHandler = new EmployeeRequestHandler(this);
+        this.recruiter = new Recruiter(this);
     }
 
     /**
@@ -211,7 +211,7 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         userInputs = gatherAllUserInput();
         String operationStatus;
         try {
-            operationStatus = employeeRequestHandler.handleRegistration(userInputs);
+            operationStatus = recruiter.registryInformation(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(RegisterEmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -241,7 +241,7 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         newIdTxt.setText(String.valueOf(id) );
     }
     
-    private EmployeeRequestHandler employeeRequestHandler;
+    private Recruiter recruiter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployeeBtn;
     private javax.swing.JLabel jLabel1;

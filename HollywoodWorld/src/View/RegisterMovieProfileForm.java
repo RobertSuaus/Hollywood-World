@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MovieRequestHandler;
+import Controller.InventoryControl;
 import Model.Movie;
 import Model.MovieProfile;
 import java.text.ParseException;
@@ -24,7 +24,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         this.setVisible(true);
         this.newProfilePanel.setVisible(true);
         
-        this.movieRequestHandler = new MovieRequestHandler(this );
+        this.inventoryControl = new InventoryControl(this );
     }
 
     /**
@@ -177,7 +177,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = movieRequestHandler.handleRegistrationProfile(userInputs);
+            operationStatus = inventoryControl.registerProfile(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);  
         } catch (ParseException ex) {
             Logger.getLogger(RegisterMovieProfileForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,7 +199,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         return userInput;
     }
     
-    private MovieRequestHandler movieRequestHandler;
+    private InventoryControl inventoryControl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewProfileBtn;
     private javax.swing.JLabel jLabel1;

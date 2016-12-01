@@ -14,28 +14,28 @@ import View.RegisterUserForm;
  *
  * @author Robert
  */
-public class UserRequestHandler {
+public class UserServiceAgent {
     /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
     con usuarios*/
     
-    public UserRequestHandler(RegisterUserForm registerUserForm){
+    public UserServiceAgent(RegisterUserForm registerUserForm){
         
         user = new User();
         this.registerUserForm = registerUserForm;
     }
     
-    public UserRequestHandler(ModifyUserForm modifyUserForm){
+    public UserServiceAgent(ModifyUserForm modifyUserForm){
         
         user = new User();
         this.modifyUserForm = modifyUserForm;
     }
     /*Manejar el procedimiento de creación de usuario*/
-    public String handleCreation(String[] userInputs){
+    public String Creation(String[] userInputs){
         
         setUserInformation(userInputs);
         if(isUserDataValid() ){
             if(isUserNameAvailable() ){
-                return UserAdministrator.createUser(user);
+                return UserServiceManager.createUser(user);
             }
             return OCCUPIED_USERNAME_MSG;
         }
@@ -43,23 +43,23 @@ public class UserRequestHandler {
     }
     
     /*Manejar el procedimiento de modificacion de usuario*/
-    public String handleModification(String[] userInputs){
+    public String modifyInformation(String[] userInputs){
         
         setUserInformation(userInputs);
         if(isUserDataValid() ){
-            return UserAdministrator.modifyUser(user);
+            return UserServiceManager.modifyUser(user);
         }
         return INVALID_DATA_MSG;
     }
     
     /*Manejar el procedimiento de obtención de datos de usuario*/
-    public String handleRetrieval(String userNameInput){
+    public String retrieveInformation(String userNameInput){
         
         user.setUserName(userNameInput);
         
         if(isUserNameValid() ){
             if(!isUserNameAvailable() ){
-                user = UserAdministrator.getUser(userNameInput);
+                user = UserServiceManager.getUser(userNameInput);
                 modifyUserForm.fillExistingUserForm(user);
                 return "Mostrando información del usuario: "+ user.getUserName();
             }

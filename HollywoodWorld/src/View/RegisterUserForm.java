@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.UserRequestHandler;
+import Controller.UserServiceAgent;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +22,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         
-        this.userRequestHandler = new UserRequestHandler(this);
+        this.userServiceAgent = new UserServiceAgent(this);
     }
 
     /**
@@ -168,7 +168,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userRequestHandler.handleCreation(userInput);
+                userServiceAgent.Creation(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_createNewBtnActionPerformed
 
@@ -186,7 +186,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         
     }
     
-    private UserRequestHandler userRequestHandler;
+    private UserServiceAgent userServiceAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createNewBtn;
     private javax.swing.JLabel jLabel1;
