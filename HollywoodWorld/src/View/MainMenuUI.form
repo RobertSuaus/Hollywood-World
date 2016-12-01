@@ -21,17 +21,17 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="ClientButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Manage"/>
+            <Property name="text" type="java.lang.String" value="Administraci&#xf3;n"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Clients"/>
+                <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="clientRegistrationBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Register client"/>
+                    <Property name="text" type="java.lang.String" value="Registrar cliente"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientRegistrationBtnActionPerformed"/>
@@ -39,7 +39,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="clientModificationBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Edit client"/>
+                    <Property name="text" type="java.lang.String" value="Editar cliente"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientModificationBtnActionPerformed"/>
@@ -49,12 +49,12 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Employees"/>
+                <Property name="text" type="java.lang.String" value="Empleados"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="employeeNewBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Register employee"/>
+                    <Property name="text" type="java.lang.String" value="Registrar empleado"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeNewBtnActionPerformed"/>
@@ -62,7 +62,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="employeeEditBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Edit employee"/>
+                    <Property name="text" type="java.lang.String" value="Editar empleado"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeEditBtnActionPerformed"/>
@@ -72,12 +72,12 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Films"/>
+                <Property name="text" type="java.lang.String" value="Pel&#xed;culas"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="addInventoryBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Add to inventory"/>
+                    <Property name="text" type="java.lang.String" value="Agregar a inventario"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addInventoryBtnActionPerformed"/>
@@ -85,7 +85,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="profileNewBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Profile registration"/>
+                    <Property name="text" type="java.lang.String" value="Registrar perfil"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileNewBtnActionPerformed"/>
@@ -93,7 +93,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="profileEditBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Profile modification"/>
+                    <Property name="text" type="java.lang.String" value="Modificar perfil"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileEditBtnActionPerformed"/>
@@ -103,12 +103,12 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="usersSubMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Users"/>
+                <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="userRegistrationBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Register user"/>
+                    <Property name="text" type="java.lang.String" value="Registrar usuarios"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userRegistrationBtnActionPerformed"/>
@@ -116,7 +116,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="userModificationBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Edit user"/>
+                    <Property name="text" type="java.lang.String" value="Editar usuarios"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userModificationBtnActionPerformed"/>
@@ -129,16 +129,17 @@
         <Menu class="javax.swing.JMenu" name="ReportsMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reports"/>
+            <Property name="actionCommand" type="java.lang.String" value="Reportes"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="payrollMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Payroll"/>
+            <Property name="text" type="java.lang.String" value="N&#xf3;mina"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Session">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Terminate Session"/>
+            <Property name="text" type="java.lang.String" value="Cerrar sesi&#xf3;n"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SessionMouseClicked"/>
@@ -177,11 +178,11 @@
                   <Group type="102" attributes="0">
                       <Component id="RentButton" min="-2" pref="139" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="RestorationButton" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="RestorationButton" min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="132" max="32767" attributes="0"/>
+              <EmptySpace pref="121" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,7 +215,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Berlin Sans FB" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Rent"/>
+        <Property name="text" type="java.lang.String" value="Rentas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RentButtonActionPerformed"/>
@@ -225,7 +226,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Berlin Sans FB" size="24" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Returns"/>
+        <Property name="text" type="java.lang.String" value="Devoluciones"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RestorationButtonActionPerformed"/>

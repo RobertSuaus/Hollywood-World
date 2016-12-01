@@ -24,6 +24,14 @@ public class RegisterUserForm extends javax.swing.JFrame {
         
         this.userServiceAgent = new UserServiceAgent(this);
     }
+    
+    public void clearFields() {
+        
+        newNameTxt.setText("");
+        newLastNameTxt.setText("");
+        newUserNameTxt.setText("");
+        newPassword.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,8 +42,6 @@ public class RegisterUserForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         newUserPanel = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -50,35 +56,31 @@ public class RegisterUserForm extends javax.swing.JFrame {
         newNameTxt = new javax.swing.JTextField();
         createNewBtn = new javax.swing.JButton();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Users");
         setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel17.setText("Create new user");
+        jLabel17.setText("Crear nuevo usuario");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("Name:");
+        jLabel1.setText("Nombre:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setText("Last name:");
+        jLabel2.setText("Apellido:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setText("User name:");
+        jLabel3.setText("Nombre de usuario:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setText("Password:");
+        jLabel4.setText("Contraseña:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Permissions:");
 
-        newPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Human Resources", "Manager", "Renter" }));
+        newPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
 
-        createNewBtn.setText("Create user");
+        createNewBtn.setText("Crear usuario");
         createNewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createNewBtnActionPerformed(evt);
@@ -147,9 +149,9 @@ public class RegisterUserForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(newUserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +170,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userServiceAgent.Creation(userInput);
+                userServiceAgent.CreateAccount(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_createNewBtnActionPerformed
 
@@ -195,8 +197,6 @@ public class RegisterUserForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField newLastNameTxt;
     private javax.swing.JTextField newNameTxt;
     private javax.swing.JPasswordField newPassword;

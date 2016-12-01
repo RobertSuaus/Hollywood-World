@@ -29,6 +29,24 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         
         this.recruiter = new Recruiter(this);
     }
+    
+    public void fillEmployeeIdField(int id){
+        
+        newIdTxt.setText(String.valueOf(id) );
+    }
+    
+    public void clearFields(int nextId) {
+        
+        newNameTxt.setText("");
+        newLastNameTxt.setText("");
+        newTelephoneTxt.setText("");
+        newAddressTxt.setText("");
+        newIdTxt.setText(String.valueOf(nextId));
+        newRfcTxt.setText("");
+        newSalaryTxt.setText("");
+        newAdmissionDate.setDate(null);
+        newPositionTxt.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,38 +83,38 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         setTitle("Hollywood World - Manage Employees");
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel18.setText("Employee Registration");
+        jLabel18.setText("Registrar Empleado");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("Name:");
+        jLabel1.setText("Nombre:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setText("Last name:");
+        jLabel2.setText("Apellido:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setText("Telephone:");
+        jLabel3.setText("Teléfono:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setText("Address:");
+        jLabel4.setText("Dirección:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setText("Employee number:");
+        jLabel5.setText("Número de empleado:");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("RFC:");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setText("Basic Salary:");
+        jLabel7.setText("Salario base:");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setText("Admission Date:");
+        jLabel8.setText("Fecha de admisión");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("Employee Position:");
+        jLabel9.setText("Puesto:");
 
         newIdTxt.setEditable(false);
 
-        addEmployeeBtn.setText("Register Employee");
+        addEmployeeBtn.setText("Registrar");
         addEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addEmployeeBtnActionPerformed(evt);
@@ -182,7 +200,7 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
                     .addComponent(newPositionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addEmployeeBtn)
-                .addGap(0, 65, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,16 +208,16 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(newEmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 14, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newEmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,11 +252,6 @@ public class RegisterEmployeeForm extends javax.swing.JFrame {
         userInput[8] = newPositionTxt.getText();
         
         return userInput;
-    }
-    
-    public void fillEmployeeIdField(int id){
-        
-        newIdTxt.setText(String.valueOf(id) );
     }
     
     private Recruiter recruiter;

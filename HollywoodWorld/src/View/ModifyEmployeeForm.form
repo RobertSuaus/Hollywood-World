@@ -24,10 +24,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="editEmployeePanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,34 +48,29 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="existingEmployeePanel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="searchEmployeeIdTxt" min="-2" pref="142" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="searchBtn" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="existingEmployeePanel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="searchEmployeeIdTxt" min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="searchBtn" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="searchEmployeeIdTxt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -95,7 +90,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="319" max="32767" attributes="0"/>
+                      <EmptySpace pref="334" max="32767" attributes="0"/>
                       <Component id="saveChangesBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -195,7 +190,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name:"/>
+                <Property name="text" type="java.lang.String" value="Nombre:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editNameTxt">
@@ -205,7 +200,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Last name:"/>
+                <Property name="text" type="java.lang.String" value="Apellido:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editLastNameTxt">
@@ -215,7 +210,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telephone:"/>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editTelephoneTxt">
@@ -225,7 +220,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Address:"/>
+                <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editAddressTxt">
@@ -235,7 +230,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Employee number:"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero de empleado:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editIdTxt">
@@ -258,7 +253,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Basic Salary:"/>
+                <Property name="text" type="java.lang.String" value="Salario base:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editSalaryTxt">
@@ -268,7 +263,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Admission Date:"/>
+                <Property name="text" type="java.lang.String" value="Fecha de admisi&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="org.jdesktop.swingx.JXDatePicker" name="editAdmissionDate">
@@ -278,14 +273,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Employee Position:"/>
+                <Property name="text" type="java.lang.String" value="Puesto:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editPositionTxt">
             </Component>
             <Component class="javax.swing.JButton" name="saveChangesBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Save Changes"/>
+                <Property name="text" type="java.lang.String" value="Guardar cambios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesBtnActionPerformed"/>
@@ -298,7 +293,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bodoni MT" size="24" style="3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Modify Employee"/>
+            <Property name="text" type="java.lang.String" value="Modificar informacion de Empleado"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
@@ -306,14 +301,14 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Employee Number:"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de empleado:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="searchEmployeeIdTxt">
         </Component>
         <Component class="javax.swing.JButton" name="searchBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBtnActionPerformed"/>

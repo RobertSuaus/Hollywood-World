@@ -25,10 +25,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="editClientPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,30 +48,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="existingClientInfoPanel" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="searchMembershipTxt" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="searchClientBtn" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="searchMembershipTxt" min="-2" pref="84" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="searchClientBtn" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="existingClientInfoPanel" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,10 +105,10 @@
                           <Component id="editLastNameTxt" alignment="0" max="32767" attributes="0"/>
                           <Component id="editTelephoneTxt" alignment="0" max="32767" attributes="0"/>
                           <Component id="editAddressTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="editMembershipTxt" alignment="0" pref="189" max="32767" attributes="0"/>
-                          <Component id="membershipStatus" max="32767" attributes="0"/>
+                          <Component id="editMembershipTxt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="membershipStatus" pref="189" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -173,7 +162,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Name:"/>
+                <Property name="text" type="java.lang.String" value="Nombre:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editNameTxt">
@@ -183,7 +172,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Last name:"/>
+                <Property name="text" type="java.lang.String" value="Apellido:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editLastNameTxt">
@@ -193,7 +182,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telephone:"/>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editTelephoneTxt">
@@ -203,7 +192,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Address:"/>
+                <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editAddressTxt">
@@ -213,7 +202,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Membership number:"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero de membresia:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="editMembershipTxt">
@@ -226,15 +215,15 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Membership status:"/>
+                <Property name="text" type="java.lang.String" value="Estado de membresia:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="membershipStatus">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Active"/>
-                    <StringItem index="1" value="Inactive"/>
+                    <StringItem index="0" value="Activo"/>
+                    <StringItem index="1" value="Inactivo"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -244,7 +233,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="saveChangesBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Save Changes"/>
+                <Property name="text" type="java.lang.String" value="Guardar cambios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesBtnActionPerformed"/>
@@ -257,7 +246,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bodoni MT" size="24" style="3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Modify client information"/>
+            <Property name="text" type="java.lang.String" value="Modificar informaci&#xf3;n de cliente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -265,14 +254,14 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Membership number:"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de membresia"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="searchMembershipTxt">
         </Component>
         <Component class="javax.swing.JButton" name="searchClientBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchClientBtnActionPerformed"/>

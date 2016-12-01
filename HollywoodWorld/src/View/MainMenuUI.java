@@ -74,7 +74,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         jLabel3.setText("Hollywood World!");
 
         RentButton.setFont(new java.awt.Font("Berlin Sans FB", 3, 18)); // NOI18N
-        RentButton.setText("Rent");
+        RentButton.setText("Rentas");
         RentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RentButtonActionPerformed(evt);
@@ -82,18 +82,18 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
 
         RestorationButton.setFont(new java.awt.Font("Berlin Sans FB", 3, 24)); // NOI18N
-        RestorationButton.setText("Returns");
+        RestorationButton.setText("Devoluciones");
         RestorationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RestorationButtonActionPerformed(evt);
             }
         });
 
-        ClientButton.setText("Manage");
+        ClientButton.setText("Administración");
 
-        jMenu1.setText("Clients");
+        jMenu1.setText("Clientes");
 
-        clientRegistrationBtn.setText("Register client");
+        clientRegistrationBtn.setText("Registrar cliente");
         clientRegistrationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientRegistrationBtnActionPerformed(evt);
@@ -101,7 +101,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         jMenu1.add(clientRegistrationBtn);
 
-        clientModificationBtn.setText("Edit client");
+        clientModificationBtn.setText("Editar cliente");
         clientModificationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientModificationBtnActionPerformed(evt);
@@ -111,9 +111,9 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         ClientButton.add(jMenu1);
 
-        jMenu3.setText("Employees");
+        jMenu3.setText("Empleados");
 
-        employeeNewBtn.setText("Register employee");
+        employeeNewBtn.setText("Registrar empleado");
         employeeNewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeNewBtnActionPerformed(evt);
@@ -121,7 +121,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         jMenu3.add(employeeNewBtn);
 
-        employeeEditBtn.setText("Edit employee");
+        employeeEditBtn.setText("Editar empleado");
         employeeEditBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeEditBtnActionPerformed(evt);
@@ -131,9 +131,9 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         ClientButton.add(jMenu3);
 
-        jMenu2.setText("Films");
+        jMenu2.setText("Películas");
 
-        addInventoryBtn.setText("Add to inventory");
+        addInventoryBtn.setText("Agregar a inventario");
         addInventoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInventoryBtnActionPerformed(evt);
@@ -141,7 +141,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         jMenu2.add(addInventoryBtn);
 
-        profileNewBtn.setText("Profile registration");
+        profileNewBtn.setText("Registrar perfil");
         profileNewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileNewBtnActionPerformed(evt);
@@ -149,7 +149,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         jMenu2.add(profileNewBtn);
 
-        profileEditBtn.setText("Profile modification");
+        profileEditBtn.setText("Modificar perfil");
         profileEditBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileEditBtnActionPerformed(evt);
@@ -159,9 +159,9 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         ClientButton.add(jMenu2);
 
-        usersSubMenu.setText("Users");
+        usersSubMenu.setText("Usuarios");
 
-        userRegistrationBtn.setText("Register user");
+        userRegistrationBtn.setText("Registrar usuarios");
         userRegistrationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userRegistrationBtnActionPerformed(evt);
@@ -169,7 +169,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         });
         usersSubMenu.add(userRegistrationBtn);
 
-        userModificationBtn.setText("Edit user");
+        userModificationBtn.setText("Editar usuarios");
         userModificationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userModificationBtnActionPerformed(evt);
@@ -182,12 +182,13 @@ public class MainMenuUI extends javax.swing.JFrame {
         jMenuBar1.add(ClientButton);
 
         ReportsMenu.setText("Reports");
+        ReportsMenu.setActionCommand("Reportes");
         jMenuBar1.add(ReportsMenu);
 
-        payrollMenu.setText("Payroll");
+        payrollMenu.setText("Nómina");
         jMenuBar1.add(payrollMenu);
 
-        Session.setText("Terminate Session");
+        Session.setText("Cerrar sesión");
         Session.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SessionMouseClicked(evt);
@@ -207,9 +208,9 @@ public class MainMenuUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75)
-                        .addComponent(RestorationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(RestorationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
