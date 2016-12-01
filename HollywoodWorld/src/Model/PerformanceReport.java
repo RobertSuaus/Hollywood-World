@@ -26,6 +26,7 @@ public class PerformanceReport {
         this.endDate = endDate;
         this.employeeName = employeeName;
         this.registryList = registryList;
+        this.employeeMonth = employeeMonth;
         this.averageRents = averageRents;
     }
 
