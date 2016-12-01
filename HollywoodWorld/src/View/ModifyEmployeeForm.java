@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.EmployeeRequestHandler;
+import Controller.Recruiter;
 import Model.Employee;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +28,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         this.setVisible(true);
         existingEmployeePanel.setVisible(false);
         
-        this.employeeRequestHandler = new EmployeeRequestHandler(this);
+        this.recruiter = new Recruiter(this);
     }
 
     /**
@@ -261,7 +261,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         String operationStatus;
         try {
             operationStatus =
-                    employeeRequestHandler.handleModification(userInputs);
+                    recruiter.Modification(userInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
             Logger.getLogger(ModifyEmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,7 +272,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
 
         String employeeId = searchEmployeeIdTxt.getText();
         
-        String operationStatus = employeeRequestHandler.handleRetrieval(employeeId);
+        String operationStatus = recruiter.Retrieval(employeeId);
         existingEmployeePanel.setVisible(true);
     }//GEN-LAST:event_searchBtnActionPerformed
     
@@ -309,7 +309,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         editPositionTxt.setText(employee.getPosition() );
     }
 
-    private EmployeeRequestHandler employeeRequestHandler;
+    private Recruiter recruiter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editAddressTxt;
     private org.jdesktop.swingx.JXDatePicker editAdmissionDate;

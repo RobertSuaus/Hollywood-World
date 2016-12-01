@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ClientRequestHandler;
+import Controller.ClientServiceAgent;
 import Model.Client;
 import javax.swing.JOptionPane;
 
@@ -19,7 +19,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         this.setVisible(true);
         this.existingClientInfoPanel.setVisible(false);
         
-        this.clientRequestHandler = new ClientRequestHandler(this);
+        this.clientServiceAgent = new ClientServiceAgent(this);
     }
     
     public void fillExistingClientForm(Client client){
@@ -239,7 +239,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         String membershipIdInput = searchMembershipTxt.getText();
         
         String operationStatus = 
-                clientRequestHandler.handleRetrieval(membershipIdInput);
+                clientServiceAgent.Retrieval(membershipIdInput);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_searchClientBtnActionPerformed
@@ -248,7 +248,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         
         String[] userInputs = gatherAllUserInput();
         String operationStatus = 
-                clientRequestHandler.handleModification(userInputs);
+                clientServiceAgent.Modification(userInputs);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
@@ -282,7 +282,7 @@ public class ModifyClientForm extends javax.swing.JFrame {
         return statusIndex;
     }
     
-    private ClientRequestHandler clientRequestHandler;
+    private ClientServiceAgent clientServiceAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField editAddressTxt;
     private javax.swing.JPanel editClientPanel;

@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MovieRequestHandler;
+import Controller.InventoryControl;
 import Model.Movie;
 import Model.MovieProfile;
 import java.text.ParseException;
@@ -22,7 +22,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         
         initComponents(); //Componentes visuales de swing
         this.setVisible(true);        
-        this.movieRequestHandler = new MovieRequestHandler(this );
+        this.inventoryControl = new InventoryControl(this );
     }
 
     /**
@@ -167,7 +167,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = movieRequestHandler.handleAddToInventory(userInputs);            
+            operationStatus = inventoryControl.AddToInventory(userInputs);            
             JOptionPane.showMessageDialog(null, operationStatus);   
         } catch (ParseException ex) {
             Logger.getLogger(RegisterMovieForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +175,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addMoviesBtnActionPerformed
 
     private void amountToAddTxtCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_amountToAddTxtCaretUpdate
-        movieRequestHandler.handleMovieAmountModification(amountToAddTxt.getText());
+        inventoryControl.MovieAmountModification(amountToAddTxt.getText());
     }//GEN-LAST:event_amountToAddTxtCaretUpdate
     
     private String[] gatherAllUserInput(){
@@ -196,7 +196,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         this.movieLowerId.setText(String.valueOf(LowerId ) );
     }
     
-    private MovieRequestHandler movieRequestHandler;
+    private InventoryControl inventoryControl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMoviesBtn;
     private javax.swing.JTextField addSerialCodeTxt;

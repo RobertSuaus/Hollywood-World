@@ -8,7 +8,7 @@ import Model.StatusValidator;
  *
  * @author Robert
  */
-public class ClientAdministrator {
+public class ClientServiceManager {
     /*Clase encargada del control de la información relacionada
     a los clientes: Agregar nuevos clientes, modificarlos y listarlos*/
     

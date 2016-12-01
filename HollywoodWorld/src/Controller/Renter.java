@@ -22,16 +22,16 @@ import java.util.Date;
  *
  * @author Robert
  */
-public class RentalOrderRequestHandler {
+public class Renter {
     /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
     con las ordenes de renta*/
     
-    public RentalOrderRequestHandler(RentalOrderForm rentalOrderForm, String userName){
+    public Renter(RentalOrderForm rentalOrderForm, String userName){
         
         this.rentalOrderForm = rentalOrderForm;
         this.rentalOrder = new RentalOrder(generateNextFolio(), userName );
         setRentalOrderReturnDate(3); //3 días por defecto
-        handleWindowInitialization();
+        WindowInitialization();
     }
     
     //Maneja el procedimiento para asignar los datos de un cliente a la orden de renta
@@ -41,7 +41,7 @@ public class RentalOrderRequestHandler {
             int membershipId = Integer.valueOf(membershipIdInput);
             if(membershipExists(membershipId) ){
                 
-                Client client = ClientAdministrator.getClientInfo(membershipId);
+                Client client = ClientServiceManager.getClientInfo(membershipId);
                 if(clientCanRent(client) ){
                     
                     rentalOrder.setClientName(
@@ -63,13 +63,13 @@ public class RentalOrderRequestHandler {
     }
     
     //Maneja el procedimiento para agregar un nuevo arrendamiento a la orden de renta
-    public String handleLeaseAggregation(String movieIdInput) throws ParseException{
+    public String LeaseAggregation(String movieIdInput) throws ParseException{
         
         if(isValidInputNumber (movieIdInput) ){
             int movieId = Integer.valueOf(movieIdInput);
             if(movieExists (movieId) ){
                 
-                Movie movie = MovieAdministrator.getMovieInfo(movieId);
+                Movie movie = InventoryManager.getMovieInfo(movieId);
                 
                 rentalOrder.addLease(generateLease(movie) );
                 rentalOrder.computeTotal();
@@ -86,7 +86,7 @@ public class RentalOrderRequestHandler {
         return "Por favor, ingrese un número de película válido";
     }
     
-    public void handleLeaseRemoval(int selectedTableIndex){
+    public void LeaseRemoval(int selectedTableIndex){
         
         //-1 es el default del componente JTable si no hay una fila seleccionada
         if(selectedTableIndex != -1){
@@ -103,13 +103,13 @@ public class RentalOrderRequestHandler {
     }
     
     //Maneja el procedimiento para archivar la orden de renta
-    public String handleArchiving(){
+    public String Archiving(){
         
         if(isRentalOrderInfoValid() ){
             if(isFolioAvailable() ){
                 
                 rentalOrderForm.dispose();
-                return RentalOrderAdministrator.archieveRentOrder(rentalOrder);
+                return RenterManager.archieveRentOrder(rentalOrder);
             }
             return "El número de folio está ocupado";
         }
@@ -118,7 +118,7 @@ public class RentalOrderRequestHandler {
     
     /*Maneja el procedimiento para establecer la ventana con los datos
     que se conocen inicialmente de la orden de renta*/
-    private void handleWindowInitialization(){
+    private void WindowInitialization(){
         
         rentalOrderForm.fillInitialValuesFields(rentalOrder);
     }

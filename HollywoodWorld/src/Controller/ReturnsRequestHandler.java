@@ -30,7 +30,7 @@ public class ReturnsRequestHandler {
             int membershipId = Integer.valueOf(membershipInput);
             if(membershipExists(membershipId ) ){
                 
-                rentalOrder = RentalOrderAdministrator.
+                rentalOrder = RenterManager.
                         getRentalOrderInfo(membershipId);
                 additionalCost = computeAdditionalCost();
                 
@@ -45,7 +45,7 @@ public class ReturnsRequestHandler {
     public String handleStatusModification(){
         
         returnsUI.dispose();
-        return RentalOrderAdministrator.
+        return RenterManager.
                 modifyRentalOrderStatus(rentalOrder.getFolio(), additionalCost );
     }
     

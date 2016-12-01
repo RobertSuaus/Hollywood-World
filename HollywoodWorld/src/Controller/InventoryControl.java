@@ -21,28 +21,28 @@ import javax.swing.JOptionPane;
  *
  * @author che_i
  */
-public class MovieRequestHandler {
+public class InventoryControl {
     
-    public MovieRequestHandler(RegisterMovieProfileForm registerMovieProfileForm){
+    public InventoryControl(RegisterMovieProfileForm registerMovieProfileForm){
         
         this.registerMovieProfileForm = registerMovieProfileForm;
         this.movieProfile = new MovieProfile();
     }
     
-    public MovieRequestHandler(RegisterMovieForm registerMovieForm){
+    public InventoryControl(RegisterMovieForm registerMovieForm){
         
         this.registerMovieForm = registerMovieForm;
         this.movie = new Movie(generateNextMovieId());
         fillMovieIdField();
     }
     
-    public MovieRequestHandler(ModifyMovieProfileForm modifyMovieForm){
+    public InventoryControl(ModifyMovieProfileForm modifyMovieForm){
         
         this.modifyMovieProfileForm = modifyMovieForm;
         this.movieProfile = new MovieProfile();
     }
     
-    public void handleMovieAmountModification(String input) {
+    public void MovieAmountModification(String input) {
         
         if( isValidInputNumber(input) ) {
             int amount = Integer.parseInt(input);
@@ -53,7 +53,7 @@ public class MovieRequestHandler {
         }
     }
     
-    public String handleAddToInventory(String[] userInputs) throws ParseException{
+    public String AddToInventory(String[] userInputs) throws ParseException{
         
         String serialCode = userInputs[0];
         if ( isExistSerialCode(serialCode) ){
@@ -61,36 +61,36 @@ public class MovieRequestHandler {
                         getMovieProfileInfo(serialCode)
                         );
             int addAmount = Integer.valueOf( userInputs[1] );
-           return MovieAdministrator.addMoviesToInventory(movie, addAmount);
+           return InventoryManager.addMoviesToInventory(movie, addAmount);
         }
         return SERIAL_CODE_UNEXIST_MSG;
     }
      
-    public String handleModificationProfile(String[] userInputs) throws ParseException{
+    public String ModificationProfile(String[] userInputs) throws ParseException{
         
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
-            return MovieAdministrator.modifyMovieProfile(movieProfile);
+            return InventoryManager.modifyMovieProfile(movieProfile);
         }
         return INVALID_DATA_MSG;
     }
     
-    public String handleRegistrationProfile(String[] userInputs) throws ParseException {
+    public String RegistrationProfile(String[] userInputs) throws ParseException {
          
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
             if( isSerialCodeAvailable(movieProfile.getSerialCode()) ){
-                return MovieAdministrator.registerMovieProfile(movieProfile);
+                return InventoryManager.registerMovieProfile(movieProfile);
             }
             return SERIAL_CODE_OCUPIED_MSG;
         }
         return INVALID_DATA_MSG;
     }
     
-    public String handleRetrieval(String serialCode){
+    public String Retrieval(String serialCode){
         
         if( isExistSerialCode(serialCode) ){
-            movieProfile = MovieAdministrator.getMovieProfileInfo(serialCode);
+            movieProfile = InventoryManager.getMovieProfileInfo(serialCode);
             modifyMovieProfileForm.fillExistingProfileForm(movieProfile);
             return "Mostrando información de: "+ movieProfile.getTitle();
         }

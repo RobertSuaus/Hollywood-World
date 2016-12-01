@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.RentalOrderRequestHandler;
+import Controller.Renter;
 import Controller.ReturnsRequestHandler;
 import Model.Lease;
 import Model.RentalOrder;
