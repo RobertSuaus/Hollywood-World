@@ -21,21 +21,21 @@ public class FinancesAgent {
     public FinancesAgent(ProfitReportUI profitUI, String userName){
         
         this.profitUI = profitUI;
-        this.name = userName;
+        this.employeeName = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
     public FinancesAgent(TendencyReportUI tendencyUI, String userName){
         
         this.tendencyUI = tendencyUI;
-        this.name = userName;
+        this.employeeName = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
     public FinancesAgent(PerformanceReportUI performanceUI, String userName){
         
         this.performanceUI = performanceUI;
-        this.name = userName;
+        this.employeeName = userName;
         //Crear reporte con datos iniciales conocidos
     }
     
@@ -46,7 +46,7 @@ public class FinancesAgent {
                 
                 //Entregar la solicitud al analista para que sea llenado
                 ProfitReport profitReport = BusinessAnalyst.fillProfitReport(
-                    name,
+                    employeeName,
                     startDateInput,
                     endDateInput
                 );
@@ -64,7 +64,7 @@ public class FinancesAgent {
                 
                 //Entregar la solicitud al analista para que sea llenado
                 TendencyReport tendencyReport = BusinessAnalyst.fillTendencyReport(
-                    name,
+                    employeeName,
                     startDateInput,
                     endDateInput
                 );
@@ -82,7 +82,7 @@ public class FinancesAgent {
                 
                 //Entregar la solicitud al analista para que sea llenado
                 PerformanceReport performanceReport = BusinessAnalyst.fillPerformanceReport(
-                    name,
+                    employeeName,
                     startDateInput,
                     endDateInput
                 );
@@ -116,7 +116,7 @@ public class FinancesAgent {
             return false;
         }
     }
-    private String name;
+    private String employeeName;
     private ProfitReportUI profitUI;
     private TendencyReportUI tendencyUI;
     private PerformanceReportUI performanceUI;

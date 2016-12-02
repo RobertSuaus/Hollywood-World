@@ -9,6 +9,7 @@ import Controller.FinancesAgent;
 import Model.ProfitReport;
 import Model.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,14 +27,17 @@ public class ProfitReportUI extends javax.swing.JFrame {
         setVisible(true);
         
         String userName = user.getName() + " "+ user.getLastName();
+        currentEmployeeTxt.setText(userName);
         financesAgent = new FinancesAgent(this, userName);
     }
     
     public void fillReportFields(ProfitReport profitReport){
         
         fillRegistryTable(profitReport.getRegistryList());
-        totalProfitField.setText("");
-        averageProfitField.setText("");
+        totalProfitField.setText(String.valueOf(profitReport.getTotalProfit() ) );
+        averageProfitField.setText(String.format(
+            "%.2f", profitReport.getAverageProfit() ) 
+        );
     }
     
     private void fillRegistryTable(ArrayList<String[]> registries){
@@ -80,8 +84,9 @@ public class ProfitReportUI extends javax.swing.JFrame {
         totalProfitField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         averageProfitField = new javax.swing.JTextField();
+        generateBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         registryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,6 +120,13 @@ public class ProfitReportUI extends javax.swing.JFrame {
 
         jLabel8.setText("Promedio de ganancia por renta:");
 
+        generateBtn.setText("Generar reporte");
+        generateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,7 +147,9 @@ public class ProfitReportUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(190, 190, 190)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(generateBtn))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -150,9 +164,9 @@ public class ProfitReportUI extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(totalProfitField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(averageProfitField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(totalProfitField, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(averageProfitField))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,7 +185,9 @@ public class ProfitReportUI extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generateBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -188,11 +204,19 @@ public class ProfitReportUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void generateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBtnActionPerformed
+        // TODO add your handling code here:
+        Date startDateInput = startDate.getDate();
+        Date endDateInput = endDate.getDate();
+        financesAgent.requestProfitReport(startDateInput, endDateInput);
+    }//GEN-LAST:event_generateBtnActionPerformed
+
     private FinancesAgent financesAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField averageProfitField;
     private javax.swing.JLabel currentEmployeeTxt;
     private org.jdesktop.swingx.JXDatePicker endDate;
+    private javax.swing.JButton generateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
