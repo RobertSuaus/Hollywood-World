@@ -23,6 +23,7 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
+        return null;
         //DAO reference
     }
     
@@ -31,6 +32,7 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
+        return null;
         //DAO reference
     }
     
@@ -39,6 +41,7 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
+        return null;
         //DAO reference
     }
 }
