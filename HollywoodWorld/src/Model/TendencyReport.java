@@ -29,6 +29,18 @@ public class TendencyReport {
         this.mostRentedMovie = mostRentedMovie;
     }
     
+    public TendencyReport(
+            String employeeName,
+            Date startDate,
+            Date endDate
+    ){
+        this.employeeName = employeeName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.registryList = new ArrayList<String[]>();
+        this.mostRentedMovie = "";
+    }
+    
     public Date getStartDate() {
         return startDate;
     }

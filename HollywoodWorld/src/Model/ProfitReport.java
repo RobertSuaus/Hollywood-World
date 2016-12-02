@@ -29,6 +29,19 @@ public class ProfitReport {
         this. totalProfit = totalProfit;
         this.averageProfit = averageProfit;
     }
+    
+    public ProfitReport(
+            String employeeName,
+            Date startDate,
+            Date endDate
+    ){
+        this.employeeName = employeeName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.registryList = new ArrayList<String[]>();
+        this.totalProfit = 0;
+        this.averageProfit = 0;
+    }
 
     public Date getStartDate() {
         return startDate;
