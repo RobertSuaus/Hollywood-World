@@ -120,6 +120,33 @@ public class MainMenuRequestHandler {
         }
     }
     
+    public void handleProfitReportRequest(){
+        
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessProfitReportWindow(user);
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handlePerformanceReportRequest(){
+        
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessPerformanceReportWindow(user);
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handleTendencyReportRequest(){
+        
+        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+            MainMenuAdministrator.accessTendencyReportWindow(user);
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
     private boolean userHasAdminPermissions(){
         
         String userPermissions = user.getPermissions();
@@ -163,6 +190,8 @@ public class MainMenuRequestHandler {
             return false;
         }
     }
+    
+    
     
     private User user;
     private MainMenuUI mainMenu;

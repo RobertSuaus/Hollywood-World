@@ -56,4 +56,16 @@ public class MainMenuAdministrator {
     public static void accessReturnsWindow(){
         new ReturnsUI();
     }
+    
+    public static void accessProfitReportWindow(User user){
+        new ProfitReportUI(user);
+    }
+    
+    public static void accessPerformanceReportWindow(User user){
+        new PerformanceReportUI(user);
+    }
+    
+    public static void accessTendencyReportWindow(User user){
+        new TendencyReportUI(user);
+    }
 }

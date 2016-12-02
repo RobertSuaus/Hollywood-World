@@ -9,6 +9,7 @@ import Controller.FinancesAgent;
 import Model.TendencyReport;
 import Model.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,14 +26,14 @@ public class TendencyReportUI extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         String userName = user.getName() + " " + user.getLastName();
-        
+        currentEmployeeTxt.setText(userName);
         financesAgent = new FinancesAgent(this, userName);
     }
     
     public void fillReportFields(TendencyReport tendencyReport){
         
         fillRegistryTable(tendencyReport.getRegistryList() );
-        mostRentedMovieTxt.setText("");
+        mostRentedMovieTxt.setText(tendencyReport.getMostRentedMovie() );
     }
     
     private void fillRegistryTable(ArrayList<String[]> registries){
@@ -77,8 +78,9 @@ public class TendencyReportUI extends javax.swing.JFrame {
         currentEmployeeTxt = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         mostRentedMovieTxt = new javax.swing.JTextField();
+        generateBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         registryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +120,13 @@ public class TendencyReportUI extends javax.swing.JFrame {
 
         jLabel7.setText("Película más rentada:");
 
+        generateBtn.setText("Generar reporte");
+        generateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,13 +154,18 @@ public class TendencyReportUI extends javax.swing.JFrame {
                                         .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(41, 41, 41)
                                         .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(generateBtn))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jLabel7)
                         .addGap(87, 87, 87)
-                        .addComponent(mostRentedMovieTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mostRentedMovieTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,7 +184,9 @@ public class TendencyReportUI extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generateBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -183,6 +199,13 @@ public class TendencyReportUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void generateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBtnActionPerformed
+        // TODO add your handling code here:
+        Date startDateInput = startDate.getDate();
+        Date endDateInput = endDate.getDate();
+        financesAgent.requestTendencyReport(startDateInput, endDateInput);
+    }//GEN-LAST:event_generateBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,6 +213,7 @@ public class TendencyReportUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel currentEmployeeTxt;
     private org.jdesktop.swingx.JXDatePicker endDate;
+    private javax.swing.JButton generateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

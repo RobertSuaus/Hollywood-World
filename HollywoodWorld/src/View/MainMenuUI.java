@@ -59,7 +59,10 @@ public class MainMenuUI extends javax.swing.JFrame {
         usersSubMenu = new javax.swing.JMenu();
         userRegistrationBtn = new javax.swing.JMenuItem();
         userModificationBtn = new javax.swing.JMenuItem();
-        ReportsMenu = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        profitReportBtn = new javax.swing.JMenuItem();
+        performanceReportBtn = new javax.swing.JMenuItem();
+        tendencyReportBtn = new javax.swing.JMenuItem();
         payrollMenu = new javax.swing.JMenu();
         Session = new javax.swing.JMenu();
 
@@ -181,8 +184,33 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         jMenuBar1.add(ClientButton);
 
-        ReportsMenu.setText("Reports");
-        jMenuBar1.add(ReportsMenu);
+        jMenu4.setText("Reports");
+
+        profitReportBtn.setText("Profit report");
+        profitReportBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profitReportBtnActionPerformed(evt);
+            }
+        });
+        jMenu4.add(profitReportBtn);
+
+        performanceReportBtn.setText("Performance report");
+        performanceReportBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                performanceReportBtnActionPerformed(evt);
+            }
+        });
+        jMenu4.add(performanceReportBtn);
+
+        tendencyReportBtn.setText("Tendency report");
+        tendencyReportBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tendencyReportBtnActionPerformed(evt);
+            }
+        });
+        jMenu4.add(tendencyReportBtn);
+
+        jMenuBar1.add(jMenu4);
 
         payrollMenu.setText("Payroll");
         jMenuBar1.add(payrollMenu);
@@ -286,13 +314,27 @@ public class MainMenuUI extends javax.swing.JFrame {
         mainMenuRequestHandler.handleEmployeeModificationRequest();
     }//GEN-LAST:event_employeeEditBtnActionPerformed
 
+    private void profitReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profitReportBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handleProfitReportRequest();
+    }//GEN-LAST:event_profitReportBtnActionPerformed
+
+    private void performanceReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performanceReportBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handlePerformanceReportRequest();
+    }//GEN-LAST:event_performanceReportBtnActionPerformed
+
+    private void tendencyReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tendencyReportBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handleTendencyReportRequest();
+    }//GEN-LAST:event_tendencyReportBtnActionPerformed
+
     
     private MainMenuRequestHandler mainMenuRequestHandler;
     private SessionRequestHandler sessionRequestHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ClientButton;
     private javax.swing.JButton RentButton;
-    private javax.swing.JMenu ReportsMenu;
     private javax.swing.JButton RestorationButton;
     private javax.swing.JMenu Session;
     private javax.swing.JMenuItem addInventoryBtn;
@@ -304,12 +346,16 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu payrollMenu;
+    private javax.swing.JMenuItem performanceReportBtn;
     private javax.swing.JMenuItem profileEditBtn;
     private javax.swing.JMenuItem profileNewBtn;
+    private javax.swing.JMenuItem profitReportBtn;
+    private javax.swing.JMenuItem tendencyReportBtn;
     private javax.swing.JMenuItem userModificationBtn;
     private javax.swing.JMenuItem userRegistrationBtn;
     private javax.swing.JMenu usersSubMenu;

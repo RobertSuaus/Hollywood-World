@@ -20,15 +20,15 @@ public class ReportDAO extends BaseDAO{
     public static ProfitReport getRegistryRents(String employeeName, Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        String sqlProfit = "SELECT folio, totalRent+additionalCost FROM"+
-                "rentalorder WHERE transactionDate <= '$endDate$' AND"+
+        String sqlProfit = "SELECT folio, totalRent+additionalCost FROM "+
+                "rentalorder WHERE transactionDate <= '$endDate$' AND "+
                 "transactionDate >= '$startDate$'";
         sqlProfit = sqlProfit.replace("$startDate$", dateFormat.format(startDate));
         sqlProfit = sqlProfit.replace("$endDate$", dateFormat.format(endDate));
         
         String sqlAvg = "SELECT SUM(totalRent+additionalCost),"+
-                "AVG(totalRent+additionalCost) FROM rentalorder"+
-                "WHERE transactionDate <= '$endDate$' AND"+
+                "AVG(totalRent+additionalCost) FROM rentalorder "+
+                "WHERE transactionDate <= '$endDate$' AND "+
                 "transactionDate >= '$startDate$'";
         sqlAvg = sqlAvg.replace("$startDate$", dateFormat.format(startDate));
         sqlAvg = sqlAvg.replace("$endDate$", dateFormat.format(endDate));
@@ -69,9 +69,9 @@ public class ReportDAO extends BaseDAO{
     public static TendencyReport getRegistryMovie(String employeeName, Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        String sql = "SELECT lease.movieTitle, COUNT(lease.movieTitle)"+
-            "FROM lease LEFT JOIN rentalorder USING (folio)" +
-            "WHERE transactionDate <= '$endDate$' AND"+
+        String sql = "SELECT lease.movieTitle, COUNT(lease.movieTitle) "+
+            "FROM lease LEFT JOIN rentalorder USING (folio) " +
+            "WHERE transactionDate <= '$endDate$' AND "+
             "transactionDate >= '$startDate$' " +
             "GROUP BY movieTitle ORDER BY COUNT(movieTitle) DESC";
         sql = sql.replace("$startDate$", dateFormat.format(startDate));
@@ -112,10 +112,10 @@ public class ReportDAO extends BaseDAO{
     public static PerformanceReport getRegistryEmployee(String employeeName, Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        String sql = "SELECT employeeName,COUNT(employeeName)"+
-            "FROM `rentalorder`"+ 
-            "WHERE transactionDate <= '$endDate$' AND"+ 
-            "transactionDate >= '$startDate$'"+
+        String sql = "SELECT employeeName,COUNT(employeeName) "+
+            "FROM `rentalorder` "+ 
+            "WHERE transactionDate <= '$endDate$' AND "+ 
+            "transactionDate >= '$startDate$' "+
             "GROUP BY employeeName ORDER BY COUNT(employeeName) DESC";
         sql = sql.replace("$startDate$", dateFormat.format(startDate));
         sql = sql.replace("$endDate$", dateFormat.format(endDate));

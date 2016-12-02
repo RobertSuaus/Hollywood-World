@@ -9,6 +9,7 @@ import Controller.FinancesAgent;
 import Model.PerformanceReport;
 import Model.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,14 +27,17 @@ public class PerformanceReportUI extends javax.swing.JFrame {
         setVisible(true);
         
         String userName = user.getName() + " " + user.getLastName();
+        currentEmployeeTxt.setText(userName);
         this.financesAgent = new FinancesAgent(this, userName);
     }
     
     public void fillReportFields(PerformanceReport performanceReport){
         
         fillRegistryTable(performanceReport.getRegistryList());
-        mostEfficentEmployeeTxt.setText("");
-        averageRentsField.setText("");
+        mostEfficentEmployeeTxt.setText(performanceReport.getEmployeeMonth() );
+        averageRentsField.setText(String.format(
+            "%.2f", performanceReport.getAverageRents() ) 
+        );
     }
     
     private void fillRegistryTable(ArrayList<String[]> registries){
@@ -80,8 +84,9 @@ public class PerformanceReportUI extends javax.swing.JFrame {
         mostEfficentEmployeeTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         averageRentsField = new javax.swing.JTextField();
+        generateBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         registryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,6 +120,13 @@ public class PerformanceReportUI extends javax.swing.JFrame {
 
         jLabel8.setText("Promedio de rentas por empleado:");
 
+        generateBtn.setText("Generar reporte");
+        generateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +155,9 @@ public class PerformanceReportUI extends javax.swing.JFrame {
                                         .addGap(41, 41, 41)
                                         .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(generateBtn)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,8 +165,8 @@ public class PerformanceReportUI extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mostEfficentEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(averageRentsField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(averageRentsField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mostEfficentEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,7 +185,9 @@ public class PerformanceReportUI extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generateBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -188,11 +204,19 @@ public class PerformanceReportUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void generateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBtnActionPerformed
+        // TODO add your handling code here:
+        Date startDateInput = startDate.getDate();
+        Date endDateInput = endDate.getDate();
+        financesAgent.requestPerformanceReport(startDateInput, endDateInput);
+    }//GEN-LAST:event_generateBtnActionPerformed
+
     private FinancesAgent financesAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField averageRentsField;
     private javax.swing.JLabel currentEmployeeTxt;
     private org.jdesktop.swingx.JXDatePicker endDate;
+    private javax.swing.JButton generateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

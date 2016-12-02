@@ -7,6 +7,7 @@ package Controller;
 
 import Model.PerformanceReport;
 import Model.ProfitReport;
+import Model.ReportDAO;
 import Model.TendencyReport;
 import java.util.Date;
 
@@ -23,8 +24,7 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
-        return null;
-        //DAO reference
+        return ReportDAO.getRegistryRents(employeeName, startDate, endDate);
     }
     
     public static TendencyReport fillTendencyReport(
@@ -32,8 +32,7 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
-        return null;
-        //DAO reference
+        return ReportDAO.getRegistryMovie(employeeName, startDate, endDate);
     }
     
     public static PerformanceReport fillPerformanceReport(
@@ -41,7 +40,6 @@ public class BusinessAnalyst {
         Date startDate,
         Date endDate
     ){
-        return null;
-        //DAO reference
+        return ReportDAO.getRegistryEmployee(employeeName, startDate, endDate);
     }
 }
