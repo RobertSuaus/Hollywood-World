@@ -61,7 +61,7 @@ public class InventoryControl {
                         getMovieProfileInfo(serialCode)
                         );
             int addAmount = Integer.valueOf( userInputs[1] );
-            int nextId = generateNextMovieId() + addAmount + 1;
+            registerMovieForm.dispose();
             return InventoryManager.addMoviesToInventory(movie, addAmount);
         }
         return SERIAL_CODE_UNEXIST_MSG;
