@@ -41,13 +41,15 @@ public class LoginUI extends javax.swing.JFrame {
         setTitle("Hollywood World - Login");
         setBackground(new java.awt.Color(153, 0, 153));
 
+        jDesktopPane2.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
-        jLabel1.setText("User name");
+        jLabel1.setText("Nombre de usuario:");
 
         jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
-        jLabel2.setText("Password");
+        jLabel2.setText("Contraseña:");
 
-        loginButton.setText("Log In");
+        loginButton.setText("Iniciar Sesión");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
