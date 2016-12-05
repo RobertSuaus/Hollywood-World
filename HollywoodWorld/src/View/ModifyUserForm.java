@@ -107,7 +107,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Permissions:");
 
-        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
+        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
 
         saveChangesBtn.setText("Guardar cambios");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +121,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         existingUserInfoPanelLayout.setHorizontalGroup(
             existingUserInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingUserInfoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(352, Short.MAX_VALUE)
                 .addComponent(saveChangesBtn)
                 .addGap(48, 48, 48))
             .addGroup(existingUserInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,11 +135,11 @@ public class ModifyUserForm extends javax.swing.JFrame {
                         .addComponent(jLabel11))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(existingUserInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(editPermissions, 0, 137, Short.MAX_VALUE)
                         .addComponent(editPassword)
                         .addComponent(editUserNameTxt)
                         .addComponent(editLastNameTxt)
-                        .addComponent(editNameTxt))
+                        .addComponent(editNameTxt)
+                        .addComponent(editPermissions, 0, 137, Short.MAX_VALUE))
                     .addContainerGap(111, Short.MAX_VALUE)))
         );
         existingUserInfoPanelLayout.setVerticalGroup(
@@ -274,6 +274,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
             case "Rentador" : permissionIndex = 3;
                 break;
             case "Finanzas" : permissionIndex = 4;
+                break;
             default : permissionIndex = ERROR;
         }
         return permissionIndex;

@@ -22,6 +22,9 @@ import javax.swing.JOptionPane;
  * @author che_i
  */
 public class InventoryControl {
+    /*Se encarga de verificar que los datos de productos nuevos sean correctos
+    y solicita al gerente las altas y cambios de estos productos*/
+    
     
     public InventoryControl(RegisterMovieProfileForm registerMovieProfileForm){
         

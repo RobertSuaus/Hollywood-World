@@ -23,8 +23,9 @@ import java.util.Date;
  * @author Robert
  */
 public class Renter {
-    /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
-    con las ordenes de renta*/
+    /*Genera las ordenes de renta para los clientes. Recibe productos y los agrega
+    a estas ordenes de renta, además que verifica que el cliente pueda rentar y 
+    lleva acabo el cobro de la renta*/
     
     public Renter(RentalOrderForm rentalOrderForm, String userName){
         
