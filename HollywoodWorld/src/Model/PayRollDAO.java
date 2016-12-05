@@ -7,6 +7,7 @@ package Model;
 
 import static Model.BaseDAO.statement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,20 +21,20 @@ public class PayRollDAO extends BaseDAO {
     
     public static int save(PayrollBreakdown desglose ){
         
-        String sql = "INSERT INTO desglose(desgloseId, employeeId, retencionISR"+
-            ", retencionSeguroSocial, aguinaldo, primaVacacional, "+
-            " diasTrabajados, primaDominical, totalPago, salarioIntegro, "+
-            "fechaDesglose)VALUES($desgloseId$, $employeeId$, $retencionISR$, "+
-            "$retencionSeguroSocial$, $aguinaldo$,$primaVvacacional$, "+
-            "$primaDominical$,$totalPago$, $salarioIntegro$,$fechaDesglose$)";
+        String sql = "INSERT INTO desglose(desgloseId, employeeId, ISR"+
+            ", seguro, aguinaldo, vacaciones, "+
+            "diasTrabajados, primaDominical, totalPago, salarioIntegro, "+
+            "fechaDesglose)VALUES($desgloseId$, $employeeId$, $ISR$, "+
+            "$seguro$, $aguinaldo$,$vacaciones$, "+
+            "$primaDominical$, $totalPago$, $salarioIntegro$, $fechaDesglose$)";
         
         
         sql = sql.replace("$desgloseId$", String.valueOf(desglose.getDesgloseId()) );
         sql = sql.replace("$employeeId$", String.valueOf(desglose.getEmployeeId()));
-        sql = sql.replace("$retencionSeguroSocial$", String.valueOf(desglose.getRetention().getTaxPerIMSS()));
-        sql = sql.replace("$retencionISR$",String.valueOf(desglose.getRetention().getISR()));
+         sql = sql.replace("$ISR$",String.valueOf(desglose.getRetention().getISR()));
+        sql = sql.replace("$seguroS$", String.valueOf(desglose.getRetention().getTaxPerIMSS()));
         sql = sql.replace("$aguinaldo$", String.valueOf(desglose.getBonus().getChristmasBox()) );
-        sql = sql.replace("$primaVacacional", String.valueOf(desglose.getBonus().getHolidayBonus()) );
+        sql = sql.replace("$vacaciones", String.valueOf(desglose.getBonus().getHolidayBonus()) );
         sql = sql.replace("$diasTrabajados$", String.valueOf(desglose.getWorkedDays()) );
         sql = sql.replace("$primaDominical$", String.valueOf(desglose.getBonus().getDominical()) );
         sql = sql.replace("$totalPago$", String.valueOf(desglose.getTotalPay()) );
@@ -53,35 +54,85 @@ public class PayRollDAO extends BaseDAO {
         
     }
     
-    public ArrayList<PayrollBreakdown> getBreakdownSummary(Date desgloseDate){
+    public String[] getBreakdownSummary(Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        String sql = "SELECT * FROM desglose WHERE "+
-            "fechaDesglose = '$desgloseDate$'";
-        sql = sql.replace("$desgloseDate$",dateFormat.format(desgloseDate));
+        String sql = "SELECT"+
+            "SUM(ISR), "+
+            "SUM(seguro), "+
+            "SUM(aguinaldo), "+
+            "SUM(vacaciones), "+
+            "SUM(primaDominical), "+
+            "SUM(diasTrabajados), "+
+            "SUM(totalPago), "+
+            "SUM(salarioIntegro) "+
+            "FROM desglose WHERE "+
+            "fechaDesglose >= '$StartDate$' AND fechaDesglose <= '$endDate$'";
+        String[] registry = new String[8];
         
-        return null;
+        try{
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            
+            registry[0] = String.valueOf(resultSet.getDouble(1));
+            registry[1] = String.valueOf(resultSet.getDouble(2));
+            registry[2] = String.valueOf(resultSet.getDouble(3));
+            registry[3] = String.valueOf(resultSet.getDouble(4));
+            registry[4] = String.valueOf(resultSet.getInt(5));
+            registry[5] = String.valueOf(resultSet.getDouble(6));
+            registry[6] = String.valueOf(resultSet.getDouble(7));
+            registry[7] = String.valueOf(resultSet.getDouble(8));
+            
+            return registry;
+        }catch(SQLException ex){
+            System.err.println("Error al obtener registros"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al obtener registros",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return registry;
+        }
     }
     
-    public ArrayList<PayrollBreakdown> getBreakdownList(int employeeId){
+    public ArrayList<PayrollBreakdown> getBreakdownList(int employeeId) throws ParseException{
         
         String sql = "SELECT * FROM desglose WHERE employeeId = '$employeeId$'";
         
-        PayrollBreakdown desglose = new PayrollBreakdown();
+        sql = sql.replace("$employeeId$", String.valueOf("employeeId"));
+        ArrayList<PayrollBreakdown> kardex = new ArrayList<PayrollBreakdown>();
         
-        sql = sql.replace("$desgloseId$", String.valueOf(desglose.getDesgloseId()) );
-        sql = sql.replace("$employeeId$", String.valueOf(desglose.getEmployeeId()));
-        sql = sql.replace("$retencionSeguroSocial$", String.valueOf(desglose.getRetention().getTaxPerIMSS()));
-        sql = sql.replace("$retencionISR$",String.valueOf(desglose.getRetention().getISR()));
-        sql = sql.replace("$aguinaldo$", String.valueOf(desglose.getBonus().getChristmasBox()) );
-        sql = sql.replace("$primaVacacional", String.valueOf(desglose.getBonus().getHolidayBonus()) );
-        sql = sql.replace("$diasTrabajados$", String.valueOf(desglose.getWorkedDays()) );
-        sql = sql.replace("$primaDominical$", String.valueOf(desglose.getBonus().getDominical()) );
-        sql = sql.replace("$totalPago$", String.valueOf(desglose.getTotalPay()) );
-        sql = sql.replace("$salarioIntegro$", String.valueOf(desglose.getFullSalary()) );
-        sql = sql.replace("$fechaDesglose$", String.valueOf(desglose.getDesgloseDate()));
+        try{
+           SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+           statement = connection.createStatement();
+           resultSet = statement.executeQuery(sql);
+           while(resultSet.next()){
+               PayrollBreakdown payrollBreakdown = new PayrollBreakdown(
+                   resultSet.getInt("desgloseId"),
+                   resultSet.getInt("employeeId"),
+                   new Retention(
+                       resultSet.getDouble("ISR"),
+                       resultSet.getDouble("seguro")
+                   ),
+                   new Bonus(
+                       resultSet.getDouble("aguinaldo"),
+                       resultSet.getDouble("primaVacacional"),
+                       resultSet.getDouble("primaDominical")
+                   ),
+                   resultSet.getInt("diasTrabajados"),
+                   resultSet.getDouble("totalPago"),
+                   resultSet.getDouble("salarioIntegro"),
+                   dateFormat.parse(resultSet.getString("fechaDesglose"))     
+               );
+            kardex.add(payrollBreakdown);
+           }
+           return kardex;
+        }catch(SQLException ex){
+            System.err.println("Error al obtener el ultimo registro " + 
+                ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener registro.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return kardex;
+        }
         
-        return null;
     }
     
     public static int getLastRegistryIndex(){
