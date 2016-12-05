@@ -29,7 +29,20 @@ public class PerformanceReport {
         this.employeeMonth = employeeMonth;
         this.averageRents = averageRents;
     }
-
+    
+    public PerformanceReport(
+            String employeeName,
+            Date startDate,
+            Date endDate
+    ){
+        this.employeeName = employeeName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.registryList = new ArrayList<String[]>();
+        this.employeeMonth = "";
+        this.averageRents = 0;
+    }
+    
     public Date getStartDate() {
         return startDate;
     }
