@@ -151,7 +151,7 @@ public class MainMenuRequestHandler {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("Admin")){
+        if(userPermissions.equals("Administrador")){
             return true;
         }else{
             return false;
@@ -162,7 +162,7 @@ public class MainMenuRequestHandler {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("Human Resources")){
+        if(userPermissions.equals("Recursos humanos")){
             return true;
         }else{
             return false;
@@ -173,7 +173,7 @@ public class MainMenuRequestHandler {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("Manager")){
+        if(userPermissions.equals("Gerente")){
             return true;
         }else{
             return false;
@@ -184,7 +184,18 @@ public class MainMenuRequestHandler {
         
         String userPermissions = user.getPermissions();
         
-        if(userPermissions.equals("Renter")){
+        if(userPermissions.equals("Rentador")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean userHasFinancesPermissions(){
+        
+        String userPermissions = user.getPermissions();
+        
+        if(userPermissions.equals("Finanzas")){
             return true;
         }else{
             return false;

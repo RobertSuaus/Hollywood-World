@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author che_i
  */
 public class Recruiter {
+    /*Se encarga de recibir los datos de empleados nuevos, verificar que todo
+    este en orden y solicitar al gerente de recursos humanos el registro y cambios*/
     
     public Recruiter(RegisterEmployeeForm registerEmployeeForm) {
         

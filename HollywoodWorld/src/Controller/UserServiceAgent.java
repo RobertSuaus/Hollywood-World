@@ -15,8 +15,8 @@ import View.RegisterUserForm;
  * @author Robert
  */
 public class UserServiceAgent {
-    /*Maneja y le da un sentido a las solicitudes o procedimientos relacionados
-    con usuarios*/
+    /*Da atención con cuestiones relacionadas al control de usuarios. Verificar
+    que el nombre de usuario esté disponible, verifica los datos, etc.*/
     
     public UserServiceAgent(RegisterUserForm registerUserForm){
         

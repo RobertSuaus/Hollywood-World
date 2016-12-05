@@ -78,7 +78,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Permissions:");
 
-        newPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
+        newPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
 
         createNewBtn.setText("Crear usuario");
         createNewBtn.addActionListener(new java.awt.event.ActionListener() {

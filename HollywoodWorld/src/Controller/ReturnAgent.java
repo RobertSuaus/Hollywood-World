@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @author Robert
  */
 public class ReturnAgent {
+    /*Realiza las devoluciones de los productos. Se encarga de verificar las
+    fechas y cobrar multas en caso de ser necesario.*/
     
     public ReturnAgent(ReturnsUI returnsUI){
         
