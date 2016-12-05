@@ -26,6 +26,16 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         
         this.inventoryControl = new InventoryControl(this );
     }
+    
+    public void clearFields() {
+        
+        newProfileTitleTxt.setText("");
+        newReleaseDate.setDate(null);
+        newRatingTxt.setText("");
+        newDescriptionTxt.setText("");
+        newRuntimeTxt.setText("");
+        newSerialcodeTxt.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +46,6 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         newProfilePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -53,30 +62,28 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         newReleaseDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel18 = new javax.swing.JLabel();
 
-        jTextField1.setText("jTextField1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Registration of movies");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("Movie title:");
+        jLabel1.setText("Título de película:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setText("Release Date:");
+        jLabel5.setText("Fecha de lanzamiento:");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel6.setText("Rating:");
+        jLabel6.setText("Clasificación:");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setText("Description:");
+        jLabel7.setText("Descripción:");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setText("Runtime:");
+        jLabel8.setText("Duración:");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("Serial code:");
+        jLabel9.setText("Código de serie:");
 
-        addNewProfileBtn.setText("Add new profile");
+        addNewProfileBtn.setText("Agregar nuevo perfil");
         addNewProfileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewProfileBtnActionPerformed(evt);
@@ -84,43 +91,42 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         });
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel18.setText("Add movie profile");
+        jLabel18.setText("Agregar perfil de película");
 
         javax.swing.GroupLayout newProfilePanelLayout = new javax.swing.GroupLayout(newProfilePanel);
         newProfilePanel.setLayout(newProfilePanelLayout);
         newProfilePanelLayout.setHorizontalGroup(
             newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newProfilePanelLayout.createSequentialGroup()
-                .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(31, 31, 31)
+                .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(newProfilePanelLayout.createSequentialGroup()
-                        .addGap(115, 115, 115)
+                        .addComponent(addNewProfileBtn)
+                        .addGap(5, 5, 5))
+                    .addGroup(newProfilePanelLayout.createSequentialGroup()
                         .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addNewProfileBtn)
-                            .addGroup(newProfilePanelLayout.createSequentialGroup()
-                                .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(newProfileTitleTxt)
-                                    .addComponent(newRatingTxt)
-                                    .addComponent(newDescriptionTxt)
-                                    .addComponent(newRuntimeTxt)
-                                    .addComponent(newSerialcodeTxt)
-                                    .addComponent(newReleaseDate, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))))
-                    .addGroup(newProfilePanelLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(newProfileTitleTxt)
+                            .addComponent(newRatingTxt)
+                            .addComponent(newDescriptionTxt)
+                            .addComponent(newRuntimeTxt)
+                            .addComponent(newSerialcodeTxt)
+                            .addComponent(newReleaseDate, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, newProfilePanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addComponent(jLabel18)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         newProfilePanelLayout.setVerticalGroup(
             newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newProfilePanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel18)
                 .addGap(9, 9, 9)
                 .addGroup(newProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -148,7 +154,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
                     .addComponent(newSerialcodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(addNewProfileBtn)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,16 +162,16 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(newProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(newProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,7 +215,6 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField newDescriptionTxt;
     private javax.swing.JPanel newProfilePanel;
     private javax.swing.JTextField newProfileTitleTxt;

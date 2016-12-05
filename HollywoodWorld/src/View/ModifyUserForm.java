@@ -36,6 +36,15 @@ public class ModifyUserForm extends javax.swing.JFrame {
             getPermissionIndex(user.getPermissions() )
             );
     }
+    
+    public void clearFields() {
+        
+        searchUserNameTxt.setText("");
+        editNameTxt.setText("");
+        editLastNameTxt.setText("");
+        editUserNameTxt.setText("");
+        editPassword.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +55,6 @@ public class ModifyUserForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         editUserPanel = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -66,21 +73,17 @@ public class ModifyUserForm extends javax.swing.JFrame {
         editPermissions = new javax.swing.JComboBox<>();
         saveChangesBtn = new javax.swing.JButton();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Users");
         setResizable(false);
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel18.setText("Edit user");
+        jLabel18.setText("Editar usuarios");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel6.setText("User name:");
+        jLabel6.setText("Nombre de usuario:");
 
-        searchUserBtn.setText("Search");
+        searchUserBtn.setText("Buscar");
         searchUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchUserBtnActionPerformed(evt);
@@ -88,25 +91,25 @@ public class ModifyUserForm extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setText("Name:");
+        jLabel7.setText("Nombre:");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setText("Last name:");
+        jLabel8.setText("Apellido");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("User name:");
+        jLabel9.setText("Nombre de usuario:");
 
         editUserNameTxt.setEditable(false);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setText("Password:");
+        jLabel10.setText("Contraseña:");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Permissions:");
 
-        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Human Resources", "Manager", "Renter" }));
+        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
 
-        saveChangesBtn.setText("Save changes");
+        saveChangesBtn.setText("Guardar cambios");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveChangesBtnActionPerformed(evt);
@@ -186,7 +189,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
                         .addComponent(searchUserNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
             .addComponent(existingUserInfoPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         editUserPanelLayout.setVerticalGroup(
@@ -208,9 +211,9 @@ public class ModifyUserForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(editUserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,14 +265,15 @@ public class ModifyUserForm extends javax.swing.JFrame {
         
         int permissionIndex;
         switch(permissions){
-            case "Administrator" : permissionIndex = 0;
+            case "Administrador" : permissionIndex = 0;
                 break;
-            case "Human Resources" : permissionIndex = 1;
+            case "Recursos humanos" : permissionIndex = 1;
                 break;
-            case "Manager" : permissionIndex = 2;
+            case "Gerente" : permissionIndex = 2;
                 break;
-            case "Renter" : permissionIndex = 3;
+            case "Rentador" : permissionIndex = 3;
                 break;
+            case "Finanzas" : permissionIndex = 4;
             default : permissionIndex = ERROR;
         }
         return permissionIndex;
@@ -296,8 +300,6 @@ public class ModifyUserForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton saveChangesBtn;
     private javax.swing.JToggleButton searchUserBtn;
     private javax.swing.JTextField searchUserNameTxt;

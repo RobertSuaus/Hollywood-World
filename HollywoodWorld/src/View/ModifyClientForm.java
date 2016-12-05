@@ -41,6 +41,16 @@ public class ModifyClientForm extends javax.swing.JFrame {
         
         existingClientInfoPanel.setVisible(true);
     }
+    
+    public void clearFields(){
+        
+        searchMembershipTxt.setText("");
+        editNameTxt.setText("");
+        editLastNameTxt.setText("");
+        editAddressTxt.setText("");
+        editTelephoneTxt.setText("");
+        editMembershipTxt.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,28 +86,28 @@ public class ModifyClientForm extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel7.setText("Name:");
+        jLabel7.setText("Nombre:");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel8.setText("Last name:");
+        jLabel8.setText("Apellido:");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("Telephone:");
+        jLabel9.setText("Teléfono:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setText("Address:");
+        jLabel10.setText("Dirección:");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setText("Membership number:");
+        jLabel11.setText("Número de membresia:");
 
         editMembershipTxt.setEditable(false);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel12.setText("Membership status:");
+        jLabel12.setText("Estado de membresia:");
 
-        membershipStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+        membershipStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
-        saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.setText("Guardar cambios");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveChangesBtnActionPerformed(evt);
@@ -123,9 +133,9 @@ public class ModifyClientForm extends javax.swing.JFrame {
                     .addComponent(editLastNameTxt)
                     .addComponent(editTelephoneTxt)
                     .addComponent(editAddressTxt)
-                    .addComponent(editMembershipTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                    .addComponent(membershipStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(editMembershipTxt)
+                    .addComponent(membershipStatus, 0, 189, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingClientInfoPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveChangesBtn)
@@ -163,12 +173,12 @@ public class ModifyClientForm extends javax.swing.JFrame {
         );
 
         jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel18.setText("Modify client information");
+        jLabel18.setText("Modificar información de cliente");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel6.setText("Membership number:");
+        jLabel6.setText("Número de membresia");
 
-        searchClientBtn.setText("Search");
+        searchClientBtn.setText("Buscar");
         searchClientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchClientBtnActionPerformed(evt);
@@ -180,24 +190,18 @@ public class ModifyClientForm extends javax.swing.JFrame {
         editClientPanelLayout.setHorizontalGroup(
             editClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editClientPanelLayout.createSequentialGroup()
-                .addGroup(editClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editClientPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(existingClientInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(editClientPanelLayout.createSequentialGroup()
-                        .addGroup(editClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(editClientPanelLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addComponent(jLabel18))
-                            .addGroup(editClientPanelLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(searchClientBtn)))
-                        .addGap(0, 109, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(59, 59, 59)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(searchClientBtn))
+            .addGroup(editClientPanelLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel18))
+            .addGroup(editClientPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(existingClientInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         editClientPanelLayout.setVerticalGroup(
             editClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,10 +222,9 @@ public class ModifyClientForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(editClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

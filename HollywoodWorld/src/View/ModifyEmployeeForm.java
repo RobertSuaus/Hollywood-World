@@ -30,6 +30,35 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         
         this.recruiter = new Recruiter(this);
     }
+    
+    public void fillExistingEmployeeForm(Employee employee){
+        
+        editNameTxt.setText(employee.getName() );
+        editLastNameTxt.setText(employee.getLastName() );
+        editTelephoneTxt.setText(employee.getTelephone() );
+        editAddressTxt.setText(employee.getAddress() );
+        editIdTxt.setText(String.valueOf(employee.getId() ) );
+        editRfcTxt.setText(employee.getRfc() );
+        editSalaryTxt.setText(
+                String.valueOf(employee.getBasicSalary() )
+                );
+        editAdmissionDate.setDate(employee.getAdmissionDate() );
+        editPositionTxt.setText(employee.getPosition() );
+    }
+    
+    public void clearFields() {
+        
+        searchEmployeeIdTxt.setText("");
+        editNameTxt.setText("");
+        editLastNameTxt.setText("");
+        editTelephoneTxt.setText("");
+        editAddressTxt.setText("");
+        editIdTxt.setText("");
+        editRfcTxt.setText("");
+        editSalaryTxt.setText("");
+        editAdmissionDate.setDate(null);
+        editPositionTxt.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,19 +99,19 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         setTitle("Hollywood World - Manage Employees");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setText("Name:");
+        jLabel11.setText("Nombre:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel12.setText("Last name:");
+        jLabel12.setText("Apellido:");
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel13.setText("Telephone:");
+        jLabel13.setText("Teléfono:");
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel14.setText("Address:");
+        jLabel14.setText("Dirección:");
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel15.setText("Employee number:");
+        jLabel15.setText("Número de empleado:");
 
         editIdTxt.setEditable(false);
 
@@ -90,15 +119,15 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         jLabel16.setText("RFC:");
 
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel17.setText("Basic Salary:");
+        jLabel17.setText("Salario base:");
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel20.setText("Admission Date:");
+        jLabel20.setText("Fecha de admisión:");
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel21.setText("Employee Position:");
+        jLabel21.setText("Puesto:");
 
-        saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.setText("Guardar cambios");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveChangesBtnActionPerformed(evt);
@@ -110,7 +139,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         existingEmployeePanelLayout.setHorizontalGroup(
             existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, existingEmployeePanelLayout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
+                .addContainerGap(334, Short.MAX_VALUE)
                 .addComponent(saveChangesBtn)
                 .addGap(33, 33, 33))
             .addGroup(existingEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,12 +215,12 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         );
 
         jLabel19.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel19.setText("Modify Employee");
+        jLabel19.setText("Modificar informacion de Empleado");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel10.setText("Employee Number:");
+        jLabel10.setText("Número de empleado:");
 
-        searchBtn.setText("Search");
+        searchBtn.setText("Buscar");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
@@ -203,28 +232,25 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         editEmployeePanelLayout.setHorizontalGroup(
             editEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editEmployeePanelLayout.createSequentialGroup()
-                .addGroup(editEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(editEmployeePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(existingEmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(editEmployeePanelLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel19))
-                    .addGroup(editEmployeePanelLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchEmployeeIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchBtn)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(existingEmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(editEmployeePanelLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchEmployeeIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(searchBtn))
+            .addGroup(editEmployeePanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel19))
         );
         editEmployeePanelLayout.setVerticalGroup(
             editEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editEmployeePanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(searchEmployeeIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,10 +264,10 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editEmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,21 +318,6 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         userInput[8] = editPositionTxt.getText();
         
         return userInput;
-    }
-    
-    public void fillExistingEmployeeForm(Employee employee){
-        
-        editNameTxt.setText(employee.getName() );
-        editLastNameTxt.setText(employee.getLastName() );
-        editTelephoneTxt.setText(employee.getTelephone() );
-        editAddressTxt.setText(employee.getAddress() );
-        editIdTxt.setText(String.valueOf(employee.getId() ) );
-        editRfcTxt.setText(employee.getRfc() );
-        editSalaryTxt.setText(
-                String.valueOf(employee.getBasicSalary() )
-                );
-        editAdmissionDate.setDate(employee.getAdmissionDate() );
-        editPositionTxt.setText(employee.getPosition() );
     }
 
     private Recruiter recruiter;

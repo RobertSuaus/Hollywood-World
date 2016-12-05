@@ -24,6 +24,22 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         this.setVisible(true);        
         this.inventoryControl = new InventoryControl(this );
     }
+    
+    public void fillMovieUpperIdField( int UpperId ) {
+        this.movieUpperIdTxt.setText(String.valueOf(UpperId));
+    }
+    
+    public void fillMovieLowerIdField(int LowerId){
+        this.movieLowerIdTxt.setText(String.valueOf(LowerId ) );
+    }
+    
+    public void clearField(int lowerId) {
+        
+        addSerialCodeTxt.setText("");
+        amountToAddTxt.setText("1");
+        movieLowerIdTxt.setText(String.valueOf(lowerId));
+        movieUpperIdTxt.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,29 +50,26 @@ public class RegisterMovieForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         inventoryPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         addSerialCodeTxt = new javax.swing.JTextField();
         amountToAddTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        movieLowerId = new javax.swing.JTextField();
+        movieLowerIdTxt = new javax.swing.JTextField();
         addMoviesBtn = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        movieUpperId = new javax.swing.JTextField();
-
-        jTextField1.setText("jTextField1");
+        movieUpperIdTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hollywood World - Manage Movies");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setText("Movie serial code:");
+        jLabel2.setText("Código de serie:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setText("Amount to add:");
+        jLabel3.setText("Monto a agregar:");
 
         addSerialCodeTxt.setToolTipText("");
 
@@ -68,11 +81,11 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel4.setText("Movie(s) code(s):");
+        jLabel4.setText("Código(s) de película(s)");
 
-        movieLowerId.setEditable(false);
+        movieLowerIdTxt.setEditable(false);
 
-        addMoviesBtn.setText("Add movies");
+        addMoviesBtn.setText("Agregar película(s)");
         addMoviesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addMoviesBtnActionPerformed(evt);
@@ -80,42 +93,41 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         });
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel17.setText("Add movies");
+        jLabel17.setText("Agregar películas");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("-");
 
-        movieUpperId.setEditable(false);
+        movieUpperIdTxt.setEditable(false);
 
         javax.swing.GroupLayout inventoryPanelLayout = new javax.swing.GroupLayout(inventoryPanel);
         inventoryPanel.setLayout(inventoryPanelLayout);
         inventoryPanelLayout.setHorizontalGroup(
             inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inventoryPanelLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(addMoviesBtn)
+                        .addGroup(inventoryPanelLayout.createSequentialGroup()
+                            .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(44, 44, 44)
+                            .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(addSerialCodeTxt)
+                                .addComponent(amountToAddTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(inventoryPanelLayout.createSequentialGroup()
+                                    .addComponent(movieLowerIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(movieUpperIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(inventoryPanelLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addMoviesBtn)
-                            .addGroup(inventoryPanelLayout.createSequentialGroup()
-                                .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(44, 44, 44)
-                                .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(addSerialCodeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                    .addComponent(amountToAddTxt)
-                                    .addGroup(inventoryPanelLayout.createSequentialGroup()
-                                        .addComponent(movieLowerId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(movieUpperId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(inventoryPanelLayout.createSequentialGroup()
-                        .addGap(232, 232, 232)
+                        .addGap(103, 103, 103)
                         .addComponent(jLabel17)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         inventoryPanelLayout.setVerticalGroup(
             inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,9 +145,9 @@ public class RegisterMovieForm extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(movieLowerId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(movieLowerIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(movieUpperId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(movieUpperIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(addMoviesBtn)
                 .addGap(33, 33, 33))
@@ -146,16 +158,15 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
-                .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,17 +194,9 @@ public class RegisterMovieForm extends javax.swing.JFrame {
         String[] userInput = new String[3];
         userInput[0] = addSerialCodeTxt.getText();
         userInput[1] = amountToAddTxt.getText();
-        userInput[2] = movieLowerId.getText();
+        userInput[2] = movieLowerIdTxt.getText();
         
         return userInput;
-    }
-    
-    public void fillMovieUpperIdField( int UpperId ) {
-        this.movieUpperId.setText(String.valueOf(UpperId));
-    }
-    
-    public void fillMovieLowerIdField(int LowerId){
-        this.movieLowerId.setText(String.valueOf(LowerId ) );
     }
     
     private InventoryControl inventoryControl;
@@ -207,8 +210,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField movieLowerId;
-    private javax.swing.JTextField movieUpperId;
+    private javax.swing.JTextField movieLowerIdTxt;
+    private javax.swing.JTextField movieUpperIdTxt;
     // End of variables declaration//GEN-END:variables
 }

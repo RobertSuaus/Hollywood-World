@@ -42,6 +42,7 @@ public class Recruiter {
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
+            registerEmployeeForm.clearFields(generateNextEmployeeId()+1);
             return HumanResourcesManager.registerEmployee(employee);
         }
         return INVALID_DATA_MSG;
@@ -51,6 +52,7 @@ public class Recruiter {
         
         setEmployeeInformation(userInputs);
         if(isEmployeeDataValid()){
+            modifyEmployeeForm.clearFields();
             return HumanResourcesManager.modifyEmployee(employee);
         }        
         return INVALID_DATA_MSG;

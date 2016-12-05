@@ -37,9 +37,10 @@ public class ClientServiceAgent {
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
-           if(isMembershipIdAvailable(client.getMembership().getId() ) ){
-               return ClientServiceManager.registerClient(client);
-           } 
+            if(isMembershipIdAvailable(client.getMembership().getId() ) ){                
+                registerClientForm.clearFields(generateNextMembershipId() + 1);
+                return ClientServiceManager.registerClient(client);
+            } 
            return MEMBERSHIP_OCCUPIED_MSG;
         } 
         return INVALID_DATA_MSG;
@@ -50,6 +51,7 @@ public class ClientServiceAgent {
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
+            modifyClientForm.clearFields();
             return ClientServiceManager.modifyClient(client);
         }
         return INVALID_DATA_MSG;

@@ -30,11 +30,12 @@ public class UserServiceAgent {
         this.modifyUserForm = modifyUserForm;
     }
     /*Manejar el procedimiento de creación de usuario*/
-    public String Creation(String[] userInputs){
+    public String CreateAccount(String[] userInputs){
         
         setUserInformation(userInputs);
         if(isUserDataValid() ){
             if(isUserNameAvailable() ){
+                registerUserForm.clearFields();
                 return UserServiceManager.createUser(user);
             }
             return OCCUPIED_USERNAME_MSG;
@@ -47,6 +48,7 @@ public class UserServiceAgent {
         
         setUserInformation(userInputs);
         if(isUserDataValid() ){
+            modifyUserForm.clearFields();
             return UserServiceManager.modifyUser(user);
         }
         return INVALID_DATA_MSG;

@@ -61,7 +61,8 @@ public class InventoryControl {
                         getMovieProfileInfo(serialCode)
                         );
             int addAmount = Integer.valueOf( userInputs[1] );
-           return InventoryManager.addMoviesToInventory(movie, addAmount);
+            registerMovieForm.dispose();
+            return InventoryManager.addMoviesToInventory(movie, addAmount);
         }
         return SERIAL_CODE_UNEXIST_MSG;
     }
@@ -70,6 +71,7 @@ public class InventoryControl {
         
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
+            modifyMovieProfileForm.clearFields();
             return InventoryManager.modifyMovieProfile(movieProfile);
         }
         return INVALID_DATA_MSG;
@@ -80,6 +82,7 @@ public class InventoryControl {
         setMovieProfileInformation( userInputs );
         if ( isEveryInputValid() ) {
             if( isSerialCodeAvailable(movieProfile.getSerialCode()) ){
+                registerMovieProfileForm.clearFields();
                 return InventoryManager.registerMovieProfile(movieProfile);
             }
             return SERIAL_CODE_OCUPIED_MSG;

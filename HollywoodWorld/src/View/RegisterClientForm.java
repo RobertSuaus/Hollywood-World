@@ -27,6 +27,15 @@ public class RegisterClientForm extends javax.swing.JFrame {
         
         newMembershipTxt.setText(String.valueOf(membershipId ) );
     }
+    
+    public void clearFields(int nextId) {
+        
+        newNameTxt.setText("");
+        newLastNameTxt.setText("");
+        newTelephoneTxt.setText("");
+        newAddressTxt.setText("");
+        newMembershipTxt.setText(String.valueOf(nextId)); 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,26 +65,26 @@ public class RegisterClientForm extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
-        jLabel17.setText("Client Registration");
+        jLabel17.setText("Registrar Cliente");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("Name:");
+        jLabel1.setText("Nombre:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setText("Last name:");
+        jLabel2.setText("Apellido:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setText("Telephone:");
+        jLabel3.setText("Teléfono:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setText("Address:");
+        jLabel4.setText("Dirección");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setText("Membership number:");
+        jLabel5.setText("Número de membresia:");
 
         newMembershipTxt.setEditable(false);
 
-        registerNewClientBtn.setText("Register new client");
+        registerNewClientBtn.setText("Registrar nuevo cliente");
         registerNewClientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerNewClientBtnActionPerformed(evt);
@@ -86,11 +95,12 @@ public class RegisterClientForm extends javax.swing.JFrame {
         newClientPanel.setLayout(newClientPanelLayout);
         newClientPanelLayout.setHorizontalGroup(
             newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newClientPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(registerNewClientBtn)
+                .addGap(35, 35, 35))
             .addGroup(newClientPanelLayout.createSequentialGroup()
                 .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(newClientPanelLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel17))
                     .addGroup(newClientPanelLayout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -105,12 +115,11 @@ public class RegisterClientForm extends javax.swing.JFrame {
                             .addComponent(newLastNameTxt)
                             .addComponent(newTelephoneTxt)
                             .addComponent(newAddressTxt)
-                            .addComponent(newMembershipTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))))
-                .addContainerGap(125, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newClientPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(registerNewClientBtn)
-                .addGap(85, 85, 85))
+                            .addComponent(newMembershipTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                    .addGroup(newClientPanelLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel17)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         newClientPanelLayout.setVerticalGroup(
             newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +146,9 @@ public class RegisterClientForm extends javax.swing.JFrame {
                 .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(newMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(32, 32, 32)
                 .addComponent(registerNewClientBtn)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,9 +156,8 @@ public class RegisterClientForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
-                .addComponent(newClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,9 +194,6 @@ public class RegisterClientForm extends javax.swing.JFrame {
         return userInput;
         
     }
-    
-    
-    
     
     private ClientServiceAgent clientServiceAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
