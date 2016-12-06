@@ -14,43 +14,43 @@ import java.util.Date;
 public class PayrollBreakdown {
     
     public PayrollBreakdown(
-        int desgloseId,
+        int breakdownId,
         int employeeId,
         Retention retention, 
         Bonus bonus, 
         int workedDays, 
-        double totalPay, 
-        double fullSalary,
-        Date desgloseDate
+        double totalPayment, 
+        double integratedWage,
+        Date breakdownDate
     ){
-        this.desgloseId = desgloseId;
+        this.breakdownId = breakdownId;
         this.employeeId = employeeId;
         this.retention = retention;
         this.bonus = bonus;
         this.workedDays = workedDays;
-        this.totalPay = totalPay;
-        this.fullSalary = fullSalary;    
-        this.desgloseDate = desgloseDate;
+        this.totalPay = totalPayment;
+        this.integratedWage = integratedWage;    
+        this.breakdownDate = breakdownDate;
     }
     
     public PayrollBreakdown(){
         
     }
 
-    public Date getDesgloseDate() {
-        return desgloseDate;
+    public Date getBreakdownDate() {
+        return breakdownDate;
     }
 
-    public void setDesgloseDate(Date desgloseDate) {
-        this.desgloseDate = desgloseDate;
+    public void setBreakdownDate(Date desgloseDate) {
+        this.breakdownDate = desgloseDate;
     }
 
     public int getDesgloseId() {
-        return desgloseId;
+        return breakdownId;
     }
 
     public void setDesgloseId(int desgloseId) {
-        this.desgloseId = desgloseId;
+        this.breakdownId = desgloseId;
     }
 
     public int getEmployeeId() {
@@ -85,29 +85,29 @@ public class PayrollBreakdown {
         this.workedDays = workedDays;
     }
 
-    public double getTotalPay() {
+    public double getTotalPayment() {
         return totalPay;
     }
 
-    public void setTotalPay(double totalPay) {
+    public void setTotalPayment(double totalPay) {
         this.totalPay = totalPay;
     }
 
-    public double getFullSalary() {
-        return fullSalary;
+    public double getIntegratedWage() {
+        return integratedWage;
     }
 
-    public void setFullSalary(double fullSalary) {
-        this.fullSalary = fullSalary;
+    public void setIntegratedWage(double fullSalary) {
+        this.integratedWage = fullSalary;
     }
     
     
-    private int desgloseId;
+    private int breakdownId;
     private int employeeId;
     private Retention retention;
     private Bonus bonus;
     private int workedDays;
     private double totalPay;
-    private double fullSalary;
-    private Date desgloseDate;
+    private double integratedWage;
+    private Date breakdownDate;
 }

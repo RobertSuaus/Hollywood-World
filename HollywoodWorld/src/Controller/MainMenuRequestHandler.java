@@ -122,7 +122,7 @@ public class MainMenuRequestHandler {
     
     public void handleProfitReportRequest(){
         
-        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+        if(userHasFinancesPermissions() ){
             MainMenuAdministrator.accessProfitReportWindow(user);
         }else{
             mainMenu.displayPermissionError();
@@ -131,7 +131,7 @@ public class MainMenuRequestHandler {
     
     public void handlePerformanceReportRequest(){
         
-        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+        if(userHasFinancesPermissions() ){
             MainMenuAdministrator.accessPerformanceReportWindow(user);
         }else{
             mainMenu.displayPermissionError();
@@ -140,8 +140,35 @@ public class MainMenuRequestHandler {
     
     public void handleTendencyReportRequest(){
         
-        if(userHasRenterPermissions() || userHasManagerPermissions() ){
+        if(userHasFinancesPermissions() ){
             MainMenuAdministrator.accessTendencyReportWindow(user);
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handlePayrollSummaryRequest(){
+        
+        if(userHasAccountingPermissions() ){
+            MainMenuAdministrator.accessPayrollSummaryWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handlePayrollBreakdownRequest(){
+        
+        if(userHasAccountingPermissions() ){
+            MainMenuAdministrator.accessPayrollBreakdownWindow();
+        }else{
+            mainMenu.displayPermissionError();
+        }
+    }
+    
+    public void handlePayrollKardexRequest(){
+        
+        if(userHasAccountingPermissions() ){
+            MainMenuAdministrator.accessPayrollKardexWindow();
         }else{
             mainMenu.displayPermissionError();
         }
@@ -196,6 +223,17 @@ public class MainMenuRequestHandler {
         String userPermissions = user.getPermissions();
         
         if(userPermissions.equals("Finanzas")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private boolean userHasAccountingPermissions(){
+        
+        String userPermissions = user.getPermissions();
+        
+        if(userPermissions.equals("Contaduría")){
             return true;
         }else{
             return false;

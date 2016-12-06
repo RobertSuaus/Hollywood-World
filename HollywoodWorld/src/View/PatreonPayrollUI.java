@@ -36,8 +36,8 @@ public class PatreonPayrollUI extends javax.swing.JFrame {
         title.add("Seguro");
         title.add("Aguinaldo");
         title.add("Vacaciones");
+        title.add("Prima dominical");
         title.add("Dias trabajados");
-        title.add("Prima vacacional");
         title.add("Total");
         title.add("Salario");
         
@@ -45,6 +45,12 @@ public class PatreonPayrollUI extends javax.swing.JFrame {
             
         row.add(((String)registries[0] ) );
         row.add(((String)registries[1] ) );
+        row.add(((String)registries[2] ) );
+        row.add(((String)registries[3] ) );
+        row.add(((String)registries[4] ) );
+        row.add(((String)registries[5] ) );
+        row.add(((String)registries[6] ) );
+        row.add(((String)registries[7] ) );
             
         data.add(row);
         
@@ -70,7 +76,7 @@ public class PatreonPayrollUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         payrollSummaryTable = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Sumario de pago de nómina");
@@ -93,7 +99,7 @@ public class PatreonPayrollUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Dias trabajados", "Prima vacacional", "Total", "Salario"
+                "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Prima dominical", "Dias trabajados", "Total", "Salario"
             }
         ));
         jScrollPane1.setViewportView(payrollSummaryTable);

@@ -6,6 +6,8 @@
 package View;
 
 import Controller.Accountant;
+import Model.PayrollBreakdown;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -32,26 +34,34 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
         Vector <String> title = new Vector<String>();
         Vector<Vector<Object>> data= new Vector<Vector<Object>>();
         
-        title.add("Folio");
+        title.add("Id Desglose");
         title.add("Clave Empleado");
         title.add("ISR");
         title.add("Seguro");
         title.add("Aguinaldo");
         title.add("Vacaciones");
+        title.add("Prima dominical");
         title.add("Dias trabajados");
-        title.add("Prima vacacional");
         title.add("Total");
         title.add("Salario");
         title.add("Fecha");
         
-        for(int i=0; i<payrollBreakdown.size(); i++){
-            Vector<Object> row= new Vector<Object>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        Vector<Object> row= new Vector<Object>();
             
-            //row.add(((String)registries.get(i)[0] ) );
-            //row.add(((String)registries.get(i)[1] ) );
+        row.add((String.valueOf(payrollBreakdown.getDesgloseId() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getEmployeeId() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getRetention().getISR() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getRetention().getTaxPerIMSS() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getBonus().getChristmasBox() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getBonus().getHolidayBonus() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getBonus().getDominical() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getWorkedDays() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getTotalPayment() ) ) );
+        row.add((String.valueOf(payrollBreakdown.getIntegratedWage() ) ) );
+        row.add((dateFormat.format(payrollBreakdown.getBreakdownDate()  ) ) );
             
-            data.add(row);
-        }
+        data.add(row);
         
         DefaultTableModel modelo= new javax.swing.table.DefaultTableModel(data, title);
         payrollBreakdownTable.setModel(modelo);
@@ -76,7 +86,7 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
         payrollBreakdownTable = new javax.swing.JTable();
         saveBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Generar desglose de nómina");
@@ -99,7 +109,7 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Folio", "Clave Empleado", "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Dias trabajados", "Prima vacacional", "Total", "Salario", "Fecha"
+                "Id", "Clave Empleado", "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Prima dominical", "Dias trabajados", "Total", "Salario", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(payrollBreakdownTable);

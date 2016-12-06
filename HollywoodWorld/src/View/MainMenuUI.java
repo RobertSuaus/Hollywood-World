@@ -63,7 +63,11 @@ public class MainMenuUI extends javax.swing.JFrame {
         profitReportBtn = new javax.swing.JMenuItem();
         performanceReportBtn = new javax.swing.JMenuItem();
         tendencyReportBtn = new javax.swing.JMenuItem();
-        payrollMenu = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        generateBreakdownBtn = new javax.swing.JMenuItem();
+        generateKardexBtn = new javax.swing.JMenuItem();
+        generateSummaryBtn = new javax.swing.JMenuItem();
         Session = new javax.swing.JMenu();
 
         jTextArea1.setColumns(20);
@@ -212,8 +216,37 @@ public class MainMenuUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        payrollMenu.setText("Payroll");
-        jMenuBar1.add(payrollMenu);
+        jMenu5.setText("Payoll");
+
+        jMenu6.setText("Breakdown");
+
+        generateBreakdownBtn.setText("Generate");
+        generateBreakdownBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateBreakdownBtnActionPerformed(evt);
+            }
+        });
+        jMenu6.add(generateBreakdownBtn);
+
+        generateKardexBtn.setText("Kardex");
+        generateKardexBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateKardexBtnActionPerformed(evt);
+            }
+        });
+        jMenu6.add(generateKardexBtn);
+
+        jMenu5.add(jMenu6);
+
+        generateSummaryBtn.setText("Summary");
+        generateSummaryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateSummaryBtnActionPerformed(evt);
+            }
+        });
+        jMenu5.add(generateSummaryBtn);
+
+        jMenuBar1.add(jMenu5);
 
         Session.setText("Terminate Session");
         Session.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,6 +362,21 @@ public class MainMenuUI extends javax.swing.JFrame {
         mainMenuRequestHandler.handleTendencyReportRequest();
     }//GEN-LAST:event_tendencyReportBtnActionPerformed
 
+    private void generateBreakdownBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBreakdownBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handlePayrollBreakdownRequest();
+    }//GEN-LAST:event_generateBreakdownBtnActionPerformed
+
+    private void generateKardexBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateKardexBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handlePayrollKardexRequest();
+    }//GEN-LAST:event_generateKardexBtnActionPerformed
+
+    private void generateSummaryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateSummaryBtnActionPerformed
+        // TODO add your handling code here:
+        mainMenuRequestHandler.handlePayrollSummaryRequest();
+    }//GEN-LAST:event_generateSummaryBtnActionPerformed
+
     
     private MainMenuRequestHandler mainMenuRequestHandler;
     private SessionRequestHandler sessionRequestHandler;
@@ -342,15 +390,19 @@ public class MainMenuUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem clientRegistrationBtn;
     private javax.swing.JMenuItem employeeEditBtn;
     private javax.swing.JMenuItem employeeNewBtn;
+    private javax.swing.JMenuItem generateBreakdownBtn;
+    private javax.swing.JMenuItem generateKardexBtn;
+    private javax.swing.JMenuItem generateSummaryBtn;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JMenu payrollMenu;
     private javax.swing.JMenuItem performanceReportBtn;
     private javax.swing.JMenuItem profileEditBtn;
     private javax.swing.JMenuItem profileNewBtn;
