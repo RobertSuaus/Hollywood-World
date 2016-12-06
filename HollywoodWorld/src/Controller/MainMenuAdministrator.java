@@ -68,4 +68,16 @@ public class MainMenuAdministrator {
     public static void accessTendencyReportWindow(User user){
         new TendencyReportUI(user);
     }
+    
+    public static void accessPayrollBreakdownWindow(){
+        new GeneratePayrollUI();
+    }
+    
+    public static void accessPayrollKardexWindow(){
+        new GenerateKardexUI();
+    }
+    
+    public static void accessPayrollSummaryWindow(){
+        new PatreonPayrollUI();
+    }
 }

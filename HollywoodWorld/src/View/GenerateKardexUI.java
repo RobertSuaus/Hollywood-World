@@ -6,7 +6,14 @@
 package View;
 
 import Controller.Accountant;
+import Model.PayrollBreakdown;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,28 +32,38 @@ public class GenerateKardexUI extends javax.swing.JFrame {
         accountant = new Accountant(this);
     }
     
-    public void fillPayrollBreakdownTable(PayrollBreakdown payrollBreakdown){
+    public void fillPayrollBreakdownTable(ArrayList<PayrollBreakdown> kardex){
         
         Vector <String> title = new Vector<String>();
         Vector<Vector<Object>> data= new Vector<Vector<Object>>();
         
-        title.add("Folio");
+        title.add("Id Desglose");
         title.add("Clave Empleado");
         title.add("ISR");
         title.add("Seguro");
         title.add("Aguinaldo");
         title.add("Vacaciones");
+        title.add("Prima dominical");
         title.add("Dias trabajados");
-        title.add("Prima vacacional");
         title.add("Total");
         title.add("Salario");
         title.add("Fecha");
         
-        for(int i=0; i<payrollBreakdown.size(); i++){
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        for(int i=0; i<kardex.size(); i++){
             Vector<Object> row= new Vector<Object>();
             
-            //row.add(((String)registries.get(i)[0] ) );
-            //row.add(((String)registries.get(i)[1] ) );
+            row.add((String.valueOf(kardex.get(i).getDesgloseId() ) ) );
+            row.add((String.valueOf(kardex.get(i).getEmployeeId() ) ) );
+            row.add((String.valueOf(kardex.get(i).getRetention().getISR() ) ) );
+            row.add((String.valueOf(kardex.get(i).getRetention().getTaxPerIMSS() ) ) );
+            row.add((String.valueOf(kardex.get(i).getBonus().getChristmasBox() ) ) );
+            row.add((String.valueOf(kardex.get(i).getBonus().getHolidayBonus() ) ) );
+            row.add((String.valueOf(kardex.get(i).getBonus().getDominical() ) ) );
+            row.add((String.valueOf(kardex.get(i).getWorkedDays() ) ) );
+            row.add((String.valueOf(kardex.get(i).getTotalPayment() ) ) );
+            row.add((String.valueOf(kardex.get(i).getIntegratedWage() ) ) );
+            row.add((dateFormat.format(kardex.get(i).getBreakdownDate() ) ) );
             
             data.add(row);
         }
@@ -71,7 +88,7 @@ public class GenerateKardexUI extends javax.swing.JFrame {
         payrollBreakdownTable = new javax.swing.JTable();
         generateBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Kardex de empleado");
@@ -84,7 +101,7 @@ public class GenerateKardexUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Folio", "Clave Empleado", "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Dias trabajados", "Prima vacacional", "Total", "Salario", "Fecha"
+                "Id", "Clave Empleado", "ISR", "Seguro", "Aguinaldo", "Vacaciones", "Prima dominical", "Dias trabajados", "Total", "Salario", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(payrollBreakdownTable);
@@ -137,7 +154,13 @@ public class GenerateKardexUI extends javax.swing.JFrame {
     private void generateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBtnActionPerformed
         // TODO add your handling code here:
         String employeeIdInput = employeeIdField.getText();
-        String operationStatus = accountant.generateKardex(employeeIdInput);
+        try {
+            String operationStatus = accountant.generateKardex(employeeIdInput);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        } catch (ParseException ex) {
+            Logger.getLogger(GenerateKardexUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al convertir la fecha");
+        }
     }//GEN-LAST:event_generateBtnActionPerformed
 
     /**

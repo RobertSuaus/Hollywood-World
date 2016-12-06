@@ -107,7 +107,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Permissions:");
 
-        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas" }));
+        editPermissions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recursos humanos", "Gerente", "Rentador", "Finanzas", "Contaduría" }));
 
         saveChangesBtn.setText("Guardar cambios");
         saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +274,8 @@ public class ModifyUserForm extends javax.swing.JFrame {
             case "Rentador" : permissionIndex = 3;
                 break;
             case "Finanzas" : permissionIndex = 4;
+                break;
+            case "Contaduría" : permissionIndex = 5;
                 break;
             default : permissionIndex = ERROR;
         }

@@ -5,7 +5,10 @@
  */
 package Controller;
 
+import Model.PayrollBreakdown;
+import Model.PayrollDAO;
 import Model.StatusValidator;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,15 +27,15 @@ public class AccountingManager {
             }
     }
     
-    public static ArrayList<PayrollBreakdown> getEmployeeKardex(int employeeId){
+    public static ArrayList<PayrollBreakdown> getEmployeeKardex(int employeeId) throws ParseException{
         
-        return PayrollDAO.getRegistries(employeeId);
+        return PayrollDAO.getBreakdownList(employeeId);
     }
     
     public static String[] getPayrollBreakdownSummary(
         Date startDate,
         Date endDate
     ){
-        return PayrollDAO.getRegistries(startDate, endDate);
+        return PayrollDAO.getBreakdownSummary(startDate, endDate);
     }
 }

@@ -5,9 +5,14 @@
  */
 package Controller;
 
+import Model.Bonus;
 import Model.EmployeeDAO;
+import Model.PayrollBreakdown;
+import Model.PayrollDAO;
+import Model.Retention;
 import View.GenerateKardexUI;
 import View.GeneratePayrollUI;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,23 +46,26 @@ public class Accountant {
             if(employeeExists(employeeId) ){
                 
                 //Generar el desglose de nómina
+                payrollBreakdown.setDesgloseId(getNextBreakdownId() );
                 payrollBreakdown.setEmployeeId(employeeId);
                 
-                payrollBreakdown.setRetention(retention);
-                payrollBreakdown.setBonification(bonification);
+                payrollBreakdown.setRetention(new Retention() );
+                payrollBreakdown.setBonus(new Bonus() );
                 
                 int daysWorked = Integer.valueOf(daysWorkedInput);
-                payrollBreakdown.setDaysWorked(daysWorked);
+                payrollBreakdown.setWorkedDays(daysWorked);
                 
-                payrollBreakdown.setSundayBonus(sundayBonus);
-                payrollBreakdown.setTotalPayment(totalPayment);
-                payrollBreakdown.setIntegratedWage(integratedWage);
+                payrollBreakdown.setTotalPayment(0);
+                payrollBreakdown.setIntegratedWage(0);
                 
-                payrollBreakdown.setPaymentDate(new Date());
+                payrollBreakdown.setBreakdownDate(new Date());
                 
                 generatePayrollUI.fillPayrollBreakdownTable(payrollBreakdown);
+                return "Desglose generado exitosamente!";
             }
+            return "El empleado no existe";
         }
+        return "Por favor, ingrese números válidos";
     }
     
     public String requestPayrollArchiving(){
@@ -65,7 +73,7 @@ public class Accountant {
         return AccountingManager.archievePayrollBreakdown(payrollBreakdown);
     }
     
-    public String generateKardex(String employeeIdInput){
+    public String generateKardex(String employeeIdInput) throws ParseException{
         
         if(isValidInputNumber(employeeIdInput) ){
             int employeeId = Integer.valueOf(employeeIdInput);
@@ -73,24 +81,35 @@ public class Accountant {
                 
                 ArrayList<PayrollBreakdown> kardex = AccountingManager.getEmployeeKardex(employeeId);
                 generateKardexUI.fillPayrollBreakdownTable(kardex);
+                return "Mostrando kardex de empleado...";
             }
+            return "El empleado no existe!";
         }
+        return "por favor, ingrese un número valido";
+    }
+    
+    private int getNextBreakdownId(){
+        
+        int lastId = PayrollDAO.getLastRegistryIndex();
+        int nextId = lastId + 1;
+        
+        return nextId;
     }
     
     private double calculateIntegratedWage(){
-        
+        return 0;
     }
     
     private double calculateSundayBonus(){
-        
+        return 0;
     }
     
     private Retention calculateRetention(){
-        
+        return null;
     }
     
-    private Bonification calculateBonification(){
-        
+    private Bonus calculateBonification(){
+        return null;
     }
     
     private boolean isValidInputNumber(String input){
