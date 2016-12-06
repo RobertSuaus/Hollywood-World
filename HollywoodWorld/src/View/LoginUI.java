@@ -40,6 +40,7 @@ public class LoginUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hollywood World - Login");
         setBackground(new java.awt.Color(153, 0, 153));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 14)); // NOI18N
         jLabel1.setText("Nombre de usuario: ");
