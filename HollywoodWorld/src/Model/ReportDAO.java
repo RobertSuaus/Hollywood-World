@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class ReportDAO extends BaseDAO{
     
-    public static ProfitReport getRegistryRents(String employeeName, Date startDate, Date endDate){
+    public static ProfitReport getRegistryRents(Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         String sqlProfit = "SELECT folio, totalRent+additionalCost FROM "+
@@ -35,7 +35,6 @@ public class ReportDAO extends BaseDAO{
         
         
         ProfitReport profitReport = new ProfitReport(
-            employeeName,
             startDate,
             endDate
         );
@@ -66,7 +65,7 @@ public class ReportDAO extends BaseDAO{
         }
     }
     
-    public static TendencyReport getRegistryMovie(String employeeName, Date startDate, Date endDate){
+    public static TendencyReport getRegistryMovie(Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         String sql = "SELECT lease.movieTitle, COUNT(lease.movieTitle) "+
@@ -78,7 +77,6 @@ public class ReportDAO extends BaseDAO{
         sql = sql.replace("$endDate$", dateFormat.format(endDate));
         
         TendencyReport tendencyReport = new TendencyReport(
-            employeeName,
             startDate,
             endDate
         );
@@ -109,7 +107,7 @@ public class ReportDAO extends BaseDAO{
         
     }
     
-    public static PerformanceReport getRegistryEmployee(String employeeName, Date startDate, Date endDate){
+    public static PerformanceReport getRegistryEmployee(Date startDate, Date endDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         String sql = "SELECT employeeName,COUNT(employeeName) "+
@@ -121,7 +119,6 @@ public class ReportDAO extends BaseDAO{
         sql = sql.replace("$endDate$", dateFormat.format(endDate));
         
         PerformanceReport performanceReport = new PerformanceReport(
-            employeeName,
             startDate,
             endDate
         );

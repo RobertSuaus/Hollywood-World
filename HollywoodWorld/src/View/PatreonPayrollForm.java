@@ -15,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Robert
  */
-public class PatreonPayrollUI extends javax.swing.JFrame {
+public class PatreonPayrollForm extends javax.swing.JFrame {
 
     /**
      * Creates new form PatreonPayrollUI
      */
-    public PatreonPayrollUI() {
+    public PatreonPayrollForm() {
         initComponents();
         setVisible(true);
         

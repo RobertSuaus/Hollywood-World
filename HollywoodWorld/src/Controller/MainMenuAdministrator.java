@@ -54,19 +54,19 @@ public class MainMenuAdministrator {
     }
     
     public static void accessReturnsWindow(){
-        new ReturnsUI();
+        new RentalReturnForm();
     }
     
     public static void accessProfitReportWindow(User user){
-        new ProfitReportUI(user);
+        new ProfitReportForm(user);
     }
     
     public static void accessPerformanceReportWindow(User user){
-        new PerformanceReportUI(user);
+        new PerformanceReportForm(user);
     }
     
     public static void accessTendencyReportWindow(User user){
-        new TendencyReportUI(user);
+        new TendencyReportForm(user);
     }
     
     public static void accessPayrollBreakdownWindow(){
@@ -78,6 +78,6 @@ public class MainMenuAdministrator {
     }
     
     public static void accessPayrollSummaryWindow(){
-        new PatreonPayrollUI();
+        new PatreonPayrollForm();
     }
 }

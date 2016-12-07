@@ -15,14 +15,12 @@ import java.util.Date;
 public class ProfitReport {
     
     public ProfitReport(
-            String employeeName,
             Date startDate,
             Date endDate,
             ArrayList<String[]> registryList,
             double totalProfit,
             double averageProfit
     ){
-        this.employeeName = employeeName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.registryList = registryList;
@@ -31,11 +29,9 @@ public class ProfitReport {
     }
     
     public ProfitReport(
-            String employeeName,
             Date startDate,
             Date endDate
     ){
-        this.employeeName = employeeName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.registryList = new ArrayList<String[]>();
@@ -57,14 +53,6 @@ public class ProfitReport {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
     }
 
     public ArrayList<String[]> getRegistryList() {
@@ -104,7 +92,6 @@ public class ProfitReport {
     
     private Date startDate;
     private Date endDate;
-    private String employeeName;
     private ArrayList<String[]> registryList;
     private double totalProfit;
     private double averageProfit;

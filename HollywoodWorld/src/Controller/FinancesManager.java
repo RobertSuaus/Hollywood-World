@@ -15,31 +15,28 @@ import java.util.Date;
  *
  * @author Robert
  */
-public class BusinessAnalyst {
-    /*El Analista de negocio se encarga de llenar los reportes solicitados 
+public class FinancesManager {
+    /*El gerente de finanzas se encarga de llenar los reportes solicitados 
     por los agentes de finanzas con los datos correspondientes del negocio.*/
     
     public static ProfitReport fillProfitReport(
-        String employeeName,
         Date startDate,
         Date endDate
     ){
-        return ReportDAO.getRegistryRents(employeeName, startDate, endDate);
+        return ReportDAO.getRegistryRents(startDate, endDate);
     }
     
     public static TendencyReport fillTendencyReport(
-        String employeeName,
         Date startDate,
         Date endDate
     ){
-        return ReportDAO.getRegistryMovie(employeeName, startDate, endDate);
+        return ReportDAO.getRegistryMovie(startDate, endDate);
     }
     
     public static PerformanceReport fillPerformanceReport(
-        String employeeName,
         Date startDate,
         Date endDate
     ){
-        return ReportDAO.getRegistryEmployee(employeeName, startDate, endDate);
+        return ReportDAO.getRegistryEmployee(startDate, endDate);
     }
 }

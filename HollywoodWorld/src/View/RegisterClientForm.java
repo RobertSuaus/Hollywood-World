@@ -176,7 +176,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
         userInputs = gatherAllUserInput();
         
         String operationStatus =
-                clientServiceAgent.registerInformation(userInputs);
+                clientServiceAgent.requestClientRegistration(userInputs);
         JOptionPane.showMessageDialog(null, operationStatus);
         
     }//GEN-LAST:event_registerNewClientBtnActionPerformed

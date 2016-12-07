@@ -15,7 +15,6 @@ import java.util.Date;
 public class PerformanceReport {
     
     public PerformanceReport(
-            String employeeName, 
             Date startDate, 
             Date endDate, 
             ArrayList<String[]> registryList,
@@ -24,18 +23,15 @@ public class PerformanceReport {
     ){
         this.startDate = startDate;
         this.endDate = endDate;
-        this.employeeName = employeeName;
         this.registryList = registryList;
         this.employeeMonth = employeeMonth;
         this.averageRents = averageRents;
     }
     
     public PerformanceReport(
-            String employeeName,
             Date startDate,
             Date endDate
     ){
-        this.employeeName = employeeName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.registryList = new ArrayList<String[]>();
@@ -57,14 +53,6 @@ public class PerformanceReport {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
     }
 
     public ArrayList<String[]> getRegistryList() {
@@ -95,7 +83,6 @@ public class PerformanceReport {
     
     private Date startDate;
     private Date endDate;
-    private String employeeName;
     private ArrayList<String[]> registryList;
     private String employeeMonth;
     private int averageRents;

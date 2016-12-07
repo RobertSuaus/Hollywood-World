@@ -7,7 +7,7 @@
 package View;
 
 import Controller.MainMenuRequestHandler;
-import Controller.SessionRequestHandler;
+import Controller.SessionManager;
 import Model.User;
 import javax.swing.JOptionPane;
 
@@ -22,7 +22,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         initComponents(); //Componentes visuales de Swing
         this.setVisible(true);
         
-        this.sessionRequestHandler = new SessionRequestHandler();
+        this.sessionRequestHandler = new SessionManager();
         this.mainMenuRequestHandler = new MainMenuRequestHandler(user, this);
     }
     
@@ -299,7 +299,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void SessionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SessionMouseClicked
         
-        sessionRequestHandler.handleLogout();
+        sessionRequestHandler.requestSessionLogout();
     }//GEN-LAST:event_SessionMouseClicked
 
     private void userRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegistrationBtnActionPerformed
@@ -379,7 +379,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     
     private MainMenuRequestHandler mainMenuRequestHandler;
-    private SessionRequestHandler sessionRequestHandler;
+    private SessionManager sessionRequestHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ClientButton;
     private javax.swing.JButton RentButton;

@@ -3,9 +3,9 @@ package Controller;
 import Model.PerformanceReport;
 import Model.ProfitReport;
 import Model.TendencyReport;
-import View.PerformanceReportUI;
-import View.ProfitReportUI;
-import View.TendencyReportUI;
+import View.PerformanceReportForm;
+import View.ProfitReportForm;
+import View.TendencyReportForm;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,24 +18,21 @@ public class FinancesAgent {
     le solicita al analista de negocio la información de negocio y
     llena los reportes*/
     
-    public FinancesAgent(ProfitReportUI profitUI, String userName){
+    public FinancesAgent(ProfitReportForm profitReportForm){
         
-        this.profitUI = profitUI;
-        this.employeeName = userName;
+        this.profitReportForm = profitReportForm;
         //Crear reporte con datos iniciales conocidos
     }
     
-    public FinancesAgent(TendencyReportUI tendencyUI, String userName){
+    public FinancesAgent(TendencyReportForm tendencyReportForm){
         
-        this.tendencyUI = tendencyUI;
-        this.employeeName = userName;
+        this.tendencyReportForm = tendencyReportForm;
         //Crear reporte con datos iniciales conocidos
     }
     
-    public FinancesAgent(PerformanceReportUI performanceUI, String userName){
+    public FinancesAgent(PerformanceReportForm performanceReportForm){
         
-        this.performanceUI = performanceUI;
-        this.employeeName = userName;
+        this.performanceReportForm = performanceReportForm;
         //Crear reporte con datos iniciales conocidos
     }
     
@@ -45,14 +42,13 @@ public class FinancesAgent {
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
                 //Entregar la solicitud al analista para que sea llenado
-                ProfitReport profitReport = BusinessAnalyst.fillProfitReport(
-                    employeeName,
+                ProfitReport profitReport = FinancesManager.fillProfitReport(
                     startDateInput,
                     endDateInput
                 );
                 
                 //Desplegar resultado al usuario
-                profitUI.fillReportFields(profitReport);
+                profitReportForm.fillReportFields(profitReport);
             }
         }
     }
@@ -63,14 +59,13 @@ public class FinancesAgent {
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
                 //Entregar la solicitud al analista para que sea llenado
-                TendencyReport tendencyReport = BusinessAnalyst.fillTendencyReport(
-                    employeeName,
+                TendencyReport tendencyReport = FinancesManager.fillTendencyReport(
                     startDateInput,
                     endDateInput
                 );
                 
                 //Desplegar resultado al usuario
-                tendencyUI.fillReportFields(tendencyReport);
+                tendencyReportForm.fillReportFields(tendencyReport);
             }
         }
     }
@@ -81,14 +76,13 @@ public class FinancesAgent {
             if(isDateRangeValid(startDateInput, endDateInput) ){
                 
                 //Entregar la solicitud al analista para que sea llenado
-                PerformanceReport performanceReport = BusinessAnalyst.fillPerformanceReport(
-                    employeeName,
+                PerformanceReport performanceReport = FinancesManager.fillPerformanceReport(
                     startDateInput,
                     endDateInput
                 );
                 
                 //Desplegar resultado al usuario
-                performanceUI.fillReportFields(performanceReport);
+                performanceReportForm.fillReportFields(performanceReport);
             }
         }
     }
@@ -116,8 +110,9 @@ public class FinancesAgent {
             return false;
         }
     }
-    private String employeeName;
-    private ProfitReportUI profitUI;
-    private TendencyReportUI tendencyUI;
-    private PerformanceReportUI performanceUI;
+    
+    //private String employeeName;
+    private ProfitReportForm profitReportForm;
+    private TendencyReportForm tendencyReportForm;
+    private PerformanceReportForm performanceReportForm;
 }

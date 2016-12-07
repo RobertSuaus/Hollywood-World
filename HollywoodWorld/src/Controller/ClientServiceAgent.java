@@ -23,7 +23,7 @@ public class ClientServiceAgent {
         
         this.registerClientForm = registerClientForm;
         this.client = new Client();
-        initizalizeWindow();
+        prepareForm();
     }
     
     public ClientServiceAgent(ModifyClientForm modifyClientForm){
@@ -33,7 +33,7 @@ public class ClientServiceAgent {
     }
     
     /*Manejar el procedimiento de registro de cliente*/
-    public String registerInformation(String[] userInputs){
+    public String requestClientRegistration(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
@@ -41,24 +41,24 @@ public class ClientServiceAgent {
                 registerClientForm.clearFields(generateNextMembershipId() + 1);
                 return ClientServiceManager.registerClient(client);
             } 
-           return MEMBERSHIP_OCCUPIED_MSG;
+           return "El número de membresía no esta disponible";
         } 
-        return INVALID_DATA_MSG;
+        return "Los datos ingresados no son validos";
     }
     
     /*Manejar el procedimiento de modificación de datos de cliente*/
-    public String modifyInformation(String[] userInputs){
+    public String requestClientModification(String[] userInputs){
         
         setClientInformation(userInputs);
         if(isClientDataValid() ){
             modifyClientForm.clearFields();
             return ClientServiceManager.modifyClient(client);
         }
-        return INVALID_DATA_MSG;
+        return "Los datos ingresados no son validos";
     }
     
     /*Manejar el procedimiento de obtención de datos del cliente*/
-    public String retrieveInformation(String membershipIdInput){
+    public String requestClientRetrieval(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
            int membershipId = Integer.valueOf(membershipIdInput);
@@ -68,14 +68,14 @@ public class ClientServiceAgent {
                modifyClientForm.fillExistingClientForm(client);
                return "Mostrando datos de: "+client.getName();
            } 
-           return MEMBERSHIP_NOT_FOUND_MSG;
+           return "El número de membresía no está asignado";
         } 
-        return INVALID_DATA_MSG;
+        return "Los datos ingresados no son validos";
     }
     
     /*Maneja el procedimiento de inicialización de parametros
     en la ventana de registro de clientes*/
-    private void initizalizeWindow(){
+    private void prepareForm(){
         
         int nextId = generateNextMembershipId();
         registerClientForm.fillMembershipField(nextId);
@@ -174,7 +174,4 @@ public class ClientServiceAgent {
     private Client client;
     private RegisterClientForm registerClientForm;
     private ModifyClientForm modifyClientForm;
-    private final String INVALID_DATA_MSG = "Los datos ingresados no son validos";
-    private final String MEMBERSHIP_NOT_FOUND_MSG = "El número de membresía no está asignado";
-    private final String MEMBERSHIP_OCCUPIED_MSG = "El número de membresía no esta disponible";
 }
