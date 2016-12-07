@@ -32,11 +32,11 @@ public class Renter {
         this.rentalOrderForm = rentalOrderForm;
         this.rentalOrder = new RentalOrder(generateNextFolio(), userName );
         setRentalOrderReturnDate(3); //3 días por defecto
-        initilizeWindow();
+        prepareRentalOrder();
     }
     
     //Maneja el procedimiento para asignar los datos de un cliente a la orden de renta
-    public String assingClientInformation(String membershipIdInput){
+    public String assingClientToRentalOrder(String membershipIdInput){
         
         if(isValidInputNumber(membershipIdInput) ){
             int membershipId = Integer.valueOf(membershipIdInput);
@@ -104,7 +104,7 @@ public class Renter {
     }
     
     //Maneja el procedimiento para archivar la orden de renta
-    public String fileOrder(){
+    public String requestRentalOrderArchiving(){
         
         if(isRentalOrderInfoValid() ){
             if(isFolioAvailable() ){
@@ -119,7 +119,7 @@ public class Renter {
     
     /*Maneja el procedimiento para establecer la ventana con los datos
     que se conocen inicialmente de la orden de renta*/
-    private void initilizeWindow(){
+    private void prepareRentalOrder(){
         
         rentalOrderForm.fillInitialValuesFields(rentalOrder);
     }

@@ -16,7 +16,6 @@ public class TendencyReport {
     
 
     public TendencyReport(
-            String employeeName,
             Date startDate, 
             Date endDate,  
             ArrayList<String[]> registryList,
@@ -24,17 +23,14 @@ public class TendencyReport {
     ){
         this.startDate = startDate;
         this.endDate = endDate;
-        this.employeeName = employeeName;
         this.registryList = registryList;
         this.mostRentedMovie = mostRentedMovie;
     }
     
     public TendencyReport(
-            String employeeName,
             Date startDate,
             Date endDate
     ){
-        this.employeeName = employeeName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.registryList = new ArrayList<String[]>();
@@ -57,14 +53,6 @@ public class TendencyReport {
         this.endDate = endDate;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
     public ArrayList<String[]> getRegistryList() {
         return registryList;
     }
@@ -85,7 +73,6 @@ public class TendencyReport {
     
     private Date startDate;
     private Date endDate;
-    private String employeeName;
     private ArrayList<String[]> registryList;
     private String mostRentedMovie;
     

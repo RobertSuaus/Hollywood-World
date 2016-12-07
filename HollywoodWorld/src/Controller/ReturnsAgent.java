@@ -7,7 +7,7 @@ package Controller;
 
 import Model.ClientDAO;
 import Model.RentalOrder;
-import View.ReturnsUI;
+import View.RentalReturnForm;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -16,27 +16,27 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Robert
  */
-public class ReturnAgent {
+public class ReturnsAgent {
     /*Realiza las devoluciones de los productos. Se encarga de verificar las
     fechas y cobrar multas en caso de ser necesario.*/
     
-    public ReturnAgent(ReturnsUI returnsUI){
+    public ReturnsAgent(RentalReturnForm returnsUI){
         
         this.rentalOrder = new RentalOrder();
-        this.returnsUI = returnsUI;
+        this.returnForm = returnsUI;
     }
     
-    public String retrieveInformation(String membershipInput) throws ParseException{
+    public String requestOrderRetrieval(String membershipInput) throws ParseException{
         
         if(isValidInputNumber(membershipInput) ){
             int membershipId = Integer.valueOf(membershipInput);
             if(membershipExists(membershipId ) ){
                 
                 rentalOrder = RenterManager.
-                        getRentalOrderInfo(membershipId);
+                    getRentalOrderInfo(membershipId);
                 additionalCost = computeAdditionalCost();
                 
-                returnsUI.fillRentalOrderField(rentalOrder, additionalCost);
+                returnForm.fillRentalOrderField(rentalOrder, additionalCost);
                 return "Obtenida información de la renta exitosamente";  
             }
             return "No existe la membresía ingresada";
@@ -44,9 +44,9 @@ public class ReturnAgent {
         return "Por favor, ingrese un número válido de membresía";
     }
     
-    public String modifyStatus(){
+    public String requestStatusModification(){
         
-        returnsUI.dispose();
+        returnForm.dispose();
         return RenterManager.
                 modifyRentalOrderStatus(rentalOrder.getFolio(), additionalCost );
     }
@@ -94,5 +94,5 @@ public class ReturnAgent {
     
     private double additionalCost;
     private RentalOrder rentalOrder;
-    private ReturnsUI returnsUI;
+    private RentalReturnForm returnForm;
 }

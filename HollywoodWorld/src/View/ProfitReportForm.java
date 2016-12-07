@@ -17,18 +17,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Robert
  */
-public class ProfitReportUI extends javax.swing.JFrame {
+public class ProfitReportForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ReportsUI
      */
-    public ProfitReportUI(User user) {
+    public ProfitReportForm(User user) {
         initComponents();
         setVisible(true);
         
-        String userName = user.getName() + " "+ user.getLastName();
-        currentEmployeeTxt.setText(userName);
-        financesAgent = new FinancesAgent(this, userName);
+        financesAgent = new FinancesAgent(this);
     }
     
     public void fillReportFields(ProfitReport profitReport){
@@ -78,8 +76,6 @@ public class ProfitReportUI extends javax.swing.JFrame {
         startDate = new org.jdesktop.swingx.JXDatePicker();
         endDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        currentEmployeeTxt = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         totalProfitField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -110,12 +106,6 @@ public class ProfitReportUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Departamento de finanzas Hollywood World");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Empleado actual:");
-
-        currentEmployeeTxt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        currentEmployeeTxt.setText("######");
-
         jLabel7.setText("Ganancia total en este periodo:");
 
         jLabel8.setText("Promedio de ganancia por renta:");
@@ -136,11 +126,6 @@ public class ProfitReportUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel5)
-                        .addGap(32, 32, 32)
-                        .addComponent(currentEmployeeTxt))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,11 +159,7 @@ public class ProfitReportUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(currentEmployeeTxt))
-                .addGap(29, 29, 29)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,14 +195,12 @@ public class ProfitReportUI extends javax.swing.JFrame {
     private FinancesAgent financesAgent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField averageProfitField;
-    private javax.swing.JLabel currentEmployeeTxt;
     private org.jdesktop.swingx.JXDatePicker endDate;
     private javax.swing.JButton generateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;

@@ -403,7 +403,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
     private void assignClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignClientBtnActionPerformed
         // TODO add your handling code here:
         String operationStatus =
-            renter.assingClientInformation(membershipInputTxt.getText() );
+            renter.assingClientToRentalOrder(membershipInputTxt.getText() );
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_assignClientBtnActionPerformed
 
@@ -420,7 +420,7 @@ public class RentalOrderForm extends javax.swing.JFrame {
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         
         String operationStatus =
-            renter.fileOrder();
+            renter.requestRentalOrderArchiving();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_confirmBtnActionPerformed
 

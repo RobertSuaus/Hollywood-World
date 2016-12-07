@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import View.PatreonPayrollUI;
+import View.PatreonPayrollForm;
 import java.util.Date;
 
 /**
@@ -16,9 +16,9 @@ public class AccountingAnalyst {
     /*Se encarga de verificar que los datos para los reportes de nómina sean correctos
     , solicita y entrega estos reportes al usuario.*/
     
-    public AccountingAnalyst(PatreonPayrollUI patreonPayrollUI){
+    public AccountingAnalyst(PatreonPayrollForm patreonPayrollUI){
         
-        this.patreonPayrollUI = patreonPayrollUI;
+        this.patreonPayrollForm = patreonPayrollUI;
     }
     
     public void requestPayrollSummary(Date startDateInput, Date endDateInput){
@@ -33,7 +33,7 @@ public class AccountingAnalyst {
                 );
                 
                 //Desplegar resultado al usuario
-                patreonPayrollUI.fillRegistryTable(payrollSummary);
+                patreonPayrollForm.fillRegistryTable(payrollSummary);
             }
         }
     }
@@ -61,5 +61,5 @@ public class AccountingAnalyst {
         }
     }
     
-    private PatreonPayrollUI patreonPayrollUI;
+    private PatreonPayrollForm patreonPayrollForm;
 }

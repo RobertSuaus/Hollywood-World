@@ -6,7 +6,7 @@
 package View;
 
 import Controller.Renter;
-import Controller.ReturnAgent;
+import Controller.ReturnsAgent;
 import Model.Lease;
 import Model.RentalOrder;
 import java.text.ParseException;
@@ -23,16 +23,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Robert
  */
-public class ReturnsUI extends javax.swing.JFrame {
+public class RentalReturnForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ReturnsUI
      */
-    public ReturnsUI() {
+    public RentalReturnForm() {
         initComponents();
         this.setVisible(true);
         
-        this.returnsHandler = new ReturnAgent(this);
+        this.returnsHandler = new ReturnsAgent(this);
     }
     
     public void fillRentalOrderField(RentalOrder rentalOrder, double AdditionalCost){
@@ -316,7 +316,7 @@ public class ReturnsUI extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = returnsHandler.retrieveInformation(memebershipIdTxt.getText() );
+            operationStatus = returnsHandler.requestOrderRetrieval(memebershipIdTxt.getText() );
         } catch (ParseException ex) {
             operationStatus = "Error de parseo de fechas";
         }
@@ -326,7 +326,7 @@ public class ReturnsUI extends javax.swing.JFrame {
     private void terminateRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateRentBtnActionPerformed
         // TODO add your handling code here:
         
-        String operationStatus = returnsHandler.modifyStatus();
+        String operationStatus = returnsHandler.requestStatusModification();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_terminateRentBtnActionPerformed
 
@@ -334,7 +334,7 @@ public class ReturnsUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    private ReturnAgent returnsHandler;
+    private ReturnsAgent returnsHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel additionalCostTxt;
     private javax.swing.JLabel clientNameTxt;
