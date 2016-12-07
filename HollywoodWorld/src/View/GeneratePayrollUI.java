@@ -7,9 +7,12 @@ package View;
 
 import Controller.Accountant;
 import Model.PayrollBreakdown;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -183,8 +186,13 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
         userInputs[0] = employeeIdField.getText();
         userInputs[1] = workedDaysField.getText();
         
-        String operationStatus = accountant.createPayrollBreakdown(userInputs);
-        JOptionPane.showMessageDialog(null, operationStatus);
+        String operationStatus;
+        try {
+            operationStatus = accountant.createPayrollBreakdown(userInputs);
+            JOptionPane.showMessageDialog(null, operationStatus);
+        } catch (ParseException ex) {
+            Logger.getLogger(GeneratePayrollUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_generateBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
