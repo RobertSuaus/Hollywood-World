@@ -11,6 +11,8 @@ import Model.EmployeeDAO;
 import Model.PayrollBreakdown;
 import Model.PayrollDAO;
 import Model.Retention;
+import Model.TaxDeduction;
+import Model.TaxDeductionRates;
 import View.GenerateKardexUI;
 import View.GeneratePayrollUI;
 import java.text.ParseException;
@@ -212,21 +214,22 @@ public class Accountant {
     
     private double calculateISR() {
         
+        final int PAID_PERIOD = 15;
+        
+        double salary = payrollBreakdown.getIntegratedWage() * PAID_PERIOD;
+        
+        TaxDeduction taxDeduction = getTaxDeduction(salary);
+        
         double boundaryBotom = 2077.51;
         double boundaryTop = 3651.00;
         double fixedQuota = 121.95;
         double percentageApplied = 0.1088;
         
-        final int PAID_PERIOD = 15;
+        double  excess = salary - taxDeduction.getBoundaryBotom();
         
-        double salary = payrollBreakdown.getIntegratedWage() * PAID_PERIOD;
-        System.out.println(salary);
+        double marginalTax = excess * taxDeduction.getPercentageApplied();        
         
-        double  excess = salary - boundaryBotom;
-        
-        double marginalTax = excess * percentageApplied;        
-        
-        double ISRRetenido = marginalTax + fixedQuota;
+        double ISRRetenido = marginalTax + taxDeduction.getFixedQuota();
         
         return ISRRetenido;
     }
@@ -269,6 +272,25 @@ public class Accountant {
         } 
         
         return isGraterThan;
+    }
+    
+    private TaxDeduction getTaxDeduction(double wage){
+        
+        TaxDeduction taxDeduction = null;
+        
+        for (TaxDeductionRates registry : TaxDeductionRates.values()) {
+            
+            if (registry.getBoundaryBotom() < wage &&
+                registry.getBoundaryTop() > wage
+                ){
+                taxDeduction = new TaxDeduction(registry.getBoundaryBotom(),
+                    registry.getBoundaryTop(),
+                    registry.getFixedQuota(),
+                    registry.getPercentageApplied());
+            }
+        }
+        
+        return taxDeduction;
     }
     
     private int calculateNumberOfDaysHoliday() {
