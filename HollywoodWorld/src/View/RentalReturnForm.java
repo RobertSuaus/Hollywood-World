@@ -125,36 +125,36 @@ public class RentalReturnForm extends javax.swing.JFrame {
 
         jLabel4.setText("Detalles de la Renta");
 
-        folioTxt.setText("####");
+        folioTxt.setText("_________");
 
         jLabel5.setText("Nombre de cliente:");
 
-        clientNameTxt.setText("####");
+        clientNameTxt.setText("_________");
 
         jLabel6.setText("Empleado que lo antendió:");
 
-        employeeNameTxt.setText("####");
+        employeeNameTxt.setText("_________");
 
         jLabel7.setText("Fecha de devolución");
 
-        returnDateTxt.setText("####");
+        returnDateTxt.setText("_________");
 
         jLabel8.setText("Fecha actual:");
 
-        currentDateTxt.setText("####");
+        currentDateTxt.setText("_________");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("Importe Adicional:");
 
         additionalCostTxt.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        additionalCostTxt.setText("####");
+        additionalCostTxt.setText("_____");
 
         jLabel11.setText("MXN");
 
         leaseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Id", "Título de película"

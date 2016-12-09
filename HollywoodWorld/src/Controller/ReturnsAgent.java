@@ -45,8 +45,12 @@ public class ReturnsAgent {
     
     public String requestRentalOrderFinalization(){
         
-        returnForm.dispose();
-        return RenterManager.finalizeRentalOrder(rentalOrder.getFolio(), rentalOrder.getAdditionalCost() );
+        if(rentalOrder.getClientName()!="" ){
+            returnForm.dispose();
+            return RenterManager.finalizeRentalOrder(rentalOrder.getFolio(), rentalOrder.getAdditionalCost() );
+        }
+        return "No se ha obtenido la orden de renta aún.";
+        
     }
     
     private double calculateAdditionalCost(){

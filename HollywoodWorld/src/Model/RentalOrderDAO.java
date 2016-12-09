@@ -126,7 +126,7 @@ public class RentalOrderDAO extends BaseDAO {
             
         }catch(SQLException ex){
             System.err.println("Error al obtener información de la orden de renta"+ ex.getMessage());
-            JOptionPane.showMessageDialog(null,"Error al obtener información de la orden de renta",
+            JOptionPane.showMessageDialog(null,"No se encontró una orden de renta para este cliente",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return rentalOrder;
         }
