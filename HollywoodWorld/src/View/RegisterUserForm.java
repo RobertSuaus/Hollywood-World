@@ -170,7 +170,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         String[] userInput = gatherAllUserInput();
         
         String operationStatus = 
-                userServiceAgent.CreateAccount(userInput);
+                userServiceAgent.requestUserCreation(userInput);
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_createNewBtnActionPerformed
 

@@ -17,7 +17,7 @@ public class UserServiceManager{
     /*Clase encargada del control de la información relacionada
     a los usuarios: Crear nuevos usuarios, modificarlos y listarlos*/
     
-    public static User getUser(String userName){
+    public static User retrieveUserInfo(String userName){
         
         User user= UserDAO.obtainRegistry(userName);
         return user;

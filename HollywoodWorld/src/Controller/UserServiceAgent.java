@@ -20,72 +20,69 @@ public class UserServiceAgent {
     
     public UserServiceAgent(RegisterUserForm registerUserForm){
         
-        user = new User();
         this.registerUserForm = registerUserForm;
     }
     
     public UserServiceAgent(ModifyUserForm modifyUserForm){
         
-        user = new User();
         this.modifyUserForm = modifyUserForm;
     }
     /*Manejar el procedimiento de creación de usuario*/
-    public String CreateAccount(String[] userInputs){
+    public String requestUserCreation(String[] userInputs){
         
-        setUserInformation(userInputs);
-        if(isUserDataValid() ){
-            if(isUserNameAvailable() ){
+        User user = setUserInformation(userInputs);
+        if(isUserDataValid(user) ){
+            if(isUserNameAvailable(user.getName() ) ){
                 registerUserForm.clearFields();
                 return UserServiceManager.createUser(user);
             }
-            return OCCUPIED_USERNAME_MSG;
+            return "El nombre de usuario está ocupado";
         }
-        return INVALID_DATA_MSG;
+        return "Los datos son invalidos";
     }
     
     /*Manejar el procedimiento de modificacion de usuario*/
-    public String modifyInformation(String[] userInputs){
+    public String requestUserModification(String[] userInputs){
         
-        setUserInformation(userInputs);
-        if(isUserDataValid() ){
+        User user = setUserInformation(userInputs);
+        if(isUserDataValid(user) ){
             modifyUserForm.clearFields();
             return UserServiceManager.modifyUser(user);
         }
-        return INVALID_DATA_MSG;
+        return "Los datos son invalidos";
     }
     
     /*Manejar el procedimiento de obtención de datos de usuario*/
-    public String retrieveInformation(String userNameInput){
+    public String requestUserInformation(String userNameInput){
         
-        user.setUserName(userNameInput);
-        
-        if(isUserNameValid() ){
-            if(!isUserNameAvailable() ){
-                user = UserServiceManager.getUser(userNameInput);
+        if(isUserNameValid(userNameInput) ){
+            if(userNameRegistered(userNameInput) ){
+                User user = UserServiceManager.retrieveUserInfo(userNameInput);
                 modifyUserForm.fillExistingUserForm(user);
                 return "Mostrando información del usuario: "+ user.getUserName();
             }
-            return USERNAME_NOT_FOUND_MSG;
+            return "El usuario no está registrado";
         }
-        return INVALID_DATA_MSG;
+        return "Los datos no son validos";
     }
     
     //Asigna los datos de usuario obtenidos desde el formulario de la vista
-    private void setUserInformation(String[] userInput){
+    private User setUserInformation(String[] userInput){
         
+        User user = new User();
         user.setName(userInput[0]);
         user.setLastName(userInput[1]);
         user.setUserName(userInput[2]);
         user.setPassword(userInput[3]);
         user.setPermissions(userInput[4]);
         
-        //userDataIsValid = isUserDataValid();
+        return user;
     }
     
-    private boolean isUserNameAvailable(){
+    private boolean isUserNameAvailable(String userName){
         
         boolean isAvailable;
-        if(UserDAO.registryExists(user.getUserName() ) ){
+        if(UserDAO.registryExists(userName ) ){
             isAvailable = false;
         }else{
             isAvailable = true;
@@ -93,13 +90,24 @@ public class UserServiceAgent {
         return isAvailable;
     }
     
-    //Validaciones de Sintaxis de los datos 
-    private boolean isUserDataValid(){
+    private boolean userNameRegistered(String userName){
         
-        if( isNameValid() &&
-            isLastNameValid() &&
-            isUserNameValid() &&
-            isPasswordValid() 
+        boolean exists;
+        if(UserDAO.registryExists(userName) ){
+            exists = true;
+        }else{
+            exists = false;
+        }
+        return exists;
+    }
+    
+    //Validaciones de Sintaxis de los datos 
+    private boolean isUserDataValid(User user){
+        
+        if( isNameValid(user.getName() ) &&
+            isLastNameValid(user.getLastName() ) &&
+            isUserNameValid(user.getUserName() ) &&
+            isPasswordValid(user.getPassword() ) 
         ){
             return true;
         }else{
@@ -107,9 +115,8 @@ public class UserServiceAgent {
         }
     }
     
-    private boolean isNameValid(){
+    private boolean isNameValid(String input){
         
-        String input = user.getName();
         if (input.matches("([A-Za-z]|\\s)*") && 
             input.equals(" ") == false &&
             input.equals("") == false){
@@ -119,9 +126,8 @@ public class UserServiceAgent {
         }
     }
     
-    private boolean isLastNameValid(){
+    private boolean isLastNameValid(String input){
         
-        String input = user.getLastName();
         if (input.matches("([A-Za-z]|\\s)*") &&
             input.equals(" ") == false &&
             input.equals("") == false
@@ -132,10 +138,10 @@ public class UserServiceAgent {
             }
     }
     
-    private boolean isUserNameValid(){
+    private boolean isUserNameValid(String input){
         
         int minNameLength = 4;
-        int nameLength = user.getUserName().length();
+        int nameLength = input.length();
         
         if (nameLength >= minNameLength){
             return true;
@@ -144,23 +150,18 @@ public class UserServiceAgent {
         }
     }
     
-    private boolean isPasswordValid(){
+    private boolean isPasswordValid(String input){
         
         int minPasswordLength = 4;
-        int nameLength = user.getPassword().length();
+        int passwordLength = input.length();
         
-        if (nameLength >= minPasswordLength){
+        if (passwordLength >= minPasswordLength){
             return true;
         }else{
             return false;
         }
     }
     
-    private User user;
     private RegisterUserForm registerUserForm;
     private ModifyUserForm modifyUserForm;
-    
-    private final String INVALID_DATA_MSG = "Los datos ingresados no son correctos";
-    private final String OCCUPIED_USERNAME_MSG = "El nombre de usuario ya está ocupado";
-    private final String USERNAME_NOT_FOUND_MSG = "El nombre de usuario no existe";
 }

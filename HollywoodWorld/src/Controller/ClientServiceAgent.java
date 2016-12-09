@@ -22,21 +22,19 @@ public class ClientServiceAgent {
     public ClientServiceAgent(RegisterClientForm registerClientForm){
         
         this.registerClientForm = registerClientForm;
-        this.client = new Client();
         prepareForm();
     }
     
     public ClientServiceAgent(ModifyClientForm modifyClientForm){
         
         this.modifyClientForm = modifyClientForm;
-        this.client = new Client();
     }
     
     /*Manejar el procedimiento de registro de cliente*/
     public String requestClientRegistration(String[] userInputs){
         
-        setClientInformation(userInputs);
-        if(isClientDataValid() ){
+        Client client = setClientInformation(userInputs);
+        if(isClientDataValid(client) ){
             if(isMembershipIdAvailable(client.getMembership().getId() ) ){                
                 registerClientForm.clearFields(generateNextMembershipId() + 1);
                 return ClientServiceManager.registerClient(client);
@@ -49,8 +47,8 @@ public class ClientServiceAgent {
     /*Manejar el procedimiento de modificación de datos de cliente*/
     public String requestClientModification(String[] userInputs){
         
-        setClientInformation(userInputs);
-        if(isClientDataValid() ){
+        Client client = setClientInformation(userInputs);
+        if(isClientDataValid(client) ){
             modifyClientForm.clearFields();
             return ClientServiceManager.modifyClient(client);
         }
@@ -64,7 +62,7 @@ public class ClientServiceAgent {
            int membershipId = Integer.valueOf(membershipIdInput);
            if(membershipExists(membershipId)){
                
-               client = ClientServiceManager.getClientInfo(membershipId);
+               Client client = ClientServiceManager.retrieveClientInfo(membershipId);
                modifyClientForm.fillExistingClientForm(client);
                return "Mostrando datos de: "+client.getName();
            } 
@@ -81,7 +79,9 @@ public class ClientServiceAgent {
         registerClientForm.fillMembershipField(nextId);
     }
     
-    private void setClientInformation(String[] userInputs){
+    private Client setClientInformation(String[] userInputs){
+        
+        Client client = new Client();
         
         client.setName(userInputs[0]);
         client.setLastName(userInputs[1]);
@@ -94,6 +94,7 @@ public class ClientServiceAgent {
             )    
         );
         
+        return client;
     }
     
     private boolean isMembershipIdAvailable(int membershipId){
@@ -127,7 +128,7 @@ public class ClientServiceAgent {
     }
     
     //Validaciones de sintaxis
-    private boolean isClientDataValid(){
+    private boolean isClientDataValid(Client client){
         
         if(
             isValidInputText( client.getName() ) &&
@@ -171,7 +172,6 @@ public class ClientServiceAgent {
         }
     }
     
-    private Client client;
     private RegisterClientForm registerClientForm;
     private ModifyClientForm modifyClientForm;
 }

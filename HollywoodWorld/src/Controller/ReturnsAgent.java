@@ -20,23 +20,22 @@ public class ReturnsAgent {
     /*Realiza las devoluciones de los productos. Se encarga de verificar las
     fechas y cobrar multas en caso de ser necesario.*/
     
-    public ReturnsAgent(RentalReturnForm returnsUI){
+    public ReturnsAgent(RentalReturnForm returnsForm){
         
         this.rentalOrder = new RentalOrder();
-        this.returnForm = returnsUI;
+        this.returnForm = returnsForm;
     }
     
-    public String requestOrderRetrieval(String membershipInput) throws ParseException{
+    public String requestOrderStatus(String membershipInput) throws ParseException{
         
         if(isValidInputNumber(membershipInput) ){
             int membershipId = Integer.valueOf(membershipInput);
             if(membershipExists(membershipId ) ){
                 
-                rentalOrder = RenterManager.
-                    getRentalOrderInfo(membershipId);
-                additionalCost = computeAdditionalCost();
+                rentalOrder = RenterManager.getRentalOrderStatus(membershipId);
+                rentalOrder.setAdditionalCost(calculateAdditionalCost() );
                 
-                returnForm.fillRentalOrderField(rentalOrder, additionalCost);
+                returnForm.fillRentalOrderField(rentalOrder);
                 return "Obtenida información de la renta exitosamente";  
             }
             return "No existe la membresía ingresada";
@@ -44,14 +43,13 @@ public class ReturnsAgent {
         return "Por favor, ingrese un número válido de membresía";
     }
     
-    public String requestStatusModification(){
+    public String requestRentalOrderFinalization(){
         
         returnForm.dispose();
-        return RenterManager.
-                modifyRentalOrderStatus(rentalOrder.getFolio(), additionalCost );
+        return RenterManager.finalizeRentalOrder(rentalOrder.getFolio(), rentalOrder.getAdditionalCost() );
     }
     
-    private double computeAdditionalCost(){
+    private double calculateAdditionalCost(){
         double additionalCost;
         long daysPast = getDifferenceDays();
         
@@ -92,7 +90,6 @@ public class ReturnsAgent {
         }
     }
     
-    private double additionalCost;
     private RentalOrder rentalOrder;
     private RentalReturnForm returnForm;
 }

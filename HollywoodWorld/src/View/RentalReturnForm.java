@@ -35,7 +35,7 @@ public class RentalReturnForm extends javax.swing.JFrame {
         this.returnsHandler = new ReturnsAgent(this);
     }
     
-    public void fillRentalOrderField(RentalOrder rentalOrder, double AdditionalCost){
+    public void fillRentalOrderField(RentalOrder rentalOrder){
         //Llena los datos
         folioTxt.setText(String.valueOf(rentalOrder.getFolio() ) );
         clientNameTxt.setText(rentalOrder.getClientName() );
@@ -51,7 +51,7 @@ public class RentalReturnForm extends javax.swing.JFrame {
             dateFormat.format(new Date() )
         );
         
-        additionalCostTxt.setText(String.valueOf(AdditionalCost));
+        additionalCostTxt.setText(String.valueOf(rentalOrder.getAdditionalCost()));
         
         //additionalCostTxt.setText(rentalOrder.getAdditionalImport() );
         this.fillLeaseTable(rentalOrder.getLeases());
@@ -316,7 +316,7 @@ public class RentalReturnForm extends javax.swing.JFrame {
         
         String operationStatus;
         try {
-            operationStatus = returnsHandler.requestOrderRetrieval(memebershipIdTxt.getText() );
+            operationStatus = returnsHandler.requestOrderStatus(memebershipIdTxt.getText() );
         } catch (ParseException ex) {
             operationStatus = "Error de parseo de fechas";
         }
@@ -326,7 +326,7 @@ public class RentalReturnForm extends javax.swing.JFrame {
     private void terminateRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateRentBtnActionPerformed
         // TODO add your handling code here:
         
-        String operationStatus = returnsHandler.requestStatusModification();
+        String operationStatus = returnsHandler.requestRentalOrderFinalization();
         JOptionPane.showMessageDialog(null, operationStatus);
     }//GEN-LAST:event_terminateRentBtnActionPerformed
 
