@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Robert
  */
-public class GeneratePayrollUI extends javax.swing.JFrame {
+public class GeneratePayrollForm extends javax.swing.JFrame {
 
     /**
      * Creates new form GeneratePayrollUI
      */
-    public GeneratePayrollUI() {
+    public GeneratePayrollForm() {
         initComponents();
         setVisible(true);
         
@@ -88,6 +88,8 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         payrollBreakdownTable = new javax.swing.JTable();
         saveBtn = new javax.swing.JButton();
+        CheckBoxChristmasBox = new javax.swing.JCheckBox();
+        CheckBoxHolidayBonus = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,15 +126,16 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
             }
         });
 
+        CheckBoxChristmasBox.setText("Calcular Aguinaldo");
+
+        CheckBoxHolidayBonus.setText("Calcular prima vacacional");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 373, Short.MAX_VALUE)
+                .addGap(0, 328, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -145,16 +148,26 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(employeeIdField)
                             .addComponent(workedDaysField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(394, 394, 394))
+                .addGap(439, 439, 439))
             .addGroup(layout.createSequentialGroup()
+                .addGap(426, 426, 426)
+                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(426, 426, 426)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(454, 454, 454)
-                        .addComponent(generateBtn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(generateBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CheckBoxChristmasBox)
+                    .addComponent(CheckBoxHolidayBonus))
+                .addGap(331, 331, 331))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,11 +181,15 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(workedDaysField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(18, 18, 18)
+                .addComponent(CheckBoxChristmasBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CheckBoxHolidayBonus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(generateBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(saveBtn)
                 .addContainerGap())
         );
@@ -186,12 +203,17 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
         userInputs[0] = employeeIdField.getText();
         userInputs[1] = workedDaysField.getText();
         
+        boolean[] userCheckBoxInputs = new boolean[2];
+        userCheckBoxInputs[0] = CheckBoxChristmasBox.isSelected();
+        userCheckBoxInputs[1] = CheckBoxHolidayBonus.isSelected();
+        
         String operationStatus;
         try {
-            operationStatus = accountant.createPayrollBreakdown(userInputs);
+            operationStatus = accountant.generatePayrollBreakdown( userInputs,
+                userCheckBoxInputs);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
-            Logger.getLogger(GeneratePayrollUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GeneratePayrollForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_generateBtnActionPerformed
 
@@ -208,6 +230,8 @@ public class GeneratePayrollUI extends javax.swing.JFrame {
     
     private Accountant accountant;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckBoxChristmasBox;
+    private javax.swing.JCheckBox CheckBoxHolidayBonus;
     private javax.swing.JTextField employeeIdField;
     private javax.swing.JButton generateBtn;
     private javax.swing.JLabel jLabel1;

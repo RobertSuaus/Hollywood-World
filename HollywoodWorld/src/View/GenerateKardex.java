@@ -20,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Robert
  */
-public class GenerateKardexUI extends javax.swing.JFrame {
+public class GenerateKardex extends javax.swing.JFrame {
 
     /**
      * Creates new form GenerateKardexUI
      */
-    public GenerateKardexUI() {
+    public GenerateKardex() {
         initComponents();
         setVisible(true);
         
@@ -158,7 +158,7 @@ public class GenerateKardexUI extends javax.swing.JFrame {
             String operationStatus = accountant.generateKardex(employeeIdInput);
             JOptionPane.showMessageDialog(null, operationStatus);
         } catch (ParseException ex) {
-            Logger.getLogger(GenerateKardexUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GenerateKardex.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error al convertir la fecha");
         }
     }//GEN-LAST:event_generateBtnActionPerformed

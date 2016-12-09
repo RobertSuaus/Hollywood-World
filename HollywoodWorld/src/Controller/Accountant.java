@@ -13,8 +13,8 @@ import Model.PayrollDAO;
 import Model.Retention;
 import Model.TaxDeduction;
 import Model.TaxDeductionRates;
-import View.GenerateKardexUI;
-import View.GeneratePayrollUI;
+import View.GenerateKardex;
+import View.GeneratePayrollForm;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,18 +28,19 @@ public class Accountant {
     de los empleados. Para esto realiza el cálculo de bonificaciones y demás
     impuestos*/
     
-    public Accountant(GeneratePayrollUI generatePayrollUI){
+    public Accountant(GeneratePayrollForm generatePayrollUI){
         
-        this.generatePayrollUI = generatePayrollUI;
+        this.generatePayrollForm = generatePayrollUI;
         this.payrollBreakdown = new PayrollBreakdown();
     }
     
-    public Accountant(GenerateKardexUI generateKardexUI){
+    public Accountant(GenerateKardex generateKardexUI){
         
-        this.generateKardexUI = generateKardexUI;
+        this.generateKardex = generateKardexUI;
     }
     
-    public String createPayrollBreakdown(String[] userInputs) throws ParseException{
+    public String generatePayrollBreakdown(String[] userInputs,
+        boolean[] userBooleanInputs) throws ParseException{
         
         String employeeIdInput = userInputs[0];
         String daysWorkedInput = userInputs[1];
@@ -57,7 +58,8 @@ public class Accountant {
                 int daysWorked = Integer.valueOf(daysWorkedInput);
                 payrollBreakdown.setWorkedDays(daysWorked);                
                 
-                payrollBreakdown.setBonus( calculateBonification() );
+                payrollBreakdown.setBonus( 
+                    calculateBonification(userBooleanInputs) );
                 
                 payrollBreakdown.setIntegratedWage( calculateIntegratedWage() );
                 
@@ -67,7 +69,7 @@ public class Accountant {
                                 
                 payrollBreakdown.setBreakdownDate(new Date());
                 
-                generatePayrollUI.fillPayrollBreakdownTable(payrollBreakdown);
+                generatePayrollForm.fillPayrollBreakdownTable(payrollBreakdown);
                 return "Desglose generado exitosamente!";
             }
             return "El empleado no existe";
@@ -76,23 +78,44 @@ public class Accountant {
     }
     
     public String requestPayrollArchiving(){
-        //Se debe ver que payrollBreakdown no esté vacio.
-        return AccountingManager.archievePayrollBreakdown(payrollBreakdown);
+        
+        if( isBreakDodwnCalculated() ){
+            return AccountingManager.archievePayrollBreakdown(payrollBreakdown);
+        } else {
+            return "Debe generar un desglose de nómina primero";
+        }
     }
     
     public String generateKardex(String employeeIdInput) throws ParseException{
         
-        if(isValidInputNumber(employeeIdInput) ){
+        if( isValidInputNumber(employeeIdInput) ){
+            
             int employeeId = Integer.valueOf(employeeIdInput);
             if(employeeExists(employeeId) ){
                 
                 ArrayList<PayrollBreakdown> kardex = AccountingManager.getEmployeeKardex(employeeId);
-                generateKardexUI.fillPayrollBreakdownTable(kardex);
+                generateKardex.fillPayrollBreakdownTable(kardex);
                 return "Mostrando kardex de empleado...";
             }
             return "El empleado no existe!";
         }
-        return "por favor, ingrese un número valido";
+        return "Ingrese un número valido de ID";
+    }
+    
+    private boolean isBreakDodwnCalculated(){
+        
+        boolean isCalculated = false;
+        
+        if ( payrollBreakdown.getIntegratedWage() != 0 &&
+            payrollBreakdown.getBreakdownDate() != null &&
+            payrollBreakdown.getTotalPayment() != 0 &&
+            payrollBreakdown.getWorkedDays() != 0) {
+            isCalculated  = true;
+        } else {
+            isCalculated = false;
+        }
+        
+        return isCalculated;
     }
     
     private int getNextBreakdownId(){
@@ -105,7 +128,6 @@ public class Accountant {
     
     private double calculateTotalPayment() {
         
-        //Faltará restar retenciones
         double salary = payrollBreakdown.getWorkedDays() * 
             payrollBreakdown.getIntegratedWage();
         
@@ -125,7 +147,7 @@ public class Accountant {
     private double calculateIntegratedWage(){
         
         double christmasBoxTax = ( employee.getBasicSalary() *
-            LEGAL_DAYS_PAID ) / DAYS_OF_YEAR;
+            LEGAL_DAYS_PAID_PER_CHRISTMASBOX ) / DAYS_OF_YEAR;
         
         double integratedWage = christmasBoxTax + employee.getBasicSalary() + 
             payrollBreakdown.getBonus().getDominical();  
@@ -137,8 +159,10 @@ public class Accountant {
         
         Retention retention = new Retention();
         
+        //CAlcular ISR
         retention.setISR( calculateISR() );
         
+        //Calcular impuesto por IMSS
         if( isgreaterThanMinimumWage() ) {
             retention.setTaxPerIMSS( calculateTaxPerIMSS() );
         }
@@ -146,36 +170,49 @@ public class Accountant {
         return retention;
     }
     
-    private Bonus calculateBonification(){
+    private Bonus calculateBonification(boolean[] inputs){
         
         Bonus bonification = new Bonus();
         
         bonification.setDominical( calculateSundayBonus() );
         
-        if ( isTimeToPayChristmasBox() ) {
+        //Calcular Aguinaldo
+        if ( isTimeToPayChristmasBox( inputs[0] ) ) {
             bonification.setChristmasBox( calculateChristmasBox() );
         }
         
-        if ( isTimeToPayHolidayBonus() ) {
+        //Calcular prima vacacional
+        if ( isTimeToPayHolidayBonus( inputs[1] ) ) {
             bonification.setHolidayBonus( calculateHolidayBonus() );
         }
         
         return bonification;
     }
     
-    private boolean isTimeToPayChristmasBox() {        
-        return true;
+    private boolean isTimeToPayChristmasBox(boolean input) { 
+        
+        if (input) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
-    private boolean isTimeToPayHolidayBonus() {
-        return true;
+    private boolean isTimeToPayHolidayBonus(boolean input) {
+        
+        if (input) {
+            return true;
+        } else  {
+            return false;
+        }
     }
     
     private double calculateSundayBonus(){
 
-        final double SET_DAYS_WORKED = 6;
+        final double SET_DAYS_WORKED_OF_WEEK = 6;
         
-        double sundayBonus = employee.getBasicSalary() * PERCENTAGE_BONUS_LFT * SET_DAYS_WORKED;
+        double sundayBonus = employee.getBasicSalary() *
+                PERCENTAGE_BONUS_LFT * SET_DAYS_WORKED_OF_WEEK;
         sundayBonus = sundayBonus / DAYS_OF_YEAR;
         
         return sundayBonus;
@@ -183,17 +220,13 @@ public class Accountant {
     
     private double calculateChristmasBox(){
         
-        Date today = new Date();
-        double christmasBox;
-        final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
+        double christmasBox;                
+        int workedDaysOfYear = calculateWorkedDays();
         
-        long workedDaysOfYear = ( today.getTime() - 
-            employee.getAdmissionDate().getTime() ) / MILLSECS_PER_DAY;
-        
-        if( workedDaysOfYear >=  DAYS_OF_YEAR) {
-            christmasBox = employee.getBasicSalary() * LEGAL_DAYS_PAID;
-        } else {
-            christmasBox = employee.getBasicSalary() * LEGAL_DAYS_PAID;
+        if( workedDaysOfYear >=  DAYS_OF_YEAR) { //caso 1 año o más
+            christmasBox = employee.getBasicSalary() * LEGAL_DAYS_PAID_PER_CHRISTMASBOX;
+        } else { //Caso menor de un año
+            christmasBox = employee.getBasicSalary() * LEGAL_DAYS_PAID_PER_CHRISTMASBOX;
             christmasBox = christmasBox / DAYS_OF_YEAR;
             christmasBox = christmasBox * workedDaysOfYear;
         }
@@ -201,8 +234,20 @@ public class Accountant {
         return christmasBox;
     }
     
+    private int calculateWorkedDays() {
+        
+        Date today = new Date();
+        final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
+        
+        long workedDaysOfYear = ( today.getTime() - 
+            employee.getAdmissionDate().getTime() ) / MILLSECS_PER_DAY;
+        
+        return (int)workedDaysOfYear;     
+    }
+    
     private double calculateHolidayBonus() {
         
+        //Días por antigüedad
         int numberOfDaysHoliday = 
             calculateNumberOfDaysHoliday();
         
@@ -216,16 +261,11 @@ public class Accountant {
         
         final int PAID_PERIOD = 15;
         
-        double salary = payrollBreakdown.getIntegratedWage() * PAID_PERIOD;
+        double wage = payrollBreakdown.getIntegratedWage() * PAID_PERIOD;
         
-        TaxDeduction taxDeduction = getTaxDeduction(salary);
+        TaxDeduction taxDeduction = getTaxDeduction(wage);
         
-        double boundaryBotom = 2077.51;
-        double boundaryTop = 3651.00;
-        double fixedQuota = 121.95;
-        double percentageApplied = 0.1088;
-        
-        double  excess = salary - taxDeduction.getBoundaryBotom();
+        double  excess = wage - taxDeduction.getBoundaryBotom();
         
         double marginalTax = excess * taxDeduction.getPercentageApplied();        
         
@@ -241,13 +281,13 @@ public class Accountant {
         Porcentaje por gasto médico = 0.00375;
         Porcentaje por validez y vida = 0.00625;
         */
-        
-        final double TOTAL_PERCENTAGE = 0.0125;
-        final int DAYS_OF_MONTH = 30;
+               
+        final double TOTAL_PERCENTAGE = 0.0125;//Suma de todos los porccentajes       
+        final int DAYS_OF_MONTH = 30;//Caso general
         
         double monthlyWage = payrollBreakdown.getIntegratedWage() * DAYS_OF_MONTH;
+        
         double taxPerIMSS = 0;
-
         taxPerIMSS = monthlyWage * TOTAL_PERCENTAGE; 
         taxPerIMSS = taxPerIMSS / 2; //Dos quincenas al mes
         
@@ -260,7 +300,7 @@ public class Accountant {
         
         double monthlyWage = payrollBreakdown.getIntegratedWage() * DAYS_OF_MONTH;
         
-        final double MINIMUM_WAGE = 61.54;
+        final double MINIMUM_WAGE = 71.54;
         boolean isGraterThan;
         
         double bound = MINIMUM_WAGE * 3;
@@ -300,15 +340,10 @@ public class Accountant {
         final int LAST_LAPSE = 5;
         final int DAYS_PER_YEAR = 2;
         
-        Date today = new Date();
-        final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
-        
         int numberOfDaysHoliday = 0;
         
-        long daysOfService  = ( today.getTime() - 
-            employee.getAdmissionDate().getTime() ) / MILLSECS_PER_DAY;
-        
-        int lengthOfService = (int)daysOfService / DAYS_OF_YEAR;
+        int daysOfService  = calculateWorkedDays();        
+        int lengthOfService = calculateLengthOfService( daysOfService );
         
         if ( lengthOfService <= FIRST_LAPSE ) {
             
@@ -328,6 +363,11 @@ public class Accountant {
         }
         
         return numberOfDaysHoliday;
+    }
+    
+    private int calculateLengthOfService(int daysOfService) {
+        
+        return daysOfService / DAYS_OF_YEAR;
     }
     
     private boolean isValidInputNumber(String input){
@@ -350,14 +390,14 @@ public class Accountant {
         }
     }
     
-    private GeneratePayrollUI generatePayrollUI;
-    private GenerateKardexUI generateKardexUI;
+    private GeneratePayrollForm generatePayrollForm;
+    private GenerateKardex generateKardex;
     
     private PayrollBreakdown payrollBreakdown;
 
     private Employee employee;
         
     private final double PERCENTAGE_BONUS_LFT = 0.25;
-    private final int LEGAL_DAYS_PAID = 15;
+    private final int LEGAL_DAYS_PAID_PER_CHRISTMASBOX = 15;
     private final int DAYS_OF_YEAR = 365;
 }
