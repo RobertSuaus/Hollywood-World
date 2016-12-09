@@ -16,10 +16,10 @@ import java.text.ParseException;
  */
 public class RenterManager {
     
-    public static RentalOrder getRentalOrderInfo(int membershipId) throws ParseException{
+    public static RentalOrder getRentalOrderStatus(int membershipId) throws ParseException{
         
-        RentalOrder clientInformation = RentalOrderDAO.obtainRegistry(membershipId);
-        return clientInformation;
+        RentalOrder rentalOrder = RentalOrderDAO.obtainRegistry(membershipId);
+        return rentalOrder;
     }
     
     public static String archieveRentOrder(RentalOrder rentalOrder){
@@ -31,7 +31,7 @@ public class RenterManager {
             }
     }
     
-    public static String modifyRentalOrderStatus(int folio, double additionalCost){
+    public static String finalizeRentalOrder(int folio, double additionalCost){
         
         if(StatusValidator.success(RentalOrderDAO.update(folio, additionalCost) ) ){
                 return "Se ha modificado el estado con éxtio";

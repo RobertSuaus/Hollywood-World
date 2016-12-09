@@ -31,7 +31,7 @@ public class Renter {
         
         this.rentalOrderForm = rentalOrderForm;
         this.rentalOrder = new RentalOrder(generateNextFolio(), userName );
-        setRentalOrderReturnDate(3); //3 días por defecto
+        setRentalDays(3);
         prepareRentalOrder();
     }
     
@@ -42,7 +42,7 @@ public class Renter {
             int membershipId = Integer.valueOf(membershipIdInput);
             if(membershipExists(membershipId) ){
                 
-                Client client = ClientServiceManager.getClientInfo(membershipId);
+                Client client = ClientServiceManager.retrieveClientInfo(membershipId);
                 if(clientCanRent(client) ){
                     
                     rentalOrder.setClientName(
@@ -202,12 +202,12 @@ public class Renter {
         );
         
         Date releaseDate = movie.getProfile().getReleaseDate();
-        lease.setPrice(computeLeasePrice(releaseDate) );
+        lease.setPrice(calculateLeasePrice(releaseDate) );
         
         return lease;
     }
     
-    private void setRentalOrderReturnDate(int rentDays){
+    private void setRentalDays(int rentDays){
         
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, rentDays);
@@ -216,7 +216,7 @@ public class Renter {
         rentalOrder.setReturnDate(returnDate);
     }
     
-    private double computeLeasePrice(Date releaseDate){
+    private double calculateLeasePrice(Date releaseDate){
         
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime threeMonthsAgo = now.plusDays(-90);

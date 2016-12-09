@@ -12,7 +12,7 @@ public class ClientServiceManager {
     /*Clase encargada del control de la información relacionada
     a los clientes: Agregar nuevos clientes, modificarlos y listarlos*/
     
-    public static Client getClientInfo(int membershipId){
+    public static Client retrieveClientInfo(int membershipId){
         
         Client clientInformation = ClientDAO.getRegistry(membershipId);
         return clientInformation;

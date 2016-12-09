@@ -140,6 +140,14 @@ public class RentalOrder {
         
     }
     
+    public void setAdditionalCost(double additionalCost){
+        this.additionalCost = additionalCost;
+    }
+    
+    public double getAdditionalCost(){
+        return additionalCost;
+    }
+    
     public void addLease(Lease rentDetail){
         leases.add(rentDetail);
     }
