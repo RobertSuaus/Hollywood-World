@@ -69,6 +69,7 @@ public class RentalOrder {
     
     public RentalOrder(){
         
+        this.clientName ="";
     }
 
     public int getFolio() {
@@ -127,10 +128,6 @@ public class RentalOrder {
         this.totalRent = totalRent;
     }
 
-    public ArrayList<Lease> getRentDetails() {
-        return leases;
-    }
-
     public void setLeases(ArrayList<Lease> leases) {
         this.leases = leases;
     }
@@ -156,7 +153,7 @@ public class RentalOrder {
         leases.remove(detailIndex);
     }
     
-    public void computeTotal(){
+    public void getTotalCost(){
         
         double total = 0;
         for(Lease lease : leases){

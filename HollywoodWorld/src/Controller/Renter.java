@@ -73,7 +73,7 @@ public class Renter {
                 Movie movie = InventoryManager.getMovieInfo(movieId);
                 
                 rentalOrder.addLease(generateLease(movie) );
-                rentalOrder.computeTotal();
+                rentalOrder.getTotalCost();
                 
                 rentalOrderForm.fillTotalPriceField(
                     String.valueOf(rentalOrder.getTotalRent() ) 
@@ -93,7 +93,7 @@ public class Renter {
         if(selectedTableIndex != -1){
             
             rentalOrder.removeLease(selectedTableIndex);
-            rentalOrder.computeTotal();
+            rentalOrder.getTotalCost();
             
             rentalOrderForm.fillTotalPriceField(
                     String.valueOf(rentalOrder.getTotalRent() ) 

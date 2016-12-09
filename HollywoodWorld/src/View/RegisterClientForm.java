@@ -28,7 +28,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
         newMembershipTxt.setText(String.valueOf(membershipId ) );
     }
     
-    public void clearFields(int nextId) {
+    public void nextSheet(int nextId) {
         
         newNameTxt.setText("");
         newLastNameTxt.setText("");
@@ -64,7 +64,7 @@ public class RegisterClientForm extends javax.swing.JFrame {
         setTitle("Hollywood World - Manage Clients");
         setResizable(false);
 
-        jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel17.setText("Registrar Cliente");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -95,31 +95,30 @@ public class RegisterClientForm extends javax.swing.JFrame {
         newClientPanel.setLayout(newClientPanelLayout);
         newClientPanelLayout.setHorizontalGroup(
             newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newClientPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(registerNewClientBtn)
-                .addGap(35, 35, 35))
             .addGroup(newClientPanelLayout.createSequentialGroup()
                 .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newClientPanelLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(28, 28, 28)
-                        .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(newNameTxt)
-                            .addComponent(newLastNameTxt)
-                            .addComponent(newTelephoneTxt)
-                            .addComponent(newAddressTxt)
-                            .addComponent(newMembershipTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel17))
                     .addGroup(newClientPanelLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel17)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(registerNewClientBtn)
+                            .addGroup(newClientPanelLayout.createSequentialGroup()
+                                .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(28, 28, 28)
+                                .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(newNameTxt)
+                                    .addComponent(newLastNameTxt)
+                                    .addComponent(newTelephoneTxt)
+                                    .addComponent(newAddressTxt)
+                                    .addComponent(newMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         newClientPanelLayout.setVerticalGroup(
             newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,9 +145,9 @@ public class RegisterClientForm extends javax.swing.JFrame {
                 .addGroup(newClientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(newMembershipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(31, 31, 31)
                 .addComponent(registerNewClientBtn)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,15 +155,16 @@ public class RegisterClientForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(newClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(newClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 14, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newClientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

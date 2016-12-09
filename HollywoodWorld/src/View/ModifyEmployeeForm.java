@@ -235,7 +235,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel19.setText("Modificar informacion de Empleado");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -265,7 +265,7 @@ public class ModifyEmployeeForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

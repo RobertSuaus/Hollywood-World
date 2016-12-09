@@ -19,7 +19,7 @@ public class PerformanceReport {
             Date endDate, 
             ArrayList<String[]> registryList,
             String employeeMonth,
-            int averageRents
+            double averageRents
     ){
         this.startDate = startDate;
         this.endDate = endDate;
@@ -71,11 +71,11 @@ public class PerformanceReport {
         this.employeeMonth = employeeMonth;
     }
 
-    public int getAverageRents() {
+    public double getAverageRents() {
         return averageRents;
     }
 
-    public void setAverageRents(int averageRents) {
+    public void setAverageRents(double averageRents) {
         this.averageRents = averageRents;
     }
     
@@ -85,7 +85,7 @@ public class PerformanceReport {
     private Date endDate;
     private ArrayList<String[]> registryList;
     private String employeeMonth;
-    private int averageRents;
+    private double averageRents;
     
     
 }

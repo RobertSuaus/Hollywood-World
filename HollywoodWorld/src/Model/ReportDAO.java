@@ -118,6 +118,12 @@ public class ReportDAO extends BaseDAO{
         sql = sql.replace("$startDate$", dateFormat.format(startDate));
         sql = sql.replace("$endDate$", dateFormat.format(endDate));
         
+        String sqlAvg = "SELECT (COUNT(employeeName)/count(distinct employeeName))"+
+            " AS cantidad FROM `rentalorder`" +
+            " WHERE transactionDate <= '2016-12-10' AND transactionDate >= '$2016-11-01$'";
+        sqlAvg = sqlAvg.replace("$startDate$", dateFormat.format(startDate));
+        sqlAvg = sqlAvg.replace("$endDate$", dateFormat.format(endDate));
+        
         PerformanceReport performanceReport = new PerformanceReport(
             startDate,
             endDate
@@ -138,6 +144,9 @@ public class ReportDAO extends BaseDAO{
             performanceReport.setRegistryList(registryList);
             performanceReport.setEmployeeMonth(registryList.get(0)[0]);
             
+            resultSet = statement.executeQuery(sqlAvg);
+            resultSet.next();
+            performanceReport.setAverageRents(resultSet.getDouble(1));
             return performanceReport;
             
         }catch(SQLException ex){

@@ -77,7 +77,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
         setTitle("Hollywood World - Manage Users");
         setResizable(false);
 
-        jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel18.setText("Editar usuarios");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -219,7 +219,7 @@ public class ModifyUserForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(editUserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();

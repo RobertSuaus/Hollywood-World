@@ -48,41 +48,37 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="addEmployeeBtn" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="newNameTxt" max="32767" attributes="0"/>
+                              <Component id="newLastNameTxt" max="32767" attributes="0"/>
+                              <Component id="newTelephoneTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="newAddressTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="newIdTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="newRfcTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="newSalaryTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="newAdmissionDate" alignment="0" pref="173" max="32767" attributes="0"/>
+                              <Component id="newPositionTxt" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="addEmployeeBtn" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="newNameTxt" max="32767" attributes="0"/>
-                                      <Component id="newLastNameTxt" max="32767" attributes="0"/>
-                                      <Component id="newTelephoneTxt" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="newAddressTxt" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="newIdTxt" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="newRfcTxt" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="newSalaryTxt" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="newAdmissionDate" alignment="0" pref="173" max="32767" attributes="0"/>
-                                      <Component id="newPositionTxt" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="110" max="32767" attributes="0"/>
@@ -149,7 +145,7 @@
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bodoni MT" size="24" style="3"/>
+              <Font name="Corbel" size="24" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Registrar Empleado"/>
           </Properties>

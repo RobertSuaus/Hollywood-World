@@ -90,7 +90,7 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel18.setText("Agregar perfil de película");
 
         javax.swing.GroupLayout newProfilePanelLayout = new javax.swing.GroupLayout(newProfilePanel);
@@ -169,9 +169,8 @@ public class RegisterMovieProfileForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(newProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

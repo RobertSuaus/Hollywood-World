@@ -60,7 +60,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
         setTitle("Hollywood World - Manage Users");
         setResizable(false);
 
-        jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Corbel", 3, 24)); // NOI18N
         jLabel17.setText("Crear nuevo usuario");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -158,7 +158,7 @@ public class RegisterUserForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 14, Short.MAX_VALUE)
                 .addComponent(newUserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();

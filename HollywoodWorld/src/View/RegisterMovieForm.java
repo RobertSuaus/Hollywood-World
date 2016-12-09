@@ -92,7 +92,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Bodoni MT", 3, 24)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         jLabel17.setText("Agregar películas");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -166,7 +166,7 @@ public class RegisterMovieForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();

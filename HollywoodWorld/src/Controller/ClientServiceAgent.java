@@ -35,8 +35,10 @@ public class ClientServiceAgent {
         
         Client client = setClientInformation(userInputs);
         if(isClientDataValid(client) ){
-            if(isMembershipIdAvailable(client.getMembership().getId() ) ){                
-                registerClientForm.clearFields(generateNextMembershipId() + 1);
+            int currentMembership = client.getMembership().getId();
+            if(isMembershipIdAvailable(currentMembership ) ){                
+                
+                registerClientForm.nextSheet(currentMembership + 1);
                 return ClientServiceManager.registerClient(client);
             } 
            return "El número de membresía no esta disponible";
@@ -49,7 +51,8 @@ public class ClientServiceAgent {
         
         Client client = setClientInformation(userInputs);
         if(isClientDataValid(client) ){
-            modifyClientForm.clearFields();
+            
+            modifyClientForm.nextSheet();
             return ClientServiceManager.modifyClient(client);
         }
         return "Los datos ingresados no son validos";
