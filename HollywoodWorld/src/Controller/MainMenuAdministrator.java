@@ -70,11 +70,11 @@ public class MainMenuAdministrator {
     }
     
     public static void accessPayrollBreakdownWindow(){
-        new GeneratePayrollUI();
+        new GeneratePayrollForm();
     }
     
     public static void accessPayrollKardexWindow(){
-        new GenerateKardexUI();
+        new GenerateKardex();
     }
     
     public static void accessPayrollSummaryWindow(){
